@@ -8,7 +8,7 @@ public abstract class UnitParser<V> {
     protected Pattern samplePattern;
     
     public UnitParser(String samplePatternStr) {
-        samplePattern = Pattern.compile(samplePatternStr);
+        samplePattern = Pattern.compile("%" + samplePatternStr);
     }
 
     public int getStart(String pattern) {

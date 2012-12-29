@@ -6,7 +6,25 @@ public class LogEntry {
     private DateTime date;
     private String caller;
     private String message;
+    private String category;
+    private Integer lineNumber;
     private Level level;
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Integer getLineNumber() {
+        return lineNumber;
+    }
+
+    public void setLineNumber(Integer lineNumber) {
+        this.lineNumber = lineNumber;
+    }
 
     public DateTime getDate() {
         return date;

@@ -9,25 +9,33 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.xendan.logmonitor.model.Level;
 import org.xendan.logmonitor.model.LogEntry;
 
 public class LogParser {
 
-    private final String pattern;
+    private static final String[] REGEX_SPECIAL = {"\\", "[","]", "|", ".", "?", "+", "*", "(", ")"};
+    private static final String NEW_LINE = System.getProperty("line.separator");
+    
+    private static final Logger logger = LoggerFactory.getLogger(LogParser.class);
+    
     private final Pattern regexPattern;
 
     private final UnitParser<String> callerParser = new CallerParser();
     private final UnitParser<DateTime> dateParser = new DateParser();
     private final UnitParser<Level> levelParser = new LevelParser();
-    private final UnitParser<String> messageParser = new MessageParser();
+    private final UnitParser<String> messageParser = new SimpleParser("m");
+    private final UnitParser<String> categoryParser = new SimpleParser("c");
+    private final UnitParser<Integer> lineNumberParser = new LineNumberParser();
 
-    private final UnitParser<?>[] allParsers = {callerParser, dateParser, levelParser, messageParser};
+    private final UnitParser<?>[] allParsers = {callerParser, dateParser, levelParser, messageParser, categoryParser, lineNumberParser};
     private final List<UnitParser<?>> activeParsers = new ArrayList<UnitParser<?>>();
-    private static final String[] REGEX_SPECIAL = {"\\", "[","]", "|", ".", "?", "+", "*", "(", ")"};
-
+    
+    private final List<LogEntry> entries = new ArrayList<LogEntry>();
+    
     public LogParser(String pattern) {
-        this.pattern = pattern;
         regexPattern = getRegexPattern(pattern);
     }
 
@@ -51,7 +59,7 @@ public class LogParser {
 
     private void initActiveParsers(String pattern) {
         Map<Integer, UnitParser<?>> parserMap = getParserMap(pattern);
-        ArrayList<Integer> sortedPositions = new ArrayList<Integer>(parserMap.keySet());
+        List<Integer> sortedPositions = new ArrayList<Integer>(parserMap.keySet());
         Collections.sort(sortedPositions);
         for (Integer position : sortedPositions) {
             if (position != -1) {
@@ -68,17 +76,33 @@ public class LogParser {
         return parserMap;
     }
 
-    public LogEntry parse(String log) {
+    public void addString(String log) {
         Matcher matcher = regexPattern.matcher(log);
         if (!matcher.find()) {
-            throw new IllegalArgumentException("Log " + log + " doesn't match " + pattern + ", that is " + regexPattern);
+            if (entries.isEmpty()) {
+                logger.warn("Message with no previous entry " + log);
+                return;
+            }
+            LogEntry last = entries.get(entries.size() - 1);
+            last.setMessage(last.getMessage() + NEW_LINE + log);
+            return;
         }
+        entries.add(createEntry(matcher));
+    }
+
+    private LogEntry createEntry(Matcher matcher) {
         LogEntry entry = new LogEntry();
         entry.setCaller(getValue(matcher, callerParser));
         entry.setDate(getValue(matcher, dateParser));
         entry.setLevel(getValue(matcher, levelParser));
         entry.setMessage(getValue(matcher, messageParser));
+        entry.setCategory(getValue(matcher, categoryParser));
+        entry.setLineNumber(getValue(matcher, lineNumberParser));
         return entry;
+    }
+    
+    public List<LogEntry> getEntries() {
+        return entries;
     }
 
     private <V> V getValue(Matcher matcher, UnitParser<V> parser) {

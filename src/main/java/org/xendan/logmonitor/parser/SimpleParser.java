@@ -2,10 +2,10 @@ package org.xendan.logmonitor.parser;
 
 import java.util.regex.Matcher;
 
-class MessageParser extends UnitParser<String> {
+class SimpleParser extends UnitParser<String> {
 
-    public MessageParser() {
-        super("%m");
+    public SimpleParser(String log4jPattern) {
+        super(log4jPattern);
     }
 
     @Override

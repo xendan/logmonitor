@@ -7,7 +7,7 @@ import org.xendan.logmonitor.model.Level;
 public class LevelParser extends UnitParser<Level> {
 
     public LevelParser() {
-        super("%[.\\d-]*p");
+        super("[.\\d-]*p");
     }
 
     @Override
