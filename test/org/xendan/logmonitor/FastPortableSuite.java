@@ -12,7 +12,8 @@ import org.xendan.logmonitor.read.LogReaderTest;
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
     LogParserTest.class,
-    LogReaderTest.class
+    LogReaderTest.class,
+    LogErrorsServiceTest.class
 })
 public class FastPortableSuite {
 }

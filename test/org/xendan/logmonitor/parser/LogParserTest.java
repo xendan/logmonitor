@@ -33,7 +33,7 @@ public class LogParserTest {
     @Test
     public void test_parse_level() throws Exception {
         LogEntry entry = singleEntry("%-5p", "WARN ");
-        assertEquals(Level.WARN, entry.getLevel());
+        assertEquals(Level.WARN.toString(), entry.getLevel());
     }
     
     @Test
@@ -68,7 +68,7 @@ public class LogParserTest {
         LogEntry entry = singleEntry("%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p", "2012-09-28 01:12:17,191 WARN ");
 
         assertEquals(28, entry.getDate().getDayOfMonth());
-        assertEquals(Level.WARN, entry.getLevel());
+        assertEquals(Level.WARN.toString(), entry.getLevel());
     }
 
     @Test
@@ -78,7 +78,7 @@ public class LogParserTest {
 
         assertEquals(28, entry.getDate().getDayOfMonth());
         assertEquals("org.caramba.CarambaContext", entry.getCaller());
-        assertEquals(Level.WARN, entry.getLevel());
+        assertEquals(Level.WARN.toString(), entry.getLevel());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class LogParserTest {
         assertEquals(28, entry.getDate().getDayOfMonth());
         assertEquals("org.caramba.CarambaContext", entry.getCaller());
         assertEquals(message, entry.getMessage());
-        assertEquals(Level.WARN, entry.getLevel());
+        assertEquals(Level.WARN.toString(), entry.getLevel());
     }
     
     @Test

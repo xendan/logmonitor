@@ -5,21 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df05f2ca-da66-4568-ac5c-c2760896237b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/HostSettings.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogEntryDao.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/LogEntryDaoImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/Level.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/EntryMatcher.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/FoundError.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogErrorData.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logmonitor.iml" afterPath="$PROJECT_DIR$/logmonitor.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/LogReader.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/LogReader.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/org/xendan/logmonitor/FastPortableSuite.java" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/FastPortableSuite.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" />
     </list>
     <ignored path="logmonitor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -154,13 +152,24 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LevelParser.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java">
+      <file leaf-file-name="LogErrorsServiceTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="29" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0">
+            <state line="22" column="16" selection-start="510" selection-end="510" vertical-scroll-proportion="0.33333334">
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1090#1104#0" expanded="true" />
+                <element signature="e#1542#1552#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogParserTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="92" column="42" selection-start="3220" selection-end="3220" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -168,16 +177,34 @@
       <file leaf-file-name="LogParser.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="34" selection-start="772" selection-end="772" vertical-scroll-proportion="0.0">
+            <state line="23" column="59" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogParserTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java">
+      <file leaf-file-name="LevelParser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="21" selection-start="1098" selection-end="1098" vertical-scroll-proportion="0.3324468">
+            <state line="12" column="45" selection-start="275" selection-end="275" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogEntry.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="4" selection-start="98" selection-end="98" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Priority.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_HOME_DIR$/lib/log4j.jar!/org/apache/log4j/Priority.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="13" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -201,21 +228,21 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/ScpDownloader.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/LogReaderTest.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/read/LogReaderTest.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/FastPortableSuite.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/DummyUserInfo.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java" />
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/HostSettings.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/LogReader.java" />
+        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/FastPortableSuite.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorDao.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/EntryMatcher.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogErrorData.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/FoundError.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java" />
+        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java" />
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java" />
       </list>
     </option>
@@ -346,7 +373,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="fileTemplates" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -365,6 +392,7 @@
       <recent name="org.xendan.logmonitor.read" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="org.xendan.logmonitor.model" />
       <recent name="org.xendan.logmonitor" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -372,50 +400,6 @@
     </key>
   </component>
   <component name="RunManager" selected="JUnit.FastPortableSuite">
-    <configuration default="false" name="LogParserTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.parser" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.parser.LogParserTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="LogReaderTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.read" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.read.LogReaderTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
     <configuration default="false" name="LogReaderTest.test_read" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="logmonitor" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -491,6 +475,50 @@
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="LogErrorsServiceTest.testUpdateErrors" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="logmonitor" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.xendan.logmonitor" />
+      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.LogErrorsServiceTest" />
+      <option name="METHOD_NAME" value="testUpdateErrors" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="LogErrorsServiceTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="logmonitor" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.xendan.logmonitor" />
+      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.LogErrorsServiceTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -612,11 +640,11 @@
       </method>
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.LogParserTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.LogReaderTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.LogReaderTest.test_read" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.FastPortableSuite" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ScpDownloaderTest.testDownloadToLocal" />
+      <item index="0" class="java.lang.String" itemvalue="JUnit.LogReaderTest.test_read" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.FastPortableSuite" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ScpDownloaderTest.testDownloadToLocal" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.LogErrorsServiceTest.testUpdateErrors" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.LogErrorsServiceTest" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -694,7 +722,7 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847896" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847896" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hudson Information" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -705,11 +733,11 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847896" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847896" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hudson Jobs" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22585794" sideWeight="0.671521" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32847896" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22585794" sideWeight="0.6343042" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3656958" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -798,92 +826,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="157" column="78" selection-start="4445" selection-end="4445" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/io/File.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="967" column="19" selection-start="40851" selection-end="40851" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="8" selection-start="598" selection-end="598" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/LogReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="13" selection-start="322" selection-end="322" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/HostSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="39" selection-start="358" selection-end="358" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="58" selection-start="675" selection-end="675" vertical-scroll-proportion="0.43074325">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="0" selection-start="174" selection-end="174" vertical-scroll-proportion="0.2787162">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="33" selection-start="707" selection-end="707" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#556#566#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/log4j.jar!/org/apache/log4j/Priority.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="154" selection-end="154" vertical-scroll-proportion="0.103626944">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/lib/log4j-1.2.17.jar!/org/apache/log4j/Level.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="48" selection-start="917" selection-end="924" vertical-scroll-proportion="0.48736462">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/log4j.jar!/org/apache/log4j/lf5/LogLevel.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="158" selection-end="158" vertical-scroll-proportion="0.103626944">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/src/apache-log4j-1.2.17/src/main/java/org/apache/log4j/Level.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="39" column="13" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.0">
@@ -891,35 +833,120 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java">
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/FastPortableSuite.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="0" selection-start="810" selection-end="810" vertical-scroll-proportion="0.0">
+        <state line="15" column="17" selection-start="349" selection-end="349" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java">
+    <entry file="jar://$PROJECT_DIR$/lib/mockito-all-1.9.5.jar!/org/mockito/Matchers.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="29" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0">
+        <state line="487" column="26" selection-start="17465" selection-end="17465" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="24" selection-start="810" selection-end="810" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="20" selection-start="475" selection-end="475" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="16" selection-start="246" selection-end="246" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/EntryMatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="26" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/FoundError.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="20" selection-start="367" selection-end="367" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogErrorData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="94" selection-end="94" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/log4j.jar!/org/apache/log4j/Priority.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="154" selection-end="154" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/log4j.jar!/org/apache/log4j/Level.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="48" selection-start="189" selection-end="189" vertical-scroll-proportion="0.14457831">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="4" selection-start="98" selection-end="98" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="34" selection-start="772" selection-end="772" vertical-scroll-proportion="0.0">
+        <state line="23" column="59" selection-start="797" selection-end="797" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="45" selection-start="275" selection-end="275" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="21" selection-start="1098" selection-end="1098" vertical-scroll-proportion="0.3324468">
+        <state line="92" column="42" selection-start="3220" selection-end="3220" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="16" selection-start="510" selection-end="510" vertical-scroll-proportion="0.33333334">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1090#1104#0" expanded="true" />
+            <element signature="e#1542#1552#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -21,7 +21,7 @@ public class LogParser {
 
     private final UnitParser<String> callerParser = new CallerParser();
     private final UnitParser<DateTime> dateParser = new DateParser();
-    private final UnitParser<Level> levelParser = new LevelParser();
+    private final UnitParser<String> levelParser = new LevelParser();
     private final UnitParser<String> messageParser = new SimpleParser("m");
     private final UnitParser<String> categoryParser = new SimpleParser("c");
     private final UnitParser<Integer> lineNumberParser = new LineNumberParser();

@@ -1,6 +1,5 @@
 package org.xendan.logmonitor.model;
 
-import org.apache.log4j.Level;
 import org.joda.time.DateTime;
 
 public class LogEntry {
@@ -10,7 +9,7 @@ public class LogEntry {
     private String message;
     private String category;
     private Integer lineNumber;
-    private Level level;
+    private String level;
 
     public String getCategory() {
         return category;
@@ -52,11 +51,11 @@ public class LogEntry {
         this.message = message;
     }
 
-    public Level getLevel() {
+    public String getLevel() {
         return level;
     }
 
-    public void setLevel(Level level) {
+    public void setLevel(String level) {
         this.level = level;
     }
 }
