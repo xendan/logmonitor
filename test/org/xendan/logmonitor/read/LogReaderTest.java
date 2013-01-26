@@ -1,20 +1,34 @@
-package org.xendan.logmonitor;
+package org.xendan.logmonitor.read;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.List;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.junit.Before;
 import org.junit.Test;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.parser.LogParserTest;
+import org.xendan.logmonitor.read.LogReader;
+import org.xendan.logmonitor.read.ScpDownloader;
 
-public class LocalLogReaderTest {
+public class LogReaderTest {
+
+    private ScpDownloader iAmFake;
+
+    @Before
+    public void setUp() {
+        iAmFake = mock(ScpDownloader.class);
+    }
 
     @Test
     public void test_read() throws Exception {
-        LocalLogReader reader = new LocalLogReader(LogParserTest.PATTERN, "test/reader_test.log");
+        when(iAmFake.downloadToLocal()).thenReturn("test/reader_test.log");
+
+        LogReader reader = new LogReader(LogParserTest.PATTERN, iAmFake);
         DateTime lastDate = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss,SSS").parseDateTime("2012-09-28 00:00:02,044");
         List<LogEntry> entries = reader.readSince(lastDate);
         assertEquals("Expect all entries before lastDate are skipped", 6, entries.size());
@@ -22,14 +36,17 @@ public class LocalLogReaderTest {
     
     @Test(expected = IllegalArgumentException.class)
     public void test_read_invalid_format() throws Exception {
-        LocalLogReader reader = new LocalLogReader("%d{yyyy-MM-dd HH:mm:ss,SSS} THIS IS INVALID FORMAT %-5p", "src/test/resources/reader_test.log");
+        when(iAmFake.downloadToLocal()).thenReturn("test/reader_test.log");
+
+        LogReader reader = new LogReader("%d{yyyy-MM-dd HH:mm:ss,SSS} THIS IS INVALID FORMAT %-5p", iAmFake);
         reader.readSince(new DateTime());
     }
     
     @Test(expected = IllegalArgumentException.class)
     public void test_read_invalid_file() throws Exception {
-        LocalLogReader reader = new LocalLogReader(LogParserTest.PATTERN, "src/test/resources/does_not_exist.log");
+        when(iAmFake.downloadToLocal()).thenReturn("does_not_exist.log");
+
+        LogReader reader = new LogReader(LogParserTest.PATTERN, iAmFake);
         reader.readSince(new DateTime());
     }
-    
 }

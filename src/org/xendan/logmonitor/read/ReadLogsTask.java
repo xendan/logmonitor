@@ -1,4 +1,4 @@
-package org.xendan.logmonitor;
+package org.xendan.logmonitor.read;
 
 import java.util.List;
 
@@ -8,9 +8,9 @@ import org.xendan.logmonitor.model.LogEntry;
 public class ReadLogsTask implements Runnable {
 
     private final LogEntryDao dao;
-    private final LocalLogReader reader;
+    private final LogReader reader;
 
-    public ReadLogsTask(LogEntryDao dao, LocalLogReader reader) {
+    public ReadLogsTask(LogEntryDao dao, LogReader reader) {
         this.dao = dao;
         this.reader = reader;
     }

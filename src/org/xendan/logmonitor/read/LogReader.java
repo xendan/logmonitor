@@ -1,4 +1,4 @@
-package org.xendan.logmonitor;
+package org.xendan.logmonitor.read;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -10,24 +10,25 @@ import org.joda.time.DateTime;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.parser.LogParser;
 
-public class LocalLogReader {
-    
-    private final String path;
+public class LogReader {
     private final LogParser parser;
     private final String pattern;
+    private ScpDownloader scpDwonloader;
 
-    public LocalLogReader(String pattern, String path) {
+
+    public LogReader(String pattern, ScpDownloader scpDwonloader) {
         this.pattern = pattern;
+        this.scpDwonloader = scpDwonloader;
         this.parser = new LogParser(pattern);
-        this.path = path;
     }
 
     public List<LogEntry> readSince(DateTime lastDate) {
-        BufferedReader br = getBufferedReader();
+        String path = scpDwonloader.downloadToLocal();
+        BufferedReader bufferedReader = getBufferedReader(path);
         String line;
         boolean firstRead = true;
         try {
-            while((line = br.readLine()) != null) {
+            while((line = bufferedReader.readLine()) != null) {
                 LogEntry entry = parser.addString(line);
                 if (firstRead && entry == null) {
                     throw new IllegalArgumentException("log line " + line + " doesn't mathc pattern " + pattern);
@@ -47,7 +48,7 @@ public class LocalLogReader {
         return entry != null && (entry.getDate().isBefore(lastDate) || entry.getDate().equals(lastDate));
     }
 
-    private BufferedReader getBufferedReader() {
+    private BufferedReader getBufferedReader(String path) {
         try {
             return new BufferedReader(new FileReader(path));
         } catch (FileNotFoundException e) {
