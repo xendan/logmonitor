@@ -4,11 +4,9 @@
     <bookmark url="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/LogReader.java" line="25" mnemonic="1" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="df05f2ca-da66-4568-ac5c-c2760896237b" name="Default" comment="scp works">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/read/DummyUserInfo.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" />
+    <list default="true" id="df05f2ca-da66-4568-ac5c-c2760896237b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jsch-0.1.49.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logmonitor.iml" afterPath="$PROJECT_DIR$/logmonitor.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java" />
     </list>
     <ignored path="logmonitor.iws" />
@@ -158,7 +156,7 @@
       <file leaf-file-name="ScpDownloader.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="82" column="22" selection-start="2133" selection-end="2133" vertical-scroll-proportion="0.45244217">
+            <state line="161" column="16" selection-start="4503" selection-end="4503" vertical-scroll-proportion="0.8457584">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -599,7 +597,11 @@
       <created>1359211735824</created>
       <updated>1359211735824</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="scp works">
+      <created>1359220622816</created>
+      <updated>1359220622816</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -688,7 +690,7 @@
     <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="added suite" />
+    <option name="LAST_COMMIT_MESSAGE" value="scp works" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -704,6 +706,7 @@
     <MESSAGE value="scp downloader added" />
     <MESSAGE value="idea desided to update" />
     <MESSAGE value="added suite" />
+    <MESSAGE value="scp works" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -841,7 +844,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="22" selection-start="2133" selection-end="2133" vertical-scroll-proportion="0.45244217">
+        <state line="161" column="16" selection-start="4503" selection-end="4503" vertical-scroll-proportion="0.8457584">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

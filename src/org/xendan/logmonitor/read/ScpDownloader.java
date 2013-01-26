@@ -114,20 +114,20 @@ public class ScpDownloader {
     private FileOutputStream readToLocalFile(String localPath,  InputStream in, byte[] buf, long fileSize) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(localPath);
 
-        int foo;
+        int tempSize;
         while (true) {
             if (buf.length < fileSize) {
-                foo = buf.length;
+                tempSize = buf.length;
             } else {
-                foo = (int) fileSize;
+                tempSize = (int) fileSize;
             }
-            foo = in.read(buf, 0, foo);
-            if (foo < 0) {
+            tempSize = in.read(buf, 0, tempSize);
+            if (tempSize < 0) {
                 // error
                 break;
             }
-            fileOutputStream.write(buf, 0, foo);
-            fileSize -= foo;
+            fileOutputStream.write(buf, 0, tempSize);
+            fileSize -= tempSize;
             if (fileSize == 0L) {
                 break;
             }
@@ -155,7 +155,6 @@ public class ScpDownloader {
     private Session createSession() throws JSchException {
         JSch jsch = new JSch();
         Session session = jsch.getSession(login, host, port);
-
         session.setUserInfo(info);
         session.connect();
         return session;
