@@ -1,6 +1,6 @@
+- persist
 - add scheduled reader
-- add db on read items
-- search prev. read item
+- add scp reader
 - api for read: 
   settings: project, enviroments, filters, poll frequency
 - web interface

@@ -1,0 +1,16 @@
+2012-09-28 00:00:00,032 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob started: 28/09/2012 00:00
+2012-09-28 00:00:00,032 WARN  [com.bics.btts.job.ActionRepairTimeJob] This job was cancelled because the previous one has not been finished yet!
+2012-09-28 00:00:01,207 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 212387 rules executed: AUTO_INCREASE_PRIORITY rules not executed: AUTO_MAIL_TICKET_ESCALATION
+ long messagebe
+ blablabl bla
+ really long
+2012-09-28 00:00:01,262 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 212387 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2012-09-28 00:00:01,665 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 211853 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2012-09-28 00:00:01,681 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 211853 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2012-09-28 00:00:02,044 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 137542 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2012-09-28 00:00:02,062 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 137542 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2012-09-28 00:00:02,476 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 167335 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2012-09-28 00:00:02,494 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 167335 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2012-09-28 00:00:02,842 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 196387 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2012-09-28 00:00:02,855 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 196387 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2012-09-28 00:00:03,229 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 208547 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION

@@ -1,7 +1,4 @@
-.classpath
 *.swp
-.project
-.settings
-pom.xml
-target
+atlassian-ide-plugin.xml
+out
 
