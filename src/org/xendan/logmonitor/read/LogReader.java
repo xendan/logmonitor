@@ -31,7 +31,7 @@ public class LogReader {
             while((line = bufferedReader.readLine()) != null) {
                 LogEntry entry = parser.addString(line);
                 if (firstRead && entry == null) {
-                    throw new IllegalArgumentException("log line " + line + " doesn't mathc pattern " + pattern);
+                    throw new IllegalArgumentException("log line " + line + " doesn't match pattern " + pattern);
                 }
                 firstRead = false;
                 if (isOutdated(lastDate, entry)) {

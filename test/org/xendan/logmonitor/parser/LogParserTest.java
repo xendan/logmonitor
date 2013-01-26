@@ -5,8 +5,8 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
+import org.apache.log4j.Level;
 import org.junit.Test;
-import org.xendan.logmonitor.model.Level;
 import org.xendan.logmonitor.model.LogEntry;
 
 public class LogParserTest {

@@ -5,9 +5,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df05f2ca-da66-4568-ac5c-c2760896237b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/jsch-0.1.49.jar" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/HostSettings.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogEntryDao.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/LogEntryDaoImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/Level.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logmonitor.iml" afterPath="$PROJECT_DIR$/logmonitor.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/LogReader.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/LogReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" />
     </list>
     <ignored path="logmonitor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -142,10 +154,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ScpDownloaderTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java">
+      <file leaf-file-name="LevelParser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="17" selection-start="327" selection-end="327" vertical-scroll-proportion="0.0">
+            <state line="14" column="29" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -153,13 +165,20 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScpDownloader.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java">
+      <file leaf-file-name="LogParser.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="161" column="16" selection-start="4503" selection-end="4503" vertical-scroll-proportion="0.8457584">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="23" column="34" selection-start="772" selection-end="772" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogParserTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="21" selection-start="1098" selection-end="1098" vertical-scroll-proportion="0.3324468">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -182,19 +201,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/LogEntryDaoImpl.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/LocalLogReaderTest.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/LocalLogReader.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/ScpDwonloader.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/RemoteLogReader.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/LogReader.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/ScpDownloader.java" />
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/LogReaderTest.java" />
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/read/LogReaderTest.java" />
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/FastPortableSuite.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/DummyUserInfo.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java" />
+        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/HostSettings.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/LogReader.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java" />
+        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java" />
+        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java" />
       </list>
     </option>
   </component>
@@ -262,6 +284,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="model" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope">
@@ -277,7 +339,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_directory_selection" value="$PROJECT_DIR$/test/org/xendan/logmonitor/read" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/test/org/xendan/logmonitor" />
     <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
@@ -299,6 +361,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="org.xendan.logmonitor" />
       <recent name="org.xendan.logmonitor.read" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
@@ -308,7 +371,7 @@
       <recent name="org.xendan.logmonitor.read" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ScpDownloaderTest.testDownloadToLocal">
+  <component name="RunManager" selected="JUnit.FastPortableSuite">
     <configuration default="false" name="LogParserTest" type="JUnit" factoryName="JUnit" temporary="true">
       <module name="logmonitor" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -735,119 +798,128 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/net/AbstractPlainSocketImpl.java">
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="181" column="0" selection-start="5116" selection-end="5116" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/net/SocksSocketImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="390" column="0" selection-start="14841" selection-end="14841" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/net/Socket.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="207" column="0" selection-start="7122" selection-end="7122" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/src/jsch-0.1.49/src/main/java/com/jcraft/jsch/Util.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="337" column="0" selection-start="9185" selection-end="9185" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/src/jsch-0.1.49/src/main/java/com/jcraft/jsch/Session.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="193" column="0" selection-start="6437" selection-end="6437" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="71" selection-start="446" selection-end="446" vertical-scroll-proportion="0.47142857">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/io/FileOutputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="375" column="27" selection-start="13991" selection-end="13991" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/io/FileDescriptor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="19" selection-start="2197" selection-end="2197" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/lang/StringBuffer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="20" selection-start="2888" selection-end="2888" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/src/jsch-0.1.49/src/main/java/com/jcraft/jsch/Channel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="239" column="22" selection-start="7376" selection-end="7376" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/io/InputStream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="15" selection-start="6545" selection-end="6545" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/src/jsch-0.1.49/src/main/java/com/jcraft/jsch/UserInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="0" selection-start="1545" selection-end="1545" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/read/DummyUserInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="20" selection-start="216" selection-end="216" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="157" column="78" selection-start="4445" selection-end="4445" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="jar:///usr/lib/jvm/java-7-oracle/src.zip!/java/io/File.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="250" column="0" selection-start="10143" selection-end="10143" vertical-scroll-proportion="0.0">
+        <state line="967" column="19" selection-start="40851" selection-end="40851" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="17" selection-start="327" selection-end="327" vertical-scroll-proportion="0.0">
+        <state line="23" column="8" selection-start="598" selection-end="598" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java">
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/LogReader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="161" column="16" selection-start="4503" selection-end="4503" vertical-scroll-proportion="0.8457584">
+        <state line="12" column="13" selection-start="322" selection-end="322" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/HostSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="39" selection-start="358" selection-end="358" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="58" selection-start="675" selection-end="675" vertical-scroll-proportion="0.43074325">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="174" selection-end="174" vertical-scroll-proportion="0.2787162">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="33" selection-start="707" selection-end="707" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#556#566#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/log4j.jar!/org/apache/log4j/Priority.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="154" selection-end="154" vertical-scroll-proportion="0.103626944">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/lib/log4j-1.2.17.jar!/org/apache/log4j/Level.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="48" selection-start="917" selection-end="924" vertical-scroll-proportion="0.48736462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/log4j.jar!/org/apache/log4j/lf5/LogLevel.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="13" selection-start="158" selection-end="158" vertical-scroll-proportion="0.103626944">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/src/apache-log4j-1.2.17/src/main/java/org/apache/log4j/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="13" selection-start="1449" selection-end="1449" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="0" selection-start="810" selection-end="810" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="29" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="34" selection-start="772" selection-end="772" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="21" selection-start="1098" selection-end="1098" vertical-scroll-proportion="0.3324468">
+          <folding />
         </state>
       </provider>
     </entry>

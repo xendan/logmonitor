@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.model;
 
+import org.apache.log4j.Level;
 import org.joda.time.DateTime;
 
 public class LogEntry {

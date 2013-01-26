@@ -1,8 +1,8 @@
 package org.xendan.logmonitor.parser;
 
-import java.util.regex.Matcher;
+import org.apache.log4j.Level;
 
-import org.xendan.logmonitor.model.Level;
+import java.util.regex.Matcher;
 
 public class LevelParser extends UnitParser<Level> {
 
@@ -12,7 +12,7 @@ public class LevelParser extends UnitParser<Level> {
 
     @Override
     public Level toValue(String string) {
-        return Level.fromString(string.trim());
+        return Level.toLevel(string.trim());
     }
 
     @Override
