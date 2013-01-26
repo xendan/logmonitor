@@ -1,8 +1,7 @@
 package org.xendan.logmonitor;
 
-import org.xendan.logmonitor.model.HostSettings;
-import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.LogErrorData;
+import org.apache.log4j.Level;
+import org.xendan.logmonitor.model.*;
 
 import java.util.List;
 
@@ -19,7 +18,32 @@ public class LogErrorsService {
     }
 
     public void updateErrors(LogErrorData data, List<LogEntry> entries) {
-       dao.updateErrorData(data);
+        for (EntryMatcher matcher : data.getEntryMatchers()) {
+            for (LogEntry entry : entries) {
+                if (matches(entry, matcher)) {
+                    data.getFoundErrors().add(createError(entry, matcher));
+                }
+            }
+        }
+        dao.updateErrorData(data);
+    }
+
+    private FoundError createError(LogEntry entry, EntryMatcher matcher) {
+        FoundError error = new FoundError();
+        error.setEntry(entry);
+        error.setMatcher(matcher);
+        return error;
+    }
+
+    private boolean matches(LogEntry entry, EntryMatcher matcher) {
+        if (matcher.getLevel() != null) {
+            Level entryLevel = Level.toLevel(entry.getLevel());
+            Level matcherLevel = Level.toLevel(matcher.getLevel());
+            if (entryLevel.isGreaterOrEqual(matcherLevel)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public LogErrorData getLogErrorData(HostSettings settings) {

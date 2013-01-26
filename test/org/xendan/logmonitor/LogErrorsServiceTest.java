@@ -2,16 +2,12 @@ package org.xendan.logmonitor;
 
 import org.apache.log4j.Level;
 import org.junit.Test;
-import org.xendan.logmonitor.model.EntryMatcher;
-import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.LogErrorData;
+import org.xendan.logmonitor.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Matchers.refEq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.junit.Assert.assertEquals;
 
 /**
  * User: kcyxa
@@ -21,17 +17,20 @@ public class LogErrorsServiceTest {
 
     @Test
     public void testUpdateErrors() throws Exception {
-        LogErrorDao dao = mock(LogErrorDao.class);
+        MyLogErrorMockDao dao = new MyLogErrorMockDao();
         LogErrorsService service = new LogErrorsService(dao);
 
         service.updateErrors(createOldErrorData(), createTestEntries());
 
-        verify(dao).updateErrorData(refEq(createExpectedUpdatedData()));
+        LogErrorData updated = dao.getUpdated();
+        assertEquals("Expect one error added",
+                1, updated.getFoundErrors().size());
     }
 
     private LogErrorData createOldErrorData() {
         LogErrorData data = new LogErrorData();
         data.setEntryMatchers(createMatchers());
+        data.setFoundErrors(new ArrayList<FoundError>());
         return data;
     }
 
@@ -43,12 +42,8 @@ public class LogErrorsServiceTest {
 
     private EntryMatcher createSimpleMatcher() {
         EntryMatcher matcher = new EntryMatcher();
+        matcher.setLevel(Level.ERROR.toString());
         return matcher;
-    }
-
-    private LogErrorData createExpectedUpdatedData() {
-        LogErrorData data = new LogErrorData();
-        return data;
     }
 
     private List<LogEntry> createTestEntries() {
@@ -61,5 +56,24 @@ public class LogErrorsServiceTest {
         LogEntry entry = new LogEntry();
         entry.setLevel(Level.ERROR.toString());
         return entry;
+    }
+
+    private static class MyLogErrorMockDao implements LogErrorDao {
+
+        private LogErrorData updated;
+
+        @Override
+        public void updateErrorData(LogErrorData logErrorData) {
+            updated = logErrorData;
+        }
+
+        @Override
+        public LogErrorData getErrorData(HostSettings settings) {
+            return null;
+        }
+
+        public LogErrorData getUpdated() {
+            return updated;
+        }
     }
 }
