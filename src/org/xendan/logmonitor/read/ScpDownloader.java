@@ -9,13 +9,13 @@ public class ScpDownloader {
     private String host;
     private String login;
     private String password;
-    private String remotePath;
+    private String path;
 
-    public ScpDownloader(String pattern, String host, String login, String password, String remotePath) {
+    public ScpDownloader(String host, String login, String password, String path) {
         this.host = host;
         this.login = login;
         this.password = password;
-        this.remotePath = remotePath;
+        this.path = path;
     }
 
 //    private static String buildPath() {
