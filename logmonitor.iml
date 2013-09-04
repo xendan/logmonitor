@@ -65,7 +65,7 @@
     <orderEntry type="library" exported="" name="antlr-2.7.6" level="project" />
     <orderEntry type="library" scope="TEST" name="junit-4.11" level="project" />
     <orderEntry type="library" exported="" name="ant-1.7.1" level="project" />
-    <orderEntry type="library" exported="" name="jsch-0.1.44" level="project" />
+    <orderEntry type="library" exported="" name="joda-time-2.3" level="project" />
   </component>
 </module>
 

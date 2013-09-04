@@ -6,6 +6,7 @@
     <JAVADOC />
     <SOURCES>
       <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jcraft/jsch/0.1.44/source/bf7a83dbb47ff688c02a3247ccf6e590ea136f59/jsch-0.1.44-sources.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jcraft/jsch/0.1.44/source/bf7a83dbb47ff688c02a3247ccf6e590ea136f59/jsch-0.1.44-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

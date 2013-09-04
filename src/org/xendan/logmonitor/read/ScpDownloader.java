@@ -1,6 +1,5 @@
 package org.xendan.logmonitor.read;
 
-import com.jcraft.jsch.UserInfo;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.optional.ssh.Scp;
 
@@ -11,7 +10,6 @@ import org.apache.tools.ant.taskdefs.optional.ssh.Scp;
 public class ScpDownloader {
 
     private String host;
-    private UserInfo info;
     private final String user;
     private final String password;
     private String path;

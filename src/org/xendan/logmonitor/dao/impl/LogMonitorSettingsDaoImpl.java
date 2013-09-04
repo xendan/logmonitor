@@ -8,6 +8,8 @@ import org.xendan.logmonitor.model.LogMonitorConfiguration;
  * Date: 04/09/13
  */
 public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
+
+
     @Override
     public LogMonitorConfiguration getConfig(String name) {
         return null;

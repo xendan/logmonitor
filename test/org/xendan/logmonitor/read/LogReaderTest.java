@@ -1,19 +1,17 @@
 package org.xendan.logmonitor.read;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
-import java.util.List;
-
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.junit.Before;
 import org.junit.Test;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.parser.LogParserTest;
-import org.xendan.logmonitor.read.LogReader;
-import org.xendan.logmonitor.read.ScpDownloader;
+
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LogReaderTest {
 
