@@ -1,9 +1,9 @@
 package org.xendan.logmonitor.read;
 
 import org.xendan.logmonitor.LogErrorsService;
-import org.xendan.logmonitor.model.HostSettings;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.model.LogErrorData;
+import org.xendan.logmonitor.model.ServerSettings;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ public class ReadLogsTask implements Runnable {
 
     private final LogErrorsService service;
     private final LogReader reader;
-    private final HostSettings settings;
+    private final ServerSettings settings;
 
-    public ReadLogsTask(LogErrorsService service, LogReader reader, HostSettings settings) {
+    public ReadLogsTask(LogErrorsService service, LogReader reader, ServerSettings settings) {
         this.service = service;
         this.reader = reader;
         this.settings = settings;

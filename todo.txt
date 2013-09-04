@@ -1,10 +1,19 @@
-- persist
-- add scheduled reader
-- add scp reader
-- api for read: 
-  settings: project, enviroments, filters, poll frequency
-- web interface
++ persits settins per project
+ + 1 environment
+ - dependencies
+ - persist settings in in memory db
+- schedule reading of log and writing in memory db
+ - schedule read for server settings
+ - parse read file
+ - show errores
+- run on server
+- persist EntryMatcher
++ 1 error pattern
 
 FIX
 - add all patterns
 - modify YYY pattern
+
+IMPROVEMENTs
+- normal edit (hide password)
+- generating server side script

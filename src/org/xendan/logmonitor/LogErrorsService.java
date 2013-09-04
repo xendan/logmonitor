@@ -46,7 +46,7 @@ public class LogErrorsService {
         return false;
     }
 
-    public LogErrorData getLogErrorData(HostSettings settings) {
+    public LogErrorData getLogErrorData(ServerSettings settings) {
         return dao.getErrorData(settings);
     }
 }

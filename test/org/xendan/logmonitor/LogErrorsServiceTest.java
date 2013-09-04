@@ -68,7 +68,7 @@ public class LogErrorsServiceTest {
         }
 
         @Override
-        public LogErrorData getErrorData(HostSettings settings) {
+        public LogErrorData getErrorData(ServerSettings settings) {
             return null;
         }
 

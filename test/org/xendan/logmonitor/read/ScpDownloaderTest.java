@@ -16,7 +16,7 @@ public class ScpDownloaderTest {
 
     @Test
     public void testDownloadToLocal() throws Exception {
-        ScpDownloader downloader = new ScpDownloader("192.168.0.1", "someuser", new DummyUserInfo("somepassword"), "/home/grizun/aa.log", 21345);
+        ScpDownloader downloader = new ScpDownloader("192.168.0.1", "someuser", "somepassword", "/home/grizun/aa.log");
         String localPath = downloader.downloadToLocal();
 
         File file = new File(localPath);
