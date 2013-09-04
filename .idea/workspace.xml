@@ -5,46 +5,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="df05f2ca-da66-4568-ac5c-c2760896237b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/ant-1.7.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/ant-jsch-1.7.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/ant-launcher-1.7.1.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/h2-1.3.173.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogMonitorConfiguration.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.form" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/ServerSettings.java" />
-      <change type="DELETED" beforePath="C:\work\projects\idea-plugins\logmonitor\src\org\xendan\logmonitor\model\HostSettings.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorDao.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorDao.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" afterPath="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogMonitorSettingsDao.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/LogMonitorSettingsDaoImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/ant_1_7_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/ant_jsch_1_7_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/ant_launcher_1_7_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/antlr_2_7_6.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build.gradle" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/commons_collections_3_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/dom4j_1_6_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/gradle.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hibernate_commons_annotations_3_2_0_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hibernate_core_3_6_7_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/hibernate_jpa_2_0_api_1_0_1_Final.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jsch_0_1_44.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/jta_1_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/junit_4_11.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/mockito_all_1_8_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/slf4j_api_1_6_1.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/unresolved_dependency___junit_junit_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/unresolved_dependency___org_hibernate_hibernate_core_3_6_7.xml" />
+      <change type="DELETED" beforePath="C:\work\projects\idea-plugins\logmonitor\lib\ant-1.7.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\idea-plugins\logmonitor\lib\ant-jsch-1.7.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\idea-plugins\logmonitor\lib\ant-launcher-1.7.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\idea-plugins\logmonitor\lib\h2-1.3.173.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\idea-plugins\logmonitor\lib\joda-time-2.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\idea-plugins\logmonitor\lib\jsch-0.1.49.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\idea-plugins\logmonitor\lib\log4j-1.2.17.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\idea-plugins\logmonitor\lib\mockito-all-1.9.5.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogMonitorConfiguration.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogMonitorConfiguration.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.form" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/ServerSettings.java" afterPath="$PROJECT_DIR$/src/org/xendan/logmonitor/model/ServerSettings.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/logmonitor.iml" afterPath="$PROJECT_DIR$/logmonitor.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/META-INF/plugin.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/todo.txt" afterPath="$PROJECT_DIR$/todo.txt" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="logmonitor.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378297965844" ignored="false" />
+    <file path="/Dummy.txt" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378297992577" ignored="false" />
     <file path="/todo.txt" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378297855978" ignored="false" />
-    <file path="/fragment.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378221782018" ignored="false" />
+    <file path="/fragment.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378301572625" ignored="false" />
     <file path="/ScpDownloader.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378217019910" ignored="false" />
     <file path="/a.dummy" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378220821009" ignored="false" />
-    <file path="/LogMonitorConfiguration.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378297740792" ignored="false" />
-    <file path="/LogMonitorSettingsConfigurable.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378291363550" ignored="false" />
+    <file path="/LogMonitorConfiguration.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378301382904" ignored="false" />
+    <file path="/LogMonitorSettingsConfigurable.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378301698523" ignored="false" />
     <file path="$PROJECT_DIR$/../JetBrains-intellij-community-4735be8/plugins/android/src/org/jetbrains/android/compiler/AndroidDexCompilerConfiguration.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378220168457" ignored="false" />
     <file path="$PROJECT_DIR$/../JetBrains-intellij-community-4735be8/plugins/android/src/org/jetbrains/android/compiler/AndroidDexCompilerSettingsConfigurable.form" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378219796188" ignored="false" />
-    <file path="/plugin.xml" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378222234799" ignored="false" />
+    <file path="/plugin.xml" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378301870175" ignored="false" />
     <file path="/ServerSettings.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378291075357" ignored="false" />
     <file path="/AddListener.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378221784872" ignored="false" />
     <file path="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/AddListener.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378221787181" ignored="false" />
     <file path="/ReadLogsTask.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378296621340" ignored="false" />
     <file path="/LogErrorsServiceTest.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378296739593" ignored="false" />
+    <file path="/.gitignore" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378298075862" ignored="false" />
+    <file path="/gradle.properties" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378300732746" ignored="false" />
+    <file path="/build.gradle" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378300946268" ignored="false" />
+    <file path="/LogMonitorSettignsDao.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378301623403" ignored="false" />
+    <file path="/LogMonitorSettingsDao.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378301700931" ignored="false" />
+    <file path="/LogMonitorSettingsDaoImpl.java" changelist="df05f2ca-da66-4568-ac5c-c2760896237b" time="1378301849991" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,47 +181,48 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LogErrorDao.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorDao.java">
+      <file leaf-file-name="plugin.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="44" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0">
+            <state line="24" column="101" selection-start="886" selection-end="886" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogMonitorConfiguration.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogMonitorConfiguration.java">
+      <file leaf-file-name="LogMonitorSettingsConfigurable.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="145" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
+            <state line="105" column="18" selection-start="3177" selection-end="3177" vertical-scroll-proportion="-0.625239">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogMonitorSettingsDao.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogMonitorSettingsDao.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="38" selection-start="158" selection-end="179" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogMonitorSettingsDaoImpl.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/LogMonitorSettingsDaoImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="8" selection-start="358" selection-end="370" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#321#337#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="todo.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/todo.txt">
+      <file leaf-file-name="ServiceManager.class" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/components/ServiceManager.class">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="45" selection-start="400" selection-end="400" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LogMonitorSettingsConfigurable.form" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.form">
-          <provider selected="true" editor-type-id="ui-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ReadLogsTask.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="13" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0">
+            <state line="11" column="25" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -225,25 +248,116 @@
       <MyDateState />
     </option>
   </component>
+  <component name="GradleLocalSettings">
+    <option name="availableTasks">
+      <set>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles the outputs of this project." />
+          <option name="name" value="assemble" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles and tests this project." />
+          <option name="name" value="build" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles and tests this project and all projects that depend on it." />
+          <option name="name" value="buildDependents" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles and tests this project and all projects it depends on." />
+          <option name="name" value="buildNeeded" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs all checks." />
+          <option name="name" value="check" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles classes 'main'." />
+          <option name="name" value="classes" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Deletes the build directory." />
+          <option name="name" value="clean" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Compiles source set 'main:java'." />
+          <option name="name" value="compileJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Compiles source set 'test:java'." />
+          <option name="name" value="compileTestJava" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles a jar archive containing the main classes." />
+          <option name="name" value="jar" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Generates Javadoc API documentation for the main source code." />
+          <option name="name" value="javadoc" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="name" value="libs" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Processes source set 'main:resources'." />
+          <option name="name" value="processResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Processes source set 'test:resources'." />
+          <option name="name" value="processTestResources" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Runs the unit tests." />
+          <option name="name" value="test" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="description" value="Assembles classes 'test'." />
+          <option name="name" value="testClasses" />
+        </GradleTaskDescriptor>
+      </set>
+    </option>
+    <option name="expandStates">
+      <map>
+        <entry key="dependencies/logmonitor/logmonitor" value="true" />
+        <entry key="groovy-2.1.6/dependencies/logmonitor/logmonitor" value="false" />
+        <entry key="logmonitor" value="true" />
+        <entry key="logmonitor/logmonitor" value="true" />
+        <entry key="unresolved dependency - junit junit 4/dependencies/logmonitor/logmonitor" value="false" />
+        <entry key="unresolved dependency - org.hibernate hibernate-core 3.6.7/dependencies/logmonitor/logmonitor" value="false" />
+      </map>
+    </option>
+    <option name="recentTasks">
+      <list>
+        <GradleTaskDescriptor>
+          <option name="executorId" value="Debug" />
+          <option name="name" value="libs" />
+        </GradleTaskDescriptor>
+        <GradleTaskDescriptor>
+          <option name="executorId" value="Run" />
+          <option name="name" value="libs" />
+        </GradleTaskDescriptor>
+      </list>
+    </option>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LevelParser.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/EntryMatcher.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ScpDownloader.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/read/ScpDownloaderTest.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.form" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/AddListener.java" />
-        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/ServerSettings.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReadLogsTask.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorDao.java" />
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/LogErrorsServiceTest.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogMonitorConfiguration.java" />
         <option value="$PROJECT_DIR$/todo.txt" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/gradle.properties" />
+        <option value="$PROJECT_DIR$/build.gradle" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogMonitorConfiguration.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettignsDao.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsDao.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogMonitorSettingsDao.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/LogMonitorSettingsDaoImpl.java" />
+        <option value="$PROJECT_DIR$/META-INF/plugin.xml" />
       </list>
     </option>
   </component>
@@ -321,69 +435,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="read" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -408,9 +464,27 @@
               <option name="myItemId" value="idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="LogMonitorSettingsConfigurable" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -423,7 +497,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="META-INF" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dao" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="impl" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -470,7 +556,7 @@
     <property name="options.lastSelected" value="reference.settingsdialog.project.gradle" />
     <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../JetBrains-intellij-community-4735be8/samples/applicationConfigurable" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/build.gradle" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -479,6 +565,7 @@
     <property name="restartRequiresConfirmation" value="true" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
+    <property name="gradle.tool.window.active" value="Project" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="dynamic.classpath" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
@@ -499,35 +586,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Plugin.run">
-    <configuration default="false" name="LogReaderTest.test_read" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.read" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.read.LogReaderTest" />
-      <option name="METHOD_NAME" value="test_read" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
     <configuration default="false" name="FastPortableSuite" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="logmonitor" />
@@ -640,6 +698,34 @@
       <patterns />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="gradle:libs" type="GroovyScriptRunConfiguration" factoryName="Groovy" temporary="true">
+      <module name="logmonitor" />
+      <setting name="path" value="file://$PROJECT_DIR$/build.gradle" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="libs" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -766,12 +852,17 @@
     </configuration>
     <list size="6">
       <item index="0" class="java.lang.String" itemvalue="Plugin.run" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.LogReaderTest.test_read" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.FastPortableSuite" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.ScpDownloaderTest.testDownloadToLocal" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.LogErrorsServiceTest.testUpdateErrors" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.LogErrorsServiceTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.FastPortableSuite" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.ScpDownloaderTest.testDownloadToLocal" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.LogErrorsServiceTest.testUpdateErrors" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.LogErrorsServiceTest" />
+      <item index="5" class="java.lang.String" itemvalue="Groovy.gradle:libs" />
     </list>
+    <recent_temporary>
+      <list size="1">
+        <item index="0" class="java.lang.String" itemvalue="Groovy.gradle:libs" />
+      </list>
+    </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
@@ -818,7 +909,11 @@
       <created>1359220622816</created>
       <updated>1359220622816</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="writing settings">
+      <created>1378298056998</created>
+      <updated>1378298056998</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -845,11 +940,11 @@
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32986537" sideWeight="0.6724337" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.6724337" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847896" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32986537" sideWeight="0.6724337" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756633" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32986537" sideWeight="0.6724337" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.6724337" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756633" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -860,7 +955,7 @@
       <window_info id="JRebel" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756633" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756633" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847896" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -868,7 +963,7 @@
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22705019" sideWeight="0.6724337" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22705019" sideWeight="0.6724337" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31487888" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hudson Information" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -972,93 +1067,10 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/openapi/options/newEditor/OptionsEditor.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/bigexample.log">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="4648.76" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="14" selection-start="1095" selection-end="1095" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="13" selection-start="83" selection-end="83" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/FoundError.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="20" selection-start="153" selection-end="153" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogErrorData.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="23" selection-start="223" selection-end="223" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/EntryMatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="18" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/ServerSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="9" selection-start="1777" selection-end="1777" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorsService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="25" selection-start="1388" selection-end="1388" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/LogErrorDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="44" selection-start="303" selection-end="303" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/project/Project.class">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="55" selection-start="704" selection-end="718" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogMonitorConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="145" selection-start="432" selection-end="432" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#321#337#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1088,6 +1100,88 @@
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.form">
       <provider selected="true" editor-type-id="ui-designer">
         <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="3" selection-start="38" selection-end="38" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/ant.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/gradle.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gradle.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="34" selection-start="34" selection-end="34" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogMonitorConfiguration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="8" selection-start="937" selection-end="937" vertical-scroll-proportion="0.40625">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#362#378#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="5" selection-start="105" selection-end="105" vertical-scroll-proportion="0.15260324">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/openapi/components/ServiceManager.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="25" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogMonitorSettingsDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="38" selection-start="158" selection-end="179" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/LogMonitorSettingsDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="8" selection-start="358" selection-end="370" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="101" selection-start="886" selection-end="886" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="105" column="18" selection-start="3177" selection-end="3177" vertical-scroll-proportion="-0.625239">
+          <folding />
+        </state>
       </provider>
     </entry>
   </component>
@@ -1210,6 +1304,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
+          <last-edited>unresolved dependency - junit junit 4</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

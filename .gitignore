@@ -1,4 +1,5 @@
 *.swp
 atlassian-ide-plugin.xml
 out
+lib
 

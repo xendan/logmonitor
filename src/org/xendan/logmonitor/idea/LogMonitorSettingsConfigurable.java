@@ -9,6 +9,7 @@ import com.jgoodies.common.collect.ArrayListModel;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
 import org.xendan.logmonitor.model.LogMonitorConfiguration;
 import org.xendan.logmonitor.model.ServerSettings;
 
@@ -23,6 +24,7 @@ import java.io.*;
  */
 public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll {
     private final LogMonitorConfiguration config;
+    private final LogMonitorSettingsDao logMonitorSettignsDao;
     private ArrayListModel<ServerSettings> settingsModel;
     private LogMonitorConfiguration initialConfig;
     private JPanel contentPanel;
@@ -42,7 +44,8 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     }
 
     public LogMonitorSettingsConfigurable(Project project) {
-        this.config =  ServiceManager.getService(project, LogMonitorConfiguration.class);
+        logMonitorSettignsDao = ServiceManager.getService(LogMonitorSettingsDao.class);
+        this.config = logMonitorSettignsDao.getConfig(project.getName());
         addButton.addActionListener(new AddListener());
         removeButton.addActionListener(new RemoveListener());
     }
@@ -100,6 +103,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     @Override
     public void apply() throws ConfigurationException {
         resetInitial();
+        logMonitorSettignsDao.save(config);
     }
 
     @Override

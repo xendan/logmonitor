@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jsch-0.1.44">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jcraft/jsch/0.1.44/jar/8e928f6b3d05d88fc72a42e262ae0888382dcaf6/jsch-0.1.44.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jcraft/jsch/0.1.44/source/bf7a83dbb47ff688c02a3247ccf6e590ea136f59/jsch-0.1.44-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

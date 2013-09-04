@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.model;
 
+import javax.persistence.Entity;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.List;
  * User: id967161
  * Date: 03/09/13
  */
+@Entity
 public class LogMonitorConfiguration implements Serializable {
     private String projectName;
     private List<ServerSettings> serverSettings = new ArrayList<ServerSettings>();
