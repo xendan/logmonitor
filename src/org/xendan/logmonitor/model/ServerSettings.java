@@ -2,19 +2,34 @@ package org.xendan.logmonitor.model;
 
 import org.joda.time.DateTime;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
  * User: id967161
  * Date: 03/09/13
  */
+@Entity
 public class ServerSettings implements Serializable {
+    private Long id;
     private String name;
     private String host;
     private String login;
     private String password;
     private String path;
     private DateTime lastReadDate;
+
+    @Id
+    @GeneratedValue
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -76,10 +91,7 @@ public class ServerSettings implements Serializable {
 
         ServerSettings that = (ServerSettings) o;
 
-        if (host != null ? !host.equals(that.host) : that.host != null) return false;
-        if (login != null ? !login.equals(that.login) : that.login != null) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        return !(password != null ? !password.equals(that.password) : that.password != null) && !(path != null ? !path.equals(that.path) : that.path != null);
+        return !(host != null ? !host.equals(that.host) : that.host != null) && !(login != null ? !login.equals(that.login) : that.login != null) && !(name != null ? !name.equals(that.name) : that.name != null) && !(password != null ? !password.equals(that.password) : that.password != null) && !(path != null ? !path.equals(that.path) : that.path != null);
 
     }
 

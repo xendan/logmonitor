@@ -21,9 +21,13 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
-      <applicationService serviceInterface="org.xendan.logmonitor.dao.LogMonitorConfiguration"
+      <applicationService serviceInterface="org.xendan.logmonitor.dao.LogMonitorSettingsDao"
                       serviceImplementation="org.xendan.logmonitor.dao.impl.LogMonitorSettingsDaoImpl"/>
+
+      <applicationService serviceInterface="org.xendan.logmonitor.HomeResolver"
+                      serviceImplementation="org.xendan.logmonitor.HomeResolver"/>
 
     <projectConfigurable instance="org.xendan.logmonitor.idea.LogMonitorSettingsConfigurable" id="logmonitor.settings" />
   </extensions>
+
 </idea-plugin>

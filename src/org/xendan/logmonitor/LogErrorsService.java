@@ -1,6 +1,7 @@
 package org.xendan.logmonitor;
 
 import org.apache.log4j.Level;
+import org.xendan.logmonitor.dao.LogErrorDao;
 import org.xendan.logmonitor.model.*;
 
 import java.util.List;

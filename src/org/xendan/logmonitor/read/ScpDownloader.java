@@ -1,7 +1,9 @@
 package org.xendan.logmonitor.read;
 
+import com.intellij.openapi.components.ServiceManager;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.taskdefs.optional.ssh.Scp;
+import org.xendan.logmonitor.HomeResolver;
 
 /**
  * User: kcyxa
@@ -23,7 +25,7 @@ public class ScpDownloader {
 
     public String downloadToLocal() {
         //POINT: use idea system
-        String localpath  = System.getProperty("user.home") + "/.logmonitor/last.log";
+        String localpath  =  ServiceManager.getService(HomeResolver.class).getPath("last.log");
         Scp scp = new Scp();
         scp.setFile(user + ":" + password + "@" + host + ":" + path);
         scp.setLocalTofile(localpath);

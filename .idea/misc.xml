@@ -1,17 +1,232 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AliProjectConfiguration">
+    <location />
+    <domain />
+    <project />
+    <username />
+    <password />
+    <store-password>true</store-password>
+    <stored>
+      <defect />
+      <requirement />
+      <build-instance />
+      <build-type />
+    </stored>
+    <status-transition />
+    <defect>
+      <currentQuery>
+        <filter />
+        <crossFilter />
+        <order />
+        <view>
+          <column name="id" width="25" />
+          <column name="name" width="150" />
+          <column name="status" width="50" />
+          <column name="target-rel" width="75" />
+          <column name="severity" width="50" />
+          <column name="owner" width="50" />
+          <column name="priority" width="50" />
+        </view>
+      </currentQuery>
+      <lookupQuery>
+        <filter />
+        <crossFilter />
+        <order />
+        <view>
+          <column name="id" width="25" />
+          <column name="name" width="150" />
+          <column name="status" width="50" />
+          <column name="target-rel" width="75" />
+          <column name="severity" width="50" />
+          <column name="owner" width="50" />
+          <column name="priority" width="50" />
+        </view>
+      </lookupQuery>
+      <details hProp="0.5" vProp="0.5">
+        <columns controls="false">
+          <column name="id" />
+          <column name="name" />
+          <column name="severity" />
+          <column name="status" />
+          <column name="target-rel" />
+          <column name="owner" />
+          <column name="priority" />
+          <column name="description" />
+          <column name="dev-comments" />
+        </columns>
+      </details>
+    </defect>
+    <requirement>
+      <currentQuery>
+        <filter />
+        <crossFilter />
+        <order />
+        <view>
+          <column name="id" width="25" />
+          <column name="name" width="150" />
+          <column name="target-rel" width="75" />
+          <column name="owner" width="50" />
+          <column name="req-priority" width="50" />
+        </view>
+      </currentQuery>
+      <lookupQuery>
+        <filter />
+        <crossFilter />
+        <order />
+        <view>
+          <column name="id" width="25" />
+          <column name="name" width="150" />
+          <column name="target-rel" width="75" />
+          <column name="owner" width="50" />
+          <column name="req-priority" width="50" />
+        </view>
+      </lookupQuery>
+      <details hProp="0.5" vProp="0.5">
+        <columns controls="false">
+          <column name="id" />
+          <column name="target-rel" />
+          <column name="owner" />
+          <column name="req-priority" />
+          <column name="name" />
+          <column name="req-comment" />
+          <column name="dev-comments" />
+        </columns>
+      </details>
+    </requirement>
+    <build-instance>
+      <currentQuery>
+        <filter />
+        <crossFilter />
+        <order />
+        <view>
+          <column name="id" width="50" />
+          <column name="type" width="50" />
+          <column name="release" width="50" />
+          <column name="number" width="50" />
+          <column name="revision" width="50" />
+          <column name="status" width="50" />
+          <column name="start-date" width="75" />
+          <column name="qa-status" width="50" />
+          <column name="category" width="50" />
+        </view>
+      </currentQuery>
+      <lookupQuery>
+        <filter />
+        <crossFilter />
+        <order />
+        <view>
+          <column name="id" width="50" />
+          <column name="type" width="50" />
+          <column name="release" width="50" />
+          <column name="number" width="50" />
+          <column name="revision" width="50" />
+          <column name="status" width="50" />
+          <column name="start-date" width="75" />
+          <column name="qa-status" width="50" />
+          <column name="category" width="50" />
+        </view>
+      </lookupQuery>
+      <details hProp="0.5" vProp="0.5">
+        <columns controls="false">
+          <column name="id" />
+          <column name="type" />
+          <column name="release" />
+          <column name="number" />
+          <column name="revision" />
+          <column name="status" />
+          <column name="start-date" />
+          <column name="duration" />
+          <column name="qa-status" />
+          <column name="test-success" />
+          <column name="test-coverage" />
+          <column name="category" />
+          <column name="build-system-url" />
+        </columns>
+      </details>
+    </build-instance>
+    <build-type>
+      <currentQuery>
+        <filter />
+        <crossFilter />
+        <order />
+        <view>
+          <column name="id" width="50" />
+          <column name="name" width="50" />
+          <column name="release" width="50" />
+          <column name="description" width="100" />
+          <column name="category" width="50" />
+          <column name="enabled" width="50" />
+          <column name="default" width="50" />
+        </view>
+      </currentQuery>
+      <lookupQuery>
+        <filter />
+        <crossFilter />
+        <order />
+        <view>
+          <column name="id" width="50" />
+          <column name="name" width="50" />
+          <column name="release" width="50" />
+          <column name="description" width="100" />
+          <column name="category" width="50" />
+          <column name="enabled" width="50" />
+          <column name="default" width="50" />
+        </view>
+      </lookupQuery>
+      <details hProp="0.5" vProp="0.5">
+        <columns controls="false">
+          <column name="id" />
+        </columns>
+      </details>
+    </build-type>
+    <CommentHistory>
+      <option name="comments">
+        <list />
+      </option>
+    </CommentHistory>
+  </component>
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
-  <component name="HudsonMonitorComponent">
-    <option name="timeOutTextField" value="30" />
-  </component>
-  <component name="IdProvider" IDEtalkID="533618678A7236D380542533217CBBA1" />
-  <component name="ProjectResources">
-    <default-html-doctype>http://www.w3.org/1999/xhtml</default-html-doctype>
-  </component>
+  <component name="IdProvider" IDEtalkID="A1B73C9DB8FF42C4154E9B95FF1E3834" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IU-117.1037" project-jdk-type="IDEA JDK">
     <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="true" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <configuration useDefault="false">C:\Users\id967161\AppData\Roaming\Subversion</configuration>
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 

@@ -1,6 +1,6 @@
 package org.xendan.logmonitor.model;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,9 +11,21 @@ import java.util.List;
  */
 @Entity
 public class LogMonitorConfiguration implements Serializable {
+    private Long id;
     private String projectName;
     private List<ServerSettings> serverSettings = new ArrayList<ServerSettings>();
 
+    @Id
+    @GeneratedValue
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<ServerSettings> getServerSettings() {
         return serverSettings;
     }

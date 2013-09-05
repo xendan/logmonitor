@@ -1,4 +1,4 @@
-package org.xendan.logmonitor;
+package org.xendan.logmonitor.dao;
 
 import org.xendan.logmonitor.model.LogErrorData;
 import org.xendan.logmonitor.model.ServerSettings;
