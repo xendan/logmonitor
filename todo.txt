@@ -1,7 +1,7 @@
 + persits settins per project
  + 1 environment
  - dependencies
- - persist settings in in memory db
+ + persist settings in in memory db
 - schedule reading of log and writing in memory db
  - schedule read for server settings
  - parse read file

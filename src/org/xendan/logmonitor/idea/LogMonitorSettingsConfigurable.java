@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
 import org.xendan.logmonitor.model.LogMonitorConfiguration;
 import org.xendan.logmonitor.model.ServerSettings;
+import org.xendan.logmonitor.read.ReaderScheduler;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -25,6 +26,7 @@ import java.io.*;
 public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll {
     private final LogMonitorConfiguration config;
     private final LogMonitorSettingsDao logMonitorSettignsDao;
+    private final ReaderScheduler scheduler;
     private ArrayListModel<ServerSettings> settingsModel;
     private LogMonitorConfiguration initialConfig;
     private JPanel contentPanel;
@@ -45,6 +47,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
     public LogMonitorSettingsConfigurable(Project project) {
         logMonitorSettignsDao = ServiceManager.getService(LogMonitorSettingsDao.class);
+        scheduler = ServiceManager.getService(ReaderScheduler.class);
         this.config = logMonitorSettignsDao.getConfig(project.getName());
         addButton.addActionListener(new AddListener());
         removeButton.addActionListener(new RemoveListener());
@@ -61,13 +64,8 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             initialConfig = (LogMonitorConfiguration) in.readObject();
         }
         catch(Exception e) {
-            log(e);
+            throw new IllegalStateException("Error creating copy", e);
         }
-    }
-
-    private void log(Exception e) {
-        //TODO
-        e.printStackTrace();
     }
 
     @Nullable
@@ -104,6 +102,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     public void apply() throws ConfigurationException {
         resetInitial();
         logMonitorSettignsDao.save(config);
+        scheduler.reload();
     }
 
     @Override
@@ -121,29 +120,40 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private class AddListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            ServerSettings settings = new ServerSettings();
-            settings.setName(nameTextField.getText());
-            settings.setPassword(passwordTextField.getText());
-            settings.setHost(hostTextField.getText());
-            settings.setLogin(loginTextField.getText());
-            settings.setPath(pathTextField.getText());
-            config.getServerSettings().add(settings);
-            settingsModel.clear();
-            settingsModel.addAll(config.getServerSettings());
+            config.getServerSettings().add(createServerSettings());
+            refreshSettingsModel();
+            clear();
+        }
+
+        private void clear() {
             nameTextField.setText("");
             passwordTextField.setText("");
             hostTextField.setText("");
             loginTextField.setText("");
             pathTextField.setText("");
         }
+
+        private ServerSettings createServerSettings() {
+            ServerSettings settings = new ServerSettings();
+            settings.setName(nameTextField.getText());
+            settings.setPassword(passwordTextField.getText());
+            settings.setHost(hostTextField.getText());
+            settings.setLogin(loginTextField.getText());
+            settings.setPath(pathTextField.getText());
+            return settings;
+        }
+    }
+
+    private void refreshSettingsModel() {
+        settingsModel.clear();
+        settingsModel.addAll(config.getServerSettings());
     }
 
     private class RemoveListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             config.getServerSettings().remove(environmentList.getSelectedValue());
-            settingsModel.clear();
-            settingsModel.addAll(config.getServerSettings());
+            refreshSettingsModel();
         }
     }
 }

@@ -7,6 +7,7 @@ import org.hibernate.ejb.packaging.PersistenceMetadata;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
 import org.xendan.logmonitor.model.LogMonitorConfiguration;
+import org.xendan.logmonitor.model.ServerSettings;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,7 +16,10 @@ import javax.persistence.spi.PersistenceProvider;
 import javax.persistence.spi.PersistenceProviderResolver;
 import javax.persistence.spi.PersistenceProviderResolverHolder;
 import javax.persistence.spi.PersistenceUnitTransactionType;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 /**
  * User: id967161
@@ -55,6 +59,14 @@ public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
+    public List<LogMonitorConfiguration> getConfig() {
+        return entityManager.createQuery("SELECT l FROM LogMonitorConfiguration l")
+                .getResultList();
+
+    }
+
+    @Override
     public void save(LogMonitorConfiguration config) {
         entityManager.getTransaction().begin();
         entityManager.merge(config);
@@ -82,8 +94,8 @@ public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
                 metadata.setName(persistenceUnitName);
                 metadata.setTransactionType(PersistenceUnitTransactionType.RESOURCE_LOCAL);
                 metadata.setClasses(Arrays.asList(
-                        "org.xendan.logmonitor.model.LogMonitorConfiguration",
-                        "org.xendan.logmonitor.model.ServerSettings"));
+                        LogMonitorConfiguration.class.getName(),
+                        ServerSettings.class.getName()));
                 Properties props = new Properties();
                 props.setProperty("hibernate.dialect", "org.hibernate.dialect.H2Dialect");
                 props.setProperty("hibernate.connection.driver_class", "org.h2.Driver");

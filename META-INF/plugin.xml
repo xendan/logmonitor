@@ -27,7 +27,13 @@
       <applicationService serviceInterface="org.xendan.logmonitor.HomeResolver"
                       serviceImplementation="org.xendan.logmonitor.HomeResolver"/>
 
-    <projectConfigurable instance="org.xendan.logmonitor.idea.LogMonitorSettingsConfigurable" id="logmonitor.settings" />
+      <applicationService serviceInterface="org.xendan.logmonitor.read.ReaderScheduler"
+                      serviceImplementation="org.xendan.logmonitor.read.ReaderScheduler"/>
+
+       <projectConfigurable instance="org.xendan.logmonitor.idea.LogMonitorSettingsConfigurable" id="logmonitor.settings" />
+
+      <toolWindow id="LogMonitor" anchor="right"
+                  factoryClass="org.xendan.logmonitor.idea.LogMonitorToolWindowFactory"/>
   </extensions>
 
 </idea-plugin>
