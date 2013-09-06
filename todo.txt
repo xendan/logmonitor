@@ -1,9 +1,9 @@
 + persits settins per project
  + 1 environment
- - dependencies
  + persist settings in in memory db
-- schedule reading of log and writing in memory db
- - schedule read for server settings
++ schedule reading of log and writing in memory db
+ + schedule read for server settings
+ - patterns to server as file
  - parse read file
  - show errores
 - run on server
@@ -17,3 +17,4 @@ FIX
 IMPROVEMENTs
 - normal edit (hide password)
 - generating server side script
+- load settigns from server!

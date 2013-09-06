@@ -32,10 +32,10 @@ public class ReaderScheduler {
         timer.cancel();
         timer = new Timer();
         List<LogMonitorConfiguration> configs = dao.getConfig();
-        List<ScpDownloader> downloaders = new ArrayList<ScpDownloader>();
+        List<LogDownloader> downloaders = new ArrayList<LogDownloader>();
         for (LogMonitorConfiguration config : configs) {
             for (ServerSettings settings : config.getServerSettings()) {
-                downloaders.add(new ScpDownloader(settings.getHost(),  settings.getLogin(), settings.getPassword(), settings.getPath()));
+                downloaders.add(new LogDownloader(settings));
             }
         }
         timer.scheduleAtFixedRate(new ReadAll(downloaders), 0, 10 * 60 * 1000);
@@ -49,15 +49,15 @@ public class ReaderScheduler {
     }
 
     private class ReadAll extends TimerTask {
-        private final List<ScpDownloader> downloaders;
+        private final List<LogDownloader> downloaders;
 
-        public ReadAll(List<ScpDownloader> downloaders) {
+        public ReadAll(List<LogDownloader> downloaders) {
             this.downloaders = downloaders;
         }
 
         @Override
         public void run() {
-            for (ScpDownloader downloader : downloaders) {
+            for (LogDownloader downloader : downloaders) {
                 downloader.downloadToLocal();
             }
         }

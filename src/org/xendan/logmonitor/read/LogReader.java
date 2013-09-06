@@ -1,29 +1,29 @@
 package org.xendan.logmonitor.read;
 
+import org.joda.time.DateTime;
+import org.xendan.logmonitor.model.LogEntry;
+import org.xendan.logmonitor.parser.LogParser;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-import org.joda.time.DateTime;
-import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.parser.LogParser;
-
 public class LogReader {
     private final LogParser parser;
     private final String pattern;
-    private ScpDownloader scpDwonloader;
+    private LogDownloader logDownloader;
 
 
-    public LogReader(String pattern, ScpDownloader scpDwonloader) {
+    public LogReader(String pattern, LogDownloader logDownloader) {
         this.pattern = pattern;
-        this.scpDwonloader = scpDwonloader;
+        this.logDownloader = logDownloader;
         this.parser = new LogParser(pattern);
     }
 
     public List<LogEntry> readSince(DateTime lastDate) {
-        String path = scpDwonloader.downloadToLocal();
+        String path = logDownloader.downloadToLocal();
         BufferedReader bufferedReader = getBufferedReader(path);
         String line;
         boolean firstRead = true;

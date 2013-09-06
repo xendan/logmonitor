@@ -30,6 +30,9 @@
       <applicationService serviceInterface="org.xendan.logmonitor.read.ReaderScheduler"
                       serviceImplementation="org.xendan.logmonitor.read.ReaderScheduler"/>
 
+      <applicationService serviceInterface="org.xendan.logmonitor.read.MatcherService"
+                      serviceImplementation="org.xendan.logmonitor.read.MatcherService"/>
+
        <projectConfigurable instance="org.xendan.logmonitor.idea.LogMonitorSettingsConfigurable" id="logmonitor.settings" />
 
       <toolWindow id="LogMonitor" anchor="right"
