@@ -23,7 +23,7 @@ public class LogParser {
     private final UnitParser<Integer> lineNumberParser = new LineNumberParser();
 
     private final UnitParser<?>[] allParsers = {callerParser, dateParser, levelParser, messageParser, categoryParser, lineNumberParser};
-    private final Map<UnitParser<?>, Integer> activeParsers = new HashMap<UnitParser<?>, Integer>();
+    private final List<UnitParser<?>> activeParsers = new ArrayList<UnitParser<?>>();
     
     private final List<LogEntry> entries = new ArrayList<LogEntry>();
     private final String pattern;
@@ -38,17 +38,17 @@ public class LogParser {
         return Pattern.compile(buildRegexPattern(true));
     }
 
-    private String buildRegexPattern(boolean breackestForAll) {
+    private String buildRegexPattern(boolean forJava) {
         String resultPattern = pattern;
-        for (UnitParser<?> parser : activeParsers.keySet()) {
-            resultPattern = parser.replaceInPattern(resultPattern, breackestForAll);
+        for (UnitParser<?> parser : activeParsers) {
+            resultPattern = parser.replaceInPattern(resultPattern, forJava);
         }
         return resultPattern;
     }
 
     public String getEntryMatcherPattern(EntryMatcher entryMatcher) {
         String resultPattern = pattern;
-        for (UnitParser<?> parser : activeParsers.keySet()) {
+        for (UnitParser<?> parser : activeParsers) {
             resultPattern = parser.replaceInPatternForMatcher(resultPattern, entryMatcher);
         }
         return resultPattern;
@@ -67,11 +67,8 @@ public class LogParser {
         Map<Integer, UnitParser<?>> parserMapStarts = getParserMap(pattern);
         List<Integer> sortedStarts = new ArrayList<Integer>(parserMapStarts.keySet());
         Collections.sort(sortedStarts);
-        Integer counter = 0;
         for (Integer start : sortedStarts) {
-            UnitParser<?> parser = parserMapStarts.get(start);
-            activeParsers.put(parser, counter);
-            counter += parser.getGroupsNumber();
+            activeParsers.add(parserMapStarts.get(start));
         }
     }
 
@@ -117,8 +114,8 @@ public class LogParser {
     }
 
     private <V> V getValue(Matcher matcher, UnitParser<V> parser) {
-        if (activeParsers.containsKey(parser)) {
-            return parser.toValue(matcher.group(activeParsers.get(parser) + 1));
+        if (activeParsers.contains(parser)) {
+            return parser.toValue(matcher.group(activeParsers.indexOf(parser) + 1));
         }
         return null;
     }
@@ -131,7 +128,7 @@ public class LogParser {
     /**
      * @return regexp for mathc common string with group for date
      */
-    public String getCommonRegexp() {
+    public String getCommonPythonRegexp() {
         return buildRegexPattern(false);
     }
 

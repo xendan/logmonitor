@@ -89,7 +89,7 @@ public class MatcherService {
         }
         toFileAndToSever(match.toString(), "match_pattern.txt", synchroniser);
         toFileAndToSever(ingore.toString(), "ignore_pattern.txt", synchroniser);
-        toFileAndToSever(logParser.getCommonRegexp(), "content_pattern.txt", synchroniser);
+        toFileAndToSever(logParser.getCommonPythonRegexp(), "content_pattern.txt", synchroniser);
     }
 
     private void toFileAndToSever(String content, String fileName, ScpSynchroniser synchroniser) {

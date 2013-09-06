@@ -21,7 +21,7 @@ public class LogParserTest {
 
     public static final String LOG_WARN = "2012-09-28 01:12:17,191 WARN  [org.caramba.CarambaContext] " + MESSAGE;
     public static final String LOG_INFO = "2012-09-28 01:12:17,191 INFO  [org.caramba.CarambaContext] " + MESSAGE;
-    public static final String LOG_ERROR = "2012-09-28 01:12:17,191 ERROR  [org.caramba.CarambaContext] " + MESSAGE;
+    public static final String LOG_ERROR = "2012-09-28 01:12:17,191 ERROR [org.caramba.CarambaContext] " + MESSAGE;
     private static final String NL = System.getProperty("line.separator");
 
     @Test
@@ -41,13 +41,13 @@ public class LogParserTest {
         LogParser parser =  new LogParser(PATTERN);
         EntryMatcher entryMatcher = new EntryMatcher();
         entryMatcher.setLevel(Level.WARN.toString());
-        String commonRegexp = parser.getCommonRegexp();
+        String commonRegexp = parser.getCommonPythonRegexp().replace("?<date>", "");
         Matcher matcher = Pattern.compile(commonRegexp).matcher(LOG_INFO);
         assertTrue(matcher.find());
         assertEquals("Expect date found by pattern " + commonRegexp, "2012-09-28 01:12:17,191", matcher.group(1));
-        String regexpEntry = parser.getEntryMatcherPattern(entryMatcher);
-        assertTrue(Pattern.matches(regexpEntry, LOG_ERROR));
-        assertTrue(Pattern.matches(regexpEntry, LOG_WARN));
+        String regexpEntry = parser.getEntryMatcherPattern(entryMatcher).replace("?<date>", "");
+        assertTrue("Expect error found by " + regexpEntry + "in \n" + LOG_ERROR, Pattern.matches(regexpEntry, LOG_ERROR));
+        assertTrue("Expect warnings found by " + regexpEntry +"in \n" + LOG_WARN, Pattern.matches(regexpEntry, LOG_WARN));
         assertFalse("Info level is less than warning", Pattern.matches(regexpEntry, LOG_INFO));
     }
 

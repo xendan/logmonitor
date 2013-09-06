@@ -21,22 +21,30 @@ public abstract class UnitParser<V> {
         return -1;
     }
     
-    public String replaceInPattern(String pattern, boolean brackets) {
-        return replaceInPattern(pattern, brackets, null);
+    public String replaceInPattern(String pattern, boolean forJava) {
+        return replaceInPattern(pattern, forJava, null);
     }
 
-    private String replaceInPattern(String pattern, boolean brackets, EntryMatcher entryMatcher) {
+    private String replaceInPattern(String pattern, boolean forJava, EntryMatcher entryMatcher) {
         Matcher matcher = samplePattern.matcher(pattern);
-        boolean addBreakets = needBrackets(brackets);
+        boolean needBrackets = needBrackets(forJava);
         if (matcher.find()) {
             String basePart = (entryMatcher == null) ? toRegExp(matcher) : getRegexpForEntryMatcher(entryMatcher, matcher);
-            String left = addBreakets ? "(" : "";
-            String right = addBreakets ? ")" : "";
+            String left = needBrackets ? "(" : "";
+            String right = needBrackets ? ")" : "";
             return pattern.substring(0, matcher.start())
-                    + left + basePart + right
+                    + left + getBasePatternPart(basePart, forJava) + right
                     + pattern.substring(matcher.end());
         }
         return pattern;
+    }
+
+    protected boolean needBrackets(boolean forPython) {
+        return forPython;
+    }
+
+    protected String getBasePatternPart(String basePart, boolean forJava) {
+        return basePart;
     }
 
     protected String getRegexpForEntryMatcher(EntryMatcher entryMatcher, Matcher matcher) {
@@ -47,16 +55,8 @@ public abstract class UnitParser<V> {
         return replaceInPattern(resultPattern, false, entryMatcher);
     }
 
-    protected boolean needBrackets(boolean brackets) {
-        return brackets;
-    }
-
     public abstract V toValue(String string);
 
     protected abstract String toRegExp(Matcher matcher);
 
-
-    public Integer getGroupsNumber() {
-        return 1;
-    }
 }

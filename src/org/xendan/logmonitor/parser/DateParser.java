@@ -30,6 +30,12 @@ class DateParser extends UnitParser<DateTime> {
     }
 
     @Override
+    protected String getBasePatternPart(String basePart, boolean forJava) {
+        String groupName = forJava ? "" : "?<date>";
+        return groupName + super.getBasePatternPart(basePart, forJava);
+    }
+
+    @Override
     protected String toRegExp(Matcher matcher) {
         String formatAsString = matcher.group(2);
         dateFormatter = getDateFormatter(getDatePatternString(formatAsString));
@@ -46,7 +52,6 @@ class DateParser extends UnitParser<DateTime> {
         if (formatAsString == null) {
             return ISO8601;
         }
-        //TODO add for ISO
         return formatAsString;
     }
     
@@ -61,8 +66,4 @@ class DateParser extends UnitParser<DateTime> {
         return DateTimeFormat.forPattern(datePatternString);
     }
 
-    @Override
-    public Integer getGroupsNumber() {
-        return 2;
-    }
 }
