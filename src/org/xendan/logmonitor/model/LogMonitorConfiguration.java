@@ -13,6 +13,7 @@ import java.util.List;
 public class LogMonitorConfiguration implements Serializable {
     private Long id;
     private String projectName;
+    private String logPattern;
     private List<ServerSettings> serverSettings = new ArrayList<ServerSettings>();
 
     @Id
@@ -58,5 +59,11 @@ public class LogMonitorConfiguration implements Serializable {
         return serverSettings != null ? serverSettings.hashCode() : 0;
     }
 
+    public String getLogPattern() {
+        return logPattern;
+    }
 
+    public void setLogPattern(String logPattern) {
+        this.logPattern = logPattern;
+    }
 }

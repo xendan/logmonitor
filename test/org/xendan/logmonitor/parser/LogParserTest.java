@@ -1,13 +1,17 @@
 package org.xendan.logmonitor.parser;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-
-import java.util.List;
-
 import org.apache.log4j.Level;
 import org.junit.Test;
+import org.xendan.logmonitor.model.EntryMatcher;
 import org.xendan.logmonitor.model.LogEntry;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static junit.framework.TestCase.assertFalse;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class LogParserTest {
 
@@ -15,12 +19,14 @@ public class LogParserTest {
 
     private static final String MESSAGE = "some message not multiline";
 
-    public static final String LOG = "2012-09-28 01:12:17,191 WARN  [org.caramba.CarambaContext] " + MESSAGE;
+    public static final String LOG_WARN = "2012-09-28 01:12:17,191 WARN  [org.caramba.CarambaContext] " + MESSAGE;
+    public static final String LOG_INFO = "2012-09-28 01:12:17,191 INFO  [org.caramba.CarambaContext] " + MESSAGE;
+    public static final String LOG_ERROR = "2012-09-28 01:12:17,191 ERROR  [org.caramba.CarambaContext] " + MESSAGE;
+    private static final String NL = System.getProperty("line.separator");
 
     @Test
     public void test_parse_date() {
         LogEntry entry = singleEntry("%d{yyyy-MM-dd HH:mm:ss,SSS}", "2012-09-28 01:12:17,191");
-
         assertEquals(28, entry.getDate().getDayOfMonth());
     }
 
@@ -28,6 +34,21 @@ public class LogParserTest {
         LogParser parser = new LogParser(pattern);
         parser.addString(log);
         return parser.getEntries().get(0);
+    }
+
+    @Test
+    public void test_matcher_pattern() throws Exception {
+        LogParser parser =  new LogParser(PATTERN);
+        EntryMatcher entryMatcher = new EntryMatcher();
+        entryMatcher.setLevel(Level.WARN.toString());
+        String commonRegexp = parser.getCommonRegexp();
+        Matcher matcher = Pattern.compile(commonRegexp).matcher(LOG_INFO);
+        assertTrue(matcher.find());
+        assertEquals("Expect date found by pattern " + commonRegexp, "2012-09-28 01:12:17,191", matcher.group(1));
+        String regexpEntry = parser.getEntryMatcherPattern(entryMatcher);
+        assertTrue(Pattern.matches(regexpEntry, LOG_ERROR));
+        assertTrue(Pattern.matches(regexpEntry, LOG_WARN));
+        assertFalse("Info level is less than warning", Pattern.matches(regexpEntry, LOG_INFO));
     }
 
     @Test
@@ -122,7 +143,7 @@ public class LogParserTest {
 
         assertEquals(5, entries.size());
         String messageStr = entries.get(2).getMessage();
-        assertEquals(textStart + "\n" + logs[3] + "\n" + logs[4] + "\n" + logs[5], messageStr);
+        assertEquals(textStart + NL + logs[3] + NL + logs[4] + NL + logs[5], messageStr);
     } 
             
             

@@ -15,6 +15,7 @@ import org.xendan.logmonitor.model.EntryMatcher;
 import org.xendan.logmonitor.model.LogMonitorConfiguration;
 import org.xendan.logmonitor.model.Matchers;
 import org.xendan.logmonitor.model.ServerSettings;
+import org.xendan.logmonitor.parser.LogParser;
 import org.xendan.logmonitor.read.MatcherService;
 import org.xendan.logmonitor.read.ReaderScheduler;
 
@@ -60,6 +61,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JList mathcerList;
     private JLabel mathcerName;
     private JTextField mathcerNameTextField;
+    private JTextField patternTextField;
 
     @NotNull
     @Override
@@ -133,8 +135,9 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     @Override
     public void apply() throws ConfigurationException {
         resetInitial();
+        config.setLogPattern(patternTextField.getText());
         logMonitorSettignsDao.save(config);
-        matcherService.save(matchers);
+        matcherService.save(matchers, new LogParser(config.getLogPattern()));
         scheduler.reload();
     }
 
@@ -142,6 +145,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     public void reset() {
         resetInitial();
         settingsModel = new ArrayListModel<ServerSettings>(config.getServerSettings());
+        pathTextField.setText(config.getLogPattern());
         environmentList.setModel(settingsModel);
     }
 

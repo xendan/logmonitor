@@ -65,4 +65,8 @@ public class ScpSynchroniser {
         task.setUsername(settings.getLogin());
         return task;
     }
+
+    public String getSeverName() {
+        return settings.getName();
+    }
 }

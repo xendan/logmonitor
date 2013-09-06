@@ -1,11 +1,11 @@
 package org.xendan.logmonitor.parser;
 
-import java.util.regex.Matcher;
-
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 import org.joda.time.format.ISODateTimeFormat;
+
+import java.util.regex.Matcher;
 
 class DateParser extends UnitParser<DateTime> {
     private static final String ABSOLUTE_PATTERN_STR = "HH:mm:ss,SSS";
@@ -16,7 +16,7 @@ class DateParser extends UnitParser<DateTime> {
     private DateTimeFormatter dateFormatter;
 
     public DateParser() {
-        super("d\\{(.+?)\\}");
+        super("d(\\{(.+?)\\})?");
     }
 
     @Override
@@ -25,9 +25,17 @@ class DateParser extends UnitParser<DateTime> {
     }
 
     @Override
+    protected boolean needBrackets(boolean brackets) {
+        return true;
+    }
+
+    @Override
     protected String toRegExp(Matcher matcher) {
-        String formatAsString = matcher.group(1);
+        String formatAsString = matcher.group(2);
         dateFormatter = getDateFormatter(getDatePatternString(formatAsString));
+        if (formatAsString == null || ISO8601.equals(formatAsString)) {
+            formatAsString = "yyyy-MM-dd HH:mm:ss,SSS";
+        }
         return getDatePatternString(formatAsString).replaceAll("[yMdHmsS]", "\\\\d");
     }
 
@@ -35,18 +43,26 @@ class DateParser extends UnitParser<DateTime> {
         if (ABSOLUTE.equals(formatAsString)) {
             return ABSOLUTE_PATTERN_STR;
         }
+        if (formatAsString == null) {
+            return ISO8601;
+        }
         //TODO add for ISO
         return formatAsString;
     }
     
     private DateTimeFormatter getDateFormatter(String dateFormat) {
-        if (ABSOLUTE.equals(getDatePatternString(dateFormat))) {
+        String datePatternString = getDatePatternString(dateFormat);
+        if (ABSOLUTE.equals(datePatternString)) {
             return ABSOLUTE_PATTERN;
         }
-        if (ISO8601.equals(getDatePatternString(dateFormat))) {
+        if (ISO8601.equals(datePatternString)) {
             return ISODateTimeFormat.dateTimeParser();
         }
-        return DateTimeFormat.forPattern(getDatePatternString(dateFormat));
+        return DateTimeFormat.forPattern(datePatternString);
     }
 
+    @Override
+    public Integer getGroupsNumber() {
+        return 2;
+    }
 }

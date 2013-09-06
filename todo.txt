@@ -1,4 +1,4 @@
-+ persits settins per project
++ persits settings per project
  + 1 environment
  + persist settings in in memory db
 + schedule reading of log and writing in memory db
@@ -6,8 +6,6 @@
  - patterns to server as file
  - parse read file
  - show errores
-- run on server
-- persist EntryMatcher
 + 1 error pattern
 
 FIX

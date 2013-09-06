@@ -1,16 +1,12 @@
 package org.xendan.logmonitor.parser;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import org.joda.time.DateTime;
+import org.xendan.logmonitor.model.EntryMatcher;
+import org.xendan.logmonitor.model.LogEntry;
+
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import org.apache.log4j.Level;
-import org.joda.time.DateTime;
-import org.xendan.logmonitor.model.LogEntry;
 
 public class LogParser {
 
@@ -27,22 +23,36 @@ public class LogParser {
     private final UnitParser<Integer> lineNumberParser = new LineNumberParser();
 
     private final UnitParser<?>[] allParsers = {callerParser, dateParser, levelParser, messageParser, categoryParser, lineNumberParser};
-    private final List<UnitParser<?>> activeParsers = new ArrayList<UnitParser<?>>();
+    private final Map<UnitParser<?>, Integer> activeParsers = new HashMap<UnitParser<?>, Integer>();
     
     private final List<LogEntry> entries = new ArrayList<LogEntry>();
-    
+    private final String pattern;
+
     public LogParser(String pattern) {
-        regexPattern = getRegexPattern(pattern);
+        this.pattern = replaceSpecial(pattern);
+        regexPattern = getRegexPattern();
     }
 
-    private Pattern getRegexPattern(String pattern) {
-        String resultPattern = replaceSpecial(pattern);
+    private Pattern getRegexPattern() {
         initActiveParsers(pattern);
-        for (UnitParser<?> parser : activeParsers) {
-            resultPattern = parser.replaceInPattern(resultPattern);
+        return Pattern.compile(buildRegexPattern(true));
+    }
+
+    private String buildRegexPattern(boolean breackestForAll) {
+        String resultPattern = pattern;
+        for (UnitParser<?> parser : activeParsers.keySet()) {
+            resultPattern = parser.replaceInPattern(resultPattern, breackestForAll);
         }
-        resultPattern = resultPattern.replace("%n", "");
-        return Pattern.compile(resultPattern);
+        return resultPattern;
+    }
+
+    public String getEntryMatcherPattern(EntryMatcher entryMatcher) {
+        String resultPattern = pattern;
+        for (UnitParser<?> parser : activeParsers.keySet()) {
+            resultPattern = parser.replaceInPatternForMatcher(resultPattern, entryMatcher);
+        }
+        return resultPattern;
+
     }
 
     private String replaceSpecial(String pattern) {
@@ -50,24 +60,28 @@ public class LogParser {
         for (String element : REGEX_SPECIAL) {
             resultPattern = resultPattern.replace(element, "\\" + element);
         }
-        return resultPattern;
+        return resultPattern.replace("%n", "");
     }
 
     private void initActiveParsers(String pattern) {
-        Map<Integer, UnitParser<?>> parserMap = getParserMap(pattern);
-        List<Integer> sortedPositions = new ArrayList<Integer>(parserMap.keySet());
-        Collections.sort(sortedPositions);
-        for (Integer position : sortedPositions) {
-            if (position != -1) {
-                activeParsers.add(parserMap.get(position));
-            }
+        Map<Integer, UnitParser<?>> parserMapStarts = getParserMap(pattern);
+        List<Integer> sortedStarts = new ArrayList<Integer>(parserMapStarts.keySet());
+        Collections.sort(sortedStarts);
+        Integer counter = 0;
+        for (Integer start : sortedStarts) {
+            UnitParser<?> parser = parserMapStarts.get(start);
+            activeParsers.put(parser, counter);
+            counter += parser.getGroupsNumber();
         }
     }
 
     private Map<Integer, UnitParser<?>> getParserMap(String pattern) {
         Map<Integer, UnitParser<?>> parserMap = new HashMap<Integer, UnitParser<?>>();
         for (UnitParser<?> parser : allParsers) {
-            parserMap.put(parser.getStart(pattern), parser);
+            int start = parser.getStart(pattern);
+            if (start != -1) {
+                parserMap.put(start, parser);
+            }
         }
         return parserMap;
     }
@@ -103,14 +117,22 @@ public class LogParser {
     }
 
     private <V> V getValue(Matcher matcher, UnitParser<V> parser) {
-        if (activeParsers.contains(parser)) {
-            return parser.toValue(matcher.group(activeParsers.indexOf(parser) + 1));
+        if (activeParsers.containsKey(parser)) {
+            return parser.toValue(matcher.group(activeParsers.get(parser) + 1));
         }
         return null;
     }
 
+
     public void clear() {
         entries.clear();
+    }
+
+    /**
+     * @return regexp for mathc common string with group for date
+     */
+    public String getCommonRegexp() {
+        return buildRegexPattern(false);
     }
 
 }

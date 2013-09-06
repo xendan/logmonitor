@@ -29,7 +29,6 @@ public class LogDownloader extends ScpSynchroniser {
             SSHExec exec = initTask(new SSHExec());
             exec.setCommand("python ~/" + HomeResolver.HOME + "/" + GREP_ERRORES_PY + " " + settings.getPath() + " 'ERROR'");
             exec.execute();
-            //POINT: use idea system
             return downloadFile(LAST_LOG, LAST_LOG);
         } catch (Exception e) {
             //TODO
@@ -45,7 +44,6 @@ public class LogDownloader extends ScpSynchroniser {
                 throw new IllegalStateException("Error creating file" + file.getAbsolutePath());
             }
             IOUtils.copy(getClass().getResourceAsStream("/" + GREP_ERRORES_PY), new FileOutputStream(file, false));
-
         }
         return GREP_ERRORES_PY;
     }

@@ -15,11 +15,11 @@ import static org.mockito.Mockito.when;
 
 public class LogReaderTest {
 
-    private ScpSynchroniser iAmFake;
+    private LogDownloader iAmFake;
 
     @Before
     public void setUp() {
-        iAmFake = mock(ScpSynchroniser.class);
+        iAmFake = mock(LogDownloader.class);
     }
 
     @Test
