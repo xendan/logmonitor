@@ -3,13 +3,12 @@ package org.xendan.logmonitor.parser;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 
 import java.util.regex.Matcher;
 
-class DateParser extends UnitParser<DateTime> {
+public class DateParser extends UnitParser<DateTime> {
+    public static final String DEFAULT_FORMAT = "yyyy-MM-dd HH:mm:ss,SSS";
     private static final String ABSOLUTE_PATTERN_STR = "HH:mm:ss,SSS";
-    private static final DateTimeFormatter ABSOLUTE_PATTERN = DateTimeFormat.forPattern(ABSOLUTE_PATTERN_STR);
     //TODO, check definition
     private static final String ABSOLUTE = "ABSOLUTE";
     private static final String ISO8601 = "ISO8601";
@@ -21,49 +20,29 @@ class DateParser extends UnitParser<DateTime> {
 
     @Override
     public DateTime toValue(String string) {
-        return dateFormatter.parseDateTime(getDatePatternString(string));
-    }
-
-    @Override
-    protected boolean needBrackets(boolean brackets) {
-        return true;
-    }
-
-    @Override
-    protected String getBasePatternPart(String basePart, boolean forJava) {
-        String groupName = forJava ? "" : "?<date>";
-        return groupName + super.getBasePatternPart(basePart, forJava);
+        return dateFormatter.parseDateTime(string);
     }
 
     @Override
     protected String toRegExp(Matcher matcher) {
         String formatAsString = matcher.group(2);
-        dateFormatter = getDateFormatter(getDatePatternString(formatAsString));
         if (formatAsString == null || ISO8601.equals(formatAsString)) {
-            formatAsString = "yyyy-MM-dd HH:mm:ss,SSS";
+            formatAsString = DEFAULT_FORMAT;
         }
-        return getDatePatternString(formatAsString).replaceAll("[yMdHmsS]", "\\\\d");
+        formatAsString = getDatePatternString(formatAsString);
+        dateFormatter = DateTimeFormat.forPattern(formatAsString);
+        return formatAsString.replaceAll("[yMdHmsS]", "\\\\d");
     }
 
     private String getDatePatternString(String formatAsString) {
         if (ABSOLUTE.equals(formatAsString)) {
             return ABSOLUTE_PATTERN_STR;
         }
-        if (formatAsString == null) {
-            return ISO8601;
-        }
         return formatAsString;
     }
-    
-    private DateTimeFormatter getDateFormatter(String dateFormat) {
-        String datePatternString = getDatePatternString(dateFormat);
-        if (ABSOLUTE.equals(datePatternString)) {
-            return ABSOLUTE_PATTERN;
-        }
-        if (ISO8601.equals(datePatternString)) {
-            return ISODateTimeFormat.dateTimeParser();
-        }
-        return DateTimeFormat.forPattern(datePatternString);
-    }
 
+
+    public String getDateAsString(String logPattern, DateTime date) {
+        return null;
+    }
 }

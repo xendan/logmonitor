@@ -23,6 +23,8 @@
     <!-- Add your extensions here -->
       <applicationService serviceInterface="org.xendan.logmonitor.dao.LogMonitorSettingsDao"
                       serviceImplementation="org.xendan.logmonitor.dao.impl.LogMonitorSettingsDaoImpl"/>
+      <applicationService serviceInterface="org.xendan.logmonitor.dao.LogEntryDao"
+                      serviceImplementation="org.xendan.logmonitor.dao.impl.LogEntryDaoImpl"/>
 
       <applicationService serviceInterface="org.xendan.logmonitor.HomeResolver"
                       serviceImplementation="org.xendan.logmonitor.HomeResolver"/>
@@ -32,6 +34,8 @@
 
       <applicationService serviceInterface="org.xendan.logmonitor.read.MatcherService"
                       serviceImplementation="org.xendan.logmonitor.read.MatcherService"/>
+      <applicationService serviceInterface="org.xendan.logmonitor.read.Serializer"
+                      serviceImplementation="org.xendan.logmonitor.read.Serializer"/>
 
        <projectConfigurable instance="org.xendan.logmonitor.idea.LogMonitorSettingsConfigurable" id="logmonitor.settings" />
 

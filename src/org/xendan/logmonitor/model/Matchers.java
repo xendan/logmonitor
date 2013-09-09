@@ -11,13 +11,13 @@ import java.util.List;
  */
 @XmlRootElement
 public class Matchers implements Serializable {
-    private List<EntryMatcher> matchers = new ArrayList<EntryMatcher>();
+    private List<MatchPattern> matchers = new ArrayList<MatchPattern>();
 
-    public List<EntryMatcher> getMatchers() {
+    public List<MatchPattern> getMatchers() {
         return matchers;
     }
 
-    public void setMatchers(List<EntryMatcher> matchers) {
+    public void setMatchers(List<MatchPattern> matchers) {
         this.matchers = matchers;
     }
 }

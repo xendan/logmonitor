@@ -1,6 +1,6 @@
 package org.xendan.logmonitor.parser;
 
-import org.xendan.logmonitor.model.EntryMatcher;
+import org.xendan.logmonitor.model.MatchPattern;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -20,43 +20,27 @@ public abstract class UnitParser<V> {
         }
         return -1;
     }
-    
-    public String replaceInPattern(String pattern, boolean forJava) {
-        return replaceInPattern(pattern, forJava, null);
-    }
 
-    private String replaceInPattern(String pattern, boolean forJava, EntryMatcher entryMatcher) {
+    public String replaceInPattern(String pattern) {
         Matcher matcher = samplePattern.matcher(pattern);
-        boolean needBrackets = needBrackets(forJava);
         if (matcher.find()) {
-            String basePart = (entryMatcher == null) ? toRegExp(matcher) : getRegexpForEntryMatcher(entryMatcher, matcher);
-            String left = needBrackets ? "(" : "";
-            String right = needBrackets ? ")" : "";
             return pattern.substring(0, matcher.start())
-                    + left + getBasePatternPart(basePart, forJava) + right
+                    + "(" + toRegExp(matcher) + ")"
                     + pattern.substring(matcher.end());
         }
         return pattern;
     }
 
-    protected boolean needBrackets(boolean forPython) {
-        return forPython;
-    }
 
-    protected String getBasePatternPart(String basePart, boolean forJava) {
-        return basePart;
-    }
 
-    protected String getRegexpForEntryMatcher(EntryMatcher entryMatcher, Matcher matcher) {
+
+    protected String getRegexpForEntryMatcher(MatchPattern entryMatcher, Matcher matcher) {
         return toRegExp(matcher);
-    }
-
-    public String replaceInPatternForMatcher(String resultPattern, EntryMatcher entryMatcher) {
-        return replaceInPattern(resultPattern, false, entryMatcher);
     }
 
     public abstract V toValue(String string);
 
     protected abstract String toRegExp(Matcher matcher);
+
 
 }

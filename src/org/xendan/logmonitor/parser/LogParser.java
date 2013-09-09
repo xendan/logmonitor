@@ -1,8 +1,8 @@
 package org.xendan.logmonitor.parser;
 
 import org.joda.time.DateTime;
-import org.xendan.logmonitor.model.EntryMatcher;
 import org.xendan.logmonitor.model.LogEntry;
+import org.xendan.logmonitor.model.Matchers;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -27,32 +27,30 @@ public class LogParser {
     
     private final List<LogEntry> entries = new ArrayList<LogEntry>();
     private final String pattern;
+    private final EntryMatcher entryMatcher;
 
-    public LogParser(String pattern) {
+    public LogParser(String pattern, Matchers matchers) {
+        this(pattern, new EntryMatcher(matchers));
+    }
+
+    public LogParser(String pattern, EntryMatcher entryMatcher) {
+        this.entryMatcher = entryMatcher;
         this.pattern = replaceSpecial(pattern);
         regexPattern = getRegexPattern();
     }
 
+
     private Pattern getRegexPattern() {
         initActiveParsers(pattern);
-        return Pattern.compile(buildRegexPattern(true));
+        return Pattern.compile(buildRegexPattern());
     }
 
-    private String buildRegexPattern(boolean forJava) {
+    private String buildRegexPattern() {
         String resultPattern = pattern;
         for (UnitParser<?> parser : activeParsers) {
-            resultPattern = parser.replaceInPattern(resultPattern, forJava);
+            resultPattern = parser.replaceInPattern(resultPattern);
         }
         return resultPattern;
-    }
-
-    public String getEntryMatcherPattern(EntryMatcher entryMatcher) {
-        String resultPattern = pattern;
-        for (UnitParser<?> parser : activeParsers) {
-            resultPattern = parser.replaceInPatternForMatcher(resultPattern, entryMatcher);
-        }
-        return resultPattern;
-
     }
 
     private String replaceSpecial(String pattern) {
@@ -83,19 +81,20 @@ public class LogParser {
         return parserMap;
     }
 
-    public LogEntry addString(String log) {
+    public void addString(String log) {
         Matcher matcher = regexPattern.matcher(log);
         if (!matcher.find()) {
             if (entries.isEmpty()) {
-                return null;
+                return;
             }
             LogEntry last = entries.get(entries.size() - 1);
             last.setMessage(last.getMessage() + NEW_LINE + log);
-            return last;
+            return;
         }
         LogEntry newEntry = createEntry(matcher);
-        entries.add(newEntry);
-        return newEntry;
+        if (entryMatcher.match(newEntry)) {
+            entries.add(newEntry);
+        }
     }
 
     private LogEntry createEntry(Matcher matcher) {
@@ -124,12 +123,4 @@ public class LogParser {
     public void clear() {
         entries.clear();
     }
-
-    /**
-     * @return regexp for mathc common string with group for date
-     */
-    public String getCommonPythonRegexp() {
-        return buildRegexPattern(false);
-    }
-
 }

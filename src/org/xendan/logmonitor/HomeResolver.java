@@ -23,7 +23,7 @@ public class HomeResolver {
     }
 
     private File mkdirs(String path) {
-        File file = new File(path);
+        File file = new File(path, File.separator);
         if (!file.exists() && !file.mkdirs()) {
             logErroDir(file);
         }
@@ -42,8 +42,14 @@ public class HomeResolver {
         return parent + File.separator + child;
     }
 
-    public void mkdir(String name) {
-        mkdirs(getPath(name));
-
+    public String joinMkDirs(String file, String... dirs) {
+        String fullDirs = getHome().getAbsolutePath();
+        for (String dir : dirs) {
+            fullDirs = join(fullDirs, dir);
+        }
+        File dirsFile = mkdirs(fullDirs);
+        return join(fullDirs, file);
     }
+
+
 }

@@ -2,27 +2,28 @@ package org.xendan.logmonitor.parser;
 
 import org.apache.log4j.Level;
 import org.junit.Test;
-import org.xendan.logmonitor.model.EntryMatcher;
 import org.xendan.logmonitor.model.LogEntry;
 
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
+import static org.mockito.Mockito.*;
 public class LogParserTest {
 
-    public static final String PATTERN = "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%C] %m%n";
+//    public static final String PATTERN = "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%C] %m%n";
 
     private static final String MESSAGE = "some message not multiline";
 
-    public static final String LOG_WARN = "2012-09-28 01:12:17,191 WARN  [org.caramba.CarambaContext] " + MESSAGE;
-    public static final String LOG_INFO = "2012-09-28 01:12:17,191 INFO  [org.caramba.CarambaContext] " + MESSAGE;
-    public static final String LOG_ERROR = "2012-09-28 01:12:17,191 ERROR [org.caramba.CarambaContext] " + MESSAGE;
+//    private static final long WARN_READ = DateTimeFormat.forPattern(DateParser.DEFAULT_FORMAT).parseDateTime("2012-09-21 01:12:17,191").getMillis();
+
+    public static final String LOG_WARN = "2012-09-21 01:12:17,191 WARN  [org.caramba.CarambaContext] " + MESSAGE;
+    public static final String LOG_INFO = "2012-09-22 01:12:17,191 INFO  [org.caramba.CarambaContext] " + MESSAGE;
+    public static final String LOG_ERROR = "2012-09-23 01:12:17,191 ERROR [org.caramba.CarambaContext] " + MESSAGE;
+    public static final String LOG_DEBUG = "2012-09-24 01:12:17,191 DEBUG [org.caramba.CarambaContext] " + MESSAGE;
     private static final String NL = System.getProperty("line.separator");
+    public static final String FULL_PATTERN = "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%C]";
+    private static final EntryMatcher INFO_MATCHER = EntryMatcherTest.createInfoMatchers();
 
     @Test
     public void test_parse_date() {
@@ -31,25 +32,12 @@ public class LogParserTest {
     }
 
     private LogEntry singleEntry(String pattern, String log) {
-        LogParser parser = new LogParser(pattern);
+        EntryMatcher genreousMatcher = createGenerousMatcher();
+        LogParser parser = new LogParser(pattern, genreousMatcher);
         parser.addString(log);
         return parser.getEntries().get(0);
     }
 
-    @Test
-    public void test_matcher_pattern() throws Exception {
-        LogParser parser =  new LogParser(PATTERN);
-        EntryMatcher entryMatcher = new EntryMatcher();
-        entryMatcher.setLevel(Level.WARN.toString());
-        String commonRegexp = parser.getCommonPythonRegexp().replace("?<date>", "");
-        Matcher matcher = Pattern.compile(commonRegexp).matcher(LOG_INFO);
-        assertTrue(matcher.find());
-        assertEquals("Expect date found by pattern " + commonRegexp, "2012-09-28 01:12:17,191", matcher.group(1));
-        String regexpEntry = parser.getEntryMatcherPattern(entryMatcher).replace("?<date>", "");
-        assertTrue("Expect error found by " + regexpEntry + "in \n" + LOG_ERROR, Pattern.matches(regexpEntry, LOG_ERROR));
-        assertTrue("Expect warnings found by " + regexpEntry +"in \n" + LOG_WARN, Pattern.matches(regexpEntry, LOG_WARN));
-        assertFalse("Info level is less than warning", Pattern.matches(regexpEntry, LOG_INFO));
-    }
 
     @Test
     public void test_parse_level() throws Exception {
@@ -59,7 +47,7 @@ public class LogParserTest {
     
     @Test
     public void test_clear() throws Exception {
-        LogParser parser = new LogParser("%-5p");
+        LogParser parser = new LogParser("%-5p", INFO_MATCHER);
         parser.addString("WARN ");
         parser.addString("DEBUG");
         parser.clear();
@@ -93,8 +81,19 @@ public class LogParserTest {
     }
 
     @Test
+    public void test_no_read_before() throws Exception {
+        LogParser parser = new LogParser(FULL_PATTERN, INFO_MATCHER);
+        parser.addString(LOG_WARN);
+        parser.addString(LOG_ERROR);
+        parser.addString(LOG_INFO);
+        parser.addString(LOG_DEBUG);
+
+        assertEquals("Expect only warn read", 3, parser.getEntries().size());
+    }
+
+    @Test
     public void test_parse_all_no_message() throws Exception {
-        LogEntry entry = singleEntry("%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%C]",
+        LogEntry entry = singleEntry(FULL_PATTERN,
                 "2012-09-28 01:12:17,191 WARN  [org.caramba.CarambaContext]");
 
         assertEquals(28, entry.getDate().getDayOfMonth());
@@ -124,6 +123,7 @@ public class LogParserTest {
 
     @Test
     public void test_parse_several() {
+        EntryMatcher genreousMatcher = createGenerousMatcher();
         String textStart = "DEBUG_FRAME = org.apache.axis2.util.JavaUtils.callStackToString(JavaUtils.java:564)";
         String[] logs = {
                 "02:00:33,543  DEBUG AxisOperation:485 - Exit: AxisOperation::setSoapAction",
@@ -135,7 +135,7 @@ public class LogParserTest {
                 "02:00:33,585  DEBUG AxisOperation:499 - Entry: AxisOperation::getInputAction",
                 "02:00:33,586  DEBUG AxisOperation:504 - Debug: AxisOperation::getInputAction - using soapAction" };
  
-        LogParser parser = new LogParser("%d{ABSOLUTE}  %5p %c{1}:%L - %m%n");
+        LogParser parser = new LogParser("%d{ABSOLUTE}  %5p %c{1}:%L - %m%n", genreousMatcher);
         for (String log : logs) {
             parser.addString(log);
         }
@@ -144,7 +144,13 @@ public class LogParserTest {
         assertEquals(5, entries.size());
         String messageStr = entries.get(2).getMessage();
         assertEquals(textStart + NL + logs[3] + NL + logs[4] + NL + logs[5], messageStr);
-    } 
-            
-            
+    }
+
+    private EntryMatcher createGenerousMatcher() {
+        EntryMatcher genreousMatcher = mock(EntryMatcher.class);
+        when(genreousMatcher.match((LogEntry) anyObject())).thenReturn(true);
+        return genreousMatcher;
+    }
+
+
 }

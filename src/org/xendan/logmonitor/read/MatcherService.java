@@ -3,11 +3,9 @@ package org.xendan.logmonitor.read;
 import com.intellij.openapi.components.ServiceManager;
 import org.apache.commons.io.FileUtils;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.model.EntryMatcher;
 import org.xendan.logmonitor.model.LogMonitorConfiguration;
 import org.xendan.logmonitor.model.Matchers;
 import org.xendan.logmonitor.model.ServerSettings;
-import org.xendan.logmonitor.parser.LogParser;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -22,11 +20,16 @@ import java.util.Map;
  * Date: 06/09/13
  */
 public class MatcherService {
-    private static final String MATCHERS_XML = "matchers.xml";
+    public static final String MATCHERS_XML = "matchers.xml";
     private final HomeResolver homereolver;
 
     public MatcherService() {
-        homereolver = ServiceManager.getService(HomeResolver.class);
+        this(ServiceManager.getService(HomeResolver.class));
+    }
+
+    public MatcherService(HomeResolver homeResolver) {
+        this.homereolver = homeResolver;
+
     }
 
     public Map<ServerSettings, Matchers> getMatchers(LogMonitorConfiguration config) {
@@ -40,6 +43,10 @@ public class MatcherService {
     private Matchers getOrCreateMatcher(ServerSettings settings) {
         ScpSynchroniser reader = new ScpSynchroniser(settings);
         String localFile = reader.downloadFile(MATCHERS_XML, getMatchersFile(settings));
+        return readFromFile(localFile);
+    }
+
+    private Matchers readFromFile(String localFile) {
         if (localFile == null) {
             return new Matchers();
         }
@@ -48,7 +55,10 @@ public class MatcherService {
         } catch (JAXBException e) {
             throw new IllegalArgumentException("Error unmarshaling file", e);
         }
+    }
 
+    public Matchers getLocalMatchers(String project) {
+        return readFromFile(homereolver.joinMkDirs(MATCHERS_XML, project));
     }
 
     private JAXBContext createContext() throws JAXBException {
@@ -56,17 +66,16 @@ public class MatcherService {
     }
 
     private String getMatchersFile(ServerSettings settings) {
-        homereolver.mkdir(settings.getName());
         return homereolver.join(settings.getName(), MATCHERS_XML);
     }
 
-    public void save(Map<ServerSettings, Matchers> matchers, LogParser logParser) {
+    public void save(Map<ServerSettings, Matchers> matchers) {
         for (Map.Entry<ServerSettings, Matchers> entry : matchers.entrySet()) {
-            saveMatcher(entry.getKey(), entry.getValue(), logParser);
+            saveMatcher(entry.getKey(), entry.getValue());
         }
     }
 
-    private void saveMatcher(ServerSettings settings, Matchers matcher, LogParser logParser) {
+    private void saveMatcher(ServerSettings settings, Matchers matcher) {
         String localFile = homereolver.getPath(getMatchersFile(settings));
         try {
             Marshaller jaxbMarshaller = createContext().createMarshaller();
@@ -77,19 +86,6 @@ public class MatcherService {
         }
         ScpSynchroniser synchroniser = new ScpSynchroniser(settings);
         synchroniser.uploadFile("", getMatchersFile(settings));
-        StringBuilder match = new StringBuilder();
-        StringBuilder ingore = new StringBuilder();
-        for (EntryMatcher entryMatcher : matcher.getMatchers()) {
-            String pattern = logParser.getEntryMatcherPattern(entryMatcher) + "\n";
-            if (entryMatcher.isError()) {
-                match.append(pattern);
-            } else {
-                ingore.append(pattern);
-            }
-        }
-        toFileAndToSever(match.toString(), "match_pattern.txt", synchroniser);
-        toFileAndToSever(ingore.toString(), "ignore_pattern.txt", synchroniser);
-        toFileAndToSever(logParser.getCommonPythonRegexp(), "content_pattern.txt", synchroniser);
     }
 
     private void toFileAndToSever(String content, String fileName, ScpSynchroniser synchroniser) {

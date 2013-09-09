@@ -2,8 +2,10 @@ package org.xendan.logmonitor;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.xendan.logmonitor.parser.DateParserTest;
+import org.xendan.logmonitor.parser.EntryMatcherTest;
+import org.xendan.logmonitor.parser.LevelParserTest;
 import org.xendan.logmonitor.parser.LogParserTest;
-import org.xendan.logmonitor.read.LogReaderTest;
 
 /**
  * User: kcyxa
@@ -11,9 +13,10 @@ import org.xendan.logmonitor.read.LogReaderTest;
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
-    LogParserTest.class,
-    LogReaderTest.class,
-    LogErrorsServiceTest.class
+        DateParserTest.class,
+        EntryMatcherTest.class,
+        LevelParserTest.class,
+        LogParserTest.class
 })
 public class FastPortableSuite {
 }

@@ -11,23 +11,19 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
-import org.xendan.logmonitor.model.EntryMatcher;
 import org.xendan.logmonitor.model.LogMonitorConfiguration;
+import org.xendan.logmonitor.model.MatchPattern;
 import org.xendan.logmonitor.model.Matchers;
 import org.xendan.logmonitor.model.ServerSettings;
-import org.xendan.logmonitor.parser.LogParser;
 import org.xendan.logmonitor.read.MatcherService;
 import org.xendan.logmonitor.read.ReaderScheduler;
+import org.xendan.logmonitor.read.Serializer;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +33,7 @@ import java.util.Map;
  */
 public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll {
     private final LogMonitorConfiguration config;
+    private final Serializer serializer;
     private Map<ServerSettings, Matchers> matchers = new HashMap<ServerSettings, Matchers>();
     private Map<ServerSettings, Matchers> initialMatchers = new HashMap<ServerSettings, Matchers>();
     private final LogMonitorSettingsDao logMonitorSettignsDao;
@@ -72,6 +69,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     public LogMonitorSettingsConfigurable(Project project) {
         logMonitorSettignsDao = ServiceManager.getService(LogMonitorSettingsDao.class);
         matcherService = ServiceManager.getService(MatcherService.class);
+        serializer = ServiceManager.getService(Serializer.class);
         scheduler = ServiceManager.getService(ReaderScheduler.class);
         this.config = logMonitorSettignsDao.getConfig(project.getName());
         this.matchers = matcherService.getMatchers(config);
@@ -83,23 +81,8 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     }
 
     private void resetInitial() {
-         initialConfig = doCopy(config);
-         initialMatchers = doCopy(matchers);
-    }
-
-    private <T> T doCopy(T source) {
-        try {
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ObjectOutputStream out = new ObjectOutputStream(bos);
-            out.writeObject(source);
-            out.flush();
-            out.close();
-            ObjectInputStream in = new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray()));
-            return (T) in.readObject();
-        }
-        catch(Exception e) {
-            throw new IllegalStateException("Error creating copy", e);
-        }
+        initialConfig = serializer.doCopy(config);
+        initialMatchers = serializer.doCopy(matchers);
     }
 
     @Nullable
@@ -137,7 +120,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         resetInitial();
         config.setLogPattern(patternTextField.getText());
         logMonitorSettignsDao.save(config);
-        matcherService.save(matchers, new LogParser(config.getLogPattern()));
+        matcherService.save(matchers);
         scheduler.reload();
     }
 
@@ -187,7 +170,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     }
 
     private void refreshMatdhers() {
-        mathcerList.setModel(new ArrayListModel<EntryMatcher>(matchers.get(getSelectedEnvironment()).getMatchers()));
+        mathcerList.setModel(new ArrayListModel<MatchPattern>(matchers.get(getSelectedEnvironment()).getMatchers()));
     }
 
     private class RemoveListener implements ActionListener {
@@ -217,8 +200,8 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             refreshMatdhers();
         }
 
-        private EntryMatcher createMatcher() {
-            EntryMatcher matcher = new EntryMatcher();
+        private MatchPattern createMatcher() {
+            MatchPattern matcher = new MatchPattern();
             matcher.setName(mathcerNameTextField.getText());
             matcher.setError(!ignoreCheckBox.isSelected());
             matcher.setLevel(levelComboBox.getSelectedItem().toString());

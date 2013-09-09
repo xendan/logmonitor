@@ -2,7 +2,7 @@ package org.xendan.logmonitor.parser;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
-import org.xendan.logmonitor.model.EntryMatcher;
+import org.xendan.logmonitor.model.MatchPattern;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,11 +28,6 @@ public class LevelParser extends UnitParser<String> {
 
     private String addSpaces(List<Level> levels, Matcher matcher) {
         return StringUtils.join(addShift(levels, getShift(matcher)), "|");
-    }
-
-    @Override
-    protected boolean needBrackets(boolean brackets) {
-        return true;
     }
 
     private int getShift(Matcher matcher) {
@@ -63,7 +58,7 @@ public class LevelParser extends UnitParser<String> {
     }
 
     @Override
-    protected String getRegexpForEntryMatcher(EntryMatcher entryMatcher, Matcher matcher) {
+    protected String getRegexpForEntryMatcher(MatchPattern entryMatcher, Matcher matcher) {
         if (StringUtils.isEmpty(entryMatcher.getLevel())) {
             return super.getRegexpForEntryMatcher(entryMatcher, matcher);
         }

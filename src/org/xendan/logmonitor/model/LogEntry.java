@@ -2,14 +2,29 @@ package org.xendan.logmonitor.model;
 
 import org.joda.time.DateTime;
 
-public class LogEntry {
-    
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import java.io.Serializable;
+
+public class LogEntry implements Serializable {
+    private Long id;
+    private ServerSettings severSettings;
     private DateTime date;
     private String caller;
     private String message;
     private String category;
     private Integer lineNumber;
     private String level;
+
+    @Id
+    @GeneratedValue
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getCategory() {
         return category;
@@ -57,5 +72,13 @@ public class LogEntry {
 
     public void setLevel(String level) {
         this.level = level;
+    }
+
+    public ServerSettings getSeverSettings() {
+        return severSettings;
+    }
+
+    public void setSeverSettings(ServerSettings severSettings) {
+        this.severSettings = severSettings;
     }
 }
