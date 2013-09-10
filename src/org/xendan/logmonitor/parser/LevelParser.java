@@ -2,7 +2,7 @@ package org.xendan.logmonitor.parser;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
-import org.xendan.logmonitor.model.MatchPattern;
+import org.xendan.logmonitor.model.MatchConfig;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -58,7 +58,7 @@ public class LevelParser extends UnitParser<String> {
     }
 
     @Override
-    protected String getRegexpForEntryMatcher(MatchPattern entryMatcher, Matcher matcher) {
+    protected String getRegexpForEntryMatcher(MatchConfig entryMatcher, Matcher matcher) {
         if (StringUtils.isEmpty(entryMatcher.getLevel())) {
             return super.getRegexpForEntryMatcher(entryMatcher, matcher);
         }

@@ -1,12 +1,12 @@
 package org.xendan.logmonitor.parser;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import java.util.regex.Matcher;
 
-public class DateParser extends UnitParser<DateTime> {
+public class DateParser extends UnitParser<LocalDateTime> {
     public static final String DEFAULT_FORMAT = "yyyy-MM-dd HH:mm:ss,SSS";
     private static final String ABSOLUTE_PATTERN_STR = "HH:mm:ss,SSS";
     //TODO, check definition
@@ -19,8 +19,8 @@ public class DateParser extends UnitParser<DateTime> {
     }
 
     @Override
-    public DateTime toValue(String string) {
-        return dateFormatter.parseDateTime(string);
+    public LocalDateTime toValue(String string) {
+        return dateFormatter.parseDateTime(string).toLocalDateTime();
     }
 
     @Override
@@ -42,7 +42,12 @@ public class DateParser extends UnitParser<DateTime> {
     }
 
 
-    public String getDateAsString(String logPattern, DateTime date) {
+    public String getDateAsString(String logPattern, LocalDateTime date) {
+        Matcher matcher = samplePattern.matcher(logPattern);
+        if (matcher.find()) {
+            toRegExp(matcher);
+            return dateFormatter.print(date);
+        }
         return null;
     }
 }

@@ -1,8 +1,8 @@
 package org.xendan.logmonitor.parser;
 
-import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.Matchers;
+import org.xendan.logmonitor.model.MatchConfig;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -16,7 +16,7 @@ public class LogParser {
     private final Pattern regexPattern;
 
     private final UnitParser<String> callerParser = new CallerParser();
-    private final UnitParser<DateTime> dateParser = new DateParser();
+    private final UnitParser<LocalDateTime> dateParser = new DateParser();
     private final UnitParser<String> levelParser = new LevelParser();
     private final UnitParser<String> messageParser = new SimpleParser("m");
     private final UnitParser<String> categoryParser = new SimpleParser("c");
@@ -29,7 +29,7 @@ public class LogParser {
     private final String pattern;
     private final EntryMatcher entryMatcher;
 
-    public LogParser(String pattern, Matchers matchers) {
+    public LogParser(String pattern, List<MatchConfig> matchers) {
         this(pattern, new EntryMatcher(matchers));
     }
 

@@ -14,7 +14,8 @@ import org.xendan.logmonitor.read.ReaderScheduler;
 public class LogMonitorToolWindowFactory implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(Project project, ToolWindow toolWindow) {
-        ServiceManager.getService(ReaderScheduler.class).refresh();
-        toolWindow.getContentManager().addContent(new ContentImpl(new LogMonitorPanel().contentPanel, "AAA", true));
+        ReaderScheduler scheduler = ServiceManager.getService(ReaderScheduler.class);
+        toolWindow.getContentManager().addContent(new ContentImpl(scheduler.getLogMonitorPanel().contentPanel, "", true));
+        scheduler.refresh();
     }
 }

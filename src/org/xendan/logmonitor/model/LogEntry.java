@@ -1,20 +1,24 @@
 package org.xendan.logmonitor.model;
 
-import org.joda.time.DateTime;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.io.Serializable;
 
+@Entity
 public class LogEntry implements Serializable {
     private Long id;
-    private ServerSettings severSettings;
-    private DateTime date;
+    private LocalDateTime date;
     private String caller;
     private String message;
     private String category;
     private Integer lineNumber;
     private String level;
+    private MatchConfig matcher;
 
     @Id
     @GeneratedValue
@@ -42,11 +46,12 @@ public class LogEntry implements Serializable {
         this.lineNumber = lineNumber;
     }
 
-    public DateTime getDate() {
+    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(DateTime date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
@@ -58,6 +63,7 @@ public class LogEntry implements Serializable {
         this.caller = caller;
     }
 
+    @Column(columnDefinition="text")
     public String getMessage() {
         return message;
     }
@@ -74,11 +80,11 @@ public class LogEntry implements Serializable {
         this.level = level;
     }
 
-    public ServerSettings getSeverSettings() {
-        return severSettings;
+    public MatchConfig getMatcher() {
+        return matcher;
     }
 
-    public void setSeverSettings(ServerSettings severSettings) {
-        this.severSettings = severSettings;
+    public void setMatcher(MatchConfig matcher) {
+        this.matcher = matcher;
     }
 }

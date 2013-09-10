@@ -2,6 +2,7 @@ package org.xendan.logmonitor.dao;
 
 import org.xendan.logmonitor.model.LogMonitorConfiguration;
 
+import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -11,7 +12,9 @@ import java.util.List;
 public interface LogMonitorSettingsDao {
     LogMonitorConfiguration getConfig(String name);
 
-    List<LogMonitorConfiguration> getConfig();
+    List<LogMonitorConfiguration> getConfigs();
 
     void save(LogMonitorConfiguration config);
+
+    EntityManager getEntityManager();
 }

@@ -8,4 +8,18 @@ import javax.swing.*;
  */
 public class LogMonitorPanel {
     public JPanel contentPanel;
+    private JTree logTree;
+    private LogMonitorPanelModel model;
+
+    public LogMonitorPanel(LogMonitorPanelModel model) {
+        this.model = model;
+    }
+
+    public void refresh() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                logTree.setModel(model.getTreeModel());
+            }
+        });
+    }
 }

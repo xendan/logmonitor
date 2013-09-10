@@ -24,7 +24,7 @@ public class LogFileParserTest {
         HomeResolver resolver = new HomeResolver();
         String project = "thisistes";
         String logPath = copyFromResource(resolver, "test", TEST_LOG);
-        LogFileParser logParser = new LogFileParser(logPath, "%d %-5p [%c] %m%n",  new MatcherService(resolver).getLocalMatchers(project));
+        LogFileParser logParser = new LogFileParser(logPath, "%d %-5p [%c] %m%n",  new MatcherService(resolver).getLocalMatchers(project, null).getMatchers());
         assertEquals("Expect last 13837 warnings loaded", 13837, logParser.getEntries().size());
     }
 

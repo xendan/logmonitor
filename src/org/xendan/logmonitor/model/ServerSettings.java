@@ -1,11 +1,9 @@
 package org.xendan.logmonitor.model;
 
-import org.joda.time.DateTime;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: id967161
@@ -19,7 +17,7 @@ public class ServerSettings implements Serializable {
     private String login;
     private String password;
     private String path;
-    private DateTime lastReadDate;
+    private List<MatchConfig> matchConfigs = new ArrayList<MatchConfig>();
 
     @Id
     @GeneratedValue
@@ -71,17 +69,18 @@ public class ServerSettings implements Serializable {
         this.path = path;
     }
 
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    public List<MatchConfig> getMatchConfigs() {
+        return matchConfigs;
+    }
+
+    public void setMatchConfigs(List<MatchConfig> matchConfigs) {
+        this.matchConfigs = matchConfigs;
+    }
+
     @Override
     public String toString() {
         return name;
-    }
-
-    public DateTime getLastReadDate() {
-        return lastReadDate;
-    }
-
-    public void setLastReadDate(DateTime lastReadDate) {
-        this.lastReadDate = lastReadDate;
     }
 
     @Override

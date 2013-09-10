@@ -1,16 +1,10 @@
-+ persits settings per project
- - create server read task
- - create upload server task
- - patterns to server as file
- - parse read file
- - show errores
-+ 1 error pattern
 
 FIX
 - add all patterns
 - modify YYY pattern
 
 IMPROVEMENTs
+- add projects
 - normal edit (hide password)
 - generating server side script
 - load settigns from server!

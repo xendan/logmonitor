@@ -1,7 +1,7 @@
 package org.xendan.logmonitor.parser;
 
 import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.Matchers;
+import org.xendan.logmonitor.model.MatchConfig;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -15,9 +15,9 @@ import java.util.List;
 public class LogFileParser {
     private final String logFile;
     private final String logPattern;
-    private final Matchers matchers;
+    private final List<MatchConfig> matchers;
 
-    public LogFileParser(String logFile, String logPattern, Matchers matchers) {
+    public LogFileParser(String logFile, String logPattern, List<MatchConfig> matchers) {
         this.logFile = logFile;
         this.logPattern = logPattern;
         this.matchers = matchers;

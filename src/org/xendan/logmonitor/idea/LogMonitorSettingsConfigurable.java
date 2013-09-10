@@ -12,8 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
 import org.xendan.logmonitor.model.LogMonitorConfiguration;
-import org.xendan.logmonitor.model.MatchPattern;
-import org.xendan.logmonitor.model.Matchers;
+import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.model.ServerSettings;
 import org.xendan.logmonitor.read.MatcherService;
 import org.xendan.logmonitor.read.ReaderScheduler;
@@ -24,8 +23,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * User: id967161
@@ -34,8 +32,6 @@ import java.util.Map;
 public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll {
     private final LogMonitorConfiguration config;
     private final Serializer serializer;
-    private Map<ServerSettings, Matchers> matchers = new HashMap<ServerSettings, Matchers>();
-    private Map<ServerSettings, Matchers> initialMatchers = new HashMap<ServerSettings, Matchers>();
     private final LogMonitorSettingsDao logMonitorSettignsDao;
     private final ReaderScheduler scheduler;
     private final MatcherService matcherService;
@@ -59,6 +55,9 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JLabel mathcerName;
     private JTextField mathcerNameTextField;
     private JTextField patternTextField;
+    private JButton addProject;
+    private JComboBox projectComboBox;
+    private JLabel projectLabel;
 
     @NotNull
     @Override
@@ -72,7 +71,6 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         serializer = ServiceManager.getService(Serializer.class);
         scheduler = ServiceManager.getService(ReaderScheduler.class);
         this.config = logMonitorSettignsDao.getConfig(project.getName());
-        this.matchers = matcherService.getMatchers(config);
         addButton.addActionListener(new AddListener());
         addPatternButton.addActionListener(new AddPatternListener());
         removeButton.addActionListener(new RemoveListener());
@@ -82,7 +80,6 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
     private void resetInitial() {
         initialConfig = serializer.doCopy(config);
-        initialMatchers = serializer.doCopy(matchers);
     }
 
     @Nullable
@@ -112,7 +109,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
     @Override
     public boolean isModified() {
-        return !initialConfig.equals(config) || !initialMatchers.equals(matchers);
+        return !initialConfig.equals(config);
     }
 
     @Override
@@ -120,7 +117,6 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         resetInitial();
         config.setLogPattern(patternTextField.getText());
         logMonitorSettignsDao.save(config);
-        matcherService.save(matchers);
         scheduler.reload();
     }
 
@@ -128,7 +124,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     public void reset() {
         resetInitial();
         settingsModel = new ArrayListModel<ServerSettings>(config.getServerSettings());
-        pathTextField.setText(config.getLogPattern());
+        patternTextField.setText(config.getLogPattern());
         environmentList.setModel(settingsModel);
     }
 
@@ -136,8 +132,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     public void disposeUIResources() {
     }
 
-
-    private class AddListener implements ActionListener {
+       private class AddListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             config.getServerSettings().add(createServerSettings());
@@ -170,7 +165,9 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     }
 
     private void refreshMatdhers() {
-        mathcerList.setModel(new ArrayListModel<MatchPattern>(matchers.get(getSelectedEnvironment()).getMatchers()));
+        ServerSettings environment = getSelectedEnvironment();
+
+        mathcerList.setModel(new ArrayListModel<MatchConfig>(environment == null ? new ArrayList<MatchConfig>() : environment.getMatchConfigs()));
     }
 
     private class RemoveListener implements ActionListener {
@@ -195,13 +192,13 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private class AddPatternListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            matchers.get(getSelectedEnvironment()).getMatchers().add(createMatcher());
+            getSelectedEnvironment().getMatchConfigs().add(createMatcher());
             mathcerNameTextField.setText("");
             refreshMatdhers();
         }
 
-        private MatchPattern createMatcher() {
-            MatchPattern matcher = new MatchPattern();
+        private MatchConfig createMatcher() {
+            MatchConfig matcher = new MatchConfig();
             matcher.setName(mathcerNameTextField.getText());
             matcher.setError(!ignoreCheckBox.isSelected());
             matcher.setLevel(levelComboBox.getSelectedItem().toString());

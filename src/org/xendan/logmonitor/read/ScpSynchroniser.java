@@ -41,6 +41,10 @@ public class ScpSynchroniser {
         localPath = homeResolver.getPath(localPath);
         Scp scp = initTask(new Scp());
         scp.setFile(getServerDir() + "/" + remotePath);
+        return downloadTo(localPath, scp);
+    }
+
+    protected String downloadTo(String localPath, Scp scp) {
         scp.setLocalTofile(localPath);
         try {
             scp.execute();
@@ -54,7 +58,11 @@ public class ScpSynchroniser {
     }
 
     protected String getServerDir() {
-        return settings.getLogin() + ":" + settings.getPassword() + "@" + settings.getHost() + ":~/" + HomeResolver.HOME;
+        return getServerRoot() + "~/" + HomeResolver.HOME;
+    }
+
+    protected String getServerRoot() {
+        return settings.getLogin() + ":" + settings.getPassword() + "@" + settings.getHost() + ":";
     }
 
     protected <T extends SSHBase> T initTask(T task) {

@@ -31,6 +31,12 @@ public class LogParserTest {
         assertEquals(28, entry.getDate().getDayOfMonth());
     }
 
+    @Test
+    public void test_use_case1() throws Exception {
+        singleEntry("%d %-5p [%c] %m%n", "2013-09-10 00:00:00,016 INFO  [com.bics.btts.job.ActionRepairTimeJob] ActionRepairTimeJob started : 10/09/2013 00:00");
+
+    }
+
     private LogEntry singleEntry(String pattern, String log) {
         EntryMatcher genreousMatcher = createGenerousMatcher();
         LogParser parser = new LogParser(pattern, genreousMatcher);

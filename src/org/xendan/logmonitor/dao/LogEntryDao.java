@@ -1,6 +1,7 @@
 package org.xendan.logmonitor.dao;
 
 import org.xendan.logmonitor.model.LogEntry;
+import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.model.ServerSettings;
 
 import java.util.List;
@@ -12,5 +13,7 @@ import java.util.List;
 public interface LogEntryDao {
     LogEntry getLastEntry(ServerSettings settings);
 
-    void addEntries(List<LogEntry> entries, ServerSettings settings);
+    void addEntries(List<LogEntry> entries);
+
+    List<LogEntry> getMatchedEntries(MatchConfig matchConfig);
 }

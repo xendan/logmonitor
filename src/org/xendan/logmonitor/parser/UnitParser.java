@@ -1,6 +1,6 @@
 package org.xendan.logmonitor.parser;
 
-import org.xendan.logmonitor.model.MatchPattern;
+import org.xendan.logmonitor.model.MatchConfig;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -34,7 +34,7 @@ public abstract class UnitParser<V> {
 
 
 
-    protected String getRegexpForEntryMatcher(MatchPattern entryMatcher, Matcher matcher) {
+    protected String getRegexpForEntryMatcher(MatchConfig entryMatcher, Matcher matcher) {
         return toRegExp(matcher);
     }
 

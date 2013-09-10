@@ -3,7 +3,7 @@ package org.xendan.logmonitor.parser;
 import org.apache.log4j.Level;
 import org.junit.Test;
 import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.MatchPattern;
+import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.model.Matchers;
 
 import static junit.framework.Assert.assertTrue;
@@ -36,10 +36,10 @@ public class EntryMatcherTest {
 
     public static EntryMatcher createInfoMatchers() {
         Matchers matchers = new Matchers();
-        MatchPattern matcher = new MatchPattern();
+        MatchConfig matcher = new MatchConfig();
         matcher.setLevel(Level.INFO.toString());
         matcher.setError(true);
         matchers.getMatchers().add(matcher);
-        return new EntryMatcher(matchers);
+        return new EntryMatcher(matchers.getMatchers());
     }
 }

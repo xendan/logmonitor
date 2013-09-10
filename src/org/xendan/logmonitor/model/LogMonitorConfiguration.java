@@ -26,7 +26,7 @@ public class LogMonitorConfiguration implements Serializable {
         this.id = id;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     public List<ServerSettings> getServerSettings() {
         return serverSettings;
     }

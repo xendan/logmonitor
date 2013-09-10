@@ -1,19 +1,13 @@
 package org.xendan.logmonitor.read;
 
 import com.intellij.openapi.components.ServiceManager;
-import org.apache.commons.io.FileUtils;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.model.LogMonitorConfiguration;
 import org.xendan.logmonitor.model.Matchers;
 import org.xendan.logmonitor.model.ServerSettings;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * User: id967161
@@ -21,44 +15,58 @@ import java.util.Map;
  */
 public class MatcherService {
     public static final String MATCHERS_XML = "matchers.xml";
-    private final HomeResolver homereolver;
+    private final HomeResolver homeResolver;
 
     public MatcherService() {
         this(ServiceManager.getService(HomeResolver.class));
     }
 
     public MatcherService(HomeResolver homeResolver) {
-        this.homereolver = homeResolver;
+        this.homeResolver = homeResolver;
 
     }
 
+    public void exportMatchers(ServerSettings settings) {
+        //TODO
+    }
+
+    public void importMatchers(ServerSettings settings) {
+        //TODO
+    }
+
+    /*
     public Map<ServerSettings, Matchers> getMatchers(LogMonitorConfiguration config) {
         Map<ServerSettings, Matchers> mathcers = new HashMap<ServerSettings, Matchers>();
         for (ServerSettings settings : config.getServerSettings()) {
             mathcers.put(settings, getOrCreateMatcher(settings));
         }
         return mathcers;
+    }*/
+
+    public Matchers getLocalMatchers(String project, ServerSettings serverSettings) {
+        String path = homeResolver.joinMkDirs(MATCHERS_XML, project);
+        File file = new File(path);
+        if (!file.exists()) {
+            return getOrCreateMatcher(serverSettings);
+        }
+        return readFromFile(file);
     }
 
     private Matchers getOrCreateMatcher(ServerSettings settings) {
         ScpSynchroniser reader = new ScpSynchroniser(settings);
         String localFile = reader.downloadFile(MATCHERS_XML, getMatchersFile(settings));
-        return readFromFile(localFile);
+        return readFromFile(localFile == null ? null : new File(localFile));
     }
 
-    private Matchers readFromFile(String localFile) {
-        if (localFile == null) {
+    private Matchers readFromFile(File file) {
+        if (file == null) {
             return new Matchers();
         }
         try {
-            return (Matchers) createContext().createUnmarshaller().unmarshal(new File(localFile));
+            return (Matchers) createContext().createUnmarshaller().unmarshal(file);
         } catch (JAXBException e) {
-            throw new IllegalArgumentException("Error unmarshaling file", e);
+            throw new IllegalArgumentException("Error unmarshalling file", e);
         }
-    }
-
-    public Matchers getLocalMatchers(String project) {
-        return readFromFile(homereolver.joinMkDirs(MATCHERS_XML, project));
     }
 
     private JAXBContext createContext() throws JAXBException {
@@ -66,9 +74,9 @@ public class MatcherService {
     }
 
     private String getMatchersFile(ServerSettings settings) {
-        return homereolver.join(settings.getName(), MATCHERS_XML);
+        return homeResolver.join(settings.getName(), MATCHERS_XML);
     }
-
+     /*
     public void save(Map<ServerSettings, Matchers> matchers) {
         for (Map.Entry<ServerSettings, Matchers> entry : matchers.entrySet()) {
             saveMatcher(entry.getKey(), entry.getValue());
@@ -76,7 +84,7 @@ public class MatcherService {
     }
 
     private void saveMatcher(ServerSettings settings, Matchers matcher) {
-        String localFile = homereolver.getPath(getMatchersFile(settings));
+        String localFile = homeResolver.getPath(getMatchersFile(settings));
         try {
             Marshaller jaxbMarshaller = createContext().createMarshaller();
             jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -86,15 +94,5 @@ public class MatcherService {
         }
         ScpSynchroniser synchroniser = new ScpSynchroniser(settings);
         synchroniser.uploadFile("", getMatchersFile(settings));
-    }
-
-    private void toFileAndToSever(String content, String fileName, ScpSynchroniser synchroniser) {
-        String localPath = homereolver.join(synchroniser.getSeverName(), fileName);
-        try {
-            FileUtils.writeStringToFile(new File(homereolver.getPath(localPath)), content);
-        } catch (IOException e) {
-            throw new IllegalStateException("Error saving to file " + fileName, e);
-        }
-        synchroniser.uploadFile("", localPath);
-    }
+    }  */
 }
