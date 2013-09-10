@@ -7,10 +7,7 @@ import org.xendan.logmonitor.model.LogMonitorConfiguration;
 import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.model.ServerSettings;
 
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeModel;
+import javax.swing.tree.*;
 
 /**
  * User: id967161
@@ -61,5 +58,10 @@ public class LogMonitorPanelModel {
     private MutableTreeNode createEntryNode(LogEntry entry) {
         MutableTreeNode node = new DefaultMutableTreeNode(entry.getLevel() + ":" + entry.getMessage());
         return node;
+    }
+
+    public String getMessage(TreePath path) {
+        MutableTreeNode node = (MutableTreeNode) path.getLastPathComponent();
+        return node.toString();
     }
 }

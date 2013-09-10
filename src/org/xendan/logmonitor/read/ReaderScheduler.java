@@ -1,6 +1,7 @@
 package org.xendan.logmonitor.read;
 
 import com.intellij.openapi.components.ServiceManager;
+import com.intellij.openapi.project.Project;
 import org.xendan.logmonitor.dao.LogEntryDao;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
 import org.xendan.logmonitor.idea.LogMonitorPanel;
@@ -51,7 +52,8 @@ public class ReaderScheduler {
         }
     }
 
-    public LogMonitorPanel getLogMonitorPanel() {
+    public LogMonitorPanel getLogMonitorPanel(Project project) {
+        logMonitorPanel.setProject(project);
         return logMonitorPanel;
     }
 }

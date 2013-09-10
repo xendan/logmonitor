@@ -15,7 +15,7 @@ public class LogMonitorToolWindowFactory implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(Project project, ToolWindow toolWindow) {
         ReaderScheduler scheduler = ServiceManager.getService(ReaderScheduler.class);
-        toolWindow.getContentManager().addContent(new ContentImpl(scheduler.getLogMonitorPanel().contentPanel, "", true));
+        toolWindow.getContentManager().addContent(new ContentImpl(scheduler.getLogMonitorPanel(project).contentPanel, "", true));
         scheduler.refresh();
     }
 }

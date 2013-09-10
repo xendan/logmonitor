@@ -25,7 +25,7 @@ public class LogDownloader extends ScpSynchroniser {
                 return downloadTo(LAST_LOG, scp);
             }
             SSHExec exec = initTask(new SSHExec());
-            exec.setCommand("set \"0,/" + datePattern + "/d\" <" + settings.getPath() +" > ~/"+ HomeResolver.HOME + "/" + LAST_LOG);
+            exec.setCommand("mkdir -p ~/" + HomeResolver.HOME + "; sed \"0,/" + datePattern + "/d\" <" + settings.getPath() + " > ~/" + HomeResolver.HOME + "/" + LAST_LOG);
             exec.execute();
             return downloadFile(LAST_LOG, LAST_LOG);
         } catch (Exception e) {
