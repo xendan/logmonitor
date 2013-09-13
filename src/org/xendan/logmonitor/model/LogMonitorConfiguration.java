@@ -1,7 +1,6 @@
 package org.xendan.logmonitor.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,29 +9,18 @@ import java.util.List;
  * Date: 03/09/13
  */
 @Entity
-public class LogMonitorConfiguration implements Serializable {
-    private Long id;
+public class LogMonitorConfiguration extends BaseObject {
     private String projectName;
     private String logPattern;
-    private List<ServerSettings> serverSettings = new ArrayList<ServerSettings>();
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private List<LogSettings> logSettings = new ArrayList<LogSettings>();
 
     @OneToMany(cascade = CascadeType.ALL)
-    public List<ServerSettings> getServerSettings() {
-        return serverSettings;
+    public List<LogSettings> getLogSettings() {
+        return logSettings;
     }
 
-    public void setServerSettings(List<ServerSettings> serverSettings) {
-        this.serverSettings = serverSettings;
+    public void setLogSettings(List<LogSettings> logSettings) {
+        this.logSettings = logSettings;
     }
 
     public String getProjectName() {
@@ -50,13 +38,13 @@ public class LogMonitorConfiguration implements Serializable {
 
         LogMonitorConfiguration that = (LogMonitorConfiguration) o;
 
-        return !(serverSettings != null ? !serverSettings.equals(that.serverSettings) : that.serverSettings != null);
+        return !(logSettings != null ? !logSettings.equals(that.logSettings) : that.logSettings != null);
 
     }
 
     @Override
     public int hashCode() {
-        return serverSettings != null ? serverSettings.hashCode() : 0;
+        return logSettings != null ? logSettings.hashCode() : 0;
     }
 
     public String getLogPattern() {

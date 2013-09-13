@@ -53,7 +53,7 @@ public class LogParser {
         return resultPattern;
     }
 
-    private String replaceSpecial(String pattern) {
+    public static String replaceSpecial(String pattern) {
         String resultPattern = pattern;
         for (String element : REGEX_SPECIAL) {
             resultPattern = resultPattern.replace(element, "\\" + element);

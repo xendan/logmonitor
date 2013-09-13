@@ -3,14 +3,10 @@ package org.xendan.logmonitor.model;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.io.Serializable;
+import javax.persistence.*;
 
 @Entity
-public class LogEntry implements Serializable {
+public class LogEntry extends BaseObject {
     private Long id;
     private LocalDateTime date;
     private String caller;
@@ -18,7 +14,9 @@ public class LogEntry implements Serializable {
     private String category;
     private Integer lineNumber;
     private String level;
-    private MatchConfig matcher;
+    private MatchConfig matchConfig;
+    private LogSettings logSettings;
+    private int foundNumber;
 
     @Id
     @GeneratedValue
@@ -30,6 +28,7 @@ public class LogEntry implements Serializable {
         this.id = id;
     }
 
+    @Column(length = 1000)
     public String getCategory() {
         return category;
     }
@@ -80,11 +79,42 @@ public class LogEntry implements Serializable {
         this.level = level;
     }
 
-    public MatchConfig getMatcher() {
-        return matcher;
+    @ManyToOne(cascade = {CascadeType.ALL})
+    public MatchConfig getMatchConfig() {
+        return matchConfig;
     }
 
-    public void setMatcher(MatchConfig matcher) {
-        this.matcher = matcher;
+    public void setMatchConfig(MatchConfig matchConfig) {
+        this.matchConfig = matchConfig;
+    }
+
+    @ManyToOne(cascade = {CascadeType.ALL})
+    public LogSettings getLogSettings() {
+        return logSettings;
+    }
+
+    public void setLogSettings(LogSettings logSettings) {
+        this.logSettings = logSettings;
+    }
+
+    public int getFoundNumber() {
+        return foundNumber;
+    }
+
+    public void setFoundNumber(int foundNumber) {
+        this.foundNumber = foundNumber;
+    }
+
+    public LogEntry createCopy(int foundNumber, MatchConfig matcher) {
+        LogEntry copy = new LogEntry();
+        copy.setMatchConfig(matcher);
+        copy.setMessage(message);
+        copy.setLevel(level);
+        copy.setDate(date);
+        copy.setCaller(caller);
+        copy.setCategory(category);
+        copy.setLineNumber(lineNumber);
+        copy.setFoundNumber(foundNumber);
+        return copy;
     }
 }

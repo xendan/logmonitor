@@ -6,10 +6,7 @@ import org.hibernate.ejb.HibernatePersistence;
 import org.hibernate.ejb.packaging.PersistenceMetadata;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
-import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.LogMonitorConfiguration;
-import org.xendan.logmonitor.model.MatchConfig;
-import org.xendan.logmonitor.model.ServerSettings;
+import org.xendan.logmonitor.model.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -45,41 +42,44 @@ public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
     }
 
     public LogMonitorSettingsDaoImpl(EntityManager entityManager) {
-
         this.entityManager = entityManager;
     }
 
 
-    @Override
-    public LogMonitorConfiguration getConfig(String projectName) {
-        List<LogMonitorConfiguration> configs = entityManager.createQuery("SELECT l FROM LogMonitorConfiguration l where projectName = :name", LogMonitorConfiguration.class)
-                .setParameter("name", projectName)
-                .getResultList();
-        if (configs.isEmpty()) {
-            LogMonitorConfiguration configuration = new LogMonitorConfiguration();
-            configuration.setProjectName(projectName);
-            return configuration;
+    private void initMatcherException(LogMonitorConfiguration logMonitorConfiguration) {
+        for (LogSettings logSettings : logMonitorConfiguration.getLogSettings()) {
+            for (MatchConfig matchConfig : logSettings.getMatchConfigs()) {
+                matchConfig.getExceptions().size();
+            }
         }
-        configs.get(0).getServerSettings().size();
-        return configs.get(0);
     }
 
     @Override
     public List<LogMonitorConfiguration> getConfigs() {
-        entityManager.getTransaction().begin();
-        List<LogMonitorConfiguration> configs = entityManager.createQuery("SELECT l FROM LogMonitorConfiguration l", LogMonitorConfiguration.class)
-                .getResultList();
-        for (LogMonitorConfiguration config : configs) {
-            config.getServerSettings().size();
+        List<LogMonitorConfiguration> configs = getAll(LogMonitorConfiguration.class);
+        for (LogMonitorConfiguration configuration : configs) {
+            initMatcherException(configuration);
         }
-        entityManager.getTransaction().commit();
         return configs;
     }
 
     @Override
-    public void save(LogMonitorConfiguration config) {
+    public List<Server> getServers() {
+        return getAll(Server.class);
+    }
+
+    private <T> List<T> getAll(Class<T> entityClass) {
+        return entityManager.createQuery("SELECT l FROM " + entityClass.getName() + " l", entityClass)
+                .getResultList();
+
+    }
+
+    @Override
+    public void save(List<LogMonitorConfiguration> configs) {
         entityManager.getTransaction().begin();
-        entityManager.merge(config);
+        for (LogMonitorConfiguration config : configs) {
+            entityManager.merge(config);
+        }
         entityManager.getTransaction().commit();
 
     }
@@ -105,8 +105,9 @@ public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
                 metadata.setTransactionType(PersistenceUnitTransactionType.RESOURCE_LOCAL);
                 metadata.setClasses(Arrays.asList(
                         LogMonitorConfiguration.class.getName(),
-                        ServerSettings.class.getName(),
+                        LogSettings.class.getName(),
                         MatchConfig.class.getName(),
+                        Server.class.getName(),
                         LogEntry.class.getName())
                         );
                 Properties props = new Properties();
@@ -115,7 +116,8 @@ public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
                 props.setProperty("hibernate.connection.password", "admin");
                 props.setProperty("hibernate.connection.username", "admin");
                 props.setProperty("hibernate.hbm2ddl.auto", "update");
-                props.setProperty("hibernate.connection.url", "jdbc:h2:/" + ServiceManager.getService(HomeResolver.class).getPath("db"));
+                props.setProperty("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
+                props.setProperty("hibernate.connection.url", "jdbc:h2:/" + ServiceManager.getService(HomeResolver.class).joinMkDirs("db", "db"));
                 metadata.setProps(props);
                 Ejb3Configuration configured = cfg.configure(metadata, properties );
                 return configured != null ? configured.buildEntityManagerFactory() : null;

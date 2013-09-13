@@ -6,6 +6,7 @@ import org.xendan.logmonitor.parser.DateParserTest;
 import org.xendan.logmonitor.parser.EntryMatcherTest;
 import org.xendan.logmonitor.parser.LevelParserTest;
 import org.xendan.logmonitor.parser.LogParserTest;
+import org.xendan.logmonitor.read.LsCommandTest;
 
 /**
  * User: kcyxa
@@ -16,7 +17,8 @@ import org.xendan.logmonitor.parser.LogParserTest;
         DateParserTest.class,
         EntryMatcherTest.class,
         LevelParserTest.class,
-        LogParserTest.class
+        LogParserTest.class,
+        LsCommandTest.class
 })
-public class FastPortableSuite {
+public class AllSuite {
 }

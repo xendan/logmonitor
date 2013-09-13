@@ -4,10 +4,11 @@ import org.apache.log4j.Level;
 import org.junit.Test;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.model.MatchConfig;
-import org.xendan.logmonitor.model.Matchers;
 
-import static junit.framework.Assert.assertTrue;
+import java.util.Arrays;
+
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertTrue;
 
 /**
  * User: id967161
@@ -15,7 +16,7 @@ import static junit.framework.Assert.assertFalse;
  */
 public class EntryMatcherTest {
     @Test
-    public void test_match() throws Exception {
+    public void test_match_level() throws Exception {
         EntryMatcher mathcer = createInfoMatchers();
 
         LogEntry entry = new LogEntry();
@@ -34,12 +35,27 @@ public class EntryMatcherTest {
         assertFalse(mathcer.match(entry));
     }
 
+    @Test
+    public void test_message() throws Exception {
+        MatchConfig config = new MatchConfig();
+        config.setMessage("Hallo");
+        EntryMatcher matcher = new EntryMatcher(Arrays.asList(config));
+
+        assertTrue("Expect full match", matcher.match(createEntry("Hallo")));
+        assertTrue("Expect contains match", matcher.match(createEntry("***Hallo**")));
+        assertFalse(matcher.match(createEntry("***Hll**")));
+    }
+
+    private LogEntry createEntry(String message) {
+        LogEntry entry = new LogEntry();
+        entry.setMessage(message);
+        return entry;
+    }
+
     public static EntryMatcher createInfoMatchers() {
-        Matchers matchers = new Matchers();
         MatchConfig matcher = new MatchConfig();
         matcher.setLevel(Level.INFO.toString());
-        matcher.setError(true);
-        matchers.getMatchers().add(matcher);
-        return new EntryMatcher(matchers.getMatchers());
+        matcher.setMessage("");
+        return new EntryMatcher(Arrays.asList(matcher));
     }
 }
