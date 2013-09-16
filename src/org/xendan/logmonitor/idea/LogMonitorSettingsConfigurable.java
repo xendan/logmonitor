@@ -66,7 +66,6 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JPasswordField serverPasswordField;
     private JTextField keyFiletextField;
     private JButton selectFileButton;
-    private JTree patternsTree;
     private JLabel serverLabel;
     private JLabel pathLabel;
     private JButton patternUp;
@@ -80,6 +79,10 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JButton broswsLogButton;
     private JPasswordField serverPastPhrsePasswordField;
     private JLabel updateIntrevalLabel;
+    private JButton savePatternButton;
+    private JList paternsList;
+    private JPanel matchConfigPanel;
+    private JPanel logSettingsPanel;
     private Server ADD_NEW = new Server("Add new...", -2);
     private Server selectedServer;
     private LogSettings selectedLogSettings;

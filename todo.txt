@@ -1,10 +1,12 @@
+TODO:
+- add patterns
+- add projects
 
 FIX
-- add all patterns
+- add all data patterns
 - modify YYY pattern
 
 IMPROVEMENTs
-- add projects
-- normal edit (hide password)
+- add log4j test
 - generating server side script
 - load settigns from server!

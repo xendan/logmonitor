@@ -30,6 +30,10 @@
     <orderEntry type="library" exported="" name="jsch-0.1.50" level="project" />
     <orderEntry type="library" exported="" name="ant-1.9.2" level="project" />
     <orderEntry type="library" exported="" name="joda-time-hibernate-1.3" level="project" />
+    <orderEntry type="library" exported="" name="joda-money-0.6" level="project" />
+    <orderEntry type="library" exported="" name="usertype.spi-3.0.0.CR1" level="project" />
+    <orderEntry type="library" exported="" name="usertype.core-3.0.0.CR1" level="project" />
+    <orderEntry type="library" exported="" name="binding-2.0.6" level="project" />
   </component>
 </module>
 

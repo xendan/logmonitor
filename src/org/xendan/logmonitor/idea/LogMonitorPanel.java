@@ -73,9 +73,11 @@ public class LogMonitorPanel implements CreatePatternListener {
     private class CreatePatternActionListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            /*
             CreatePattern dialog = new CreatePattern(model.getContent(selectedPath), LogMonitorPanel.this);
             dialog.pack();
             dialog.setVisible(true);
+            */
         }
     }
 
