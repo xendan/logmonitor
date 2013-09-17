@@ -177,7 +177,7 @@
     <file path="$PROJECT_DIR$/../BTS/trunk/btts-commonweb/src/main/java/com/bics/btts/caramba/renderer/ComboBox2Label.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379340537876" ignored="false" />
     <file path="/LogMonitorSettingsConfigurableTest.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379429727772" ignored="false" />
     <file path="/LinkingUnlinkingRuleconfiguratorPanel.jsp" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379409093326" ignored="false" />
-    <file path="/VerboseBeanAdapter.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379425838994" ignored="false" />
+    <file path="/VerboseBeanAdapter.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379430912155" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -318,10 +318,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SetItemFromListModelTest.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="SetItemFromListModel.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/SetItemFromListModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="128" column="0" selection-start="4291" selection-end="4291" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VerboseBeanAdapter.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/VerboseBeanAdapter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="53" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#414#428#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SetItemFromListModelTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/idea/SetItemFromListModelTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="61" selection-start="2008" selection-end="2008" vertical-scroll-proportion="0.57630163">
+            <state line="46" column="8" selection-start="1638" selection-end="1638" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AllSuite.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/AllSuite.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="6" selection-start="658" selection-end="658" vertical-scroll-proportion="0.4578097">
               <folding />
             </state>
           </provider>
@@ -431,13 +461,13 @@
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.form" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/Server.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/VerboseBeanAdapter.java" />
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/idea/SetItemFromListModelTest.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogMonitorSettingsDao.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/LogMonitorSettingsDaoImpl.java" />
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurableTest.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/SetItemFromListModel.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/VerboseBeanAdapter.java" />
       </list>
     </option>
   </component>
@@ -1277,9 +1307,9 @@
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="JUnit.AllSuite" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.LogMonitorSettingsConfigurableTest.test_add_new" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.LogMonitorSettingsConfigurableTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.SetItemFromListModelTest.test_edit_create_remove" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.SetItemFromListModelTest.test_edit_create_remove" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.LogMonitorSettingsConfigurableTest.test_add_new" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.LogMonitorSettingsConfigurableTest" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.LogMonitorSettingsConfigurableTest.test_selected_config" />
       </list>
     </recent_temporary>
@@ -1368,7 +1398,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20379438" sideWeight="0.6724337" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756633" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756633" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.19838524" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.29988465" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1447,13 +1477,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/adapter/ComboBoxAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="262" column="0" selection-start="11265" selection-end="11265" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogSettings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="23" selection-start="262" selection-end="266" vertical-scroll-proportion="0.0">
@@ -1475,60 +1498,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/beans/ExtendedPropertyChangeSupport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="272" column="0" selection-start="11118" selection-end="11118" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/beans/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="462" column="0" selection-start="18629" selection-end="18629" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/value/AbstractValueModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="0" selection-start="5159" selection-end="5159" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/value/ValueHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="181" column="0" selection-start="6604" selection-end="6604" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/value/ValueModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="96" column="9" selection-start="4341" selection-end="4341" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/VerboseBeanAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="25" selection-start="375" selection-end="375" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/beans/BeanAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="414" column="25" selection-start="18255" selection-end="18255" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/SetItemFromListModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="133" column="13" selection-start="4406" selection-end="4406" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -1549,16 +1521,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/AllSuite.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/beans/ExtendedPropertyChangeSupport.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="4" selection-start="627" selection-end="627" vertical-scroll-proportion="0.0">
+        <state line="297" column="0" selection-start="11870" selection-end="11870" vertical-scroll-proportion="0.5894207">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/beans/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="457" column="0" selection-start="18489" selection-end="18489" vertical-scroll-proportion="0.3325359">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/value/AbstractValueModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="128" column="0" selection-start="5076" selection-end="5076" vertical-scroll-proportion="0.3325359">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/value/ValueHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="232" column="0" selection-start="8590" selection-end="8590" vertical-scroll-proportion="0.5119617">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/list/ArrayListModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="314" column="0" selection-start="11362" selection-end="11362" vertical-scroll-proportion="0.3325359">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.jgoodies/binding/2.0.6/source/102b260b28d9a05586575873d8fe613bb9410d84/binding-2.0.6-sources.jar!/com/jgoodies/binding/beans/BeanAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="676" column="17" selection-start="28712" selection-end="28712" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/VerboseBeanAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="53" selection-start="588" selection-end="588" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#414#428#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/SetItemFromListModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="128" column="0" selection-start="4291" selection-end="4291" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/idea/SetItemFromListModelTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="61" selection-start="2008" selection-end="2008" vertical-scroll-proportion="0.57630163">
+        <state line="46" column="8" selection-start="1638" selection-end="1638" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/AllSuite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="6" selection-start="658" selection-end="658" vertical-scroll-proportion="0.4578097">
           <folding />
         </state>
       </provider>
