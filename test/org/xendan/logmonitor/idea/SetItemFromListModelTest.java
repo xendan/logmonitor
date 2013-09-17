@@ -2,15 +2,16 @@ package org.xendan.logmonitor.idea;
 
 import com.intellij.ui.components.JBList;
 import com.jgoodies.binding.adapter.Bindings;
-import com.jgoodies.binding.beans.BeanAdapter;
-import com.jgoodies.binding.list.ArrayListModel;
+import com.jgoodies.binding.value.ValueHolder;
+import com.jgoodies.binding.value.ValueModel;
+import org.apache.commons.lang.StringUtils;
 import org.junit.Test;
 import org.xendan.logmonitor.model.BaseObject;
 
 import javax.swing.*;
 import java.util.Arrays;
+import java.util.List;
 
-import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertFalse;
@@ -28,19 +29,22 @@ public class SetItemFromListModelTest {
     private JList itemsList = new JBList();
 
     @Test
+    @SuppressWarnings("unchecked")
     public void test_edit_create_remove() throws Exception {
         TestBean b1 = new TestBean();
         String name = "AAA";
+        b1.setId(1L);
         b1.setName(name);
         TestBean b2 = new TestBean();
+        b1.setId(2L);
+        b2.setName("BBB");
         itemPanel.add(nameField);
-        TestSetItemFromListMode model = new TestSetItemFromListMode();
+        ValueModel listValue = new ValueHolder(Arrays.asList(b1, b2));
+        TestSetItemFromListMode model = new TestSetItemFromListMode(newButton, removeButton, itemPanel, itemsList, listValue);
         assertFalse("Nothing to remove", removeButton.isEnabled());
         assertFalse("initial state is disabled", nameField.isEnabled());
-        ArrayListModel<TestBean> listModel = new ArrayListModel<TestBean>(Arrays.asList(b1, b2));
-        model.setItemsModel(listModel);
+        assertEquals(2, ((List<TestBean>) listValue.getValue()).size());
 
-        assertNull("Initially nothing is selected", model.getSelected());
         //edit b1
         itemsList.setSelectedValue(b1, false);
         assertEquals("Expect item selected in list", b1, model.getSelected());
@@ -52,10 +56,11 @@ public class SetItemFromListModelTest {
 
         //create new
         newButton.doClick();
+        assertEquals(3, itemsList.getModel().getSize());
         String newBean = "This is new bean";
         nameField.setText(newBean);
 
-        assertEquals(newBean, listModel.get(2).getName());
+        assertEquals(newBean, ((TestBean)itemsList.getModel().getElementAt(2)).getName());
         assertFalse(nameField.isEnabled());
 
         //remove
@@ -63,16 +68,28 @@ public class SetItemFromListModelTest {
         removeButton.doClick();
         assertEquals(2, itemsList.getModel().getSize());
         assertFalse(nameField.isEnabled());
+
+        //add invalid
+        newButton.doClick();
+        itemsList.setSelectedValue(b1, false);
+        assertEquals("Expect new invalid bean not added", 2, itemsList.getModel().getSize());
     }
 
     private class TestSetItemFromListMode extends SetItemFromListModel<TestBean> {
-        public TestSetItemFromListMode() {
-            super(newButton, removeButton, itemPanel, itemsList);
+
+
+        public TestSetItemFromListMode(JButton newButton, JButton removeButton, JPanel itemPanel, JList itemsList, ValueModel valueModel) {
+            super(newButton, removeButton, itemPanel, itemsList, valueModel);
         }
 
         @Override
-        protected void bind(BeanAdapter<TestBean> beanAdapter) {
-            Bindings.bind(nameField, beanAdapter.getValueModel("name"));
+        protected void bind(VerboseBeanAdapter<TestBean> beanAdapter) {
+            Bindings.bind(nameField, beanAdapter.getPropertyModel("name"));
+        }
+
+        @Override
+        protected boolean isInvalid(TestBean item) {
+            return StringUtils.isEmpty(item.getName());
         }
     }
 

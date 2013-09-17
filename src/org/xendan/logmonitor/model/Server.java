@@ -8,7 +8,6 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Server extends BaseObject {
-    public static final Server LOCALHOST = new Server("localhost", -1);
     private String host;
     private String login;
     private String password;
@@ -21,7 +20,7 @@ public class Server extends BaseObject {
 
     public Server(String host, int id) {
         this.host = host;
-        setId(Long.valueOf(id));
+        setId((long) id);
     }
 
     public String getHost() {

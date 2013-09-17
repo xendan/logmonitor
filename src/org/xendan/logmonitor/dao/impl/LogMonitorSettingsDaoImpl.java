@@ -63,11 +63,6 @@ public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
         return configs;
     }
 
-    @Override
-    public List<Server> getServers() {
-        return getAll(Server.class);
-    }
-
     private <T> List<T> getAll(Class<T> entityClass) {
         return entityManager.createQuery("SELECT l FROM " + entityClass.getName() + " l", entityClass)
                 .getResultList();
