@@ -1,6 +1,10 @@
 package org.xendan.logmonitor.model;
 
-import javax.persistence.*;
+import org.apache.log4j.Level;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +14,7 @@ import java.util.List;
  */
 @Entity
 public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
-    private String level;
+    private String level = Level.DEBUG.toString();
     private boolean useArchive;
     private String name;
     private String message;

@@ -4,8 +4,8 @@ import com.jgoodies.binding.beans.BeanAdapter;
 import com.jgoodies.binding.value.AbstractValueModel;
 import com.jgoodies.binding.value.ValueModel;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * User: id967161
@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class VerboseBeanAdapter<T>  {
     private final BeanAdapter<T> adapter;
-    private List<VerboseModel> models = new ArrayList<VerboseModel>();
+    private Map<String, VerboseModel> models = new HashMap<String, VerboseModel>();
 
     public VerboseBeanAdapter(T bean) {
         adapter = new BeanAdapter<T>(bean);
@@ -24,14 +24,16 @@ public class VerboseBeanAdapter<T>  {
     }
 
     public ValueModel getPropertyModel(String property) {
-        VerboseModel model = new VerboseModel(adapter.getValueModel(property));
-        models.add(model);
-        return model;
+        if (!models.containsKey(property)) {
+            VerboseModel model = new VerboseModel(adapter.getValueModel(property));
+            models.put(property, model);
+        }
+        return models.get(property);
     }
 
     public void setBean(T newBean) {
         adapter.setBean(newBean);
-        for (VerboseModel model : models) {
+        for (VerboseModel model : models.values()) {
             model.fireChanged(model.getValue(), null);
         }
     }

@@ -20,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
 import org.xendan.logmonitor.model.LogMonitorConfiguration;
 import org.xendan.logmonitor.model.LogSettings;
+import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.model.Server;
 import org.xendan.logmonitor.read.ReaderScheduler;
 import org.xendan.logmonitor.read.Serializer;
@@ -39,11 +40,13 @@ import java.util.List;
  * Date: 03/09/13
  */
 public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll {
+    public static final String LOG_SETTINGS = "logSettings";
     private final Serializer serializer;
     private final LogMonitorSettingsDao logMonitorSettignsDao;
     private final ReaderScheduler scheduler;
     private final Project project;
     final LogSettingsModel logSettingsModel;
+    final MatchConfigModel matchConfigModel;
     private final ArrayListModel<LogMonitorConfiguration> configsModel;
     private List<LogMonitorConfiguration> initialConfigs;
     private JPanel contentPanel;
@@ -53,16 +56,10 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JButton addLogSettingsButton;
     private JButton addPatternButton;
     private JButton removePatternButton;
-    private JComboBox levelComboBox;
     private JScrollPane patternsListPanel;
-    private JTextField mathcerNameTextField;
     private JTextField patternTextField;
     JComboBox projectComboBox;
     private JLabel projectLabel;
-    private JTextField matchMessageTextField;
-    private JCheckBox userArchiveCheckBox;
-    private JPasswordField passwordField;
-    private JTextArea messageTextArea;
     JList logSettingsList;
     JComboBox serverComboBox;
     JPanel serverPanel;
@@ -108,6 +105,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         this.configAdapter = new VerboseBeanAdapter<LogMonitorConfiguration>(new LogMonitorConfiguration());
         configsModel = new ArrayListModel<LogMonitorConfiguration>(logMonitorSettignsDao.getConfigs());
         logSettingsModel = new LogSettingsModel();
+        matchConfigModel = new MatchConfigModel();
         init();
 
     }
@@ -115,7 +113,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private void init() {
         addProjectButton.addActionListener(new AddProjectActionListener());
         broswsLogButton.addActionListener(new BrowseLogButtonActionListener());
-        projectComboBox.setRenderer(new ConfigProjectRendere());
+        projectComboBox.setRenderer(new ConfigProjectRenderer());
         ValueHolder configSelection = new ValueHolder();
         Bindings.bind(projectComboBox, new SelectionInList<LogMonitorConfiguration>((ListModel) configsModel, configSelection));
         configSelection.addValueChangeListener(new ConfigChangeListener());
@@ -266,7 +264,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         private VerboseBeanAdapter<Server> serverAdapter = new VerboseBeanAdapter<Server>(new Server());
 
         public LogSettingsModel() {
-            super(addLogSettingsButton, removeLogSettingsButton, logSettingsPanel, logSettingsList, configAdapter.getPropertyModel("logSettings"));
+            super(addLogSettingsButton, removeLogSettingsButton, logSettingsPanel, logSettingsList, configAdapter.getPropertyModel(LOG_SETTINGS), "name");
         }
 
 
@@ -390,7 +388,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         }
     }
 
-    private class ConfigProjectRendere extends ListCellRendererWrapper {
+    private class ConfigProjectRenderer extends ListCellRendererWrapper {
 
 
         @Override
@@ -402,4 +400,35 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     }
 
 
+    private class MatchConfigModel extends  SetItemFromListModel<MatchConfig> {
+        private MatchConfigForm form;
+
+        public MatchConfigModel() {
+            super(addPatternButton, removePatternButton, matchConfigPanel, paternsList, logSettingsModel.getBeanModel("matchConfigs"), "name");
+        }
+
+        @Override
+        protected void bind(VerboseBeanAdapter<MatchConfig> beanAdapter) {
+            form = new MatchConfigForm();
+            matchConfigPanel.setLayout(new BoxLayout(matchConfigPanel, BoxLayout.PAGE_AXIS));
+            matchConfigPanel.add(form.contentPanel);
+            form.setBeanAdapter(beanAdapter);
+            form.setLogSettingsList(configAdapter.getPropertyModel(LOG_SETTINGS));
+            setPanelEnabled(itemPanel, false);
+            form.hideException();
+        }
+
+        @Override
+        protected void onNewClicked() {
+            super.onNewClicked();
+            form.setIsArchive(true);
+            form.setShowNotification(true);
+
+        }
+
+        @Override
+        protected boolean isInvalid(MatchConfig item) {
+            return StringUtils.isEmpty(item.getName());
+        }
+    }
 }

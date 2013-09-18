@@ -30,6 +30,9 @@ public class LogMonitorSettingsConfigurableTest {
 
     private LogMonitorSettingsConfigurable configurable;
     private LogMonitorConfiguration config;
+    private Server server;
+    private LogSettings local;
+    private LogSettings notLocal;
 
     @Test
     public void test_selected_config() throws Exception {
@@ -39,14 +42,29 @@ public class LogMonitorSettingsConfigurableTest {
     }
 
     @Test
+    public void test_remove_button() throws Exception {
+        setSomeLogSettings();
+        configurable.refresh();
+        configurable.projectComboBox.setSelectedItem(config);
+
+        assertFalse(configurable.logSettingsModel.removeButton.isEnabled());
+        configurable.logSettingsList.setSelectedIndex(1);
+
+        assertTrue(configurable.logSettingsModel.removeButton.isEnabled());
+    }
+
+    @Test
     public void test_add_new() throws Exception {
         configurable.refresh();
         assertEquals("Expect add new and localhost", 2, configurable.serverComboBox.getModel().getSize());
 
         configurable.logSettingsModel.newButton.doClick();
         assertNotNull(((LogSettings) configurable.logSettingsList.getModel().getElementAt(0)).getServer());
+        assertNull(((LogSettings) configurable.logSettingsList.getModel().getElementAt(0)).getServer().getId());
         assertEquals(1, configurable.logSettingsList.getModel().getSize());
         assertEquals(1, configurable.configAdapter.getBean().getLogSettings().size());
+        assertTrue("Expect on new name is enabled", configurable.logSettingsNametextField.isEnabled());
+        assertEquals(0, configurable.logSettingsList.getSelectedIndex());
 
         //add valid data
         configurable.logSettingsNametextField.setText("Log Settings 1");
@@ -63,13 +81,7 @@ public class LogMonitorSettingsConfigurableTest {
 
     @Test
     public void test_server_is_selected() throws Exception {
-        LogSettings local = createValidSettigns();
-        local.setName("LOCAL");
-        LogSettings notLocal = createValidSettigns();
-        Server server = new Server();
-        server.setHost("some host");
-        notLocal.setServer(server);
-        config.setLogSettings(Arrays.asList(local, notLocal));
+        setSomeLogSettings();
         configurable.refresh();
         configurable.projectComboBox.setSelectedItem(config);
 
@@ -86,6 +98,16 @@ public class LogMonitorSettingsConfigurableTest {
 
         assertEquals("Expect sever host selected", server,  configurable.serverComboBox.getSelectedItem());
         assertEquals("Expect sever host selected", server.getHost(), configurable.serverHostTextField.getText());
+    }
+
+    private void setSomeLogSettings() {
+        local = createValidSettigns();
+        local.setName("LOCAL");
+        notLocal = createValidSettigns();
+        server = new Server();
+        server.setHost("some host");
+        notLocal.setServer(server);
+        config.setLogSettings(Arrays.asList(local, notLocal));
     }
 
     private LogSettings createValidSettigns() {

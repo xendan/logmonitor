@@ -29,15 +29,17 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
     JPanel itemPanel;
     JList itemsList;
     private final ValueModel listValueModel;
+    private final String toStringProperty;
     final VerboseBeanAdapter<T> beanAdapter;
-    private boolean modelIsClearing;
+    private ListModelUpdater listModelUpdater;
 
-    public SetItemFromListModel(JButton newButton, JButton removeButton, JPanel itemPanel, JList itemsList, ValueModel listValueModel) {
+    public SetItemFromListModel(JButton newButton, JButton removeButton, JPanel itemPanel, JList itemsList, ValueModel listValueModel, String toStringProperty) {
         this.newButton = newButton;
         this.removeButton = removeButton;
         this.itemPanel = itemPanel;
         this.itemsList = itemsList;
         this.listValueModel = listValueModel;
+        this.toStringProperty = toStringProperty;
         beanAdapter = new VerboseBeanAdapter<T>(newBeanInstance());
         init();
     }
@@ -50,8 +52,10 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         itemsList.addListSelectionListener(new ItemListSelectionListener());
         setPanelEnabled(itemPanel, false);
         ArrayListModel<T> listModel = new ArrayListModel<T>((Collection) listValueModel.getValue());
-        listValueModel.addValueChangeListener(new ListModelUpdater(listModel));
+        listModelUpdater = new ListModelUpdater(listModel);
+        listValueModel.addValueChangeListener(listModelUpdater);
         itemsList.setModel(listModel);
+        beanAdapter.getPropertyModel(toStringProperty).addValueChangeListener(new ListRefresher(listModel));
         bind(beanAdapter);
     }
 
@@ -85,14 +89,21 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         return beanAdapter.getBean();
     }
 
+    public ValueModel getBeanModel(String propertyName) {
+        return beanAdapter.getPropertyModel(propertyName);
+    }
+
     protected void onNewClicked() {
         clearInvalid();
         T newBean = newBeanInstance();
         List<T> items = getItemsList();
         items.add(newBean);
         listValueModel.setValue(items);
-        beanAdapter.setBean(newBean);
-        setPanelEnabled(itemPanel, false);
+        listModelUpdater.setIgnoreItemSelection(true);
+        itemsList.setSelectedValue(newBean, true);
+        applyItemSet();
+        listModelUpdater.setIgnoreItemSelection(false);
+        setPanelEnabled(itemPanel, true);
     }
 
     private void clearInvalid() {
@@ -121,14 +132,18 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
 
         @Override
         public void valueChanged(ListSelectionEvent e) {
-            if (!modelIsClearing) {
+            if (!listModelUpdater.isIgnoreItemSelection()) {
                 clearInvalid();
-                removeButton.setEnabled(true);
-                setPanelEnabled(itemPanel, true);
-                onItemSet();
-                beanAdapter.setBean((T) itemsList.getSelectedValue());
+                applyItemSet();
             }
         }
+    }
+
+    private void applyItemSet() {
+        removeButton.setEnabled(true);
+        setPanelEnabled(itemPanel, true);
+        onItemSet();
+        beanAdapter.setBean((T) itemsList.getSelectedValue());
     }
 
     protected void onItemSet() {
@@ -147,21 +162,21 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         List<T> items = getItemsList();
         items.remove(item);
         listValueModel.setValue(items);
+        if (itemsList.getSelectedIndex() == -1) {
+            removeButton.setEnabled(false);
+        }
     }
 
-    private class ListModelUpdater implements PropertyChangeListener {
+    private class ListRefresher implements PropertyChangeListener {
         private final ArrayListModel<T> listModel;
 
-        public ListModelUpdater(ArrayListModel<T> listModel) {
+        public ListRefresher(ArrayListModel<T> listModel) {
             this.listModel = listModel;
         }
 
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
-            modelIsClearing = true;
-            listModel.clear();
-            listModel.addAll((Collection<? extends T>) evt.getNewValue());
-            modelIsClearing = false;
+            listModel.fireContentsChanged(itemsList.getSelectedIndex());
         }
     }
 }

@@ -79,7 +79,7 @@ public class SetItemFromListModelTest {
 
 
         public TestSetItemFromListMode(JButton newButton, JButton removeButton, JPanel itemPanel, JList itemsList, ValueModel valueModel) {
-            super(newButton, removeButton, itemPanel, itemsList, valueModel);
+            super(newButton, removeButton, itemPanel, itemsList, valueModel, "name");
         }
 
         @Override
