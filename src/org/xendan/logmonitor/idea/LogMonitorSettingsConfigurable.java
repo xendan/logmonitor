@@ -5,7 +5,9 @@ import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
 import com.intellij.openapi.project.Project;
+import com.intellij.ui.ListCellRendererWrapper;
 import com.jgoodies.binding.adapter.Bindings;
+import com.jgoodies.binding.adapter.SpinnerAdapterFactory;
 import com.jgoodies.binding.list.SelectionInList;
 import com.jgoodies.binding.value.AbstractConverter;
 import com.jgoodies.binding.value.ValueHolder;
@@ -63,7 +65,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JTextArea messageTextArea;
     JList logSettingsList;
     JComboBox serverComboBox;
-    private JPanel serverPanel;
+    JPanel serverPanel;
     private JButton saveLogSettingsButton;
     JTextField serverHostTextField;
     JTextField serverLoginTextField;
@@ -113,6 +115,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private void init() {
         addProjectButton.addActionListener(new AddProjectActionListener());
         broswsLogButton.addActionListener(new BrowseLogButtonActionListener());
+        projectComboBox.setRenderer(new ConfigProjectRendere());
         ValueHolder configSelection = new ValueHolder();
         Bindings.bind(projectComboBox, new SelectionInList<LogMonitorConfiguration>((ListModel) configsModel, configSelection));
         configSelection.addValueChangeListener(new ConfigChangeListener());
@@ -273,12 +276,19 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             serverAdapter = new VerboseBeanAdapter<Server>(new Server());
             Bindings.bind(logSettingsNametextField, beanAdapter.getPropertyModel("name"));
             Bindings.bind(pathTextField, beanAdapter.getPropertyModel("path"));
-            Bindings.bind(serverComboBox, new SelectionInList<Server>(servers, new ServerInListModel(beanAdapter.getPropertyModel("server"), serverAdapter)));
+            ValueModel serverPropertyModel = beanAdapter.getPropertyModel("server");
+            serverPropertyModel.addValueChangeListener(new IsSeverNullListener());
+            Bindings.bind(serverComboBox, new SelectionInList<Server>(servers, new ServerInListModel(serverPropertyModel, serverAdapter)));
             Bindings.bind(serverHostTextField, serverAdapter.getPropertyModel("host"));
             Bindings.bind(serverLoginTextField, serverAdapter.getPropertyModel("login"));
             Bindings.bind(serverPasswordField, serverAdapter.getPropertyModel("password"));
             Bindings.bind(keyFiletextField, serverAdapter.getPropertyModel("keyPath"));
             Bindings.bind(serverPastPhrsePasswordField, serverAdapter.getPropertyModel("passPhrase"));
+
+            ValueModel   levelModel   = beanAdapter.getPropertyModel("updateInterval");
+            SpinnerModel spinnerModel = new SpinnerNumberModel(9, 0, 1000, 1);
+            SpinnerAdapterFactory.connect(spinnerModel, levelModel, 10);
+            updateIntervalSpinner.setModel(spinnerModel);
         }
 
         @Override
@@ -300,6 +310,12 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         }
 
 
+        private class IsSeverNullListener implements PropertyChangeListener {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                setPanelEnabled(serverPanel, evt.getNewValue() != null);
+            }
+        }
     }
 
     private List<Server> getServers() {
@@ -316,7 +332,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         return servers;
     }
 
-    private class ServerInListModel extends AbstractConverter {
+    private class ServerInListModel extends AbstractConverter implements PropertyChangeListener {
 
         private final ValueModel subject;
         private final VerboseBeanAdapter<Server> serverAdapter;
@@ -331,6 +347,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             super(subject);
             this.subject = subject;
             this.serverAdapter = serverAdapter;
+            subject.addValueChangeListener(this);
         }
 
         @Override
@@ -358,6 +375,12 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
                 return (Server) newValue;
             }
         }
+
+        @Override
+        public void propertyChange(PropertyChangeEvent evt) {
+            serverAdapter.setBean((Server) evt.getNewValue());
+            firePropertyChange(evt.getPropertyName(), evt.getOldValue(), convertFromSubject(evt.getNewValue()));
+        }
     }
 
     private class ConfigChangeListener implements PropertyChangeListener {
@@ -366,4 +389,17 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             configAdapter.setBean((LogMonitorConfiguration) evt.getNewValue());
         }
     }
+
+    private class ConfigProjectRendere extends ListCellRendererWrapper {
+
+
+        @Override
+        public void customize(JList jList, Object o, int i, boolean b, boolean b2) {
+            if (o instanceof LogMonitorConfiguration) {
+                setText(((LogMonitorConfiguration)o).getProjectName());
+            }
+        }
+    }
+
+
 }

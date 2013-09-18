@@ -55,7 +55,7 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         bind(beanAdapter);
     }
 
-    private void setPanelEnabled(JPanel itemPanel, boolean enabled) {
+    protected void setPanelEnabled(JPanel itemPanel, boolean enabled) {
         for (Component component : itemPanel.getComponents()) {
             component.setEnabled(enabled);
             if (component instanceof JPanel) {

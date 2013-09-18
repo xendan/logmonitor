@@ -7,15 +7,18 @@ import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
 import org.xendan.logmonitor.model.LogMonitorConfiguration;
 import org.xendan.logmonitor.model.LogSettings;
+import org.xendan.logmonitor.model.Server;
 import org.xendan.logmonitor.read.ReaderScheduler;
 import org.xendan.logmonitor.read.Serializer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertFalse;
+import static junit.framework.TestCase.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -26,6 +29,7 @@ import static org.mockito.Mockito.when;
 public class LogMonitorSettingsConfigurableTest {
 
     private LogMonitorSettingsConfigurable configurable;
+    private LogMonitorConfiguration config;
 
     @Test
     public void test_selected_config() throws Exception {
@@ -58,6 +62,40 @@ public class LogMonitorSettingsConfigurableTest {
     }
 
     @Test
+    public void test_server_is_selected() throws Exception {
+        LogSettings local = createValidSettigns();
+        local.setName("LOCAL");
+        LogSettings notLocal = createValidSettigns();
+        Server server = new Server();
+        server.setHost("some host");
+        notLocal.setServer(server);
+        config.setLogSettings(Arrays.asList(local, notLocal));
+        configurable.refresh();
+        configurable.projectComboBox.setSelectedItem(config);
+
+        assertEquals("Expect two log setting ", 2, configurable.logSettingsModel.itemsList.getModel().getSize());
+
+        configurable.logSettingsModel.itemsList.setSelectedValue(local, false);
+
+        assertEquals("Expect local host selected", LogMonitorSettingsConfigurable.LOCALHOST, configurable.serverComboBox.getSelectedItem());
+        assertFalse("For local host server panel is disabled", configurable.serverHostTextField.isEnabled());
+
+        configurable.logSettingsModel.itemsList.setSelectedValue(notLocal, false);
+
+        assertTrue("For server panel is enabled for not localhost", configurable.serverHostTextField.isEnabled());
+
+        assertEquals("Expect sever host selected", server,  configurable.serverComboBox.getSelectedItem());
+        assertEquals("Expect sever host selected", server.getHost(), configurable.serverHostTextField.getText());
+    }
+
+    private LogSettings createValidSettigns() {
+        LogSettings settings = new LogSettings();
+        settings.setName("some name");
+        settings.setPath("some path");
+        return settings;
+    }
+
+    @Test
     public void test_not_added_empty() throws Exception {
         configurable.logSettingsModel.newButton.doClick();
         configurable.logSettingsModel.newButton.doClick();
@@ -69,9 +107,9 @@ public class LogMonitorSettingsConfigurableTest {
         Project project = mock(Project.class);
         when(project.getName()).thenReturn("Test project");
         LogMonitorSettingsDao logMonitorSettingsDao = mock(LogMonitorSettingsDao.class);
-        LogMonitorConfiguration logMonitorConfiguration = new LogMonitorConfiguration();
-        logMonitorConfiguration.setProjectName("AAA");
-        when(logMonitorSettingsDao.getConfigs()).thenReturn(new ArrayList<LogMonitorConfiguration>(Arrays.asList(logMonitorConfiguration)));
+        config = new LogMonitorConfiguration();
+        config.setProjectName("AAA");
+        when(logMonitorSettingsDao.getConfigs()).thenReturn(new ArrayList<LogMonitorConfiguration>(Arrays.asList(config)));
         ReaderScheduler readerScheduler = mock(ReaderScheduler.class);
         configurable = new LogMonitorSettingsConfigurable(project, logMonitorSettingsDao, new Serializer(new HomeResolver()), readerScheduler);
     }
