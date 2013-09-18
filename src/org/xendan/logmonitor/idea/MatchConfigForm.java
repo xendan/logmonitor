@@ -28,10 +28,10 @@ public class MatchConfigForm {
     private JList ignorePatterns;
     private JCheckBox isGeneralCheckBox;
     private JLabel ignoreLabel;
-    private JLabel applyForLabel;
+    JLabel applyForLabel;
     private JPanel applyFor;
     public JPanel contentPanel;
-    private JCheckBox shoeMessageCheckBox;
+    private JCheckBox showMessageCheckBox;
     private JButton removeButton;
     private JButton addButton;
     private JScrollPane ignorePatternsScrollPane;
@@ -74,7 +74,7 @@ public class MatchConfigForm {
     }
 
     public void setShowNotification(boolean value) {
-        shoeMessageCheckBox.setSelected(value);
+        showMessageCheckBox.setSelected(value);
     }
 
     public void setLogSettingsList(ValueModel settingsModel) {

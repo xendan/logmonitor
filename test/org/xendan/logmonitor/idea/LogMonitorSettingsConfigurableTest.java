@@ -124,6 +124,17 @@ public class LogMonitorSettingsConfigurableTest {
         assertEquals(1, configurable.logSettingsList.getModel().getSize());
     }
 
+    @Test
+    public void test_patterns_disabled() throws Exception {
+        setSomeLogSettings();
+        configurable.refresh();
+        configurable.projectComboBox.setSelectedItem(config);
+
+        assertFalse(configurable.paternsList.isEnabled());
+        configurable.logSettingsModel.itemsList.setSelectedValue(local, false);
+        assertTrue("Some log settings is selected", configurable.paternsList.isEnabled());
+    }
+
     @Before
     public void setUp() {
         Project project = mock(Project.class);

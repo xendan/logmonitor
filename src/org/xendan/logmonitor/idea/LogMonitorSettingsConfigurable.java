@@ -82,7 +82,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JButton broswsLogButton;
     private JPasswordField serverPastPhrsePasswordField;
     private JLabel updateIntrevalLabel;
-    private JList paternsList;
+    JList paternsList;
     private JPanel matchConfigPanel;
     private JPanel logSettingsPanel;
     private static final Server ADD_NEW = new Server("Add new...", -2);

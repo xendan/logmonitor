@@ -2,6 +2,8 @@ package org.xendan.logmonitor;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.xendan.logmonitor.idea.LogMonitorSettingsConfigurableTest;
+import org.xendan.logmonitor.idea.MatchConfigFormTest;
 import org.xendan.logmonitor.idea.SetItemFromListModelTest;
 import org.xendan.logmonitor.parser.DateParserTest;
 import org.xendan.logmonitor.parser.EntryMatcherTest;
@@ -20,7 +22,9 @@ import org.xendan.logmonitor.read.LsCommandTest;
         LevelParserTest.class,
         LogParserTest.class,
         LsCommandTest.class,
-        SetItemFromListModelTest.class
+        SetItemFromListModelTest.class,
+        MatchConfigFormTest.class,
+        LogMonitorSettingsConfigurableTest.class
 })
 public class AllSuite {
 }
