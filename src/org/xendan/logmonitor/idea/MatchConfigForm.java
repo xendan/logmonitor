@@ -10,6 +10,8 @@ import org.xendan.logmonitor.model.MatchConfig;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
@@ -21,24 +23,26 @@ import java.util.List;
  * Date: 16/09/13
  */
 public class MatchConfigForm {
+    public static final String ENVIRONMENT = "environment";
     private JTextField nameTextField;
     private JComboBox levelComboBox;
-    private JLabel nameCombo;
     private JTextArea messageTextArea;
     private JList ignorePatterns;
     private JCheckBox isGeneralCheckBox;
     private JLabel ignoreLabel;
     JLabel applyForLabel;
-    private JPanel applyFor;
+    JPanel applyFor;
     public JPanel contentPanel;
     private JCheckBox showMessageCheckBox;
     private JButton removeButton;
     private JButton addButton;
     private JScrollPane ignorePatternsScrollPane;
-    private ValueModel settingsModel;
+    private ValueModel environmentsModel;
+    private VerboseBeanAdapter<MatchConfig> beanAdapter;
 
     @SuppressWarnings("unchecked")
-    public void setBeanAdapter(VerboseBeanAdapter<MatchConfig> beanAdapter) {
+    public void setBeanAdapters(VerboseBeanAdapter<MatchConfig> beanAdapter) {
+        this.beanAdapter = beanAdapter;
         Bindings.bind(nameTextField, beanAdapter.getPropertyModel("name"));
         Bindings.bind(levelComboBox, new SelectionInList<String>(getLevels(), beanAdapter.getPropertyModel("level")));
         Bindings.bind(messageTextArea, beanAdapter.getPropertyModel("message"));
@@ -49,6 +53,7 @@ public class MatchConfigForm {
         ListModelUpdater<MatchConfig> listModelUpdater = new ListModelUpdater<MatchConfig>(listModel);
         exceptions.addValueChangeListener(listModelUpdater);
         ignorePatterns.setModel(listModel);
+        beanAdapter.addBeanChangeListener(new ApplyEnvironmentAdapter());
     }
 
     private List<String> getLevels() {
@@ -78,10 +83,10 @@ public class MatchConfigForm {
         showMessageCheckBox.setSelected(value);
     }
 
-    public void setLogSettingsList(ValueModel settingsModel) {
-        this.settingsModel = settingsModel;
+    public void setEnvironments(ValueModel environmentsModel) {
+        this.environmentsModel = environmentsModel;
         updateSettings();
-        settingsModel.addValueChangeListener(new SettingsListener());
+        environmentsModel.addValueChangeListener(new EnvironmentListener());
     }
 
     @SuppressWarnings("unchecked")
@@ -89,24 +94,54 @@ public class MatchConfigForm {
         for (Component component : applyFor.getComponents()) {
             applyFor.remove(component);
         }
-        List<Environment> settings = (List<Environment>) settingsModel.getValue();
-        if (settings == null) {
-            settings = new ArrayList<Environment>();
+        List<Environment> environments = (List<Environment>) environmentsModel.getValue();
+        if (environments == null) {
+            environments = new ArrayList<Environment>();
         }
-        boolean visible = settings.size() > 1;
+        boolean visible = environments.size() > 1;
         applyFor.setVisible(visible);
         applyForLabel.setVisible(visible);
-        for (Environment config : settings) {
-            JCheckBox checkbox = new JCheckBox(config.getName());
+        for (Environment environment : environments) {
+            JCheckBox checkbox = new JCheckBox(environment.getName());
+            checkbox.putClientProperty(ENVIRONMENT, environment);
+            if (beanAdapter != null) {
+                checkbox.setSelected(environment.getMatchConfigs().contains(beanAdapter.getBean()));
+            }
+            checkbox.addItemListener(new EnvironmentEnableListener());
             applyFor.add(checkbox);
         }
     }
 
 
-    private class SettingsListener implements PropertyChangeListener {
+    private class EnvironmentListener implements PropertyChangeListener {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
             updateSettings();
+        }
+    }
+
+    private class ApplyEnvironmentAdapter implements BeanChangeListener<MatchConfig> {
+        @Override
+        public void onBeanSet(MatchConfig newBean) {
+            for (Component component : applyFor.getComponents()) {
+                JCheckBox checkBox = (JCheckBox) component;
+                Environment environment = (Environment) checkBox.getClientProperty(ENVIRONMENT);
+                checkBox.setSelected(environment.getMatchConfigs().contains(newBean));
+            }
+        }
+    }
+
+    private class EnvironmentEnableListener implements ItemListener {
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            JCheckBox checkBox = (JCheckBox) e.getSource();
+            Environment environment = (Environment) checkBox.getClientProperty(ENVIRONMENT);
+            if (checkBox.isSelected()) {
+                environment.getMatchConfigs().add(beanAdapter.getBean());
+            } else {
+                environment.getMatchConfigs().remove(beanAdapter.getBean());
+            }
         }
     }
 }

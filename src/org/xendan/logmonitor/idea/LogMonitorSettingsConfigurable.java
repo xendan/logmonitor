@@ -489,8 +489,8 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             form = new MatchConfigForm();
             matchConfigPanel.setLayout(new BoxLayout(matchConfigPanel, BoxLayout.PAGE_AXIS));
             matchConfigPanel.add(form.contentPanel);
-            form.setBeanAdapter(beanAdapter);
-            form.setLogSettingsList(configAdapter.getPropertyModel(ENVIRONMENTS));
+            form.setBeanAdapters(beanAdapter);
+            form.setEnvironments(configAdapter.getPropertyModel(ENVIRONMENTS));
             setPanelEnabled(itemPanel, false);
             form.hideException();
         }

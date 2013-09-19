@@ -4,7 +4,9 @@ import com.jgoodies.binding.beans.BeanAdapter;
 import com.jgoodies.binding.value.AbstractValueModel;
 import com.jgoodies.binding.value.ValueModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,6 +16,7 @@ import java.util.Map;
 public class VerboseBeanAdapter<T>  {
     private final BeanAdapter<T> adapter;
     private Map<String, VerboseModel> models = new HashMap<String, VerboseModel>();
+    private List<BeanChangeListener<T>> listeners = new ArrayList<BeanChangeListener<T>>();
 
     public VerboseBeanAdapter(T bean) {
         adapter = new BeanAdapter<T>(bean);
@@ -21,6 +24,10 @@ public class VerboseBeanAdapter<T>  {
 
     public T getBean() {
         return adapter.getBean();
+    }
+
+    public void addBeanChangeListener(BeanChangeListener<T> listener) {
+        listeners.add(listener);
     }
 
     public ValueModel getPropertyModel(String property) {
@@ -33,6 +40,9 @@ public class VerboseBeanAdapter<T>  {
 
     public void setBean(T newBean) {
         adapter.setBean(newBean);
+        for (BeanChangeListener listener : listeners) {
+            listener.onBeanSet(newBean);
+        }
         for (VerboseModel model : models.values()) {
             model.fireChanged(model.getValue(), null);
         }
@@ -61,4 +71,5 @@ public class VerboseBeanAdapter<T>  {
             firePropertyChange("value", oldValue, newValue);
         }
     }
+
 }
