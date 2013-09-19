@@ -1,12 +1,10 @@
-TODO:
-- add patterns
-- add projects
-
 FIX
 - add all data patterns
 - modify YYY pattern
 
 IMPROVEMENTs
+- add validation
 - add log4j test
-- generating server side script
+- (?) generating server side script
+- add db config!
 - load settigns from server!
