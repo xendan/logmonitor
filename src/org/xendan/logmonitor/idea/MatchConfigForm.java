@@ -88,7 +88,11 @@ public class MatchConfigForm {
         for (Component component : applyFor.getComponents()) {
             applyFor.remove(component);
         }
-        for (LogSettings config : (List<LogSettings>) settingsModel.getValue()) {
+        List<LogSettings> settings = (List<LogSettings>) settingsModel.getValue();
+        boolean visible = settings.size() > 1;
+        applyFor.setVisible(visible);
+        applyForLabel.setVisible(visible);
+        for (LogSettings config : settings) {
             JCheckBox checkbox = new JCheckBox(config.getName());
             applyFor.add(checkbox);
         }

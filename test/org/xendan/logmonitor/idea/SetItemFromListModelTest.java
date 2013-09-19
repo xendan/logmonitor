@@ -61,7 +61,7 @@ public class SetItemFromListModelTest {
         nameField.setText(newBean);
 
         assertEquals(newBean, ((TestBean)itemsList.getModel().getElementAt(2)).getName());
-        assertFalse(nameField.isEnabled());
+        assertTrue(nameField.isEnabled());
 
         //remove
         itemsList.setSelectedValue(b2, false);
@@ -102,6 +102,25 @@ public class SetItemFromListModelTest {
 
         public void setName(String name) {
             this.name = name;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            if (!super.equals(o)) return false;
+
+            TestBean testBean = (TestBean) o;
+
+            return !(name != null ? !name.equals(testBean.name) : testBean.name != null);
+
+        }
+
+        @Override
+        public int hashCode() {
+            int result = super.hashCode();
+            result = 31 * result + (name != null ? name.hashCode() : 0);
+            return result;
         }
     }
 }

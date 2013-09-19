@@ -191,7 +191,15 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         projectComboBox.setSelectedItem(configForProject);
         setProjectButtonCreate();
         projectNameTextField.setText("");
+        setMatchConfigEnabled(false);
     }
+
+    private void setMatchConfigEnabled(boolean enabled) {
+        addPatternButton.setEnabled(enabled);
+        removePatternButton.setEnabled(enabled);
+        paternsList.setEnabled(enabled);
+    }
+
 
     private LogMonitorConfiguration findConfigForProject(List<LogMonitorConfiguration> configs) {
         for (LogMonitorConfiguration config : configs) {
@@ -299,6 +307,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         @Override
         protected void onItemSet() {
             servers.setValue(getServers());
+            setMatchConfigEnabled(true);
         }
 
         @Override

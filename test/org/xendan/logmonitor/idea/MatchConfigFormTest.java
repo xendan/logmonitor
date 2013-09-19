@@ -29,6 +29,7 @@ public class MatchConfigFormTest {
         settings.add(new LogSettings());
         settings.add(new LogSettings());
 
+        settingsValue.setValue(settings);
         assertTrue("Expect for two settings apply visible", form.applyForLabel.isVisible());
     }
 }

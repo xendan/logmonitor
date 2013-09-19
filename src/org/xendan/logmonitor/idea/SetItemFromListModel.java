@@ -1,7 +1,10 @@
 package org.xendan.logmonitor.idea;
 
+import com.intellij.ui.JBColor;
+import com.intellij.ui.ListCellRendererWrapper;
 import com.jgoodies.binding.list.ArrayListModel;
 import com.jgoodies.binding.value.ValueModel;
+import org.apache.commons.lang.StringUtils;
 import org.xendan.logmonitor.model.BaseObject;
 
 import javax.swing.*;
@@ -50,6 +53,7 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         removeButton.setEnabled(false);
         removeButton.addActionListener(new RemoveButtonActionListener());
         itemsList.addListSelectionListener(new ItemListSelectionListener());
+        itemsList.setCellRenderer(new NewReneder());
         setPanelEnabled(itemPanel, false);
         ArrayListModel<T> listModel = new ArrayListModel<T>((Collection) listValueModel.getValue());
         listModelUpdater = new ListModelUpdater(listModel);
@@ -177,6 +181,19 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
             listModel.fireContentsChanged(itemsList.getSelectedIndex());
+        }
+    }
+
+    private class NewReneder extends ListCellRendererWrapper<T> {
+
+        @Override
+        public void customize(JList jList, T t, int i, boolean b, boolean b2) {
+            if (StringUtils.isEmpty(t.toString())) {
+                setText("New...");
+                setForeground(JBColor.GRAY);
+            } else {
+                setText(t.toString());
+            }
         }
     }
 }
