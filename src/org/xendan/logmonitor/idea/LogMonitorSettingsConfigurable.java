@@ -14,12 +14,13 @@ import com.jgoodies.binding.value.ValueHolder;
 import com.jgoodies.binding.value.ValueModel;
 import com.jgoodies.common.collect.ArrayListModel;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Level;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
-import org.xendan.logmonitor.model.LogMonitorConfiguration;
-import org.xendan.logmonitor.model.LogSettings;
+import org.xendan.logmonitor.model.Configuration;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.model.Server;
 import org.xendan.logmonitor.read.ReaderScheduler;
@@ -40,15 +41,15 @@ import java.util.List;
  * Date: 03/09/13
  */
 public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll {
-    public static final String LOG_SETTINGS = "logSettings";
+    public static final String ENVIRONMENTS = "environments";
     private final Serializer serializer;
     private final LogMonitorSettingsDao logMonitorSettignsDao;
     private final ReaderScheduler scheduler;
     private final Project project;
-    final LogSettingsModel logSettingsModel;
+    final EnvironmentsModel environmentsModel;
     final MatchConfigModel matchConfigModel;
-    private final ArrayListModel<LogMonitorConfiguration> configsModel;
-    private List<LogMonitorConfiguration> initialConfigs;
+    private final ArrayListModel<Configuration> configsModel;
+    private List<Configuration> initialConfigs;
     private JPanel contentPanel;
     private JButton removeLogSettingsButton;
 
@@ -63,31 +64,31 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     JList logSettingsList;
     JComboBox serverComboBox;
     JPanel serverPanel;
-    private JButton saveLogSettingsButton;
     JTextField serverHostTextField;
     JTextField serverLoginTextField;
     JPasswordField serverPasswordField;
-    JTextField keyFiletextField;
-    JButton selectFileButton;
+    JTextField keyFileTextField;
+    JButton selectKeyFileButton;
     private JLabel serverLabel;
     private JLabel pathLabel;
     private JButton patternUp;
     private JButton patternDown;
     JTextField logSettingsNametextField;
-    private JButton addProjectButton;
-    private JTextField projectNameTextField;
+    JButton addProjectButton;
+    JTextField projectNameTextField;
     private JLabel logSettingsLabel;
     private JPanel serverPanelBig;
     private JSpinner updateIntervalSpinner;
-    private JButton broswsLogButton;
+    private JButton browsLogButton;
     private JPasswordField serverPastPhrsePasswordField;
     private JLabel updateIntrevalLabel;
     JList paternsList;
     private JPanel matchConfigPanel;
     private JPanel logSettingsPanel;
+    JButton projectRemoveButton;
     private static final Server ADD_NEW = new Server("Add new...", -2);
     public static final Server LOCALHOST = new Server("localhost", -1);
-    final VerboseBeanAdapter<LogMonitorConfiguration> configAdapter;
+    final VerboseBeanAdapter<Configuration> configAdapter;
 
     public LogMonitorSettingsConfigurable(Project project) {
         this(project,
@@ -102,9 +103,9 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         this.scheduler = readerScheduler;
         this.project = project;
 
-        this.configAdapter = new VerboseBeanAdapter<LogMonitorConfiguration>(new LogMonitorConfiguration());
-        configsModel = new ArrayListModel<LogMonitorConfiguration>(logMonitorSettignsDao.getConfigs());
-        logSettingsModel = new LogSettingsModel();
+        this.configAdapter = new VerboseBeanAdapter<Configuration>(new Configuration());
+        configsModel = new ArrayListModel<Configuration>(logMonitorSettignsDao.getConfigs());
+        environmentsModel = new EnvironmentsModel();
         matchConfigModel = new MatchConfigModel();
         init();
 
@@ -112,11 +113,24 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
     private void init() {
         addProjectButton.addActionListener(new AddProjectActionListener());
-        broswsLogButton.addActionListener(new BrowseLogButtonActionListener());
+        projectRemoveButton.addActionListener(new RemoveProjectListener());
+        browsLogButton.addActionListener(new BrowseLogButtonActionListener());
+        selectKeyFileButton.addActionListener(new KeyFileSelectionListener());
         projectComboBox.setRenderer(new ConfigProjectRenderer());
         ValueHolder configSelection = new ValueHolder();
-        Bindings.bind(projectComboBox, new SelectionInList<LogMonitorConfiguration>((ListModel) configsModel, configSelection));
+        Bindings.bind(projectComboBox, new SelectionInList<Configuration>((ListModel) configsModel, configSelection));
+        Bindings.bind(patternTextField, configAdapter.getPropertyModel("logPattern"));
         configSelection.addValueChangeListener(new ConfigChangeListener());
+
+        List<Configuration> configs = logMonitorSettignsDao.getConfigs();
+        initialConfigs = new ArrayList<Configuration>();
+        Configuration configForProject = findConfigForProject(configs);
+        if (configForProject == null) {
+            configForProject = new Configuration();
+            configForProject.setProjectName(project.getName());
+            initialConfigs.add(configForProject);
+        }
+        initialConfigs.addAll(configs);
     }
 
     @NotNull
@@ -127,7 +141,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
 
     private void resetInitial() {
-        initialConfigs = serializer.doCopy(new ArrayList<LogMonitorConfiguration>(configsModel));
+        initialConfigs = serializer.doCopy(new ArrayList<Configuration>(configsModel));
     }
 
     @Nullable
@@ -157,52 +171,52 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
     @Override
     public boolean isModified() {
-        return !initialConfigs.equals(new ArrayList<LogMonitorConfiguration>(configsModel));
+        return !initialConfigs.equals(new ArrayList<Configuration>(configsModel));
     }
 
     @Override
     public void apply() throws ConfigurationException {
+        environmentsModel.onItemCommit();
+        matchConfigModel.onItemCommit();
         resetInitial();
         logMonitorSettignsDao.save(configsModel);
         scheduler.reload();
     }
 
-    private LogMonitorConfiguration selectedConfig() {
-        return configAdapter.getBean();
-    }
 
     @Override
     public void reset() {
-        resetInitial();
-        refresh();
-    }
-
-    protected void refresh() {
-        patternTextField.setText(selectedConfig().getLogPattern());
-        List<LogMonitorConfiguration> configs = logMonitorSettignsDao.getConfigs();
         configsModel.clear();
-        LogMonitorConfiguration configForProject = findConfigForProject(configs);
-        if (configForProject == null) {
-            configForProject = new LogMonitorConfiguration();
-            configForProject.setProjectName(project.getName());
-            configsModel.add(configForProject);
-        }
-        configsModel.addAll(configs);
-        projectComboBox.setSelectedItem(configForProject);
+        configsModel.addAll(serializer.doCopy(initialConfigs));
+        projectComboBox.setSelectedItem(findConfigForProject());
         setProjectButtonCreate();
         projectNameTextField.setText("");
+        environmentsModel.disableItemPanel();
+        matchConfigModel.disableItemPanel();
         setMatchConfigEnabled(false);
+    }
+
+    private Configuration findConfigForProject() {
+        for (Configuration config : configsModel) {
+            if (project.getName().equals(config.getProjectName())) {
+                return config;
+            }
+
+        }
+        return null;
     }
 
     private void setMatchConfigEnabled(boolean enabled) {
         addPatternButton.setEnabled(enabled);
         removePatternButton.setEnabled(enabled);
         paternsList.setEnabled(enabled);
+        patternUp.setEnabled(enabled);
+        patternDown.setEnabled(enabled);
     }
 
 
-    private LogMonitorConfiguration findConfigForProject(List<LogMonitorConfiguration> configs) {
-        for (LogMonitorConfiguration config : configs) {
+    private Configuration findConfigForProject(List<Configuration> configs) {
+        for (Configuration config : configs) {
             if (config.getProjectName().equals(project.getName())) {
                return config;
             }
@@ -216,7 +230,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
     private void setProjectButtonCreate() {
         projectNameTextField.setVisible(false);
-        addProjectButton.setText("Create new");
+        addProjectButton.setText("New project");
     }
 
 
@@ -225,12 +239,11 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         @Override
         public void actionPerformed(ActionEvent e) {
             if (projectNameTextField.isVisible()) {
-                LogMonitorConfiguration config = new LogMonitorConfiguration();
-                String name = projectNameTextField.getName();
-                config.setProjectName(name);
-                refresh();
-                projectComboBox.setSelectedItem(name);
-
+                Configuration config = new Configuration();
+                config.setProjectName(projectNameTextField.getText());
+                configsModel.add(config);
+                projectComboBox.setSelectedItem(config);
+                setProjectButtonCreate();
             } else {
                 projectNameTextField.setVisible(true);
                 addProjectButton.setText("Add project");
@@ -241,14 +254,10 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private class BrowseLogButtonActionListener implements ActionListener, LogChooseListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            Server server = logSettingsModel.getSelected().getServer();
-            if (server == null) {
-                final JFileChooser fc = new JFileChooser();
-                fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
-                int returnVal = fc.showOpenDialog(contentPanel);
-
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    File file = fc.getSelectedFile();
+            Server server = environmentsModel.getSelected().getServer();
+            if (isLocalHost(server)) {
+                File file = selectFile();
+                if (file != null) {
                     pathTextField.setText(file.getAbsolutePath());
                 }
             } else {
@@ -267,17 +276,27 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         }
     }
 
-    class LogSettingsModel extends SetItemFromListModel<LogSettings> {
+    private File selectFile() {
+        final JFileChooser fc = new JFileChooser();
+        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        int returnVal = fc.showOpenDialog(contentPanel);
+        boolean selected = returnVal == JFileChooser.APPROVE_OPTION;
+        return selected ? fc.getSelectedFile() : null;
+    }
+
+    class EnvironmentsModel extends SetItemFromListModel<Environment> {
+        public static final String GENERAL_ERROR = "General Error";
+        public static final int DEFAULT_TIME_MIN = 10;
         private ValueModel servers;
         private VerboseBeanAdapter<Server> serverAdapter = new VerboseBeanAdapter<Server>(new Server());
 
-        public LogSettingsModel() {
-            super(addLogSettingsButton, removeLogSettingsButton, logSettingsPanel, logSettingsList, configAdapter.getPropertyModel(LOG_SETTINGS), "name");
+        public EnvironmentsModel() {
+            super(addLogSettingsButton, removeLogSettingsButton, logSettingsPanel, logSettingsList, configAdapter.getPropertyModel(ENVIRONMENTS), "name");
         }
 
 
         @Override
-        protected void bind(VerboseBeanAdapter<LogSettings> beanAdapter) {
+        protected void bind(VerboseBeanAdapter<Environment> beanAdapter) {
             servers = new ValueHolder(getServers(), true);
             serverAdapter = new VerboseBeanAdapter<Server>(new Server());
             Bindings.bind(logSettingsNametextField, beanAdapter.getPropertyModel("name"));
@@ -288,12 +307,12 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             Bindings.bind(serverHostTextField, serverAdapter.getPropertyModel("host"));
             Bindings.bind(serverLoginTextField, serverAdapter.getPropertyModel("login"));
             Bindings.bind(serverPasswordField, serverAdapter.getPropertyModel("password"));
-            Bindings.bind(keyFiletextField, serverAdapter.getPropertyModel("keyPath"));
+            Bindings.bind(keyFileTextField, serverAdapter.getPropertyModel("keyPath"));
             Bindings.bind(serverPastPhrsePasswordField, serverAdapter.getPropertyModel("passPhrase"));
 
             ValueModel   levelModel   = beanAdapter.getPropertyModel("updateInterval");
-            SpinnerModel spinnerModel = new SpinnerNumberModel(9, 0, 1000, 1);
-            SpinnerAdapterFactory.connect(spinnerModel, levelModel, 10);
+            SpinnerModel spinnerModel = new SpinnerNumberModel(DEFAULT_TIME_MIN, 1, 1000, 1);
+            SpinnerAdapterFactory.connect(spinnerModel, levelModel, DEFAULT_TIME_MIN);
             updateIntervalSpinner.setModel(spinnerModel);
         }
 
@@ -305,15 +324,72 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         }
 
         @Override
+        protected Environment initBean(Environment environment) {
+            boolean addDefault = true;
+            for (Environment other : configAdapter.getBean().getEnvironments()) {
+                if (other != environment) {
+                    for (MatchConfig matchConfig : other.getMatchConfigs()) {
+                        if (!environment.getMatchConfigs().contains(matchConfig)) {
+                            environment.getMatchConfigs().add(matchConfig);
+                            if (Level.ERROR.toString().equals(matchConfig.getLevel())
+                                    && StringUtils.isEmpty(matchConfig.getMessage())
+                                    && GENERAL_ERROR.equals(matchConfig.getName())) {
+                                addDefault = false;
+                            }
+                        }
+                    }
+                }
+            }
+            if (addDefault) {
+                MatchConfig defConfig = new MatchConfig();
+                defConfig.setName(GENERAL_ERROR);
+                defConfig.setLevel(Level.ERROR.toString());
+                defConfig.setUseArchive(true);
+                defConfig.setShowNotification(true);
+                environment.getMatchConfigs().add(defConfig);
+            }
+            environment.setUpdateInterval(DEFAULT_TIME_MIN);
+            return environment;
+        }
+
+        @Override
         protected void onItemSet() {
             servers.setValue(getServers());
             setMatchConfigEnabled(true);
         }
 
         @Override
-        protected boolean isInvalid(LogSettings item) {
+        protected void onItemCommit() {
+            super.onItemCommit();
+            for (int i = 0; i < logSettingsList.getModel().getSize(); i++) {
+                 Environment settings = (Environment) logSettingsList.getModel().getElementAt(i);
+                 Server server = settings.getServer();
+                 if (isLocalHost(server)) {
+                       settings.setServer(null);
+                 }
+
+            }
+
+        }
+
+        @Override
+        protected boolean isInvalid(Environment item) {
             return StringUtils.isEmpty(item.getName())
                     || StringUtils.isEmpty(item.getPath());
+        }
+
+        private List<Server> getServers() {
+            List<Server> servers = new ArrayList<Server>();
+            servers.add(ADD_NEW);
+            servers.add(LOCALHOST);
+            for (Configuration config : configsModel) {
+                for (Environment environment : config.getEnvironments()) {
+                    if (environment.getServer() != null) {
+                        servers.add(environment.getServer());
+                    }
+                }
+            }
+            return servers;
         }
 
 
@@ -325,19 +401,11 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         }
     }
 
-    private List<Server> getServers() {
-        List<Server> servers = new ArrayList<Server>();
-        servers.add(ADD_NEW);
-        servers.add(LOCALHOST);
-        for (LogMonitorConfiguration config : configsModel) {
-            for (LogSettings logSettings : config.getLogSettings()) {
-                if (logSettings.getServer() != null) {
-                    servers.add(logSettings.getServer());
-                }
-            }
-        }
-        return servers;
+    private boolean isLocalHost(Server server) {
+        return server == null || StringUtils.isEmpty(server.getHost()) ||
+                LOCALHOST.getHost().equals(server.getHost()) || "127.0.0.1".equals(server.getHost());
     }
+
 
     private class ServerInListModel extends AbstractConverter implements PropertyChangeListener {
 
@@ -393,7 +461,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private class ConfigChangeListener implements PropertyChangeListener {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
-            configAdapter.setBean((LogMonitorConfiguration) evt.getNewValue());
+            configAdapter.setBean((Configuration) evt.getNewValue());
         }
     }
 
@@ -402,8 +470,8 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
         @Override
         public void customize(JList jList, Object o, int i, boolean b, boolean b2) {
-            if (o instanceof LogMonitorConfiguration) {
-                setText(((LogMonitorConfiguration)o).getProjectName());
+            if (o instanceof Configuration) {
+                setText(((Configuration) o).getProjectName());
             }
         }
     }
@@ -413,7 +481,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         private MatchConfigForm form;
 
         public MatchConfigModel() {
-            super(addPatternButton, removePatternButton, matchConfigPanel, paternsList, logSettingsModel.getBeanModel("matchConfigs"), "name");
+            super(addPatternButton, removePatternButton, matchConfigPanel, paternsList, environmentsModel.getBeanModel("matchConfigs"), "name");
         }
 
         @Override
@@ -422,7 +490,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             matchConfigPanel.setLayout(new BoxLayout(matchConfigPanel, BoxLayout.PAGE_AXIS));
             matchConfigPanel.add(form.contentPanel);
             form.setBeanAdapter(beanAdapter);
-            form.setLogSettingsList(configAdapter.getPropertyModel(LOG_SETTINGS));
+            form.setLogSettingsList(configAdapter.getPropertyModel(ENVIRONMENTS));
             setPanelEnabled(itemPanel, false);
             form.hideException();
         }
@@ -432,12 +500,28 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             super.onNewClicked();
             form.setIsArchive(true);
             form.setShowNotification(true);
-
         }
 
         @Override
         protected boolean isInvalid(MatchConfig item) {
             return StringUtils.isEmpty(item.getName());
+        }
+    }
+
+    private class RemoveProjectListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            configsModel.remove(projectComboBox.getSelectedItem());
+        }
+    }
+
+    private class KeyFileSelectionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            File file = selectFile();
+            if (file != null) {
+                keyFileTextField.setText(file.getAbsolutePath());
+            }
         }
     }
 }

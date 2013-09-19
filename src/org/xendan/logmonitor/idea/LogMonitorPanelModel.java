@@ -2,9 +2,9 @@ package org.xendan.logmonitor.idea;
 
 import org.xendan.logmonitor.dao.LogEntryDao;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
+import org.xendan.logmonitor.model.Configuration;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.LogMonitorConfiguration;
-import org.xendan.logmonitor.model.LogSettings;
 import org.xendan.logmonitor.model.MatchConfig;
 
 import javax.swing.tree.*;
@@ -25,21 +25,21 @@ public class LogMonitorPanelModel {
 
     public TreeModel getTreeModel() {
         DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-        for (LogMonitorConfiguration logMonitorConfiguration : logMonitorSettingsDao.getConfigs()) {
-            root.add(createConfigNode(logMonitorConfiguration));
+        for (Configuration configuration : logMonitorSettingsDao.getConfigs()) {
+            root.add(createConfigNode(configuration));
         }
         return new DefaultTreeModel(root);
     }
 
-    private MutableTreeNode createConfigNode(LogMonitorConfiguration logMonitorConfiguration) {
-        DefaultMutableTreeNode configNode  = new DefaultMutableTreeNode(logMonitorConfiguration.getProjectName());
-        for (LogSettings settings : logMonitorConfiguration.getLogSettings()) {
+    private MutableTreeNode createConfigNode(Configuration configuration) {
+        DefaultMutableTreeNode configNode  = new DefaultMutableTreeNode(configuration.getProjectName());
+        for (Environment settings : configuration.getEnvironments()) {
             configNode.add(createSettingsNode(settings));
         }
         return configNode;
     }
 
-    private MutableTreeNode createSettingsNode(LogSettings settings) {
+    private MutableTreeNode createSettingsNode(Environment settings) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(settings);
         for (MatchConfig matchConfig : settings.getMatchConfigs()) {
             node.add(createMatchNode(matchConfig));
@@ -87,13 +87,13 @@ public class LogMonitorPanelModel {
 
     public void addMatchConfig(MatchConfig matcher, TreePath treePath) {
         LogEntry entry = getEntry(treePath);
-        LogSettings settings = getSettings(treePath);
+        Environment settings = getSettings(treePath);
         if (entry != null) {
             logEntryDao.addMatchConfig(matcher, entry.getMatchConfig(), settings);
         }
     }
 
-    private LogSettings getSettings(TreePath path) {
+    private Environment getSettings(TreePath path) {
         if (path == null) {
             return null;
         }
@@ -101,8 +101,8 @@ public class LogMonitorPanelModel {
             Object component = path.getPathComponent(i);
             if (component instanceof DefaultMutableTreeNode) {
                 Object obj = ((DefaultMutableTreeNode) component).getUserObject();
-                if (obj instanceof LogSettings) {
-                    return (LogSettings) obj;
+                if (obj instanceof Environment) {
+                    return (Environment) obj;
                 }
             }
 
@@ -112,7 +112,7 @@ public class LogMonitorPanelModel {
     }
 
     public void clearAll(TreePath selectedPath) {
-        LogSettings settings = getSettings(selectedPath);
+        Environment settings = getSettings(selectedPath);
         if (settings != null) {
             logEntryDao.clearEntries(settings);
         }

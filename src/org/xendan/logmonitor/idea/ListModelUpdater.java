@@ -7,9 +7,9 @@ import java.beans.PropertyChangeListener;
 import java.util.Collection;
 
 /**
-* User: id967161
-* Date: 18/09/13
-*/
+ * User: id967161
+ * Date: 18/09/13
+ */
 class ListModelUpdater<T> implements PropertyChangeListener {
     private final ArrayListModel<T> listModel;
     private boolean ignoreItemSelection;
@@ -21,8 +21,11 @@ class ListModelUpdater<T> implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ignoreItemSelection = true;
-        listModel.clear();
-        listModel.addAll((Collection<? extends T>) evt.getNewValue());
+        Collection<? extends T> newItems = (Collection<? extends T>) evt.getNewValue();
+        if (newItems != null) {
+            listModel.clear();
+            listModel.addAll(newItems);
+        }
         ignoreItemSelection = false;
     }
 

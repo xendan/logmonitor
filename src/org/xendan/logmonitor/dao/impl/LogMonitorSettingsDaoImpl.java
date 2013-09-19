@@ -46,18 +46,18 @@ public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
     }
 
 
-    private void initMatcherException(LogMonitorConfiguration logMonitorConfiguration) {
-        for (LogSettings logSettings : logMonitorConfiguration.getLogSettings()) {
-            for (MatchConfig matchConfig : logSettings.getMatchConfigs()) {
+    private void initMatcherException(Configuration configuration) {
+        for (Environment environment : configuration.getEnvironments()) {
+            for (MatchConfig matchConfig : environment.getMatchConfigs()) {
                 matchConfig.getExceptions().size();
             }
         }
     }
 
     @Override
-    public List<LogMonitorConfiguration> getConfigs() {
-        List<LogMonitorConfiguration> configs = getAll(LogMonitorConfiguration.class);
-        for (LogMonitorConfiguration configuration : configs) {
+    public List<Configuration> getConfigs() {
+        List<Configuration> configs = getAll(Configuration.class);
+        for (Configuration configuration : configs) {
             initMatcherException(configuration);
         }
         return configs;
@@ -70,9 +70,9 @@ public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
     }
 
     @Override
-    public void save(List<LogMonitorConfiguration> configs) {
+    public void save(List<Configuration> configs) {
         entityManager.getTransaction().begin();
-        for (LogMonitorConfiguration config : configs) {
+        for (Configuration config : configs) {
             entityManager.merge(config);
         }
         entityManager.getTransaction().commit();
@@ -99,8 +99,8 @@ public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
                 metadata.setName(persistenceUnitName);
                 metadata.setTransactionType(PersistenceUnitTransactionType.RESOURCE_LOCAL);
                 metadata.setClasses(Arrays.asList(
-                        LogMonitorConfiguration.class.getName(),
-                        LogSettings.class.getName(),
+                        Configuration.class.getName(),
+                        Environment.class.getName(),
                         MatchConfig.class.getName(),
                         Server.class.getName(),
                         LogEntry.class.getName())

@@ -6,8 +6,8 @@ import org.xendan.logmonitor.dao.LogEntryDao;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
 import org.xendan.logmonitor.idea.LogMonitorPanel;
 import org.xendan.logmonitor.idea.LogMonitorPanelModel;
-import org.xendan.logmonitor.model.LogMonitorConfiguration;
-import org.xendan.logmonitor.model.LogSettings;
+import org.xendan.logmonitor.model.Configuration;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.parser.DownloadAndParse;
 
 import java.util.Timer;
@@ -44,9 +44,9 @@ public class ReaderScheduler {
     public void reload() {
         timer.cancel();
         timer = new Timer();
-        for (LogMonitorConfiguration configuration : dao.getConfigs()) {
-            for (LogSettings logSettings : configuration.getLogSettings()) {
-                timer.scheduleAtFixedRate(new DownloadAndParse(configuration.getLogPattern(), logSettings, logEntryDao, logMonitorPanel), 0, logSettings.getUpdateInterval() * 60 * 1000);
+        for (Configuration configuration : dao.getConfigs()) {
+            for (Environment environment : configuration.getEnvironments()) {
+                timer.scheduleAtFixedRate(new DownloadAndParse(configuration.getLogPattern(), environment, logEntryDao, logMonitorPanel), 0, environment.getUpdateInterval() * 60 * 1000);
             }
         }
         inited = true;

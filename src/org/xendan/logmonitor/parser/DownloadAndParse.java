@@ -2,8 +2,8 @@ package org.xendan.logmonitor.parser;
 
 import org.xendan.logmonitor.dao.LogEntryDao;
 import org.xendan.logmonitor.idea.LogMonitorPanel;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.LogSettings;
 import org.xendan.logmonitor.read.LogDownloader;
 
 import java.util.TimerTask;
@@ -16,11 +16,11 @@ public class DownloadAndParse extends TimerTask {
     private final LogEntryDao logEntryDao;
     private final LogMonitorPanel panel;
     private final String logPattern;
-    private final LogSettings logSettings;
+    private final Environment environment;
 
-    public DownloadAndParse(String logPattern, LogSettings logSettings, LogEntryDao logEntryDao, LogMonitorPanel panel) {
+    public DownloadAndParse(String logPattern, Environment environment, LogEntryDao logEntryDao, LogMonitorPanel panel) {
         this.logPattern = logPattern;
-        this.logSettings = logSettings;
+        this.environment = environment;
         this.logEntryDao = logEntryDao;
         this.panel = panel;
     }
@@ -28,10 +28,10 @@ public class DownloadAndParse extends TimerTask {
     @Override
     public void run() {
         DateParser dateParser = new DateParser();
-        LogEntry lastEntry = logEntryDao.getLastEntry(logSettings);
+        LogEntry lastEntry = logEntryDao.getLastEntry(environment);
         String lastRead = lastEntry == null ? null : dateParser.getDateAsString(logPattern, lastEntry.getDate());
-        String logFile = logSettings.getServer() == null ? logSettings.getPath() : new LogDownloader(logSettings).downloadToLocal(lastRead);
-        logEntryDao.addEntries(new LogFileParser(logFile, logPattern, logSettings.getMatchConfigs()).getEntries());
+        String logFile = environment.getServer() == null ? environment.getPath() : new LogDownloader(environment).downloadToLocal(lastRead);
+        logEntryDao.addEntries(new LogFileParser(logFile, logPattern, environment.getMatchConfigs()).getEntries());
         panel.refresh();
     }
 }

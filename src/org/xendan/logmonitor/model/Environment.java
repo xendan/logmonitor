@@ -9,7 +9,7 @@ import java.util.List;
  * Date: 03/09/13
  */
 @Entity
-public class LogSettings extends BaseObject {
+public class Environment extends BaseObject {
     private Server server;
     private String path;
     private String name;
@@ -69,7 +69,7 @@ public class LogSettings extends BaseObject {
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
 
-        LogSettings that = (LogSettings) o;
+        Environment that = (Environment) o;
 
         if (updateInterval != that.updateInterval) return false;
         if (matchConfigs != null ? !matchConfigs.equals(that.matchConfigs) : that.matchConfigs != null) return false;

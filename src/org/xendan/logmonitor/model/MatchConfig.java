@@ -16,6 +16,7 @@ import java.util.List;
 public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
     private String level = Level.DEBUG.toString();
     private boolean useArchive;
+    private boolean showNotification;
     private String name;
     private String message;
     private Integer weight;
@@ -83,6 +84,14 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
         return otherWeight - weight;
     }
 
+    public boolean isShowNotification() {
+        return showNotification;
+    }
+
+    public void setShowNotification(boolean showNotification) {
+        this.showNotification = showNotification;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -91,14 +100,14 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
 
         MatchConfig that = (MatchConfig) o;
 
+        if (showNotification != that.showNotification) return false;
         if (useArchive != that.useArchive) return false;
         if (exceptions != null ? !exceptions.equals(that.exceptions) : that.exceptions != null) return false;
         if (level != null ? !level.equals(that.level) : that.level != null) return false;
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
-        if (weight != null ? !weight.equals(that.weight) : that.weight != null) return false;
+        return !(weight != null ? !weight.equals(that.weight) : that.weight != null);
 
-        return true;
     }
 
     @Override
@@ -106,6 +115,7 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
         int result = super.hashCode();
         result = 31 * result + (level != null ? level.hashCode() : 0);
         result = 31 * result + (useArchive ? 1 : 0);
+        result = 31 * result + (showNotification ? 1 : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + (weight != null ? weight.hashCode() : 0);

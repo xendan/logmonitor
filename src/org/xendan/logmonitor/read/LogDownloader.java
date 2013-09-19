@@ -3,7 +3,7 @@ package org.xendan.logmonitor.read;
 import org.apache.tools.ant.taskdefs.optional.ssh.SSHExec;
 import org.apache.tools.ant.taskdefs.optional.ssh.Scp;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.model.LogSettings;
+import org.xendan.logmonitor.model.Environment;
 
 /**
  * User: kcyxa
@@ -14,7 +14,7 @@ public class LogDownloader extends ScpSynchroniser {
     private static final String LAST_LOG = "last.log";
     private final String path;
 
-    public LogDownloader(LogSettings settings) {
+    public LogDownloader(Environment settings) {
         super(settings.getServer());
         path = settings.getPath();
     }

@@ -3,8 +3,8 @@ package org.xendan.logmonitor.dao.impl;
 import com.intellij.openapi.components.ServiceManager;
 import org.xendan.logmonitor.dao.LogEntryDao;
 import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.LogSettings;
 import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.parser.EntryMatcher;
 
@@ -27,7 +27,7 @@ public class LogEntryDaoImpl implements LogEntryDao {
     }
 
     @Override
-    public LogEntry getLastEntry(LogSettings settings) {
+    public LogEntry getLastEntry(Environment settings) {
         List<LogEntry> entries = entityManager.createQuery(
                 "SELECT e FROM LogEntry e where e.matchConfig in (:matchers) ORDER BY e.date DESC ",
                 LogEntry.class)
@@ -50,7 +50,7 @@ public class LogEntryDaoImpl implements LogEntryDao {
     }
 
     @Override
-    public void clearEntries(LogSettings settings) {
+    public void clearEntries(Environment settings) {
         entityManager.getTransaction().begin();
         entityManager.createQuery(
                 "DELETE FROM LogEntry e where e.matchConfig = (:matchers) ")
@@ -60,7 +60,7 @@ public class LogEntryDaoImpl implements LogEntryDao {
     }
 
     @Override
-    public void addMatchConfig(MatchConfig matcher, MatchConfig parentMatcher, LogSettings settings) {
+    public void addMatchConfig(MatchConfig matcher, MatchConfig parentMatcher, Environment settings) {
         entityManager.getTransaction().begin();
         matcher.setWeight(getMaxWeight(settings.getMatchConfigs()) + 1);
         settings.getMatchConfigs().add(matcher);

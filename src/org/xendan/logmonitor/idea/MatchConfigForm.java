@@ -5,7 +5,7 @@ import com.jgoodies.binding.list.ArrayListModel;
 import com.jgoodies.binding.list.SelectionInList;
 import com.jgoodies.binding.value.ValueModel;
 import org.apache.log4j.Level;
-import org.xendan.logmonitor.model.LogSettings;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 
 import javax.swing.*;
@@ -43,6 +43,7 @@ public class MatchConfigForm {
         Bindings.bind(levelComboBox, new SelectionInList<String>(getLevels(), beanAdapter.getPropertyModel("level")));
         Bindings.bind(messageTextArea, beanAdapter.getPropertyModel("message"));
         Bindings.bind(isGeneralCheckBox, beanAdapter.getPropertyModel("useArchive"));
+        Bindings.bind(showMessageCheckBox, beanAdapter.getPropertyModel("showNotification"));
         ValueModel exceptions = beanAdapter.getPropertyModel("exceptions");
         ArrayListModel<MatchConfig> listModel = new ArrayListModel<MatchConfig>((Collection<? extends MatchConfig>) exceptions.getValue());
         ListModelUpdater<MatchConfig> listModelUpdater = new ListModelUpdater<MatchConfig>(listModel);
@@ -88,11 +89,14 @@ public class MatchConfigForm {
         for (Component component : applyFor.getComponents()) {
             applyFor.remove(component);
         }
-        List<LogSettings> settings = (List<LogSettings>) settingsModel.getValue();
+        List<Environment> settings = (List<Environment>) settingsModel.getValue();
+        if (settings == null) {
+            settings = new ArrayList<Environment>();
+        }
         boolean visible = settings.size() > 1;
         applyFor.setVisible(visible);
         applyForLabel.setVisible(visible);
-        for (LogSettings config : settings) {
+        for (Environment config : settings) {
             JCheckBox checkbox = new JCheckBox(config.getName());
             applyFor.add(checkbox);
         }

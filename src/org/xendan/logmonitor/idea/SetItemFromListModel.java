@@ -54,13 +54,17 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         removeButton.addActionListener(new RemoveButtonActionListener());
         itemsList.addListSelectionListener(new ItemListSelectionListener());
         itemsList.setCellRenderer(new NewReneder());
-        setPanelEnabled(itemPanel, false);
+        disableItemPanel();
         ArrayListModel<T> listModel = new ArrayListModel<T>((Collection) listValueModel.getValue());
         listModelUpdater = new ListModelUpdater(listModel);
         listValueModel.addValueChangeListener(listModelUpdater);
         itemsList.setModel(listModel);
         beanAdapter.getPropertyModel(toStringProperty).addValueChangeListener(new ListRefresher(listModel));
         bind(beanAdapter);
+    }
+
+    public void disableItemPanel() {
+        setPanelEnabled(itemPanel, false);
     }
 
     protected void setPanelEnabled(JPanel itemPanel, boolean enabled) {
@@ -74,7 +78,7 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
 
     protected abstract void bind(VerboseBeanAdapter<T> beanAdapter);
 
-    private T newBeanInstance() {
+    protected final T newBeanInstance() {
         Type genericSuperClass = getClass().getGenericSuperclass();
         if (genericSuperClass instanceof ParameterizedType) {
             Type[] genericTypes = ((ParameterizedType) genericSuperClass).getActualTypeArguments();
@@ -98,8 +102,8 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
     }
 
     protected void onNewClicked() {
-        clearInvalid();
-        T newBean = newBeanInstance();
+        onItemCommit();
+        T newBean = initBean(newBeanInstance());
         List<T> items = getItemsList();
         items.add(newBean);
         listValueModel.setValue(items);
@@ -110,7 +114,11 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         setPanelEnabled(itemPanel, true);
     }
 
-    private void clearInvalid() {
+    protected T initBean(T bean) {
+        return bean;
+    }
+
+    protected void onItemCommit() {
         for (T item : getItemsList()) {
             if (isInvalid(item)) {
                 removeItem(item);
@@ -137,7 +145,7 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         @Override
         public void valueChanged(ListSelectionEvent e) {
             if (!listModelUpdater.isIgnoreItemSelection()) {
-                clearInvalid();
+                onItemCommit();
                 applyItemSet();
             }
         }
@@ -158,7 +166,7 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         @Override
         public void actionPerformed(ActionEvent e) {
             removeItem(getSelected());
-            setPanelEnabled(itemPanel, false);
+            disableItemPanel();
         }
     }
 

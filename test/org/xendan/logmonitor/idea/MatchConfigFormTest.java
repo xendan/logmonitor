@@ -3,7 +3,7 @@ package org.xendan.logmonitor.idea;
 import com.jgoodies.binding.value.ValueHolder;
 import com.jgoodies.binding.value.ValueModel;
 import org.junit.Test;
-import org.xendan.logmonitor.model.LogSettings;
+import org.xendan.logmonitor.model.Environment;
 
 import java.util.ArrayList;
 
@@ -19,15 +19,15 @@ public class MatchConfigFormTest {
     public void test_apply() throws Exception {
         MatchConfigForm form = new MatchConfigForm();
 
-        ArrayList<LogSettings> settings = new ArrayList<LogSettings>();
-        settings.add(new LogSettings());
+        ArrayList<Environment> settings = new ArrayList<Environment>();
+        settings.add(new Environment());
         ValueModel settingsValue = new ValueHolder(settings);
         form.setLogSettingsList(settingsValue);
 
         assertFalse("Expect for single settings apply not visible", form.applyForLabel.isVisible());
-        settings = new ArrayList<LogSettings>();
-        settings.add(new LogSettings());
-        settings.add(new LogSettings());
+        settings = new ArrayList<Environment>();
+        settings.add(new Environment());
+        settings.add(new Environment());
 
         settingsValue.setValue(settings);
         assertTrue("Expect for two settings apply visible", form.applyForLabel.isVisible());

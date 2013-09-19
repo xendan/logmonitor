@@ -7,7 +7,6 @@ import javax.persistence.*;
 
 @Entity
 public class LogEntry extends BaseObject {
-    private Long id;
     private LocalDateTime date;
     private String caller;
     private String message;
@@ -15,18 +14,8 @@ public class LogEntry extends BaseObject {
     private Integer lineNumber;
     private String level;
     private MatchConfig matchConfig;
-    private LogSettings logSettings;
+    private Environment environment;
     private int foundNumber;
-
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Column(length = 1000)
     public String getCategory() {
@@ -89,12 +78,12 @@ public class LogEntry extends BaseObject {
     }
 
     @ManyToOne(cascade = {CascadeType.ALL})
-    public LogSettings getLogSettings() {
-        return logSettings;
+    public Environment getEnvironment() {
+        return environment;
     }
 
-    public void setLogSettings(LogSettings logSettings) {
-        this.logSettings = logSettings;
+    public void setEnvironment(Environment environment) {
+        this.environment = environment;
     }
 
     public int getFoundNumber() {
