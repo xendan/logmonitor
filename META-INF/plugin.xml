@@ -21,8 +21,8 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
-      <applicationService serviceInterface="org.xendan.logmonitor.dao.LogMonitorSettingsDao"
-                      serviceImplementation="org.xendan.logmonitor.dao.impl.LogMonitorSettingsDaoImpl"/>
+      <applicationService serviceInterface="org.xendan.logmonitor.dao.ConfigurationDao"
+                      serviceImplementation="org.xendan.logmonitor.dao.impl.ConfigurationDaoImpl"/>
       <applicationService serviceInterface="org.xendan.logmonitor.dao.LogEntryDao"
                       serviceImplementation="org.xendan.logmonitor.dao.impl.LogEntryDaoImpl"/>
 
@@ -32,10 +32,14 @@
       <applicationService serviceInterface="org.xendan.logmonitor.read.ReaderScheduler"
                       serviceImplementation="org.xendan.logmonitor.read.ReaderScheduler"/>
 
-      <applicationService serviceInterface="org.xendan.logmonitor.read.MatcherService"
-                      serviceImplementation="org.xendan.logmonitor.read.MatcherService"/>
       <applicationService serviceInterface="org.xendan.logmonitor.read.Serializer"
                       serviceImplementation="org.xendan.logmonitor.read.Serializer"/>
+
+      <applicationService serviceInterface="org.xendan.logmonitor.service.LogService"
+                      serviceImplementation="org.xendan.logmonitor.service.impl.LogServiceImp"/>
+
+      <applicationService serviceInterface="org.xendan.logmonitor.parser.EntryAddedListener"
+                      serviceImplementation="org.xendan.logmonitor.parser.EntryAddedListener"/>
 
        <projectConfigurable instance="org.xendan.logmonitor.idea.LogMonitorSettingsConfigurable" id="logmonitor.settings" />
 

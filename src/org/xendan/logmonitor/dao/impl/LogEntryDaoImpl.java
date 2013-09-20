@@ -1,8 +1,8 @@
 package org.xendan.logmonitor.dao.impl;
 
 import com.intellij.openapi.components.ServiceManager;
+import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.dao.LogEntryDao;
-import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.model.MatchConfig;
@@ -23,7 +23,7 @@ public class LogEntryDaoImpl implements LogEntryDao {
     private final EntityManager entityManager;
 
     public LogEntryDaoImpl() {
-        this.entityManager = ServiceManager.getService(LogMonitorSettingsDao.class).getEntityManager();
+        this.entityManager = ServiceManager.getService(ConfigurationDao.class).getEntityManager();
     }
 
     @Override

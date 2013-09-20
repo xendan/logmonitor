@@ -41,7 +41,6 @@ public class ServerLogChooser extends JDialog {
             }
         });
 
-// call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
@@ -49,7 +48,6 @@ public class ServerLogChooser extends JDialog {
             }
         });
 
-// call onCancel() on ESCAPE
         contentPane.registerKeyboardAction(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 onCancel();
@@ -72,7 +70,6 @@ public class ServerLogChooser extends JDialog {
     }
 
     private void onCancel() {
-// add your code here if necessary
         dispose();
     }
 

@@ -1,14 +1,11 @@
 package org.xendan.logmonitor.read;
 
-import com.intellij.openapi.components.ServiceManager;
-import com.intellij.openapi.project.Project;
-import org.xendan.logmonitor.dao.LogEntryDao;
-import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
-import org.xendan.logmonitor.idea.LogMonitorPanel;
-import org.xendan.logmonitor.idea.LogMonitorPanelModel;
+import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.parser.DownloadAndParse;
+import org.xendan.logmonitor.parser.EntryAddedListener;
+import org.xendan.logmonitor.service.LogService;
 
 import java.util.Timer;
 
@@ -18,35 +15,25 @@ import java.util.Timer;
  */
 public class ReaderScheduler {
 
-    private final LogMonitorSettingsDao dao;
-    private final LogEntryDao logEntryDao;
+    private final ConfigurationDao dao;
+    private final LogService logService;
+    private final EntryAddedListener listener;
     private Timer timer = new Timer();
     private boolean inited;
-    private final LogMonitorPanel logMonitorPanel;
 
-    public ReaderScheduler() {
-        this(
-                ServiceManager.getService(LogMonitorSettingsDao.class),
-                ServiceManager.getService(LogEntryDao.class),
-                new LogMonitorPanel(new LogMonitorPanelModel(
-                        ServiceManager.getService(LogEntryDao.class),
-                        ServiceManager.getService(LogMonitorSettingsDao.class)
-                ))
-        );
-    }
-
-    public ReaderScheduler(LogMonitorSettingsDao dao, LogEntryDao logEntryDao, LogMonitorPanel logMonitorPanel) {
+    public ReaderScheduler(ConfigurationDao dao, LogService logService, EntryAddedListener listener) {
         this.dao = dao;
-        this.logEntryDao = logEntryDao;
-        this.logMonitorPanel = logMonitorPanel;
+        this.logService = logService;
+        this.listener = listener;
     }
+
 
     public void reload() {
         timer.cancel();
         timer = new Timer();
         for (Configuration configuration : dao.getConfigs()) {
             for (Environment environment : configuration.getEnvironments()) {
-                timer.scheduleAtFixedRate(new DownloadAndParse(configuration.getLogPattern(), environment, logEntryDao, logMonitorPanel), 0, environment.getUpdateInterval() * 60 * 1000);
+                timer.scheduleAtFixedRate(new DownloadAndParse(configuration.getLogPattern(), environment, logService, listener), 0, environment.getUpdateInterval() * 60 * 1000);
             }
         }
         inited = true;
@@ -58,8 +45,4 @@ public class ReaderScheduler {
         }
     }
 
-    public LogMonitorPanel getLogMonitorPanel(Project project) {
-        logMonitorPanel.setProject(project);
-        return logMonitorPanel;
-    }
 }

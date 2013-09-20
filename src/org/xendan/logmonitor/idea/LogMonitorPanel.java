@@ -3,9 +3,15 @@ package org.xendan.logmonitor.idea;
 import com.intellij.execution.impl.ConsoleViewImpl;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.project.Project;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 
 import javax.swing.*;
+import javax.swing.event.HyperlinkEvent;
+import javax.swing.event.HyperlinkListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,30 +29,50 @@ public class LogMonitorPanel implements CreatePatternListener {
     private JPanel consolePanel;
     private JButton createPattern;
     private JButton clearButton;
+    private JScrollPane treePanel;
     private LogMonitorPanelModel model;
-    private Project project;
     private TreePath selectedPath;
+    private JEditorPane linkPanel;
 
-    public LogMonitorPanel(LogMonitorPanelModel model) {
+    public LogMonitorPanel(LogMonitorPanelModel model, Project project) {
         this.model = model;
+        init(project);
+    }
+
+    private void init(Project project) {
         logTree.addMouseListener(new LogDisplayListener());
-    }
-
-    public void refresh() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                logTree.setModel(model.getTreeModel());
-            }
-        });
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
+        treePanel.getViewport().remove(logTree);
+        logTree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Loading...")));
+        linkPanel = new JEditorPane();
+        linkPanel.setContentType("text/html");
+        linkPanel.setText("No configuration found.<a href='http://www.google.com'>Configure...</a>");
+        linkPanel.addHyperlinkListener(new OpenConfigurationListener());
+        linkPanel.setEditable(false);
+        linkPanel.setOpaque(false);
+        treePanel.setViewportView(linkPanel);
         console = new ConsoleViewImpl(project, false);
         consolePanel.setLayout(new BoxLayout(consolePanel, BoxLayout.PAGE_AXIS));
         consolePanel.add(console.getComponent());
         createPattern.addActionListener(new CreatePatternActionListener());
         clearButton.addActionListener(new ClearListener());
+    }
+
+    public void refresh() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                TreeModel treeModel = model.rebuildTreeModel();
+                if (treeModel != null) {
+                    treePanel.getViewport().remove(linkPanel);
+                    treePanel.setViewportView(logTree);
+                    logTree.setModel(treeModel);
+                }
+               
+            }
+        });
+    }
+
+    public void onEntriesAdded(Environment environment) {
+        refresh();
     }
 
 
@@ -87,6 +113,13 @@ public class LogMonitorPanel implements CreatePatternListener {
         public void actionPerformed(ActionEvent e) {
             model.clearAll(selectedPath);
             refresh();
+        }
+    }
+
+    private class OpenConfigurationListener implements HyperlinkListener {
+        @Override
+        public void hyperlinkUpdate(HyperlinkEvent e) {
+            System.out.println("YAHHOO!!!");
         }
     }
 }

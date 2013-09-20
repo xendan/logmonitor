@@ -1,6 +1,5 @@
 package org.xendan.logmonitor.read;
 
-import com.intellij.openapi.components.ServiceManager;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.LogEntry;
 
@@ -16,10 +15,6 @@ public class Serializer {
 
     public static final String ENTRIES_FILE = "entries.bo";
     private final HomeResolver resolver;
-
-    public Serializer() {
-        this(ServiceManager.getService(HomeResolver.class));
-    }
 
     public Serializer(HomeResolver resolver) {
         this.resolver = resolver;

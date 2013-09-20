@@ -34,7 +34,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="5b553" class="javax.swing.JList" binding="logSettingsList">
+          <component id="5b553" class="javax.swing.JList" binding="environmentsList">
             <constraints/>
             <properties/>
           </component>

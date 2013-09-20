@@ -3,6 +3,7 @@ FIX
 - modify YYY pattern
 
 IMPROVEMENTs
+- add version
 - add validation
 - add log4j test
 - (?) generating server side script

@@ -5,7 +5,7 @@ import org.hibernate.ejb.Ejb3Configuration;
 import org.hibernate.ejb.HibernatePersistence;
 import org.hibernate.ejb.packaging.PersistenceMetadata;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
+import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.model.*;
 
 import javax.persistence.EntityManager;
@@ -24,11 +24,11 @@ import java.util.Properties;
  * User: id967161
  * Date: 04/09/13
  */
-public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
+public class ConfigurationDaoImpl implements ConfigurationDao {
 
     private final EntityManager entityManager;
 
-    public LogMonitorSettingsDaoImpl() {
+    public ConfigurationDaoImpl() {
         this(createUnit());
     }
 
@@ -41,7 +41,7 @@ public class LogMonitorSettingsDaoImpl implements LogMonitorSettingsDao {
         return entityManager;
     }
 
-    public LogMonitorSettingsDaoImpl(EntityManager entityManager) {
+    public ConfigurationDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

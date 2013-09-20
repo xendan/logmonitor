@@ -18,7 +18,7 @@ import org.apache.log4j.Level;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.xendan.logmonitor.dao.LogMonitorSettingsDao;
+import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
@@ -43,7 +43,7 @@ import java.util.List;
 public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll {
     public static final String ENVIRONMENTS = "environments";
     private final Serializer serializer;
-    private final LogMonitorSettingsDao logMonitorSettignsDao;
+    private final ConfigurationDao logMonitorSettignsDao;
     private final ReaderScheduler scheduler;
     private final Project project;
     final EnvironmentsModel environmentsModel;
@@ -61,7 +61,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JTextField patternTextField;
     JComboBox projectComboBox;
     private JLabel projectLabel;
-    JList logSettingsList;
+    JList environmentsList;
     JComboBox serverComboBox;
     JPanel serverPanel;
     JTextField serverHostTextField;
@@ -92,13 +92,13 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
     public LogMonitorSettingsConfigurable(Project project) {
         this(project,
-                ServiceManager.getService(LogMonitorSettingsDao.class),
+                ServiceManager.getService(ConfigurationDao.class),
                 ServiceManager.getService(Serializer.class),
                 ServiceManager.getService(ReaderScheduler.class));
     }
 
-    public LogMonitorSettingsConfigurable(Project project, LogMonitorSettingsDao logMonitorSettingsDao, Serializer serializer, ReaderScheduler readerScheduler) {
-        this.logMonitorSettignsDao = logMonitorSettingsDao;
+    public LogMonitorSettingsConfigurable(Project project, ConfigurationDao configurationDao, Serializer serializer, ReaderScheduler readerScheduler) {
+        this.logMonitorSettignsDao = configurationDao;
         this.serializer = serializer;
         this.scheduler = readerScheduler;
         this.project = project;
@@ -291,7 +291,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         private VerboseBeanAdapter<Server> serverAdapter = new VerboseBeanAdapter<Server>(new Server());
 
         public EnvironmentsModel() {
-            super(addLogSettingsButton, removeLogSettingsButton, logSettingsPanel, logSettingsList, configAdapter.getPropertyModel(ENVIRONMENTS), "name");
+            super(addLogSettingsButton, removeLogSettingsButton, logSettingsPanel, environmentsList, configAdapter.getPropertyModel(ENVIRONMENTS), "name");
         }
 
 
@@ -361,8 +361,8 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         @Override
         protected void onItemCommit() {
             super.onItemCommit();
-            for (int i = 0; i < logSettingsList.getModel().getSize(); i++) {
-                 Environment settings = (Environment) logSettingsList.getModel().getElementAt(i);
+            for (int i = 0; i < environmentsList.getModel().getSize(); i++) {
+                 Environment settings = (Environment) environmentsList.getModel().getElementAt(i);
                  Server server = settings.getServer();
                  if (isLocalHost(server)) {
                        settings.setServer(null);
