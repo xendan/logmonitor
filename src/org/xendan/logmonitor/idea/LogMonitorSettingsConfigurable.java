@@ -1,6 +1,5 @@
 package org.xendan.logmonitor.idea;
 
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.options.Configurable;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
@@ -18,13 +17,15 @@ import org.apache.log4j.Level;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.xendan.logmonitor.dao.ConfigurationDao;
+import org.xendan.logmonitor.idea.model.SetItemFromListModel;
+import org.xendan.logmonitor.idea.model.VerboseBeanAdapter;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.model.Server;
 import org.xendan.logmonitor.read.ReaderScheduler;
 import org.xendan.logmonitor.read.Serializer;
+import org.xendan.logmonitor.service.LogService;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,18 +44,18 @@ import java.util.List;
 public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll {
     public static final String ENVIRONMENTS = "environments";
     private final Serializer serializer;
-    private final ConfigurationDao logMonitorSettignsDao;
     private final ReaderScheduler scheduler;
     private final Project project;
     final EnvironmentsModel environmentsModel;
     final MatchConfigModel matchConfigModel;
     private final ArrayListModel<Configuration> configsModel;
+    private final LogService service;
     private List<Configuration> initialConfigs;
     private JPanel contentPanel;
-    private JButton removeLogSettingsButton;
+    JButton removeLogSettingsButton;
 
     JTextField pathTextField;
-    private JButton addLogSettingsButton;
+    JButton addLogSettingsButton;
     private JButton addPatternButton;
     private JButton removePatternButton;
     private JScrollPane patternsListPanel;
@@ -90,25 +91,21 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     public static final Server LOCALHOST = new Server("localhost", -1);
     final VerboseBeanAdapter<Configuration> configAdapter;
 
-    public LogMonitorSettingsConfigurable(Project project) {
-        this(project,
-                ServiceManager.getService(ConfigurationDao.class),
-                ServiceManager.getService(Serializer.class),
-                ServiceManager.getService(ReaderScheduler.class));
-    }
-
-    public LogMonitorSettingsConfigurable(Project project, ConfigurationDao configurationDao, Serializer serializer, ReaderScheduler readerScheduler) {
-        this.logMonitorSettignsDao = configurationDao;
+    public LogMonitorSettingsConfigurable(Project project, LogService service, Serializer serializer, ReaderScheduler readerScheduler) {
+        this.service = service;
         this.serializer = serializer;
         this.scheduler = readerScheduler;
         this.project = project;
 
         this.configAdapter = new VerboseBeanAdapter<Configuration>(new Configuration());
-        configsModel = new ArrayListModel<Configuration>(logMonitorSettignsDao.getConfigs());
+        configsModel = new ArrayListModel<Configuration>(service.getConfigs());
         environmentsModel = new EnvironmentsModel();
         matchConfigModel = new MatchConfigModel();
         init();
+    }
 
+    public JPanel getContentPanel() {
+        return contentPanel;
     }
 
     private void init() {
@@ -122,15 +119,14 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         Bindings.bind(patternTextField, configAdapter.getPropertyModel("logPattern"));
         configSelection.addValueChangeListener(new ConfigChangeListener());
 
-        List<Configuration> configs = logMonitorSettignsDao.getConfigs();
         initialConfigs = new ArrayList<Configuration>();
-        Configuration configForProject = findConfigForProject(configs);
+        Configuration configForProject = findConfigForProject();
         if (configForProject == null) {
             configForProject = new Configuration();
             configForProject.setProjectName(project.getName());
             initialConfigs.add(configForProject);
         }
-        initialConfigs.addAll(configs);
+        initialConfigs.addAll(configsModel);
     }
 
     @NotNull
@@ -178,8 +174,8 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     public void apply() throws ConfigurationException {
         environmentsModel.onItemCommit();
         matchConfigModel.onItemCommit();
+        service.saveConfigs(configsModel);
         resetInitial();
-        logMonitorSettignsDao.save(configsModel);
         scheduler.reload();
     }
 
@@ -359,7 +355,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         }
 
         @Override
-        protected void onItemCommit() {
+        public void onItemCommit() {
             super.onItemCommit();
             for (int i = 0; i < environmentsList.getModel().getSize(); i++) {
                  Environment settings = (Environment) environmentsList.getModel().getElementAt(i);

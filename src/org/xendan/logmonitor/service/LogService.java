@@ -23,4 +23,6 @@ public interface LogService {
     LogEntry getLastEntry(Environment environment);
 
     void addEntries(List<LogEntry> entries);
+
+    void saveConfigs(List<Configuration> configs);
 }

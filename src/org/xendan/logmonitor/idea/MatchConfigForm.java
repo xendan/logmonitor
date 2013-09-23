@@ -5,6 +5,9 @@ import com.jgoodies.binding.list.ArrayListModel;
 import com.jgoodies.binding.list.SelectionInList;
 import com.jgoodies.binding.value.ValueModel;
 import org.apache.log4j.Level;
+import org.xendan.logmonitor.idea.model.BeanChangeListener;
+import org.xendan.logmonitor.idea.model.ListModelUpdater;
+import org.xendan.logmonitor.idea.model.VerboseBeanAdapter;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 

@@ -1,4 +1,4 @@
-package org.xendan.logmonitor.idea;
+package org.xendan.logmonitor.idea.model;
 
 import com.intellij.ui.JBColor;
 import com.intellij.ui.ListCellRendererWrapper;
@@ -29,7 +29,7 @@ import java.util.List;
 public abstract class SetItemFromListModel<T extends BaseObject> {
     JButton newButton;
     JButton removeButton;
-    JPanel itemPanel;
+    protected JPanel itemPanel;
     JList itemsList;
     private final ValueModel listValueModel;
     private final String toStringProperty;
@@ -118,7 +118,7 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         return bean;
     }
 
-    protected void onItemCommit() {
+    public void onItemCommit() {
         for (T item : getItemsList()) {
             if (isInvalid(item)) {
                 removeItem(item);

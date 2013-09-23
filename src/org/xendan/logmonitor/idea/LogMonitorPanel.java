@@ -3,6 +3,7 @@ package org.xendan.logmonitor.idea;
 import com.intellij.execution.impl.ConsoleViewImpl;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.project.Project;
+import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 
@@ -31,11 +32,13 @@ public class LogMonitorPanel implements CreatePatternListener {
     private JButton clearButton;
     private JScrollPane treePanel;
     private LogMonitorPanelModel model;
+    private final LogMonitorSettingsConfigurable logMonitorSettingsConfigurable;
     private TreePath selectedPath;
     private JEditorPane linkPanel;
 
-    public LogMonitorPanel(LogMonitorPanelModel model, Project project) {
+    public LogMonitorPanel(LogMonitorPanelModel model, Project project, LogMonitorSettingsConfigurable logMonitorSettingsConfigurable) {
         this.model = model;
+        this.logMonitorSettingsConfigurable = logMonitorSettingsConfigurable;
         init(project);
     }
 
@@ -66,7 +69,7 @@ public class LogMonitorPanel implements CreatePatternListener {
                     treePanel.setViewportView(logTree);
                     logTree.setModel(treeModel);
                 }
-               
+
             }
         });
     }
@@ -119,7 +122,12 @@ public class LogMonitorPanel implements CreatePatternListener {
     private class OpenConfigurationListener implements HyperlinkListener {
         @Override
         public void hyperlinkUpdate(HyperlinkEvent e) {
-            System.out.println("YAHHOO!!!");
+            if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
+                ConfigureDialog dialog = new ConfigureDialog(logMonitorSettingsConfigurable);
+                dialog.setLocationRelativeTo(null);
+                dialog.pack();
+                dialog.setVisible(true);
+            }
         }
     }
 }

@@ -4,22 +4,20 @@ import com.intellij.openapi.project.Project;
 import org.junit.Before;
 import org.junit.Test;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.model.Server;
 import org.xendan.logmonitor.read.ReaderScheduler;
 import org.xendan.logmonitor.read.Serializer;
+import org.xendan.logmonitor.service.LogService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertFalse;
-import static junit.framework.TestCase.assertTrue;
+import static junit.framework.TestCase.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -63,7 +61,7 @@ public class LogMonitorSettingsConfigurableTest {
         configurable.reset();
         configurable.projectComboBox.setSelectedItem(config);
 
-        configurable.environmentsModel.newButton.doClick();
+        configurable.addLogSettingsButton.doClick();
         Environment newEnvironment = (Environment) configurable.environmentsList.getSelectedValue();
         assertEquals("Expect contains from local and error", 2, newEnvironment.getMatchConfigs().size());
     }
@@ -86,7 +84,7 @@ public class LogMonitorSettingsConfigurableTest {
     }
 
     private void assertLocalhost(String localhost, int index) {
-        configurable.environmentsModel.newButton.doClick();
+        configurable.addLogSettingsButton.doClick();
         configurable.serverHostTextField.setText(localhost);
         configurable.pathTextField.setText("aaa");
         configurable.logSettingsNametextField.setText("bb");
@@ -101,10 +99,10 @@ public class LogMonitorSettingsConfigurableTest {
         configurable.reset();
         configurable.projectComboBox.setSelectedItem(config);
 
-        assertFalse(configurable.environmentsModel.removeButton.isEnabled());
+        assertFalse(configurable.removeLogSettingsButton.isEnabled());
         configurable.environmentsList.setSelectedIndex(1);
 
-        assertTrue(configurable.environmentsModel.removeButton.isEnabled());
+        assertTrue(configurable.removeLogSettingsButton.isEnabled());
     }
 
     @Test
@@ -112,7 +110,7 @@ public class LogMonitorSettingsConfigurableTest {
         configurable.reset();
         assertEquals("Expect add new and localhost", 2, configurable.serverComboBox.getModel().getSize());
 
-        configurable.environmentsModel.newButton.doClick();
+        configurable.addLogSettingsButton.doClick();
         assertNotNull(((Environment) configurable.environmentsList.getModel().getElementAt(0)).getServer());
         assertNull(((Environment) configurable.environmentsList.getModel().getElementAt(0)).getServer().getId());
         assertEquals(1, configurable.environmentsList.getModel().getSize());
@@ -129,7 +127,7 @@ public class LogMonitorSettingsConfigurableTest {
         configurable.pathTextField.setText("aaa");
 
         //commit
-        configurable.environmentsModel.newButton.doClick();
+        configurable.addLogSettingsButton.doClick();
         assertEquals("Expect new server added", 3, configurable.serverComboBox.getModel().getSize());
     }
 
@@ -139,14 +137,14 @@ public class LogMonitorSettingsConfigurableTest {
         configurable.reset();
         configurable.projectComboBox.setSelectedItem(config);
 
-        assertEquals("Expect two log setting ", 2, configurable.environmentsModel.itemsList.getModel().getSize());
+        assertEquals("Expect two log setting ", 2, configurable.environmentsList.getModel().getSize());
 
-        configurable.environmentsModel.itemsList.setSelectedValue(local, false);
+        configurable.environmentsList.setSelectedValue(local, false);
 
         assertEquals("Expect local host selected", LogMonitorSettingsConfigurable.LOCALHOST, configurable.serverComboBox.getSelectedItem());
         assertFalse("For local host server panel is disabled", configurable.serverHostTextField.isEnabled());
 
-        configurable.environmentsModel.itemsList.setSelectedValue(notLocal, false);
+        configurable.environmentsList.setSelectedValue(notLocal, false);
 
         assertTrue("For server panel is enabled for not localhost", configurable.serverHostTextField.isEnabled());
 
@@ -173,8 +171,8 @@ public class LogMonitorSettingsConfigurableTest {
 
     @Test
     public void test_not_added_empty() throws Exception {
-        configurable.environmentsModel.newButton.doClick();
-        configurable.environmentsModel.newButton.doClick();
+        configurable.addLogSettingsButton.doClick();
+        configurable.addLogSettingsButton.doClick();
         assertEquals(1, configurable.environmentsList.getModel().getSize());
     }
 
@@ -185,7 +183,7 @@ public class LogMonitorSettingsConfigurableTest {
         configurable.projectComboBox.setSelectedItem(config);
 
         assertFalse(configurable.paternsList.isEnabled());
-        configurable.environmentsModel.itemsList.setSelectedValue(local, false);
+        configurable.environmentsList.setSelectedValue(local, false);
         assertTrue("Some log settings is selected", configurable.paternsList.isEnabled());
     }
 
@@ -198,9 +196,9 @@ public class LogMonitorSettingsConfigurableTest {
         configurable.reset();
         configurable.projectComboBox.setSelectedItem(config);
 
-        configurable.environmentsModel.newButton.doClick();
+        configurable.addLogSettingsButton.doClick();
         assertEquals("Expect all available matchcs + new default copied to new enviromnent",
-                4, ((Environment) configurable.environmentsModel.itemsList.getSelectedValue()).getMatchConfigs().size());
+                4, ((Environment) configurable.environmentsList.getSelectedValue()).getMatchConfigs().size());
     }
 
     private MatchConfig createMatch(int id) {
@@ -215,11 +213,11 @@ public class LogMonitorSettingsConfigurableTest {
     public void setUp() {
         Project project = mock(Project.class);
         when(project.getName()).thenReturn("Test project");
-        ConfigurationDao configurationDao = mock(ConfigurationDao.class);
+        LogService service = mock(LogService.class);
         config = new Configuration();
         config.setProjectName("AAA");
-        when(configurationDao.getConfigs()).thenReturn(new ArrayList<Configuration>(Arrays.asList(config)));
+        when(service.getConfigs()).thenReturn(new ArrayList<Configuration>(Arrays.asList(config)));
         ReaderScheduler readerScheduler = mock(ReaderScheduler.class);
-        configurable = new LogMonitorSettingsConfigurable(project, configurationDao, new Serializer(new HomeResolver()), readerScheduler);
+        configurable = new LogMonitorSettingsConfigurable(project, service, new Serializer(new HomeResolver()), readerScheduler);
     }
 }

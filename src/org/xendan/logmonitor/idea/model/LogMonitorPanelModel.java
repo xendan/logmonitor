@@ -1,4 +1,4 @@
-package org.xendan.logmonitor.idea;
+package org.xendan.logmonitor.idea.model;
 
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;

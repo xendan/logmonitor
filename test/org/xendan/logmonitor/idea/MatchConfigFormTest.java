@@ -3,6 +3,7 @@ package org.xendan.logmonitor.idea;
 import com.jgoodies.binding.value.ValueHolder;
 import com.jgoodies.binding.value.ValueModel;
 import org.junit.Test;
+import org.xendan.logmonitor.idea.model.VerboseBeanAdapter;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 

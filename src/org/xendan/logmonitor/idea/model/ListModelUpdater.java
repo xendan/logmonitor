@@ -1,4 +1,4 @@
-package org.xendan.logmonitor.idea;
+package org.xendan.logmonitor.idea.model;
 
 import com.jgoodies.binding.list.ArrayListModel;
 
@@ -10,7 +10,7 @@ import java.util.Collection;
  * User: id967161
  * Date: 18/09/13
  */
-class ListModelUpdater<T> implements PropertyChangeListener {
+public class ListModelUpdater<T> implements PropertyChangeListener {
     private final ArrayListModel<T> listModel;
     private boolean ignoreItemSelection;
 

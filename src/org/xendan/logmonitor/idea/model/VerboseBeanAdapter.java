@@ -1,8 +1,9 @@
-package org.xendan.logmonitor.idea;
+package org.xendan.logmonitor.idea.model;
 
 import com.jgoodies.binding.beans.BeanAdapter;
 import com.jgoodies.binding.value.AbstractValueModel;
 import com.jgoodies.binding.value.ValueModel;
+import org.xendan.logmonitor.idea.model.BeanChangeListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;

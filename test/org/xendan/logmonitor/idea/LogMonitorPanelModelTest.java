@@ -2,6 +2,7 @@ package org.xendan.logmonitor.idea;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.service.LogService;
 import static org.mockito.Mockito.mock;
 

@@ -54,4 +54,9 @@ public class LogServiceImp implements LogService {
     public void addEntries(List<LogEntry> entries) {
         logEntryDao.addEntries(entries);
     }
+
+    @Override
+    public void saveConfigs(List<Configuration> configs) {
+        configDao.save(configs);
+    }
 }
