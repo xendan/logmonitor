@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.parser;
 
+import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.read.LogDownloader;
@@ -21,7 +22,6 @@ public class DownloadAndParse extends TimerTask {
         this.logPattern = logPattern;
         this.environment = environment;
         this.logService = logService;
-
         this.listener = listener;
     }
 
@@ -29,9 +29,10 @@ public class DownloadAndParse extends TimerTask {
     public void run() {
         DateParser dateParser = new DateParser();
         LogEntry lastEntry = logService.getLastEntry(environment);
-        String lastRead = lastEntry == null ? null : dateParser.getDateAsString(logPattern, lastEntry.getDate());
+        LocalDateTime since = lastEntry == null ? null : lastEntry.getDate();
+        String lastRead = since == null ? null : dateParser.getDateAsString(logPattern, since);
         String logFile = environment.getServer() == null ? environment.getPath() : new LogDownloader(environment).downloadToLocal(lastRead);
-        logService.addEntries(new LogFileParser(logFile, logPattern, environment.getMatchConfigs()).getEntries());
+        logService.addEntries(new LogFileParser(since, logFile, logPattern, environment.getMatchConfigs()).getEntries());
         listener.onEntriesAdded(environment);
     }
 }

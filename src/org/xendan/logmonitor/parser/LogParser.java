@@ -10,9 +10,9 @@ import java.util.regex.Pattern;
 
 public class LogParser {
 
-    private static final String[] REGEX_SPECIAL = {"\\", "[","]", "|", ".", "?", "+", "*", "(", ")"};
+    private static final String[] REGEX_SPECIAL = {"\\", "[", "]", "|", ".", "?", "+", "*", "(", ")"};
     private static final String NEW_LINE = System.getProperty("line.separator");
-    
+
     private final Pattern regexPattern;
 
     private final UnitParser<String> callerParser = new CallerParser();
@@ -24,16 +24,18 @@ public class LogParser {
 
     private final UnitParser<?>[] allParsers = {callerParser, dateParser, levelParser, messageParser, categoryParser, lineNumberParser};
     private final List<UnitParser<?>> activeParsers = new ArrayList<UnitParser<?>>();
-    
+
     private final List<LogEntry> entries = new ArrayList<LogEntry>();
     private final String pattern;
     private final EntryMatcher entryMatcher;
+    private final LocalDateTime since;
 
-    public LogParser(String pattern, List<MatchConfig> matchers) {
-        this(pattern, new EntryMatcher(matchers));
+    public LogParser(LocalDateTime since, String pattern, List<MatchConfig> matchers) {
+        this(since, pattern, new EntryMatcher(matchers));
     }
 
-    public LogParser(String pattern, EntryMatcher entryMatcher) {
+    public LogParser(LocalDateTime since, String pattern, EntryMatcher entryMatcher) {
+        this.since = since;
         this.entryMatcher = entryMatcher;
         this.pattern = replaceSpecial(pattern);
         regexPattern = getRegexPattern();
@@ -92,7 +94,7 @@ public class LogParser {
             return;
         }
         LogEntry newEntry = createEntry(matcher);
-        if (entryMatcher.match(newEntry)) {
+        if ((newEntry.getDate() == null || since ==null || newEntry.getDate().isAfter(since)) && entryMatcher.match(newEntry)) {
             entries.add(newEntry);
         }
     }
@@ -107,7 +109,7 @@ public class LogParser {
         entry.setLineNumber(getValue(matcher, lineNumberParser));
         return entry;
     }
-    
+
     public List<LogEntry> getEntries() {
         return entries;
     }

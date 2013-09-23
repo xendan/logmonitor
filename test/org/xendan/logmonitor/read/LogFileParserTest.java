@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.parser.LogFileParser;
+import org.xendan.logmonitor.parser.LogParserTest;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,7 +28,7 @@ public class LogFileParserTest {
     public void test_read() throws Exception {
         HomeResolver resolver = new HomeResolver();
         String logPath = copyFromResource(resolver, "test", TEST_LOG);
-        LogFileParser logParser = new LogFileParser(logPath, "%d %-5p [%c] %m%n",  createMatchers());
+        LogFileParser logParser = new LogFileParser(LogParserTest.A_WHILE_AGO, logPath, "%d %-5p [%c] %m%n",  createMatchers());
         assertEquals("Expect last 13837 warnings loaded", 13837, logParser.getEntries().size());
     }
 

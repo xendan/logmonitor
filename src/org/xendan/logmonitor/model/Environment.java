@@ -24,7 +24,7 @@ public class Environment extends BaseObject {
         this.path = path;
     }
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     public List<MatchConfig> getMatchConfigs() {
         return matchConfigs;
     }
@@ -72,7 +72,8 @@ public class Environment extends BaseObject {
         Environment that = (Environment) o;
 
         if (updateInterval != that.updateInterval) return false;
-        if (matchConfigs != null ? !matchConfigs.equals(that.matchConfigs) : that.matchConfigs != null) return false;
+        //new array because persistentbag is compared by identity
+        if (matchConfigs != null ? !new ArrayList<MatchConfig>(matchConfigs).equals(new ArrayList<MatchConfig>(that.matchConfigs)) : that.matchConfigs != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (path != null ? !path.equals(that.path) : that.path != null) return false;
         if (server != null ? !server.equals(that.server) : that.server != null) return false;

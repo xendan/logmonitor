@@ -1,5 +1,7 @@
 package org.xendan.logmonitor.idea;
 
+import com.intellij.openapi.options.ConfigurationException;
+
 import javax.swing.*;
 import java.awt.event.*;
 
@@ -12,6 +14,7 @@ public class ConfigureDialog extends JDialog {
 
     public ConfigureDialog(LogMonitorSettingsConfigurable logMonitorSettingsConfigurable) {
         this.logMonitorSettingsConfigurable = logMonitorSettingsConfigurable;
+        logMonitorSettingsConfigurable.reset();
         setContentPane(contentPane);
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.PAGE_AXIS));
         infoPanel.add(logMonitorSettingsConfigurable.getContentPanel());
@@ -45,7 +48,13 @@ public class ConfigureDialog extends JDialog {
     }
 
     private void onOK() {
-        dispose();
+        try {
+            logMonitorSettingsConfigurable.apply();
+            dispose();
+        } catch (ConfigurationException e) {
+            //TODO show message
+        }
+
     }
 
     private void onCancel() {

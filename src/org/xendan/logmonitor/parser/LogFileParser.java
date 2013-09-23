@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.parser;
 
+import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.model.MatchConfig;
 
@@ -13,18 +14,20 @@ import java.util.List;
  * Date: 09/09/13
  */
 public class LogFileParser {
+    private final LocalDateTime since;
     private final String logFile;
     private final String logPattern;
     private final List<MatchConfig> matchers;
 
-    public LogFileParser(String logFile, String logPattern, List<MatchConfig> matchers) {
+    public LogFileParser(LocalDateTime since, String logFile, String logPattern, List<MatchConfig> matchers) {
+        this.since = since;
         this.logFile = logFile;
         this.logPattern = logPattern;
         this.matchers = matchers;
     }
 
     public List<LogEntry> getEntries() {
-        LogParser parser = new LogParser(logPattern, matchers);
+        LogParser parser = new LogParser(since, logPattern, matchers);
         readEntries(logFile, parser);
         return parser.getEntries();
     }

@@ -98,7 +98,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         this.project = project;
 
         this.configAdapter = new VerboseBeanAdapter<Configuration>(new Configuration());
-        configsModel = new ArrayListModel<Configuration>(service.getConfigs());
+        configsModel = new ArrayListModel<Configuration>();
         environmentsModel = new EnvironmentsModel();
         matchConfigModel = new MatchConfigModel();
         init();
@@ -118,15 +118,6 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         Bindings.bind(projectComboBox, new SelectionInList<Configuration>((ListModel) configsModel, configSelection));
         Bindings.bind(patternTextField, configAdapter.getPropertyModel("logPattern"));
         configSelection.addValueChangeListener(new ConfigChangeListener());
-
-        initialConfigs = new ArrayList<Configuration>();
-        Configuration configForProject = findConfigForProject();
-        if (configForProject == null) {
-            configForProject = new Configuration();
-            configForProject.setProjectName(project.getName());
-            initialConfigs.add(configForProject);
-        }
-        initialConfigs.addAll(configsModel);
     }
 
     @NotNull
@@ -182,9 +173,18 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
     @Override
     public void reset() {
+        List<Configuration> configs = service.getConfigs();
+        initialConfigs = new ArrayList<Configuration>();
+        Configuration configForProject = findConfigForProject(configs);
+        if (configForProject == null) {
+            configForProject = new Configuration();
+            configForProject.setProjectName(project.getName());
+            initialConfigs.add(configForProject);
+        }
+        initialConfigs.addAll(configs);
         configsModel.clear();
         configsModel.addAll(serializer.doCopy(initialConfigs));
-        projectComboBox.setSelectedItem(findConfigForProject());
+        projectComboBox.setSelectedItem(configForProject);
         setProjectButtonCreate();
         projectNameTextField.setText("");
         environmentsModel.disableItemPanel();
@@ -192,15 +192,6 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         setMatchConfigEnabled(false);
     }
 
-    private Configuration findConfigForProject() {
-        for (Configuration config : configsModel) {
-            if (project.getName().equals(config.getProjectName())) {
-                return config;
-            }
-
-        }
-        return null;
-    }
 
     private void setMatchConfigEnabled(boolean enabled) {
         addPatternButton.setEnabled(enabled);

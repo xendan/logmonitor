@@ -102,7 +102,8 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
 
         if (showNotification != that.showNotification) return false;
         if (useArchive != that.useArchive) return false;
-        if (exceptions != null ? !exceptions.equals(that.exceptions) : that.exceptions != null) return false;
+        //new array because persistentbag is compared by identity
+        if (exceptions != null ? !new ArrayList<MatchConfig>(exceptions).equals(new ArrayList<MatchConfig>(that.exceptions)) : that.exceptions != null) return false;
         if (level != null ? !level.equals(that.level) : that.level != null) return false;
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;

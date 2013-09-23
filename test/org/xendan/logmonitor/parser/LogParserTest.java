@@ -1,6 +1,8 @@
 package org.xendan.logmonitor.parser;
 
 import org.apache.log4j.Level;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.junit.Test;
 import org.xendan.logmonitor.model.LogEntry;
 
@@ -24,6 +26,7 @@ public class LogParserTest {
     private static final String NL = System.getProperty("line.separator");
     public static final String FULL_PATTERN = "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%C]";
     private static final EntryMatcher INFO_MATCHER = EntryMatcherTest.createInfoMatchers();
+    public static final LocalDateTime A_WHILE_AGO = defaultFrmtDate("1900-09-22 01:12:17,191");
 
     @Test
     public void test_parse_date() {
@@ -39,7 +42,7 @@ public class LogParserTest {
 
     private LogEntry singleEntry(String pattern, String log) {
         EntryMatcher genreousMatcher = createGenerousMatcher();
-        LogParser parser = new LogParser(pattern, genreousMatcher);
+        LogParser parser = new LogParser(A_WHILE_AGO, pattern, genreousMatcher);
         parser.addString(log);
         return parser.getEntries().get(0);
     }
@@ -53,7 +56,7 @@ public class LogParserTest {
     
     @Test
     public void test_clear() throws Exception {
-        LogParser parser = new LogParser("%-5p", INFO_MATCHER);
+        LogParser parser = new LogParser(A_WHILE_AGO, "%-5p", INFO_MATCHER);
         parser.addString("WARN ");
         parser.addString("DEBUG");
         parser.clear();
@@ -88,13 +91,18 @@ public class LogParserTest {
 
     @Test
     public void test_no_read_before() throws Exception {
-        LogParser parser = new LogParser(FULL_PATTERN, INFO_MATCHER);
+        LocalDateTime dateTime = defaultFrmtDate("2012-09-21 01:12:17,191");
+        LogParser parser = new LogParser(dateTime, FULL_PATTERN, INFO_MATCHER);
         parser.addString(LOG_WARN);
         parser.addString(LOG_ERROR);
         parser.addString(LOG_INFO);
         parser.addString(LOG_DEBUG);
 
-        assertEquals("Expect only warn read", 3, parser.getEntries().size());
+        assertEquals("Expect only warn read after set date", 2, parser.getEntries().size());
+    }
+
+    private static LocalDateTime defaultFrmtDate(String text) {
+        return DateTimeFormat.forPattern(DateParser.DEFAULT_FORMAT).parseDateTime(text).toLocalDateTime();
     }
 
     @Test
@@ -141,7 +149,7 @@ public class LogParserTest {
                 "02:00:33,585  DEBUG AxisOperation:499 - Entry: AxisOperation::getInputAction",
                 "02:00:33,586  DEBUG AxisOperation:504 - Debug: AxisOperation::getInputAction - using soapAction" };
  
-        LogParser parser = new LogParser("%d{ABSOLUTE}  %5p %c{1}:%L - %m%n", genreousMatcher);
+        LogParser parser = new LogParser(A_WHILE_AGO, "%d{ABSOLUTE}  %5p %c{1}:%L - %m%n", genreousMatcher);
         for (String log : logs) {
             parser.addString(log);
         }
