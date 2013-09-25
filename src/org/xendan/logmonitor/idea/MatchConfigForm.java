@@ -49,7 +49,7 @@ public class MatchConfigForm {
         Bindings.bind(nameTextField, beanAdapter.getPropertyModel("name"));
         Bindings.bind(levelComboBox, new SelectionInList<String>(getLevels(), beanAdapter.getPropertyModel("level")));
         Bindings.bind(messageTextArea, beanAdapter.getPropertyModel("message"));
-        Bindings.bind(isGeneralCheckBox, beanAdapter.getPropertyModel("useArchive"));
+        Bindings.bind(isGeneralCheckBox, beanAdapter.getPropertyModel("general"));
         Bindings.bind(showMessageCheckBox, beanAdapter.getPropertyModel("showNotification"));
         ValueModel exceptions = beanAdapter.getPropertyModel("exceptions");
         ArrayListModel<MatchConfig> listModel = new ArrayListModel<MatchConfig>((Collection<? extends MatchConfig>) exceptions.getValue());
@@ -112,6 +112,16 @@ public class MatchConfigForm {
             }
             checkbox.addItemListener(new EnvironmentEnableListener());
             applyFor.add(checkbox);
+        }
+    }
+
+    public void updateEnvironmentCheckboxesNames() {
+        for (Component component : applyFor.getComponents()) {
+            if (component instanceof JCheckBox) {
+                JCheckBox checkbox = (JCheckBox) component;
+                Environment environment = (Environment) checkbox.getClientProperty(ENVIRONMENT);
+                checkbox.setText(environment.getName());
+            }
         }
     }
 

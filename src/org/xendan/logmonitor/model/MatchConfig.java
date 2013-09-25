@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
     private String level = Level.DEBUG.toString();
-    private boolean useArchive;
+    private boolean general;
     private boolean showNotification;
     private String name;
     private String message;
@@ -60,12 +60,12 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
         this.weight = weight;
     }
 
-    public boolean isUseArchive() {
-        return useArchive;
+    public boolean isGeneral() {
+        return general;
     }
 
-    public void setUseArchive(boolean useArchive) {
-        this.useArchive = useArchive;
+    public void setGeneral(boolean general) {
+        this.general = general;
     }
 
     @OneToMany
@@ -101,7 +101,7 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
         MatchConfig that = (MatchConfig) o;
 
         if (showNotification != that.showNotification) return false;
-        if (useArchive != that.useArchive) return false;
+        if (general != that.general) return false;
         //new array because persistentbag is compared by identity
         if (exceptions != null ? !new ArrayList<MatchConfig>(exceptions).equals(new ArrayList<MatchConfig>(that.exceptions)) : that.exceptions != null) return false;
         if (level != null ? !level.equals(that.level) : that.level != null) return false;
@@ -115,7 +115,7 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
     public int hashCode() {
         int result = super.hashCode();
         result = 31 * result + (level != null ? level.hashCode() : 0);
-        result = 31 * result + (useArchive ? 1 : 0);
+        result = 31 * result + (general ? 1 : 0);
         result = 31 * result + (showNotification ? 1 : 0);
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (message != null ? message.hashCode() : 0);

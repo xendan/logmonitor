@@ -1,6 +1,7 @@
 package org.xendan.logmonitor.parser;
 
 import org.joda.time.LocalDateTime;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.model.MatchConfig;
 
@@ -30,8 +31,8 @@ public class LogParser {
     private final EntryMatcher entryMatcher;
     private final LocalDateTime since;
 
-    public LogParser(LocalDateTime since, String pattern, List<MatchConfig> matchers) {
-        this(since, pattern, new EntryMatcher(matchers));
+    public LogParser(LocalDateTime since, String pattern, Environment environment) {
+        this(since, pattern, new EntryMatcher(environment));
     }
 
     public LogParser(LocalDateTime since, String pattern, EntryMatcher entryMatcher) {

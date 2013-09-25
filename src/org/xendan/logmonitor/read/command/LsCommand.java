@@ -1,9 +1,10 @@
-package org.xendan.logmonitor.read;
+package org.xendan.logmonitor.read.command;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.optional.ssh.SSHExec;
 import org.xendan.logmonitor.model.Server;
+import org.xendan.logmonitor.read.command.BaseCommand;
 
 import java.util.ArrayList;
 import java.util.List;

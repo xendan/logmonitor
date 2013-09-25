@@ -2,10 +2,9 @@ package org.xendan.logmonitor.parser;
 
 import org.apache.log4j.Level;
 import org.junit.Test;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.model.MatchConfig;
-
-import java.util.Arrays;
 
 import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertTrue;
@@ -39,11 +38,17 @@ public class EntryMatcherTest {
     public void test_message() throws Exception {
         MatchConfig config = new MatchConfig();
         config.setMessage("Hallo");
-        EntryMatcher matcher = new EntryMatcher(Arrays.asList(config));
+        EntryMatcher matcher = new EntryMatcher(createEnv(config));
 
         assertTrue("Expect full match", matcher.match(createEntry("Hallo")));
         assertTrue("Expect contains match", matcher.match(createEntry("***Hallo**")));
         assertFalse(matcher.match(createEntry("***Hll**")));
+    }
+
+    private static Environment createEnv(MatchConfig config) {
+        Environment env = new Environment();
+        env.getMatchConfigs().add(config);
+        return env;
     }
 
     private LogEntry createEntry(String message) {
@@ -56,6 +61,6 @@ public class EntryMatcherTest {
         MatchConfig matcher = new MatchConfig();
         matcher.setLevel(Level.INFO.toString());
         matcher.setMessage("");
-        return new EntryMatcher(Arrays.asList(matcher));
+        return new EntryMatcher(createEnv(matcher));
     }
 }

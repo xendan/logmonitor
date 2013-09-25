@@ -1,7 +1,7 @@
 package org.xendan.logmonitor.idea;
 
 import org.xendan.logmonitor.model.Server;
-import org.xendan.logmonitor.read.LsCommand;
+import org.xendan.logmonitor.read.command.LsCommand;
 
 import javax.swing.*;
 import javax.swing.event.TreeExpansionEvent;

@@ -2,6 +2,7 @@ package org.xendan.logmonitor.read;
 
 import org.junit.Test;
 import org.xendan.logmonitor.model.Server;
+import org.xendan.logmonitor.read.command.LsCommand;
 
 import static junit.framework.TestCase.assertEquals;
 

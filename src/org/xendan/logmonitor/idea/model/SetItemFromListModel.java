@@ -53,7 +53,7 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         removeButton.setEnabled(false);
         removeButton.addActionListener(new RemoveButtonActionListener());
         itemsList.addListSelectionListener(new ItemListSelectionListener());
-        itemsList.setCellRenderer(new NewReneder());
+        itemsList.setCellRenderer(new NewRenderer());
         disableItemPanel();
         ArrayListModel<T> listModel = new ArrayListModel<T>((Collection) listValueModel.getValue());
         listModelUpdater = new ListModelUpdater(listModel);
@@ -179,6 +179,10 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         }
     }
 
+    protected void onNamePropertyUpdated() {
+
+    }
+
     private class ListRefresher implements PropertyChangeListener {
         private final ArrayListModel<T> listModel;
 
@@ -189,10 +193,11 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         @Override
         public void propertyChange(PropertyChangeEvent evt) {
             listModel.fireContentsChanged(itemsList.getSelectedIndex());
+            onNamePropertyUpdated();
         }
     }
 
-    private class NewReneder extends ListCellRendererWrapper<T> {
+    private class NewRenderer extends ListCellRendererWrapper<T> {
 
         @Override
         public void customize(JList jList, T t, int i, boolean b, boolean b2) {

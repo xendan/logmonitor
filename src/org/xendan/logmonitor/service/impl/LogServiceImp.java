@@ -1,7 +1,6 @@
 package org.xendan.logmonitor.service.impl;
 
 import org.xendan.logmonitor.dao.ConfigurationDao;
-import org.xendan.logmonitor.dao.LogEntryDao;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
@@ -16,12 +15,10 @@ import java.util.List;
  */
 public class LogServiceImp implements LogService {
 
-    private final LogEntryDao logEntryDao;
     private final ConfigurationDao configDao;
 
 
-    public LogServiceImp(LogEntryDao logEntryDao, ConfigurationDao configDao) {
-        this.logEntryDao = logEntryDao;
+    public LogServiceImp(ConfigurationDao configDao) {
         this.configDao = configDao;
     }
 
@@ -32,27 +29,27 @@ public class LogServiceImp implements LogService {
 
     @Override
     public List<LogEntry> getMatchedEntries(MatchConfig matchConfig) {
-        return logEntryDao.getMatchedEntries(matchConfig);
+        return configDao.getMatchedEntries(matchConfig);
     }
 
     @Override
     public void addMatchConfig(MatchConfig matcher, MatchConfig parentMatcher, Environment settings) {
-        logEntryDao.addMatchConfig(matcher, parentMatcher, settings);
+        configDao.addMatchConfig(matcher, parentMatcher, settings);
     }
 
     @Override
     public void clearEntries(Environment settings) {
-        logEntryDao.clearEntries(settings);
+        configDao.clearEntries(settings);
     }
 
     @Override
     public LogEntry getLastEntry(Environment environment) {
-        return logEntryDao.getLastEntry(environment);
+        return configDao.getLastEntry(environment);
     }
 
     @Override
     public void addEntries(List<LogEntry> entries) {
-        logEntryDao.addEntries(entries);
+        configDao.addEntries(entries);
     }
 
     @Override

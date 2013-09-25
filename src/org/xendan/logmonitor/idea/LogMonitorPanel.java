@@ -48,7 +48,7 @@ public class LogMonitorPanel implements CreatePatternListener {
         logTree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Loading...")));
         linkPanel = new JEditorPane();
         linkPanel.setContentType("text/html");
-        linkPanel.setText("No configuration found.<a href='http://www.google.com'>Configure...</a>");
+        linkPanel.setText("No configuration found.<a href='open_config'> Configure...</a>");
         linkPanel.addHyperlinkListener(new OpenConfigurationListener());
         linkPanel.setEditable(false);
         linkPanel.setOpaque(false);

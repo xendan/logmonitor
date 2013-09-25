@@ -331,7 +331,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
                 MatchConfig defConfig = new MatchConfig();
                 defConfig.setName(GENERAL_ERROR);
                 defConfig.setLevel(Level.ERROR.toString());
-                defConfig.setUseArchive(true);
+                defConfig.setGeneral(true);
                 defConfig.setShowNotification(true);
                 environment.getMatchConfigs().add(defConfig);
             }
@@ -386,6 +386,12 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
                 setPanelEnabled(serverPanel, evt.getNewValue() != null);
             }
         }
+
+        @Override
+        protected void onNamePropertyUpdated() {
+            super.onNamePropertyUpdated();
+            matchConfigModel.updateEnvironmentCheckboxesNames();
+        }
     }
 
     private boolean isLocalHost(Server server) {
@@ -432,7 +438,6 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
                 return null;
             } else if (newValue == ADD_NEW) {
                 return new Server();
-
             } else {
                 return (Server) newValue;
             }
@@ -493,7 +498,13 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         protected boolean isInvalid(MatchConfig item) {
             return StringUtils.isEmpty(item.getName());
         }
+
+        public void updateEnvironmentCheckboxesNames() {
+            form.updateEnvironmentCheckboxesNames();
+        }
     }
+
+
 
     private class RemoveProjectListener implements ActionListener {
         @Override

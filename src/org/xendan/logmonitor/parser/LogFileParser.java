@@ -1,8 +1,8 @@
 package org.xendan.logmonitor.parser;
 
 import org.joda.time.LocalDateTime;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.MatchConfig;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,22 +17,23 @@ public class LogFileParser {
     private final LocalDateTime since;
     private final String logFile;
     private final String logPattern;
-    private final List<MatchConfig> matchers;
+    private final Environment environment;
 
-    public LogFileParser(LocalDateTime since, String logFile, String logPattern, List<MatchConfig> matchers) {
+    public LogFileParser(LocalDateTime since, String logFile, String logPattern, Environment environment) {
         this.since = since;
         this.logFile = logFile;
         this.logPattern = logPattern;
-        this.matchers = matchers;
+
+        this.environment = environment;
     }
 
     public List<LogEntry> getEntries() {
-        LogParser parser = new LogParser(since, logPattern, matchers);
+        LogParser parser = new LogParser(since, logPattern, environment);
         readEntries(logFile, parser);
         return parser.getEntries();
     }
 
-    private static void readEntries(String path, LogParser parser) {
+    private void readEntries(String path, LogParser parser) {
         FileReader fileReader = null;
         BufferedReader br = null;
         try {

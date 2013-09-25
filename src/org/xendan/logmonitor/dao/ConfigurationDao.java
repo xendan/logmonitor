@@ -1,8 +1,10 @@
 package org.xendan.logmonitor.dao;
 
 import org.xendan.logmonitor.model.Configuration;
+import org.xendan.logmonitor.model.Environment;
+import org.xendan.logmonitor.model.LogEntry;
+import org.xendan.logmonitor.model.MatchConfig;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 /**
@@ -11,10 +13,17 @@ import java.util.List;
  */
 public interface ConfigurationDao {
 
-
     void save(List<Configuration> configs);
 
-    EntityManager getEntityManager();
-
     List<Configuration> getConfigs();
+
+    LogEntry getLastEntry(Environment settings);
+
+    void addEntries(List<LogEntry> entries);
+
+    List<LogEntry> getMatchedEntries(MatchConfig matchConfig);
+
+    void addMatchConfig(MatchConfig matcher, MatchConfig parentMatcher, Environment settings);
+
+    void clearEntries(Environment settings);
 }
