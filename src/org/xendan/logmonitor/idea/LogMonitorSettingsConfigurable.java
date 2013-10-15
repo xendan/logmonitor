@@ -17,6 +17,7 @@ import org.apache.log4j.Level;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.xendan.logmonitor.idea.model.LogChooseListener;
 import org.xendan.logmonitor.idea.model.SetItemFromListModel;
 import org.xendan.logmonitor.idea.model.VerboseBeanAdapter;
 import org.xendan.logmonitor.model.Configuration;

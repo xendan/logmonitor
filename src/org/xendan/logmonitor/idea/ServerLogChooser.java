@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.idea;
 
+import org.xendan.logmonitor.idea.model.LogChooseListener;
 import org.xendan.logmonitor.model.Server;
 import org.xendan.logmonitor.read.command.LsCommand;
 

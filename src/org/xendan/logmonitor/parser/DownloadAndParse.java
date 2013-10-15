@@ -36,7 +36,7 @@ public class DownloadAndParse extends TimerTask {
         LogEntry lastEntry = logService.getLastEntry(environment);
         LocalDateTime since = lastEntry == null ? null : lastEntry.getDate();
         String lastRead = since == null ? null : dateParser.getDateAsString(logPattern, since);
-        logService.addEntries(new LogFileParser(since, getLogFile(lastRead), logPattern, environment).getEntries());
+        logService.addEntries(new LogFileReader(since, getLogFile(lastRead), logPattern, environment).getEntries());
         listener.onEntriesAdded(environment);
     }
 

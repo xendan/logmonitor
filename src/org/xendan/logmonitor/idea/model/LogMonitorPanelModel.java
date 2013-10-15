@@ -41,17 +41,17 @@ public class LogMonitorPanelModel {
         return configNode;
     }
 
-    private MutableTreeNode createSettingsNode(Environment settings) {
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(settings);
-        for (MatchConfig matchConfig : settings.getMatchConfigs()) {
-            node.add(createMatchNode(matchConfig));
+    private MutableTreeNode createSettingsNode(Environment environment) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(environment);
+        for (MatchConfig matchConfig : environment.getMatchConfigs()) {
+            node.add(createMatchNode(matchConfig, environment));
         }
         return node;
     }
 
-    private MutableTreeNode createMatchNode(MatchConfig matchConfig) {
+    private MutableTreeNode createMatchNode(MatchConfig matchConfig, Environment environment) {
         DefaultMutableTreeNode node =  new DefaultMutableTreeNode(matchConfig.getName());
-        for (LogEntry entry : service.getMatchedEntries(matchConfig)) {
+        for (LogEntry entry : service.getMatchedEntries(matchConfig, environment)) {
             node.add(createEntryNode(entry));
         }
         return node;

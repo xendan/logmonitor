@@ -13,13 +13,13 @@ import java.util.List;
  * User: id967161
  * Date: 09/09/13
  */
-public class LogFileParser {
+public class LogFileReader {
     private final LocalDateTime since;
     private final String logFile;
     private final String logPattern;
     private final Environment environment;
 
-    public LogFileParser(LocalDateTime since, String logFile, String logPattern, Environment environment) {
+    public LogFileReader(LocalDateTime since, String logFile, String logPattern, Environment environment) {
         this.since = since;
         this.logFile = logFile;
         this.logPattern = logPattern;

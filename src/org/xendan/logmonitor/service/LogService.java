@@ -14,7 +14,7 @@ import java.util.List;
 public interface LogService {
     List<Configuration> getConfigs();
 
-    List<LogEntry> getMatchedEntries(MatchConfig matchConfig);
+    List<LogEntry> getMatchedEntries(MatchConfig matchConfig, Environment environment);
 
     void addMatchConfig(MatchConfig matcher, MatchConfig parentMatcher, Environment settings);
 

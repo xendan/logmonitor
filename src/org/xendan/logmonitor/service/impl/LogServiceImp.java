@@ -28,18 +28,18 @@ public class LogServiceImp implements LogService {
     }
 
     @Override
-    public List<LogEntry> getMatchedEntries(MatchConfig matchConfig) {
-        return configDao.getMatchedEntries(matchConfig);
+    public List<LogEntry> getMatchedEntries(MatchConfig matchConfig, Environment environment) {
+        return configDao.getMatchedEntries(matchConfig, environment);
     }
 
     @Override
-    public void addMatchConfig(MatchConfig matcher, MatchConfig parentMatcher, Environment settings) {
-        configDao.addMatchConfig(matcher, parentMatcher, settings);
+    public void addMatchConfig(MatchConfig matcher, MatchConfig parentMatcher, Environment environment) {
+        configDao.addMatchConfig(matcher, parentMatcher, environment);
     }
 
     @Override
-    public void clearEntries(Environment settings) {
-        configDao.clearEntries(settings);
+    public void clearEntries(Environment environment) {
+        configDao.clearEntries(environment);
     }
 
     @Override

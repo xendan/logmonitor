@@ -1,9 +1,6 @@
 package org.xendan.logmonitor.dao;
 
-import org.xendan.logmonitor.model.Configuration;
-import org.xendan.logmonitor.model.Environment;
-import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.MatchConfig;
+import org.xendan.logmonitor.model.*;
 
 import java.util.List;
 
@@ -21,7 +18,9 @@ public interface ConfigurationDao {
 
     void addEntries(List<LogEntry> entries);
 
-    List<LogEntry> getMatchedEntries(MatchConfig matchConfig);
+    List<LogEntry> getMatchedEntries(MatchConfig matchConfig, Environment environment);
+
+    List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment);
 
     void addMatchConfig(MatchConfig matcher, MatchConfig parentMatcher, Environment settings);
 

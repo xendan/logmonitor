@@ -3,7 +3,6 @@ package org.xendan.logmonitor.parser;
 import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.MatchConfig;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -11,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class LogParser {
 
-    private static final String[] REGEX_SPECIAL = {"\\", "[", "]", "|", ".", "?", "+", "*", "(", ")"};
+    private static final String[] REGEX_SPECIAL = {"\\", "[", "]", "|", ".", "?", "+", "*", "(", ")", "$"};
     private static final String NEW_LINE = System.getProperty("line.separator");
 
     private final Pattern regexPattern;

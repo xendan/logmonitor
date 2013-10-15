@@ -38,7 +38,7 @@ public class HomeResolver {
         //TODO log
     }
 
-    public String join(String parent, String child) {
+    private String join(String parent, String child) {
         return parent + File.separator + child;
     }
 

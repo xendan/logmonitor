@@ -3,6 +3,7 @@ package org.xendan.logmonitor.idea;
 import com.intellij.execution.impl.ConsoleViewImpl;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.project.Project;
+import org.xendan.logmonitor.idea.model.CreatePatternListener;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
