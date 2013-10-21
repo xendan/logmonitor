@@ -4,13 +4,13 @@ import com.intellij.openapi.project.Project;
 import org.junit.Before;
 import org.junit.Test;
 import org.xendan.logmonitor.HomeResolver;
+import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.model.Server;
 import org.xendan.logmonitor.read.ReaderScheduler;
 import org.xendan.logmonitor.read.Serializer;
-import org.xendan.logmonitor.service.LogService;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -213,11 +213,11 @@ public class LogMonitorSettingsConfigurableTest {
     public void setUp() {
         Project project = mock(Project.class);
         when(project.getName()).thenReturn("Test project");
-        LogService service = mock(LogService.class);
+        ConfigurationDao dao = mock(ConfigurationDao.class);
         config = new Configuration();
         config.setProjectName("AAA");
-        when(service.getConfigs()).thenReturn(new ArrayList<Configuration>(Arrays.asList(config)));
+        when(dao.getConfigs()).thenReturn(new ArrayList<Configuration>(Arrays.asList(config)));
         ReaderScheduler readerScheduler = mock(ReaderScheduler.class);
-        configurable = new LogMonitorSettingsConfigurable(project, service, new Serializer(new HomeResolver()), readerScheduler);
+        configurable = new LogMonitorSettingsConfigurable(project, dao, new Serializer(new HomeResolver()), readerScheduler);
     }
 }

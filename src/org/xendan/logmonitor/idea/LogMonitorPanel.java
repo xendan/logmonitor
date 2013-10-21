@@ -49,7 +49,7 @@ public class LogMonitorPanel implements CreatePatternListener {
         logTree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Loading...")));
         linkPanel = new JEditorPane();
         linkPanel.setContentType("text/html");
-        linkPanel.setText("No configuration found.<a href='open_config'> Configure...</a>");
+        linkPanel.setText(getInitialText());
         linkPanel.addHyperlinkListener(new OpenConfigurationListener());
         linkPanel.setEditable(false);
         linkPanel.setOpaque(false);
@@ -59,6 +59,13 @@ public class LogMonitorPanel implements CreatePatternListener {
         consolePanel.add(console.getComponent());
         createPattern.addActionListener(new CreatePatternActionListener());
         clearButton.addActionListener(new ClearListener());
+    }
+
+    private String getInitialText() {
+        if (model.hasConfig()) {
+            return "Loading...";
+        }
+        return "No configuration found.<a href='open_config'> Configure...</a>";
     }
 
     public void refresh() {

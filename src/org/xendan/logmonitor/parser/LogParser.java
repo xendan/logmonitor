@@ -10,7 +10,7 @@ import java.util.regex.Pattern;
 
 public class LogParser {
 
-    private static final String[] REGEX_SPECIAL = {"\\", "[", "]", "|", ".", "?", "+", "*", "(", ")", "$"};
+
     private static final String NEW_LINE = System.getProperty("line.separator");
 
     private final Pattern regexPattern;
@@ -37,7 +37,7 @@ public class LogParser {
     public LogParser(LocalDateTime since, String pattern, EntryMatcher entryMatcher) {
         this.since = since;
         this.entryMatcher = entryMatcher;
-        this.pattern = replaceSpecial(pattern);
+        this.pattern = PatternUtils.simpleToRegexp(pattern).replace("%n", "");
         regexPattern = getRegexPattern();
     }
 
@@ -53,14 +53,6 @@ public class LogParser {
             resultPattern = parser.replaceInPattern(resultPattern);
         }
         return resultPattern;
-    }
-
-    public static String replaceSpecial(String pattern) {
-        String resultPattern = pattern;
-        for (String element : REGEX_SPECIAL) {
-            resultPattern = resultPattern.replace(element, "\\" + element);
-        }
-        return resultPattern.replace("%n", "");
     }
 
     private void initActiveParsers(String pattern) {

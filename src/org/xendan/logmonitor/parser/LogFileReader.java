@@ -43,7 +43,6 @@ public class LogFileReader {
             while ((line = br.readLine()) != null) {
                 parser.addString(line);
             }
-            br.close();
         } catch (IOException e) {
             throw new IllegalArgumentException("Error reading log file", e);
         } finally {

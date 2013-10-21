@@ -47,7 +47,7 @@ public class HomeResolver {
         for (String dir : dirs) {
             fullDirs = join(fullDirs, dir);
         }
-        File dirsFile = mkdirs(fullDirs);
+        mkdirs(fullDirs);
         return join(fullDirs, file);
     }
 

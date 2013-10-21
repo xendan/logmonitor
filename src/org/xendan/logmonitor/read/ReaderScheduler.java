@@ -1,11 +1,11 @@
 package org.xendan.logmonitor.read;
 
 import org.xendan.logmonitor.HomeResolver;
+import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.parser.DownloadAndParse;
 import org.xendan.logmonitor.parser.EntryAddedListener;
-import org.xendan.logmonitor.service.LogService;
 
 import java.util.Timer;
 
@@ -15,27 +15,27 @@ import java.util.Timer;
  */
 public class ReaderScheduler {
 
-    private final LogService logService;
+    private final ConfigurationDao dao;
     private final EntryAddedListener listener;
     private Timer timer = new Timer();
     private boolean inited;
     private HomeResolver homeResolver;
 
-    public ReaderScheduler(LogService logService, EntryAddedListener listener, HomeResolver homeResolver) {
+    public ReaderScheduler(ConfigurationDao dao, EntryAddedListener listener, HomeResolver homeResolver) {
         this.homeResolver = homeResolver;
-        this.logService = logService;
+        this.dao = dao;
         this.listener = listener;
     }
 
     public void reload() {
         timer.cancel();
         timer = new Timer();
-        for (Configuration configuration : logService.getConfigs()) {
+        for (Configuration configuration : dao.getConfigs()) {
             for (Environment environment : configuration.getEnvironments()) {
                 timer.scheduleAtFixedRate(new DownloadAndParse(
                         configuration.getLogPattern(),
                         environment,
-                        logService,
+                        dao,
                         listener,
                         homeResolver,
                         configuration.getProjectName()

@@ -6,7 +6,7 @@ import org.hibernate.ejb.packaging.PersistenceMetadata;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.model.*;
-import org.xendan.logmonitor.parser.LogParser;
+import org.xendan.logmonitor.parser.PatternUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,21 +16,23 @@ import javax.persistence.spi.PersistenceProviderResolver;
 import javax.persistence.spi.PersistenceProviderResolverHolder;
 import javax.persistence.spi.PersistenceUnitTransactionType;
 import java.util.*;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
  * User: id967161
  * Date: 04/09/13
  */
+@SuppressWarnings("unchecked")
 public class ConfigurationDaoImpl implements ConfigurationDao {
 
-    private final EntityManager entityManager;
+    protected final EntityManager entityManager;
 
     public ConfigurationDaoImpl(HomeResolver homeResolver) {
         this(createUnit(homeResolver, "db"));
     }
 
-    public ConfigurationDaoImpl(HomeResolver homeResolver, String dbPath) {
+    protected ConfigurationDaoImpl(HomeResolver homeResolver, String dbPath) {
         this(createUnit(homeResolver, dbPath));
     }
 
@@ -41,6 +43,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     public ConfigurationDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
+
     }
 
 
@@ -92,31 +95,22 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     @Override
-    public List<LogEntry> getMatchedEntries(MatchConfig matchConfig, Environment environment) {
-        return entityManager.createQuery(
-                "SELECT e FROM LogEntry e where e.matchConfig = (:matcher) AND e.environment = (:environment)  ORDER BY e.date DESC ",
-                LogEntry.class)
-                .setParameter("matcher", matchConfig)
-                .setParameter("environment", environment)
-                .getResultList();
-    }
-
-
-    private List<LogEntry> getMatchedNotGroupEntries(MatchConfig matchConfig, Environment environment) {
+    public List<LogEntry> getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment) {
         return entityManager.createNativeQuery(
                 "SELECT e.* FROM LOG_ENTRY e " +
-                 " WHERE e.MATCH_CONFIG = (:matcher) AND e.ENVIRONMENT = (:environment) " +
-                 " AND NOT EXISTS (" +
+                        " WHERE e.MATCH_CONFIG = (:matcher) AND e.ENVIRONMENT = (:environment) " +
+                        " AND NOT EXISTS (" +
                         "SELECT ENTRIES " +
                         "FROM  LOG_ENTRY_GROUP_ENTRIES " +
                         "WHERE ENTRIES = e.ID" +
-                  ")" +
-                 " ORDER BY e.date DESC ",
+                        ")" +
+                        " ORDER BY e.date DESC ",
                 LogEntry.class)
                 .setParameter("matcher", matchConfig.getId())
                 .setParameter("environment", environment.getId())
                 .getResultList();
     }
+
 
     @Override
     public List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment) {
@@ -189,53 +183,114 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         entityManager.getTransaction().begin();
         for (LogEntry entry : entries) {
             if (!entry.getMatchConfig().isGeneral()) {
-                List<LogEntry> oldEntries = getMatchedEntries(entry.getMatchConfig(), entry.getEnvironment());
-                if (!oldEntries.isEmpty()) {
-                    LogEntry first = oldEntries.get(0);
-                    first.setDate(entry.getDate());
-                    first.setFoundNumber(first.getFoundNumber() + 1);
-                    for (int i = 1; i < entries.size(); i++) {
-                        entityManager.remove(entries.get(i));
-                    }
-                    entry = first;
-                }
-                entityManager.persist(entry);
+                entityManager.persist(getLogEntryForNotGeneral(entries, entry));
             } else {
                 List<LogEntryGroup> groups = getMatchedEntryGroups(entry.getMatchConfig(), entry.getEnvironment());
-                LogEntryGroup matchedGroup = getMatchedGroup(groups, entry);
-                if (matchedGroup != null) {
-                    entry.setMessage("");
-                    matchedGroup.getEntries().add(entry);
-                    entityManager.persist(matchedGroup);
-                } else {
-                    List<LogEntry> oldEntries = getMatchedNotGroupEntries(entry.getMatchConfig(), entry.getEnvironment());
-                    boolean matchFound = false;
-                    for (LogEntry oldEntry : oldEntries) {
-                        if (oldEntry.getMessage().equals(entry.getMessage())) {
-                            LogEntryGroup group = new LogEntryGroup();
-                            group.setMessagePattern(LogParser.replaceSpecial(entry.getMessage()));
-                            oldEntry.setMessage("");
-                            entry.setMessage("");
-                            group.getEntries().add(oldEntry);
-                            group.getEntries().add(entry);
-                            entityManager.persist(group);
-                            entityManager.flush();
-                            matchFound = true;
-                            break;
-                        }
-
-                    }
-                    if (!matchFound) {
-                        entityManager.persist(entry);
-                    }
-                }
-
+                persistGroupCandidate(entry, getMatchedGroup(groups, entry));
             }
         }
         entityManager.getTransaction().commit();
     }
 
+    private void persistGroupCandidate(LogEntry entry, LogEntryGroup matchedGroup) {
+        if (matchedGroup != null) {
+            entry.setMessage(getGroupContent(matchedGroup.getMessagePattern(), entry.getMessage()));
+            matchedGroup.getEntries().add(entry);
+            entityManager.persist(matchedGroup);
+        } else {
+            List<LogEntry> oldEntries = getNotGroupedMatchedEntries(entry.getMatchConfig(), entry.getEnvironment());
+            boolean matchFound = false;
+            for (Iterator<LogEntry> iterator = oldEntries.iterator(); iterator.hasNext() && !matchFound; ) {
+                matchFound = checkIfEntryInSameGroup(entry, iterator.next());
+            }
+            if (!matchFound) {
+                entityManager.persist(entry);
+            }
+        }
+    }
 
+    private boolean checkIfEntryInSameGroup(LogEntry entry, LogEntry oldEntry) {
+        String commonPattern = getCommonPattern(entry.getMessage(), oldEntry.getMessage());
+        if (commonPattern != null) {
+            LogEntryGroup group = new LogEntryGroup();
+            group.setMessagePattern(commonPattern);
+            oldEntry.setMessage(getGroupContent(commonPattern, oldEntry.getMessage()));
+            entry.setMessage(getGroupContent(commonPattern, entry.getMessage()));
+            group.getEntries().add(oldEntry);
+            group.getEntries().add(entry);
+            entityManager.persist(group);
+            entityManager.flush();
+            return true;
+        }
+        return false;
+    }
+
+    private String getCommonPattern(String message1, String message2) {
+        if (message1.equals(message2)) {
+            return PatternUtils.simpleToRegexp(message1);
+        }
+        int noMatchStart = -1;
+        int separatorPosition = 0;
+        boolean doMatch = true;
+        while (doMatch) {
+            noMatchStart++;
+            if (isSeparator(message1, noMatchStart)) {
+                separatorPosition = noMatchStart;
+            }
+            if (message1.charAt(noMatchStart) != message2.charAt(noMatchStart)) {
+                doMatch = false;
+            }
+        }
+        noMatchStart = separatorPosition + 1;
+        doMatch = true;
+        int noMatchEnd = 0;
+        while (doMatch) {
+            noMatchEnd++;
+            if (isSeparator(message1, noMatchEnd)) {
+                separatorPosition = noMatchEnd;
+            }
+            if (message1.charAt(message1.length() - noMatchEnd) != message2.charAt(message2.length() - noMatchEnd)) {
+                doMatch = false;
+            }
+        }
+        noMatchEnd = separatorPosition;
+        int matchingLength = 2 * noMatchStart + message1.length() + message2.length() - 2 * noMatchEnd;
+        int notMatchLength = message1.length() + message2.length() - 2 * noMatchStart - 2 * noMatchEnd;
+        if (matchingLength / notMatchLength > 5) {
+            return PatternUtils.simpleToRegexp(message1.substring(0, noMatchStart)) + "(.+)" +
+                   PatternUtils.simpleToRegexp(message1.substring(message1.length() - noMatchEnd + 1)) ;
+        }
+        return null;
+    }
+
+    private boolean isSeparator(String message1, int noMatchStart) {
+        return Pattern.matches("[^\\w\\d_]", String.valueOf(message1.charAt(noMatchStart)));
+    }
+
+    private String getGroupContent(String commonPattern, String message) {
+        if (PatternUtils.simpleToRegexp(message).equals(commonPattern)) {
+            return "";
+        }
+        Matcher matcher = Pattern.compile(commonPattern).matcher(message);
+        if (matcher.matches()&& matcher.groupCount() > 0) {
+            return matcher.group(1);
+        }
+        throw new IllegalArgumentException("No group in pattern " + commonPattern);
+    }
+
+    private LogEntry getLogEntryForNotGeneral(List<LogEntry> entries, LogEntry entry) {
+        List<LogEntry> oldEntries = getNotGroupedMatchedEntries(entry.getMatchConfig(), entry.getEnvironment());
+        if (!oldEntries.isEmpty()) {
+            LogEntry first = oldEntries.get(0);
+            first.setDate(entry.getDate());
+            first.setFoundNumber(first.getFoundNumber() + 1);
+            for (int i = 1; i < entries.size(); i++) {
+                entityManager.remove(entries.get(i));
+            }
+            entry = first;
+        }
+        return entry;
+    }
 
 
     private LogEntryGroup getMatchedGroup(List<LogEntryGroup> groups, LogEntry entry) {

@@ -18,7 +18,7 @@ public interface ConfigurationDao {
 
     void addEntries(List<LogEntry> entries);
 
-    List<LogEntry> getMatchedEntries(MatchConfig matchConfig, Environment environment);
+    List<LogEntry> getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment);
 
     List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment);
 

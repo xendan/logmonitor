@@ -1,10 +1,9 @@
 package org.xendan.logmonitor.idea.model;
 
-import org.xendan.logmonitor.model.Configuration;
-import org.xendan.logmonitor.model.Environment;
-import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.MatchConfig;
-import org.xendan.logmonitor.service.LogService;
+import org.apache.commons.lang.StringUtils;
+import org.xendan.logmonitor.dao.ConfigurationDao;
+import org.xendan.logmonitor.model.*;
+import org.xendan.logmonitor.parser.PatternUtils;
 
 import javax.swing.tree.*;
 import java.util.List;
@@ -15,14 +14,18 @@ import java.util.List;
  */
 public class LogMonitorPanelModel {
 
-    private final LogService service;
+    private final ConfigurationDao dao;
 
-    public LogMonitorPanelModel(LogService service) {
-        this.service = service;
+    public LogMonitorPanelModel(ConfigurationDao dao) {
+        this.dao = dao;
+    }
+
+    public boolean hasConfig() {
+        return !dao.getConfigs().isEmpty();
     }
 
     public TreeModel rebuildTreeModel() {
-        List<Configuration> configs = service.getConfigs();
+        List<Configuration> configs = dao.getConfigs();
         if (configs.isEmpty()) {
             return null;
         }
@@ -51,8 +54,19 @@ public class LogMonitorPanelModel {
 
     private MutableTreeNode createMatchNode(MatchConfig matchConfig, Environment environment) {
         DefaultMutableTreeNode node =  new DefaultMutableTreeNode(matchConfig.getName());
-        for (LogEntry entry : service.getMatchedEntries(matchConfig, environment)) {
+        for (LogEntryGroup group : dao.getMatchedEntryGroups(matchConfig, environment)) {
+            node.add(createLogEntryNode(group));
+        }
+        for (LogEntry entry : dao.getNotGroupedMatchedEntries(matchConfig, environment)) {
             node.add(createEntryNode(entry));
+        }
+        return node;
+    }
+
+    private MutableTreeNode createLogEntryNode(LogEntryGroup group) {
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(new EntryGroupObject(group));
+        for (LogEntry logEntry : group.getEntries()) {
+            node.add(new DefaultMutableTreeNode(new GroupedEntryObject(logEntry, group)));
         }
         return node;
     }
@@ -63,10 +77,12 @@ public class LogMonitorPanelModel {
 
     public String getMessage(TreePath path) {
         if (path.getLastPathComponent() instanceof MutableTreeNode) {
-            MutableTreeNode node = (MutableTreeNode) path.getLastPathComponent();
-            return node.toString();
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+            if (node.getUserObject() instanceof ConsoleDisplayable) {
+                return ((ConsoleDisplayable)node.getUserObject()).toConsoleString();
+            }
         }
-        return null;
+        return path.getLastPathComponent().toString();
     }
 
 
@@ -84,7 +100,7 @@ public class LogMonitorPanelModel {
         LogEntry entry = getEntry(treePath);
         Environment settings = getSettings(treePath);
         if (entry != null) {
-            service.addMatchConfig(matcher, entry.getMatchConfig(), settings);
+            dao.addMatchConfig(matcher, entry.getMatchConfig(), settings);
         }
     }
 
@@ -109,12 +125,15 @@ public class LogMonitorPanelModel {
     public void clearAll(TreePath selectedPath) {
         Environment settings = getSettings(selectedPath);
         if (settings != null) {
-            service.clearEntries(settings);
+            dao.clearEntries(settings);
         }
     }
 
+    private interface ConsoleDisplayable {
+        String toConsoleString();
+    }
 
-    private class EntryObject {
+    private static class EntryObject implements ConsoleDisplayable {
         private final LogEntry entry;
 
         public EntryObject(LogEntry entry) {
@@ -123,11 +142,53 @@ public class LogMonitorPanelModel {
 
         @Override
         public String toString() {
-            return entry.getLevel() + ":" + entry.getMessage();
+            return entry.getLevel() + ":" + entry.getDate() + StringUtils.abbreviate(entry.getMessage(), 10);
         }
 
         public LogEntry getEntry() {
             return entry;
+        }
+
+        @Override
+        public String toConsoleString() {
+            return entry.getLevel() + ":" + entry.getDate() + "\n" + getMessage();
+        }
+
+        protected String getMessage() {
+            return entry.getMessage();
+        }
+    }
+
+    private static class GroupedEntryObject extends EntryObject {
+
+        private final LogEntryGroup group;
+
+        public GroupedEntryObject(LogEntry entry, LogEntryGroup group) {
+            super(entry);
+            this.group = group;
+        }
+
+        @Override
+        protected String getMessage() {
+            return PatternUtils.regexToSimple(group.getMessagePattern());
+        }
+    }
+
+    private static class EntryGroupObject implements ConsoleDisplayable {
+        private final LogEntryGroup group;
+
+        public EntryGroupObject(LogEntryGroup group) {
+            this.group = group;
+        }
+
+        @Override
+        public String toString() {
+            return group.getEntries().size() + " similar entries";
+        }
+
+        @Override
+        public String toConsoleString() {
+            return toString() + " matched by \n"+ group.getMessagePattern();
         }
     }
 }
