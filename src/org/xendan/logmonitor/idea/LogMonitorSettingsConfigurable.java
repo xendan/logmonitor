@@ -184,7 +184,8 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         }
         initialConfigs.addAll(configs);
         configsModel.clear();
-        configsModel.addAll(serializer.doCopy(initialConfigs));
+        configsModel.addAll(initialConfigs);
+        initialConfigs = serializer.doCopy(initialConfigs);
         projectComboBox.setSelectedItem(configForProject);
         setProjectButtonCreate();
         projectNameTextField.setText("");
@@ -302,6 +303,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             SpinnerModel spinnerModel = new SpinnerNumberModel(DEFAULT_TIME_MIN, 1, 1000, 1);
             SpinnerAdapterFactory.connect(spinnerModel, levelModel, DEFAULT_TIME_MIN);
             updateIntervalSpinner.setModel(spinnerModel);
+            setFirstFocusComponent(logSettingsNametextField);
         }
 
         @Override
@@ -486,6 +488,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             form.setEnvironments(configAdapter.getPropertyModel(ENVIRONMENTS));
             setPanelEnabled(itemPanel, false);
             form.hideException();
+            setFirstFocusComponent(form.getFirstFocusComponent());
         }
 
         @Override

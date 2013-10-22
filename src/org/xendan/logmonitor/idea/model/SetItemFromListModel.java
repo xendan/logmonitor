@@ -35,6 +35,7 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
     private final String toStringProperty;
     final VerboseBeanAdapter<T> beanAdapter;
     private ListModelUpdater listModelUpdater;
+    private JComponent firstFocusComponent;
 
     public SetItemFromListModel(JButton newButton, JButton removeButton, JPanel itemPanel, JList itemsList, ValueModel listValueModel, String toStringProperty) {
         this.newButton = newButton;
@@ -47,6 +48,9 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         init();
     }
 
+    protected void setFirstFocusComponent(JComponent firstFocusComponent) {
+        this.firstFocusComponent = firstFocusComponent;
+    }
 
     protected void init() {
         newButton.addActionListener(new NewButtonListener());
@@ -112,6 +116,7 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
         applyItemSet();
         listModelUpdater.setIgnoreItemSelection(false);
         setPanelEnabled(itemPanel, true);
+        firstFocusComponent.requestFocus();
     }
 
     protected T initBean(T bean) {

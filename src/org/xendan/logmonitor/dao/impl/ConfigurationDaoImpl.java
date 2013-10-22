@@ -26,6 +26,8 @@ import java.util.regex.Pattern;
 @SuppressWarnings("unchecked")
 public class ConfigurationDaoImpl implements ConfigurationDao {
 
+    public static final int MATCHING_INDEX = 5;
+    public static final String ANY_STR_PATTERN = "(.*)";
     protected final EntityManager entityManager;
 
     public ConfigurationDaoImpl(HomeResolver homeResolver) {
@@ -229,36 +231,71 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         if (message1.equals(message2)) {
             return PatternUtils.simpleToRegexp(message1);
         }
+        if (message1.isEmpty() || message2.isEmpty()) {
+            return null;
+        }
         int noMatchStart = -1;
         int separatorPosition = 0;
         boolean doMatch = true;
+        boolean oneStartsWithOther = false;
         while (doMatch) {
             noMatchStart++;
-            if (isSeparator(message1, noMatchStart)) {
-                separatorPosition = noMatchStart;
-            }
-            if (message1.charAt(noMatchStart) != message2.charAt(noMatchStart)) {
+            if (noMatchStart >= message1.length() || noMatchStart >= message2.length()) {
+                oneStartsWithOther = true;
                 doMatch = false;
+            } else {
+                if (isSeparator(message1, noMatchStart)) {
+                    separatorPosition = noMatchStart;
+                }
+                if (message1.charAt(noMatchStart) != message2.charAt(noMatchStart)) {
+                    doMatch = false;
+                }
             }
         }
-        noMatchStart = separatorPosition + 1;
-        doMatch = true;
+        noMatchStart = separatorPosition;
         int noMatchEnd = 0;
-        while (doMatch) {
-            noMatchEnd++;
-            if (isSeparator(message1, noMatchEnd)) {
-                separatorPosition = noMatchEnd;
+        boolean sameEnd = false;
+        if (!oneStartsWithOther) {
+            doMatch = true;
+            while (doMatch) {
+                noMatchEnd++;
+                int pos1 = message1.length() - noMatchEnd;
+                int pos2 = message2.length() - noMatchEnd;
+                if (pos1 > 0 && pos2 > 0) {
+                    if (isSeparator(message1, pos1)) {
+                        separatorPosition = noMatchEnd;
+                    }
+                    if (message1.charAt(pos1) != message2.charAt(pos2)) {
+                        doMatch = false;
+                    }
+                } else {
+                    doMatch = false;
+                    sameEnd = true;
+                }
             }
-            if (message1.charAt(message1.length() - noMatchEnd) != message2.charAt(message2.length() - noMatchEnd)) {
-                doMatch = false;
+            if (!sameEnd) {
+                noMatchEnd = separatorPosition;
             }
+        } else {
+            String longMsg = message2;
+            String shortMsg = message1;
+            if (message1.length() > message2.length()) {
+                longMsg = message1;
+                shortMsg = message2;
+            }
+            int matchingLength = shortMsg.length();
+            int notMatchLength = longMsg.length() - shortMsg.length();
+            if (matchingLength / notMatchLength > MATCHING_INDEX) {
+                return PatternUtils.simpleToRegexp(shortMsg) + ANY_STR_PATTERN;
+            }
+            return null;
         }
-        noMatchEnd = separatorPosition;
-        int matchingLength = 2 * noMatchStart + message1.length() + message2.length() - 2 * noMatchEnd;
+
+        int matchingLength = 2 * noMatchStart + 2 * noMatchEnd;
         int notMatchLength = message1.length() + message2.length() - 2 * noMatchStart - 2 * noMatchEnd;
-        if (matchingLength / notMatchLength > 5) {
-            return PatternUtils.simpleToRegexp(message1.substring(0, noMatchStart)) + "(.+)" +
-                   PatternUtils.simpleToRegexp(message1.substring(message1.length() - noMatchEnd + 1)) ;
+        if (matchingLength / notMatchLength > MATCHING_INDEX) {
+            return PatternUtils.simpleToRegexp(message1.substring(0, noMatchStart)) + ANY_STR_PATTERN +
+                    PatternUtils.simpleToRegexp(message1.substring(message1.length() - noMatchEnd));
         }
         return null;
     }
@@ -271,8 +308,8 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         if (PatternUtils.simpleToRegexp(message).equals(commonPattern)) {
             return "";
         }
-        Matcher matcher = Pattern.compile(commonPattern).matcher(message);
-        if (matcher.matches()&& matcher.groupCount() > 0) {
+        Matcher matcher = Pattern.compile(commonPattern, Pattern.DOTALL).matcher(message);
+        if (matcher.matches() && matcher.groupCount() > 0) {
             return matcher.group(1);
         }
         throw new IllegalArgumentException("No group in pattern " + commonPattern);

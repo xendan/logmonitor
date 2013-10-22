@@ -61,6 +61,24 @@ public class ConfigurationDaoImplTest {
     }
 
     @Test
+    public void test_similar_start() throws Exception {
+        List<LogEntry> entries = getJobErroresEntries("similar_start.log");
+        dao.addEntries(entries);
+        List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
+        assertEquals("Expect single group", 1, groups.size());
+        assertTrue(groups.get(0).getMessagePattern().endsWith("(.*)"));
+    }
+
+    @Test
+    public void test_similar_end() throws Exception {
+        List<LogEntry> entries = getJobErroresEntries("similar_end.log");
+        dao.addEntries(entries);
+        List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
+        assertEquals("Expect single group", 1, groups.size());
+        assertTrue(groups.get(0).getMessagePattern().substring(0, 10), groups.get(0).getMessagePattern().startsWith("(.*)Caused by"));
+    }
+
+    @Test
     public void test_general_error_grouped__full_text() throws Exception {
         List<LogEntry> entries = getJobErroresEntries("same_errores.log");
         for (int i = 1; i < entries.size(); i++) {

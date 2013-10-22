@@ -76,9 +76,8 @@ public class Environment extends BaseObject {
         if (matchConfigs != null ? !new ArrayList<MatchConfig>(matchConfigs).equals(new ArrayList<MatchConfig>(that.matchConfigs)) : that.matchConfigs != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (path != null ? !path.equals(that.path) : that.path != null) return false;
-        if (server != null ? !server.equals(that.server) : that.server != null) return false;
+        return !(server != null ? !server.equals(that.server) : that.server != null);
 
-        return true;
     }
 
     @Override

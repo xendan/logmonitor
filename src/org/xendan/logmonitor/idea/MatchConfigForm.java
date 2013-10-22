@@ -125,6 +125,10 @@ public class MatchConfigForm {
         }
     }
 
+    public JComponent getFirstFocusComponent() {
+        return nameTextField;
+    }
+
 
     private class EnvironmentListener implements PropertyChangeListener {
         @Override

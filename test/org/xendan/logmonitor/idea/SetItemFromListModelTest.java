@@ -87,6 +87,7 @@ public class SetItemFromListModelTest {
         @Override
         protected void bind(VerboseBeanAdapter<TestBean> beanAdapter) {
             Bindings.bind(nameField, beanAdapter.getPropertyModel("name"));
+            setFirstFocusComponent(nameField);
         }
 
         @Override
