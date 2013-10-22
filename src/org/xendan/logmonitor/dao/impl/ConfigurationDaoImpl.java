@@ -245,7 +245,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 doMatch = false;
             } else {
                 if (isSeparator(message1, noMatchStart)) {
-                    separatorPosition = noMatchStart;
+                    separatorPosition = noMatchStart + 1;
                 }
                 if (message1.charAt(noMatchStart) != message2.charAt(noMatchStart)) {
                     doMatch = false;

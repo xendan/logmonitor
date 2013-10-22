@@ -207,7 +207,7 @@
     <file path="$PROJECT_DIR$/../BTS/trunk/externalResources/dataMigration/BTS 3.8.0/20_1391_add_destinations.sql" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1380116890276" ignored="false" />
     <file path="/20_1391_add_destinations.sql" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1380116888548" ignored="false" />
     <file path="/BeanChangeListener.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379607923475" ignored="false" />
-    <file path="$PROJECT_DIR$/../BTS/trunk/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1382446677641" ignored="false" />
+    <file path="$PROJECT_DIR$/../BTS/trunk/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1382448367581" ignored="false" />
     <file path="/LogMonitorPanelModelTest.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1381855655304" ignored="false" />
     <file path="/LogService.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1381853150789" ignored="false" />
     <file path="/LogServiceImp.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1381853164235" ignored="false" />
@@ -557,7 +557,7 @@
       <file leaf-file-name="ConfigurationDaoImplTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/impl/ConfigurationDaoImplTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="62" selection-start="3417" selection-end="3417" vertical-scroll-proportion="0.0">
+            <state line="97" column="0" selection-start="3787" selection-end="3787" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -566,7 +566,7 @@
       <file leaf-file-name="ConfigurationDaoImpl.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/ConfigurationDaoImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="293" column="48" selection-start="11441" selection-end="11441" vertical-scroll-proportion="0.6397059">
+            <state line="265" column="54" selection-start="10455" selection-end="10455" vertical-scroll-proportion="1.0">
               <folding>
                 <element signature="e#858#888#0" expanded="true" />
               </folding>
@@ -1074,7 +1074,7 @@
       <recent name="org.xendan.logmonitor.read" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.ConfigurationDaoImplTest.test_similar_end">
+  <component name="RunManager" selected="JUnit.ALL">
     <configuration default="false" name="ConfigurationDaoImplTest.test_general_error_grouped__full_text" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1088,40 +1088,6 @@
       <option name="PACKAGE_NAME" value="org.xendan.logmonitor.dao.impl" />
       <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.dao.impl.ConfigurationDaoImplTest" />
       <option name="METHOD_NAME" value="test_general_error_grouped__full_text" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ConfigurationDaoImplTest.test_last" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.xendan.logmonitor.dao.impl.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.dao.impl" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.dao.impl.ConfigurationDaoImplTest" />
-      <option name="METHOD_NAME" value="test_last" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
@@ -1236,6 +1202,34 @@
       </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ConfigurationDaoImplTest.test_general_error_grouped__middle_match" type="JUnit" factoryName="JUnit" temporary="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="org.xendan.logmonitor.dao.impl.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="logmonitor" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.dao.impl" />
+      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.dao.impl.ConfigurationDaoImplTest" />
+      <option name="METHOD_NAME" value="test_general_error_grouped__middle_match" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -1449,18 +1443,18 @@
       <item index="1" class="java.lang.String" itemvalue="JUnit.ALL" />
       <item index="2" class="java.lang.String" itemvalue="Plugin.run" />
       <item index="3" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_general_error_grouped__full_text" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_last" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_similar_start" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_similar_end" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_similar_start" />
+      <item index="5" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest" />
+      <item index="6" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_similar_end" />
+      <item index="7" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_general_error_grouped__middle_match" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_similar_end" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_similar_start" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_general_error_grouped__full_text" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_last" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_general_error_grouped__middle_match" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_similar_end" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_similar_start" />
+        <item index="4" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.test_general_error_grouped__full_text" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
@@ -1522,27 +1516,27 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.6009227" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22827417" sideWeight="0.2733564" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22827417" sideWeight="0.24452133" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979239" sideWeight="0.2607099" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.34832758" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22827417" sideWeight="0.39907727" order="6" side_tool="true" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22827417" sideWeight="0.3575548" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18543452" sideWeight="0.6724337" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32756633" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18543452" sideWeight="0.6032295" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32756633" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.67128026" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2637699" sideWeight="0.67012686" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.54161566" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39677048" sideWeight="0.73929006" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39677048" sideWeight="0.73929006" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -1760,14 +1754,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/impl/ConfigurationDaoImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="62" selection-start="3417" selection-end="3417" vertical-scroll-proportion="0.0">
+        <state line="97" column="0" selection-start="3787" selection-end="3787" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/ConfigurationDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="293" column="48" selection-start="11441" selection-end="11441" vertical-scroll-proportion="0.6397059">
+        <state line="265" column="54" selection-start="10455" selection-end="10455" vertical-scroll-proportion="1.0">
           <folding>
             <element signature="e#858#888#0" expanded="true" />
           </folding>
