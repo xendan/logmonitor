@@ -22,6 +22,7 @@ public class BaseCommand {
         task.setPassword(settings.getPassword());
         task.setHost(settings.getHost());
         task.setUsername(settings.getLogin());
+        //TODO: key, passphrase
         return task;
     }
 

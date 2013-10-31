@@ -15,6 +15,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -132,6 +133,8 @@ public class LogMonitorPanel implements CreatePatternListener {
         public void hyperlinkUpdate(HyperlinkEvent e) {
             if (HyperlinkEvent.EventType.ACTIVATED.equals(e.getEventType())) {
                 ConfigureDialog dialog = new ConfigureDialog(logMonitorSettingsConfigurable);
+                dialog.setSize(800, 800);
+                dialog.setMinimumSize(new Dimension(800, 800));
                 dialog.setLocationRelativeTo(null);
                 dialog.pack();
                 dialog.setVisible(true);

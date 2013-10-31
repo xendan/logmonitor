@@ -1,0 +1,4 @@
+2013-10-31 11:00:01,622 ERROR [STDERR] 31-Oct-2013 11:00:01 java.util.prefs.WindowsPreferences openKey
+WARNING: Could not open windows registry node Software\JavaSoft\Prefs\dvf-settings at root 0x80000002. Windows RegOpenKey(...) returned error code 2.
+2013-10-31 11:00:01,623 ERROR [STDERR] 31-Oct-2013 11:00:01 java.util.prefs.WindowsPreferences openKey
+WARNING: Could not open windows registry node Software\JavaSoft\Prefs\dvf-settings\/D/V/F at root 0x80000002. Windows RegOpenKey(...) returned error code 2.

@@ -251,8 +251,8 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
                 }
             } else {
                 ServerLogChooser chooser = new ServerLogChooser(server, this);
-                chooser.setSize(300, 300);
-                chooser.setMinimumSize(new Dimension(300, 300));
+                chooser.setSize(400, 400);
+                chooser.setMinimumSize(new Dimension(400, 400));
                 chooser.setLocationRelativeTo(null);
                 chooser.pack();
                 chooser.setVisible(true);

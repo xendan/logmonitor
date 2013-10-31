@@ -244,11 +244,11 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 oneStartsWithOther = true;
                 doMatch = false;
             } else {
-                if (isSeparator(message1, noMatchStart)) {
-                    separatorPosition = noMatchStart + 1;
-                }
                 if (message1.charAt(noMatchStart) != message2.charAt(noMatchStart)) {
                     doMatch = false;
+                }
+                if (doMatch && isSeparator(message1, noMatchStart)) {
+                    separatorPosition = noMatchStart + 1;
                 }
             }
         }
@@ -312,7 +312,8 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         if (matcher.matches() && matcher.groupCount() > 0) {
             return matcher.group(1);
         }
-        throw new IllegalArgumentException("No group in pattern " + commonPattern);
+        //TODO log or something
+        throw new IllegalArgumentException("No match of  *******\n" + commonPattern + "\n to message ********\n" + message);
     }
 
     private LogEntry getLogEntryForNotGeneral(List<LogEntry> entries, LogEntry entry) {

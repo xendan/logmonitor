@@ -43,7 +43,7 @@
 
        <projectConfigurable instance="org.xendan.logmonitor.idea.LogMonitorSettingsConfigurable" id="logmonitor.settings" />
 
-      <toolWindow id="LogMonitor" anchor="right"
+      <toolWindow id="Log Monitor" anchor="right" icon="/org/xendan/logmonitor/idea/icon.png"
                   factoryClass="org.xendan.logmonitor.idea.LogMonitorToolWindowFactory"/>
   </extensions>
 

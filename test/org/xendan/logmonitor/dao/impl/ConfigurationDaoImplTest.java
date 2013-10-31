@@ -70,6 +70,14 @@ public class ConfigurationDaoImplTest {
     }
 
     @Test
+    public void test_dvf_settings() throws Exception {
+        dao.addEntries(getJobErroresEntries("dvf-settings.log"));
+        List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
+        assertEquals("Expect single group", 1, groups.size());
+        assertEquals(2, groups.get(0).getEntries().size());
+    }
+
+    @Test
     public void test_similar_end() throws Exception {
         List<LogEntry> entries = getJobErroresEntries("similar_end.log");
         dao.addEntries(entries);
