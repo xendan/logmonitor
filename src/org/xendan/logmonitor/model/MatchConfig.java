@@ -123,4 +123,6 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
         result = 31 * result + (exceptions != null ? exceptions.hashCode() : 0);
         return result;
     }
+
+
 }

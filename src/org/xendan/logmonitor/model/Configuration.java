@@ -62,4 +62,9 @@ public class Configuration extends BaseObject {
     public void setLogPattern(String logPattern) {
         this.logPattern = logPattern;
     }
+
+    @Override
+    public String toString() {
+        return projectName;
+    }
 }

@@ -8,6 +8,7 @@ import javax.persistence.Entity;
  */
 @Entity
 public class Server extends BaseObject {
+    public static final String LOCALHOST = "localhost";
     private String host;
     private String login;
     private String password;

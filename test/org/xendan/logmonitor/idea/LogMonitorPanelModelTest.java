@@ -32,7 +32,7 @@ public class LogMonitorPanelModelTest {
 
     @Test
     public void test_rebuildTreeModel() throws Exception {
-        TreeModel treeModel = model.rebuildTreeModel();
+        TreeModel treeModel = model.initTreeModel();
         assertEquals("Expect config only for one project", 1, treeModel.getChildCount(treeModel.getRoot()));
         Object configNode = treeModel.getChild(treeModel.getRoot(), 0);
         assertEquals("Expect 1 environment", 1, treeModel.getChildCount(configNode));
@@ -46,7 +46,7 @@ public class LogMonitorPanelModelTest {
 
     @Test
     public void test_getMessage() throws Exception {
-        TreeModel treeModel = model.rebuildTreeModel();
+        TreeModel treeModel = model.initTreeModel();
         Object configNode = treeModel.getChild(treeModel.getRoot(), 0);
         Object matchNode = treeModel.getChild(configNode, 0);
         Object envNode = treeModel.getChild(matchNode, 0);

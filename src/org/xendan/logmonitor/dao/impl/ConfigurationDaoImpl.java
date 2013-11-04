@@ -116,8 +116,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     @Override
     public List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment) {
-
-        return entityManager.createNativeQuery(
+        List<LogEntryGroup> groups = entityManager.createNativeQuery(
                 "SELECT g.* FROM LOG_ENTRY_GROUP g" +
                         " WHERE EXISTS (" +
                         "    SELECT 1 FROM  LOG_ENTRY_GROUP_ENTRIES le, LOG_ENTRY e" +
@@ -129,6 +128,8 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 .setParameter("matcher", matchConfig.getId())
                 .setParameter("environment", environment.getId())
                 .getResultList();
+        Collections.sort(groups, new GroupComparator());
+        return groups;
     }
 
     @Override
@@ -390,6 +391,13 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 Ejb3Configuration configured = cfg.configure(metadata, properties);
                 return configured != null ? configured.buildEntityManagerFactory() : null;
             }
+        }
+    }
+
+    private class GroupComparator implements Comparator<LogEntryGroup> {
+        @Override
+        public int compare(LogEntryGroup o1, LogEntryGroup o2) {
+            return o2.getEntries().size() - o1.getEntries().size();
         }
     }
 }

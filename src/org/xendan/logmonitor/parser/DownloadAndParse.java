@@ -1,5 +1,7 @@
 package org.xendan.logmonitor.parser;
 
+import com.intellij.idea.LoggerFactory;
+import com.intellij.openapi.diagnostic.Logger;
 import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.dao.ConfigurationDao;
@@ -20,6 +22,7 @@ public class DownloadAndParse extends TimerTask {
     private final EntryAddedListener listener;
     private final HomeResolver homeResolver;
     private final String project;
+    private static final Logger logger = LoggerFactory.getInstance().getLoggerInstance(TimerTask.class.getCanonicalName());
 
     public DownloadAndParse(String logPattern, Environment environment, ConfigurationDao dao, EntryAddedListener listener, HomeResolver homeResolver, String project) {
         this.logPattern = logPattern;
@@ -32,12 +35,18 @@ public class DownloadAndParse extends TimerTask {
 
     @Override
     public void run() {
-        DateParser dateParser = new DateParser();
-        LogEntry lastEntry = dao.getLastEntry(environment);
-        LocalDateTime since = lastEntry == null ? null : lastEntry.getDate();
-        String lastRead = since == null ? null : dateParser.getDateAsString(logPattern, since);
-        dao.addEntries(new LogFileReader(since, getLogFile(lastRead), logPattern, environment).getEntries());
-        listener.onEntriesAdded(environment);
+        try {
+            DateParser dateParser = new DateParser();
+            LogEntry lastEntry = dao.getLastEntry(environment);
+            LocalDateTime since = lastEntry == null ? null : lastEntry.getDate();
+            String lastRead = since == null ? null : dateParser.getDateAsString(logPattern, since);
+            dao.addEntries(new LogFileReader(since, getLogFile(lastRead), logPattern, environment).getEntries());
+            listener.onEntriesAdded(environment);
+        } catch (Exception e) {
+            //Notifications.Bus.notify(new Notification("i don't know what is this", "Error loading ", e.getMessage(), NotificationType.ERROR));
+            logger.error(e);
+            listener.onError(e);
+        }
     }
 
     private String getLogFile(String lastRead) {

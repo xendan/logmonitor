@@ -28,6 +28,7 @@ public class ReaderScheduler {
     }
 
     public void reload() {
+        listener.beforeReload();
         timer.cancel();
         timer = new Timer();
         for (Configuration configuration : dao.getConfigs()) {

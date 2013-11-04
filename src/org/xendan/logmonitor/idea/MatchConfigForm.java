@@ -59,6 +59,10 @@ public class MatchConfigForm {
         beanAdapter.addBeanChangeListener(new ApplyEnvironmentAdapter());
     }
 
+    public JPanel getContentPanel() {
+        return contentPanel;
+    }
+
     private List<String> getLevels() {
         List<String> levels = new ArrayList<String>();
         levels.add(Level.FATAL.toString());

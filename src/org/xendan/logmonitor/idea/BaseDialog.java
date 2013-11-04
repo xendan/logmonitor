@@ -1,23 +1,22 @@
 package org.xendan.logmonitor.idea;
 
-import com.intellij.openapi.options.ConfigurationException;
+import org.xendan.logmonitor.idea.model.OnOkAction;
 
 import javax.swing.*;
 import java.awt.event.*;
 
-public class ConfigureDialog extends JDialog {
-    private final LogMonitorSettingsConfigurable logMonitorSettingsConfigurable;
+public class BaseDialog extends JDialog {
+    private final OnOkAction onOkAction;
     private JPanel contentPane;
     private JButton buttonOK;
     private JButton buttonCancel;
     private JPanel infoPanel;
 
-    public ConfigureDialog(LogMonitorSettingsConfigurable logMonitorSettingsConfigurable) {
-        this.logMonitorSettingsConfigurable = logMonitorSettingsConfigurable;
-        logMonitorSettingsConfigurable.reset();
+    public BaseDialog(OnOkAction onOkAction, JComponent content) {
+        this.onOkAction = onOkAction;
         setContentPane(contentPane);
         infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.PAGE_AXIS));
-        infoPanel.add(logMonitorSettingsConfigurable.getContentPanel());
+        infoPanel.add(content);
         setModal(true);
         getRootPane().setDefaultButton(buttonOK);
 
@@ -48,13 +47,9 @@ public class ConfigureDialog extends JDialog {
     }
 
     private void onOK() {
-        try {
-            logMonitorSettingsConfigurable.apply();
+        if (onOkAction.doAction()) {
             dispose();
-        } catch (ConfigurationException e) {
-            //TODO show message
         }
-
     }
 
     private void onCancel() {

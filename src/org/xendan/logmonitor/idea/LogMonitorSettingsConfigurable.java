@@ -89,7 +89,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JPanel logSettingsPanel;
     JButton projectRemoveButton;
     private static final Server ADD_NEW = new Server("Add new...", -2);
-    public static final Server LOCALHOST = new Server("localhost", -1);
+    public static final Server LOCALHOST = new Server(Server.LOCALHOST, -1);
     final VerboseBeanAdapter<Configuration> configAdapter;
 
     public LogMonitorSettingsConfigurable(Project project, ConfigurationDao dao, Serializer serializer, ReaderScheduler readerScheduler) {
