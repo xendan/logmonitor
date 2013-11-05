@@ -37,7 +37,6 @@ public class MatchConfigForm {
     JPanel applyFor;
     public JPanel contentPanel;
     private JCheckBox showMessageCheckBox;
-    private JButton removeButton;
     private JButton addButton;
     private JScrollPane ignorePatternsScrollPane;
     private ValueModel environmentsModel;
@@ -59,6 +58,10 @@ public class MatchConfigForm {
         beanAdapter.addBeanChangeListener(new ApplyEnvironmentAdapter());
     }
 
+    public void setIsSpecific() {
+        isGeneralCheckBox.setEnabled(false);
+    }
+
     public JPanel getContentPanel() {
         return contentPanel;
     }
@@ -74,15 +77,7 @@ public class MatchConfigForm {
         return levels;
     }
 
-    public void hideException() {
-        ignoreLabel.setVisible(false);
-        ignorePatterns.setVisible(false);
-        ignorePatternsScrollPane.setVisible(false);
-        removeButton.setVisible(false);
-        addButton.setVisible(false);
-    }
-
-    public void setIsArchive(boolean value) {
+    public void setIsGeneral(boolean value) {
         isGeneralCheckBox.setSelected(value);
     }
 

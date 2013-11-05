@@ -10,7 +10,6 @@ import org.xendan.logmonitor.parser.PatternUtils;
 
 import javax.swing.*;
 import javax.swing.tree.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -185,9 +184,11 @@ public class LogMonitorPanelModel {
     public JPopupMenu getContextMenu(TreePath path, Runnable openConfigDialog) {
         JPopupMenu menu = new JPopupMenu();
         menu.add(new JMenuItem(new OpenConfig(openConfigDialog)));
+
+        MatchConfig config = getObjectFromPath(path, MatchConfig.class);
         GroupObject group = getObjectFromPath(path, GroupObject.class);
         if (group != null) {
-            menu.add(new JMenuItem(new CreateGroupedMatchConfig(group.getGroup())));
+            menu.add(new JMenuItem(new CreateGroupedMatchConfig(group.getGroup(), config.getLevel())));
         }
         return menu;
     }
@@ -265,26 +266,29 @@ public class LogMonitorPanelModel {
 
     private class CreateGroupedMatchConfig extends AbstractAction {
         private final LogEntryGroup group;
+        private final String level;
 
-        public CreateGroupedMatchConfig(LogEntryGroup group) {
+        public CreateGroupedMatchConfig(LogEntryGroup group, String level) {
             super("Create match...");
             this.group = group;
+            this.level = level;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
             MatchConfigForm matchConfigForm = new MatchConfigForm();
+            MatchConfig config = new MatchConfig();
+            config.setMessage(group.getMessagePattern());
+            config.setLevel(level);
+            matchConfigForm.setBeanAdapters(new VerboseBeanAdapter<MatchConfig>(config));
+            matchConfigForm.setIsSpecific();
             BaseDialog dialog = new BaseDialog(new OnOkAction() {
                 @Override
                 public boolean doAction() {
                     return true;
                 }
             }, matchConfigForm.getContentPanel());
-            dialog.setSize(800, 800);
-            dialog.setMinimumSize(new Dimension(800, 800));
-            dialog.setLocationRelativeTo(null);
-            dialog.pack();
-            dialog.setVisible(true);
+            dialog.setTitleAndShow("Add new match config");
         }
     }
 

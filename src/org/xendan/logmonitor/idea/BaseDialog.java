@@ -3,9 +3,12 @@ package org.xendan.logmonitor.idea;
 import org.xendan.logmonitor.idea.model.OnOkAction;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 
 public class BaseDialog extends JDialog {
+    public static final int WIDTH = 850;
+    public static final int HEIGHT = 800;
     private final OnOkAction onOkAction;
     private JPanel contentPane;
     private JButton buttonOK;
@@ -54,5 +57,16 @@ public class BaseDialog extends JDialog {
 
     private void onCancel() {
         dispose();
+    }
+
+    public void setTitleAndShow(String title) {
+        setTitle(title);
+        setSize(WIDTH, HEIGHT);
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        setMaximumSize(new Dimension(WIDTH, HEIGHT));
+        setLocationRelativeTo(null);
+        pack();
+        setVisible(true);
     }
 }

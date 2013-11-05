@@ -487,14 +487,13 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             form.setBeanAdapters(beanAdapter);
             form.setEnvironments(configAdapter.getPropertyModel(ENVIRONMENTS));
             setPanelEnabled(itemPanel, false);
-            form.hideException();
             setFirstFocusComponent(form.getFirstFocusComponent());
         }
 
         @Override
         protected void onNewClicked() {
             super.onNewClicked();
-            form.setIsArchive(true);
+            form.setIsGeneral(true);
             form.setShowNotification(true);
         }
 

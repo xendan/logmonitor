@@ -162,11 +162,7 @@ public class LogMonitorPanel implements CreatePatternListener {
         public void run() {
             BaseDialog dialog = new BaseDialog(new ConfigureDialogOnOkAction(), logMonitorSettingsConfigurable.getContentPanel());
             logMonitorSettingsConfigurable.reset();
-            dialog.setSize(800, 800);
-            dialog.setMinimumSize(new Dimension(800, 800));
-            dialog.setLocationRelativeTo(null);
-            dialog.pack();
-            dialog.setVisible(true);
+            dialog.setTitleAndShow("Configuration");
         }
 
         private class ConfigureDialogOnOkAction implements OnOkAction {
