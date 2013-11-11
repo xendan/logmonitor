@@ -61,6 +61,17 @@ public class ConfigurationDaoImplTest {
     }
 
     @Test
+    public void test_unexpected_error() throws Exception {
+        List<LogEntry> entries = getJobErroresEntries("unexpected-error.log");
+        dao.addEntries(entries);
+        /*
+        List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
+        assertEquals("Expect single group", 1, groups.size());
+        assertTrue(groups.get(0).getMessagePattern().endsWith("(.*)"));
+        */
+    }
+
+    @Test
     public void test_similar_start() throws Exception {
         List<LogEntry> entries = getJobErroresEntries("similar_start.log");
         dao.addEntries(entries);

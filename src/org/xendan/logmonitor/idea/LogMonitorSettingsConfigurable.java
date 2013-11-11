@@ -191,18 +191,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         projectNameTextField.setText("");
         environmentsModel.disableItemPanel();
         matchConfigModel.disableItemPanel();
-        setMatchConfigEnabled(false);
     }
-
-
-    private void setMatchConfigEnabled(boolean enabled) {
-        addPatternButton.setEnabled(enabled);
-        removePatternButton.setEnabled(enabled);
-        paternsList.setEnabled(enabled);
-        patternUp.setEnabled(enabled);
-        patternDown.setEnabled(enabled);
-    }
-
 
     private Configuration findConfigForProject(List<Configuration> configs) {
         for (Configuration config : configs) {
@@ -345,7 +334,6 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         @Override
         protected void onItemSet() {
             servers.setValue(getServers());
-            setMatchConfigEnabled(true);
         }
 
         @Override
@@ -462,7 +450,6 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
 
     private class ConfigProjectRenderer extends ListCellRendererWrapper {
 
-
         @Override
         public void customize(JList jList, Object o, int i, boolean b, boolean b2) {
             if (o instanceof Configuration) {
@@ -476,7 +463,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         private MatchConfigForm form;
 
         public MatchConfigModel() {
-            super(addPatternButton, removePatternButton, matchConfigPanel, paternsList, environmentsModel.getBeanModel("matchConfigs"), "name");
+            super(addPatternButton, removePatternButton, matchConfigPanel, paternsList, new MatchConfigListModel(configAdapter.getPropertyModel(ENVIRONMENTS)), "name");
         }
 
         @Override

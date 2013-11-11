@@ -8,7 +8,7 @@ import java.awt.event.*;
 
 public class BaseDialog extends JDialog {
     public static final int WIDTH = 850;
-    public static final int HEIGHT = 800;
+    public static final int HEIGHT = 820;
     private final OnOkAction onOkAction;
     private JPanel contentPane;
     private JButton buttonOK;

@@ -97,7 +97,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     @Override
-    public List<LogEntry> getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment) {
+    public synchronized List<LogEntry> getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment) {
         return entityManager.createNativeQuery(
                 "SELECT e.* FROM LOG_ENTRY e " +
                         " WHERE e.MATCH_CONFIG = (:matcher) AND e.ENVIRONMENT = (:environment) " +
@@ -115,7 +115,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
 
     @Override
-    public List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment) {
+    public synchronized List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment) {
         List<LogEntryGroup> groups = entityManager.createNativeQuery(
                 "SELECT g.* FROM LOG_ENTRY_GROUP g" +
                         " WHERE EXISTS (" +
@@ -182,7 +182,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     @Override
-    public void addEntries(List<LogEntry> entries) {
+    public synchronized void addEntries(List<LogEntry> entries) {
         entityManager.getTransaction().begin();
         for (LogEntry entry : entries) {
             if (!entry.getMatchConfig().isGeneral()) {
@@ -238,11 +238,9 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         int noMatchStart = -1;
         int separatorPosition = 0;
         boolean doMatch = true;
-        boolean oneStartsWithOther = false;
         while (doMatch) {
             noMatchStart++;
             if (noMatchStart >= message1.length() || noMatchStart >= message2.length()) {
-                oneStartsWithOther = true;
                 doMatch = false;
             } else {
                 if (message1.charAt(noMatchStart) != message2.charAt(noMatchStart)) {
@@ -253,45 +251,33 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 }
             }
         }
-        noMatchStart = separatorPosition;
+        boolean sameStart = true;
+        if (noMatchStart < message1.length() && noMatchStart < message2.length()) {
+            sameStart = false;
+            noMatchStart = separatorPosition;
+        }
         int noMatchEnd = 0;
         boolean sameEnd = false;
-        if (!oneStartsWithOther) {
-            doMatch = true;
-            while (doMatch) {
-                noMatchEnd++;
-                int pos1 = message1.length() - noMatchEnd;
-                int pos2 = message2.length() - noMatchEnd;
-                if (pos1 > 0 && pos2 > 0) {
-                    if (isSeparator(message1, pos1)) {
-                        separatorPosition = noMatchEnd;
-                    }
-                    if (message1.charAt(pos1) != message2.charAt(pos2)) {
-                        doMatch = false;
-                    }
-                } else {
+        doMatch = true;
+        while (doMatch && !sameStart) {
+            noMatchEnd++;
+            int pos1 = message1.length() - noMatchEnd;
+            int pos2 = message2.length() - noMatchEnd;
+            if (pos1 > 0 && pos2 > 0) {
+                if (message1.charAt(pos1) != message2.charAt(pos2)) {
                     doMatch = false;
-                    sameEnd = true;
                 }
+                if (doMatch && isSeparator(message1, pos1)) {
+                    separatorPosition = noMatchEnd;
+                }
+            } else {
+                doMatch = false;
+                sameEnd = true;
             }
-            if (!sameEnd) {
-                noMatchEnd = separatorPosition;
-            }
-        } else {
-            String longMsg = message2;
-            String shortMsg = message1;
-            if (message1.length() > message2.length()) {
-                longMsg = message1;
-                shortMsg = message2;
-            }
-            int matchingLength = shortMsg.length();
-            int notMatchLength = longMsg.length() - shortMsg.length();
-            if (matchingLength / notMatchLength > MATCHING_INDEX) {
-                return PatternUtils.simpleToRegexp(shortMsg) + ANY_STR_PATTERN;
-            }
-            return null;
         }
-
+        if (!sameEnd && !sameStart) {
+            noMatchEnd = separatorPosition;
+        }
         int matchingLength = 2 * noMatchStart + 2 * noMatchEnd;
         int notMatchLength = message1.length() + message2.length() - 2 * noMatchStart - 2 * noMatchEnd;
         if (matchingLength / notMatchLength > MATCHING_INDEX) {
@@ -384,6 +370,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 props.setProperty("hibernate.connection.username", "admin");
                 props.setProperty("hibernate.hbm2ddl.auto", "update");
                 props.setProperty("hibernate.ejb.naming_strategy", "org.hibernate.cfg.ImprovedNamingStrategy");
+                props.setProperty("hibernate.current_session_context_class", "thread");
                 String connection = "jdbc:h2:/" + homeResolver.joinMkDirs("db", dbpath);
                 System.out.println(connection);
                 props.setProperty("hibernate.connection.url", connection);

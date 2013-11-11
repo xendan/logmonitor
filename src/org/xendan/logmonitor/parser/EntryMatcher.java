@@ -46,6 +46,6 @@ public class EntryMatcher {
     }
 
     private boolean messageMatch(String message, String messagePattern) {
-        return Pattern.compile(messagePattern).matcher(message).find();
+        return Pattern.compile(messagePattern, Pattern.CASE_INSENSITIVE).matcher(message).find();
     }
 }

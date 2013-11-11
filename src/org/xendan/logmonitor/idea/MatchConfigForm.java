@@ -154,7 +154,9 @@ public class MatchConfigForm {
             JCheckBox checkBox = (JCheckBox) e.getSource();
             Environment environment = (Environment) checkBox.getClientProperty(ENVIRONMENT);
             if (checkBox.isSelected()) {
-                environment.getMatchConfigs().add(beanAdapter.getBean());
+                if (!environment.getMatchConfigs().contains(beanAdapter.getBean())) {
+                    environment.getMatchConfigs().add(beanAdapter.getBean());
+                }
             } else {
                 environment.getMatchConfigs().remove(beanAdapter.getBean());
             }

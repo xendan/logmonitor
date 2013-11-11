@@ -132,7 +132,7 @@ public class LogMonitorPanel implements CreatePatternListener {
             if (value instanceof DefaultMutableTreeNode) {
                 String name = getIconImgName(((DefaultMutableTreeNode) value).getUserObject());
                 if (name != null) {
-                    setIcon(new ImageIcon(getClass().getResource("/org/xendan/logmonitor/idea/" + name + ".png")));
+                    setIcon(new ImageIcon(getClass().getResource("/org/xendan/logmonitor/idea/img/" + name + ".png")));
                 }
             }
             return this;

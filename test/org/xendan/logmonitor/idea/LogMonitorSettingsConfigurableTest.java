@@ -67,6 +67,24 @@ public class LogMonitorSettingsConfigurableTest {
     }
 
     @Test
+    public void test_configs_visible_all() throws Exception {
+        setSomeEnvironments();
+        local.setMatchConfigs(Arrays.asList(createConfig(1)));
+        notLocal.setMatchConfigs(Arrays.asList(createConfig(2)));
+        configurable.reset();
+        configurable.projectComboBox.setSelectedItem(config);
+
+        assertEquals("Expect two configs for two environments are set",
+                2, configurable.paternsList.getModel().getSize() );
+    }
+
+    private MatchConfig createConfig(int id) {
+        MatchConfig matchConfig = new MatchConfig();
+        matchConfig.setId((long) id);
+        return matchConfig;
+    }
+
+    @Test
     public void test_selected_config() throws Exception {
         configurable.reset();
         assertEquals("Expect existing and new project", 2, configurable.projectComboBox.getModel().getSize());
@@ -174,17 +192,6 @@ public class LogMonitorSettingsConfigurableTest {
         configurable.addLogSettingsButton.doClick();
         configurable.addLogSettingsButton.doClick();
         assertEquals(1, configurable.environmentsList.getModel().getSize());
-    }
-
-    @Test
-    public void test_patterns_disabled() throws Exception {
-        setSomeEnvironments();
-        configurable.reset();
-        configurable.projectComboBox.setSelectedItem(config);
-
-        assertFalse(configurable.paternsList.isEnabled());
-        configurable.environmentsList.setSelectedValue(local, false);
-        assertTrue("Some log settings is selected", configurable.paternsList.isEnabled());
     }
 
     @Test
