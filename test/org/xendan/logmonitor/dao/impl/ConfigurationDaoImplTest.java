@@ -64,11 +64,11 @@ public class ConfigurationDaoImplTest {
     @Test
     public void testAddConfig() throws Exception {
         List<LogEntry> entries = new ArrayList<LogEntry>();
-        String error1 = "this is a long error";
+        String error1 = "this. is .a long [error]";
         for (int i = 0; i < 3; i++) {
             entries.add(createError(error1));
         }
-        entries.add(createError("and it is a short error"));
+        entries.add(createError("and[] it. is a short [error]#"));
         dao.addEntries(entries);
         assertEquals(1, dao.getMatchedEntryGroups(matchConfig, environment).size());
         assertEquals(3, dao.getMatchedEntryGroups(matchConfig, environment).get(0).getEntries().size());
@@ -76,7 +76,7 @@ public class ConfigurationDaoImplTest {
 
         MatchConfig textError = new MatchConfig();
         textError.setLevel(Level.ERROR.toString());
-        textError.setMessage("Error");
+        textError.setMessage("\\[Error\\]");
 
         dao.addMatchConfig(environment, textError);
         environment.getMatchConfigs().add(textError);
@@ -92,6 +92,7 @@ public class ConfigurationDaoImplTest {
     private LogEntry createError(String message) {
         LogEntry entry = new LogEntry();
         entry.setLevel(Level.ERROR.toString());
+        entry.setDate(new LocalDateTime());
         entry.setMessage(message);
         entry.setEnvironment(environment);
         entry.setMatchConfig(matchConfig);

@@ -83,7 +83,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     @Override
-    public void addMatchConfig(Environment environment, MatchConfig newConfig) {
+    public synchronized void addMatchConfig(Environment environment, MatchConfig newConfig) {
         entityManager.getTransaction().begin();
         for (MatchConfig matchConfig : environment.getMatchConfigs()) {
             if (matchConfig.isGeneral()) {
@@ -96,7 +96,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                             groupChanged = true;
                             //TODO message!
                             entry.setMatchConfig(newConfig);
-                            entityManager.persist(entry);
+                            persistEntry(entry);
                         }
                     }
                     if (groupChanged) {
@@ -115,7 +115,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                     if (PatternUtils.isMatch(entry, newConfig)) {
                         //TODO message!
                         entry.setMatchConfig(newConfig);
-                        entityManager.persist(entry);
+                        persistEntry(entry);
                     }
                 }
             }
@@ -129,7 +129,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         if (messagePattern.contains(PatternUtils.ALL_GROUP)) {
             entry.setMessage(PatternUtils.regexToSimple(messagePattern).replace(PatternUtils.ALL_GROUP, entry.getMessage()));
         } else {
-            entry.setMessage(messagePattern);
+            entry.setMessage(PatternUtils.regexToSimple(messagePattern));
         }
     }
 
@@ -188,13 +188,22 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         entityManager.getTransaction().begin();
         for (LogEntry entry : entries) {
             if (!entry.getMatchConfig().isGeneral()) {
-                entityManager.persist(getLogEntryForNotGeneral(entries, entry));
+                persistEntry(getLogEntryForNotGeneral(entries, entry));
             } else {
                 List<LogEntryGroup> groups = getMatchedEntryGroups(entry.getMatchConfig(), entry.getEnvironment());
                 persistGroupCandidate(entry, getMatchedGroup(groups, entry));
             }
         }
         entityManager.getTransaction().commit();
+    }
+
+    private LogEntry assertEntryOk(LogEntry entry) {
+
+        assert  entry.getMessage() != null;
+        assert entry.getLevel() != null;
+        assert entry.getDate() != null;
+
+        return entry;
     }
 
     private void persistGroupCandidate(LogEntry entry, LogEntryGroup matchedGroup) {
@@ -206,15 +215,19 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
             List<LogEntry> oldEntries = getNotGroupedMatchedEntries(entry.getMatchConfig(), entry.getEnvironment());
             boolean matchFound = false;
             for (Iterator<LogEntry> iterator = oldEntries.iterator(); iterator.hasNext() && !matchFound; ) {
-                matchFound = checkIfEntryInSameGroup(entry, iterator.next());
+                matchFound = checkIfShouldBeSameGroup(entry, iterator.next());
             }
             if (!matchFound) {
-                entityManager.persist(entry);
+                persistEntry(entry);
             }
         }
     }
 
-    private boolean checkIfEntryInSameGroup(LogEntry entry, LogEntry oldEntry) {
+    private void persistEntry(LogEntry entry) {
+        entityManager.persist(assertEntryOk(entry));
+    }
+
+    private boolean checkIfShouldBeSameGroup(LogEntry entry, LogEntry oldEntry) {
         String commonPattern = getCommonPattern(entry.getMessage(), oldEntry.getMessage());
         if (commonPattern != null) {
             LogEntryGroup group = new LogEntryGroup();
@@ -253,15 +266,16 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 }
             }
         }
-        boolean sameStart = true;
+        boolean includeAtStart = true;
         if (noMatchStart < message1.length() && noMatchStart < message2.length()) {
-            sameStart = false;
+            includeAtStart = false;
             noMatchStart = separatorPosition;
         }
         int noMatchEnd = 0;
+        separatorPosition = 0;
         boolean sameEnd = false;
         doMatch = true;
-        while (doMatch && !sameStart) {
+        while (doMatch && !includeAtStart) {
             noMatchEnd++;
             int pos1 = message1.length() - noMatchEnd;
             int pos2 = message2.length() - noMatchEnd;
@@ -277,7 +291,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 sameEnd = true;
             }
         }
-        if (!sameEnd && !sameStart) {
+        if (!sameEnd && !includeAtStart) {
             noMatchEnd = separatorPosition;
         }
         int matchingLength = 2 * noMatchStart + 2 * noMatchEnd;

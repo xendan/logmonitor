@@ -138,8 +138,9 @@ public class LogMonitorPanel {
             if (userObject instanceof Environment) {
                 return "environment";
             }
-            if (userObject instanceof MatchConfig) {
-                return "list-error";
+            if (userObject instanceof LogMonitorPanelModel.MatchConfigObject) {
+                MatchConfig config = ((LogMonitorPanelModel.MatchConfigObject) userObject).getMatchConfig();
+                return config.isGeneral() ? "list-unknown" : "list-error";
             }
             if (userObject instanceof LogMonitorPanelModel.EntryObject) {
                 LogMonitorPanelModel.EntryObject entryObject = (LogMonitorPanelModel.EntryObject) userObject;

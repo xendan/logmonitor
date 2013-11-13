@@ -60,25 +60,28 @@ public class LogMonitorPanelModel {
     private MutableTreeNode createEnvironment(Environment environment) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(environment);
         for (MatchConfig matchConfig : environment.getMatchConfigs()) {
-            node.add(createMatchNode(matchConfig, environment));
+            node.add(createMatchNode(matchConfig, environment, true));
         }
         return node;
     }
 
-    private MutableTreeNode createMatchNode(MatchConfig matchConfig, Environment environment) {
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(matchConfig);
+    private DefaultMutableTreeNode createMatchNode(MatchConfig matchConfig, Environment environment, boolean addIsLoading) {
+        MatchConfigObject matchConfigObject = new MatchConfigObject(matchConfig);
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(matchConfigObject);
         List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
         List<LogEntry> entries = dao.getNotGroupedMatchedEntries(matchConfig, environment);
+        matchConfigObject.setChildNum(groups.size() + entries.size());
         if (!groups.isEmpty() || !entries.isEmpty()) {
             return addGroupsAndEntries(node, groups, entries);
         }
-        DefaultMutableTreeNode loading = new DefaultMutableTreeNode(LOADING);
-        node.add(loading);
+        if (addIsLoading) {
+            node.add(new DefaultMutableTreeNode(LOADING));
+        }
         return node;
 
     }
 
-    private MutableTreeNode addGroupsAndEntries(DefaultMutableTreeNode node, List<LogEntryGroup> groups, List<LogEntry> entries) {
+    private DefaultMutableTreeNode addGroupsAndEntries(DefaultMutableTreeNode node, List<LogEntryGroup> groups, List<LogEntry> entries) {
         for (LogEntryGroup group : groups) {
             node.add(createLogEntryGroupNode(group));
         }
@@ -121,17 +124,6 @@ public class LogMonitorPanelModel {
         return server.getLogin() + "@" + server.getHost();
     }
 
-
-    private LogEntry getEntry(TreePath path) {
-        if (path.getLastPathComponent() instanceof DefaultMutableTreeNode) {
-            Object obj = ((DefaultMutableTreeNode) path.getLastPathComponent()).getUserObject();
-            if (obj instanceof EntryObject) {
-                return ((EntryObject) obj).getEntry();
-            }
-        }
-        return null;
-    }
-
     @SuppressWarnings("unchecked")
     private <T> T getObjectFromPath(TreePath path, Class<T> objectClass) {
         if (path == null) {
@@ -152,16 +144,25 @@ public class LogMonitorPanelModel {
     public void onEntriesAdded(Environment environment, DefaultTreeModel model) {
         DefaultMutableTreeNode envNode = findNode((DefaultMutableTreeNode) model.getRoot(), environment);
         for (MatchConfig matchConfig : environment.getMatchConfigs()) {
-            DefaultMutableTreeNode node = findNode(envNode, matchConfig);
-            while (node.getChildCount() != 0) {
-                TreeNode child = node.getChildAt(0);
-                model.removeNodeFromParent((MutableTreeNode) child);
-            }
-            for (LogEntryGroup group : dao.getMatchedEntryGroups(matchConfig, environment)) {
-                model.insertNodeInto(createLogEntryGroupNode(group), node, node.getChildCount());
-            }
-            for (LogEntry entry : dao.getNotGroupedMatchedEntries(matchConfig, environment)) {
-                model.insertNodeInto(createEntryNode(entry), node, node.getChildCount());
+            DefaultMutableTreeNode node = findNode(envNode, new MatchConfigObject(matchConfig));
+            if (node == null) {
+                model.insertNodeInto(createMatchNode(matchConfig, environment, false), envNode, envNode.getChildCount());
+            } else {
+                while (node.getChildCount() != 0) {
+                    TreeNode child = node.getChildAt(0);
+                    model.removeNodeFromParent((MutableTreeNode) child);
+                }
+                MatchConfigObject configObject = (MatchConfigObject) node.getUserObject();
+                int itemsNum = 0;
+                for (LogEntryGroup group : dao.getMatchedEntryGroups(matchConfig, environment)) {
+                    model.insertNodeInto(createLogEntryGroupNode(group), node, node.getChildCount());
+                    itemsNum++;
+                }
+                for (LogEntry entry : dao.getNotGroupedMatchedEntries(matchConfig, environment)) {
+                    model.insertNodeInto(createEntryNode(entry), node, node.getChildCount());
+                    itemsNum++;
+                }
+                configObject.setChildNum(itemsNum);
             }
         }
     }
@@ -184,17 +185,61 @@ public class LogMonitorPanelModel {
         JPopupMenu menu = new JPopupMenu();
         menu.add(new JMenuItem(new OpenConfig(openConfigDialog)));
 
-        MatchConfig config = getObjectFromPath(path, MatchConfig.class);
+        MatchConfigObject config = getObjectFromPath(path, MatchConfigObject.class);
         Configuration configuration = getObjectFromPath(path, Configuration.class);
         GroupObject group = getObjectFromPath(path, GroupObject.class);
         if (group != null) {
-            menu.add(new JMenuItem(new CreateGroupedMatchConfig(configuration, group.getGroup(), config.getLevel())));
+            menu.add(new JMenuItem(new CreateGroupedMatchConfig(configuration, group.getGroup(), config.matchConfig.getLevel())));
         }
         return menu;
     }
 
     private interface ConsoleDisplayable {
         String toConsoleString();
+    }
+
+    public class MatchConfigObject implements ConsoleDisplayable {
+        private final MatchConfig matchConfig;
+        private int childNum;
+
+        public MatchConfigObject(MatchConfig matchConfig) {
+            this.matchConfig = matchConfig;
+        }
+
+        public void setChildNum(int childNum) {
+            this.childNum = childNum;
+        }
+
+        @Override
+        public String toString() {
+            return matchConfig.toString() + "(" + childNum + ")";
+        }
+
+        @Override
+        public String toConsoleString() {
+            return matchConfig.toString() + "\nLEVEL>=" + matchConfig.getLevel() + "\nPattern:\n" + matchConfig.getMessage();
+        }
+
+        public MatchConfig getMatchConfig() {
+            return matchConfig;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            MatchConfigObject that = (MatchConfigObject) o;
+
+            if (matchConfig != null ? !matchConfig.equals(that.matchConfig) : that.matchConfig != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            return matchConfig != null ? matchConfig.hashCode() : 0;
+        }
     }
 
     public static class EntryObject implements ConsoleDisplayable {
@@ -207,10 +252,6 @@ public class LogMonitorPanelModel {
         @Override
         public String toString() {
             return entry.getLevel() + ":" + entry.getDate() + StringUtils.abbreviate(entry.getMessage(), 10);
-        }
-
-        public LogEntry getEntry() {
-            return entry;
         }
 
         @Override
@@ -285,24 +326,42 @@ public class LogMonitorPanelModel {
             VerboseBeanAdapter<MatchConfig> beanAdapter = new VerboseBeanAdapter<MatchConfig>(config);
             matchConfigForm.setBeanAdapters(beanAdapter);
             final List<Environment> copy = serializer.doCopy(configuration.getEnvironments());
+            for (Environment environment : copy) {
+                environment.getMatchConfigs().add(config);
+            }
             matchConfigForm.setEnvironments(new ValueHolder(copy));
             matchConfigForm.setIsSpecific();
-            BaseDialog dialog = new BaseDialog(new OnOkAction() {
-                @Override
-                public boolean doAction() {
-                    doSaveSettings(config, copy, configuration.getEnvironments());
-                    return true;
-                }
-            }, matchConfigForm.getContentPanel());
+            BaseDialog dialog = new BaseDialog(new OnMatchConfigOkAction(config, copy), matchConfigForm.getContentPanel());
             dialog.setTitleAndShow("Add new match config");
         }
 
         private void doSaveSettings(MatchConfig config, List<Environment> copies, List<Environment> originals) {
             for (int i = 0; i < copies.size(); i++) {
-                 if (copies.get(i).getMatchConfigs().contains(config)) {
-                     dao.addMatchConfig(originals.get(i), config);
-                     listener.onEntriesAdded(originals.get(i));
-                 }
+                if (copies.get(i).getMatchConfigs().contains(config)) {
+                    dao.addMatchConfig(originals.get(i), config);
+                    listener.onEntriesAdded(originals.get(i));
+                }
+            }
+        }
+
+        private class OnMatchConfigOkAction extends Thread implements OnOkAction {
+            private final MatchConfig config;
+            private final List<Environment> copy;
+
+            private OnMatchConfigOkAction(MatchConfig config, List<Environment> copy) {
+                this.config = config;
+                this.copy = copy;
+            }
+
+            @Override
+            public boolean doAction() {
+                start();
+                return true;
+            }
+
+            @Override
+            public void run() {
+                doSaveSettings(config, copy, configuration.getEnvironments());
             }
         }
     }
