@@ -43,7 +43,6 @@ import java.util.List;
  * Date: 03/09/13
  */
 public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll {
-    public static final String ENVIRONMENTS = "environments";
     private final Serializer serializer;
     private final ReaderScheduler scheduler;
     private final Project project;
@@ -269,7 +268,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         private VerboseBeanAdapter<Server> serverAdapter = new VerboseBeanAdapter<Server>(new Server());
 
         public EnvironmentsModel() {
-            super(addLogSettingsButton, removeLogSettingsButton, logSettingsPanel, environmentsList, configAdapter.getPropertyModel(ENVIRONMENTS), "name");
+            super(addLogSettingsButton, removeLogSettingsButton, logSettingsPanel, environmentsList, configAdapter.getPropertyModel(Configuration.ENVIRONMENTS), "name");
         }
 
 
@@ -463,7 +462,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         private MatchConfigForm form;
 
         public MatchConfigModel() {
-            super(addPatternButton, removePatternButton, matchConfigPanel, paternsList, new MatchConfigListModel(configAdapter.getPropertyModel(ENVIRONMENTS)), "name");
+            super(addPatternButton, removePatternButton, matchConfigPanel, paternsList, new MatchConfigListModel(configAdapter.getPropertyModel(Configuration.ENVIRONMENTS)), "name");
         }
 
         @Override
@@ -472,7 +471,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             matchConfigPanel.setLayout(new BoxLayout(matchConfigPanel, BoxLayout.PAGE_AXIS));
             matchConfigPanel.add(form.contentPanel);
             form.setBeanAdapters(beanAdapter);
-            form.setEnvironments(configAdapter.getPropertyModel(ENVIRONMENTS));
+            form.setEnvironments(configAdapter.getPropertyModel(Configuration.ENVIRONMENTS));
             setPanelEnabled(itemPanel, false);
             setFirstFocusComponent(form.getFirstFocusComponent());
         }

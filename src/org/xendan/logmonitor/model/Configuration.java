@@ -10,6 +10,7 @@ import java.util.List;
  */
 @Entity
 public class Configuration extends BaseObject {
+    public static final String ENVIRONMENTS = "environments";
     private String projectName;
     private String logPattern;
     private List<Environment> environments = new ArrayList<Environment>();

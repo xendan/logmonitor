@@ -1,12 +1,15 @@
 package org.xendan.logmonitor.idea.model;
 
+import com.jgoodies.binding.value.ValueHolder;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
 import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.idea.BaseDialog;
 import org.xendan.logmonitor.idea.MatchConfigForm;
 import org.xendan.logmonitor.model.*;
+import org.xendan.logmonitor.parser.EntryAddedListener;
 import org.xendan.logmonitor.parser.PatternUtils;
+import org.xendan.logmonitor.read.Serializer;
 
 import javax.swing.*;
 import javax.swing.tree.*;
@@ -21,9 +24,13 @@ public class LogMonitorPanelModel {
 
     public static final String LOADING = "Loading...";
     private final ConfigurationDao dao;
+    private final Serializer serializer;
+    private final EntryAddedListener listener;
 
-    public LogMonitorPanelModel(ConfigurationDao dao) {
+    public LogMonitorPanelModel(ConfigurationDao dao, Serializer serializer, EntryAddedListener listener) {
         this.dao = dao;
+        this.serializer = serializer;
+        this.listener = listener;
     }
 
     public boolean hasConfig() {
@@ -125,14 +132,6 @@ public class LogMonitorPanelModel {
         return null;
     }
 
-    public void addMatchConfig(MatchConfig matcher, TreePath treePath) {
-        LogEntry entry = getEntry(treePath);
-        Environment settings = getObjectFromPath(treePath, Environment.class);
-        if (entry != null) {
-            dao.addMatchConfig(matcher, entry.getMatchConfig(), settings);
-        }
-    }
-
     @SuppressWarnings("unchecked")
     private <T> T getObjectFromPath(TreePath path, Class<T> objectClass) {
         if (path == null) {
@@ -186,9 +185,10 @@ public class LogMonitorPanelModel {
         menu.add(new JMenuItem(new OpenConfig(openConfigDialog)));
 
         MatchConfig config = getObjectFromPath(path, MatchConfig.class);
+        Configuration configuration = getObjectFromPath(path, Configuration.class);
         GroupObject group = getObjectFromPath(path, GroupObject.class);
         if (group != null) {
-            menu.add(new JMenuItem(new CreateGroupedMatchConfig(group.getGroup(), config.getLevel())));
+            menu.add(new JMenuItem(new CreateGroupedMatchConfig(configuration, group.getGroup(), config.getLevel())));
         }
         return menu;
     }
@@ -267,9 +267,11 @@ public class LogMonitorPanelModel {
     private class CreateGroupedMatchConfig extends AbstractAction {
         private final LogEntryGroup group;
         private final String level;
+        private final Configuration configuration;
 
-        public CreateGroupedMatchConfig(LogEntryGroup group, String level) {
+        public CreateGroupedMatchConfig(Configuration configuration, LogEntryGroup group, String level) {
             super("Create match...");
+            this.configuration = configuration;
             this.group = group;
             this.level = level;
         }
@@ -277,18 +279,31 @@ public class LogMonitorPanelModel {
         @Override
         public void actionPerformed(ActionEvent e) {
             MatchConfigForm matchConfigForm = new MatchConfigForm();
-            MatchConfig config = new MatchConfig();
+            final MatchConfig config = new MatchConfig();
             config.setMessage(group.getMessagePattern());
             config.setLevel(level);
-            matchConfigForm.setBeanAdapters(new VerboseBeanAdapter<MatchConfig>(config));
+            VerboseBeanAdapter<MatchConfig> beanAdapter = new VerboseBeanAdapter<MatchConfig>(config);
+            matchConfigForm.setBeanAdapters(beanAdapter);
+            final List<Environment> copy = serializer.doCopy(configuration.getEnvironments());
+            matchConfigForm.setEnvironments(new ValueHolder(copy));
             matchConfigForm.setIsSpecific();
             BaseDialog dialog = new BaseDialog(new OnOkAction() {
                 @Override
                 public boolean doAction() {
+                    doSaveSettings(config, copy, configuration.getEnvironments());
                     return true;
                 }
             }, matchConfigForm.getContentPanel());
             dialog.setTitleAndShow("Add new match config");
+        }
+
+        private void doSaveSettings(MatchConfig config, List<Environment> copies, List<Environment> originals) {
+            for (int i = 0; i < copies.size(); i++) {
+                 if (copies.get(i).getMatchConfigs().contains(config)) {
+                     dao.addMatchConfig(originals.get(i), config);
+                     listener.onEntriesAdded(originals.get(i));
+                 }
+            }
         }
     }
 

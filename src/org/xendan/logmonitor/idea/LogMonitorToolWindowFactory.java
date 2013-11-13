@@ -29,7 +29,7 @@ public class LogMonitorToolWindowFactory implements ToolWindowFactory {
 
     @Override
     public void createToolWindowContent(Project project, ToolWindow toolWindow) {
-        LogMonitorPanel panel = new LogMonitorPanel(new LogMonitorPanelModel(dao), project, new LogMonitorSettingsConfigurable(project, dao, serializer, scheduler));
+        LogMonitorPanel panel = new LogMonitorPanel(new LogMonitorPanelModel(dao, serializer, listener), project, new LogMonitorSettingsConfigurable(project, dao, serializer, scheduler));
         listener.setLogMonitorPanel(panel);
         toolWindow.getContentManager().addContent(new ContentImpl(panel.contentPanel, "", true));
         scheduler.refresh();

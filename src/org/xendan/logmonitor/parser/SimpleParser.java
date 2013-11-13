@@ -8,6 +8,10 @@ class SimpleParser extends UnitParser<String> {
         super(log4jPattern);
     }
 
+    public SimpleParser(String samplePatternStr, boolean addCurlBraces) {
+        super(samplePatternStr, addCurlBraces);
+    }
+
     @Override
     public String toValue(String string) {
         return string;

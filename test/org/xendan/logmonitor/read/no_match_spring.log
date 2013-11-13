@@ -1,0 +1,139 @@
+2013-11-12 11:52:19,679 ERROR [org.quartz.core.ErrorLogger] Job (DEFAULT.org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean#6ec15ff6 threw an exception.
+org.quartz.SchedulerException: Job threw an unhandled exception. [See nested exception: org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:206)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+* Nested Exception (Underlying Cause) ---------------
+org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:273)
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:86)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:195)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+Caused by: java.lang.NullPointerException
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.getIncreaseConfiguration(AutoIncreaseInternalEscalationRule.java:102)
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.mustBeExecuted(AutoIncreaseInternalEscalationRule.java:76)
+	at com.bics.btts.job.ActionRepairTimeJob.execute(ActionRepairTimeJob.java:62)
+	at com.bics.btts.job.BttsJob.startJob(BttsJob.java:19)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:273)
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:264)
+	... 3 more
+2013-11-12 11:52:31,371 WARN  [org.caramba.CarambaContext] An event did throw an error. (pnl_contactCarrier.tbl_carriers , rowSelected
+java.lang.IndexOutOfBoundsException: Index: 2, Size: 1
+	at java.util.ArrayList.RangeCheck(ArrayList.java:547)
+	at java.util.ArrayList.get(ArrayList.java:322)
+	at org.caramba.components.Table.onEvent(Table.java:173)
+	at org.caramba.CarambaServlet.handleComponentEvent(CarambaServlet.java:726)
+	at org.caramba.CarambaServlet.service(CarambaServlet.java:171)
+	at javax.servlet.http.HttpServlet.service(HttpServlet.java:803)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:290)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at com.bics.btts.util.EncodingFilter.doFilterInternal(EncodingFilter.java:22)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:76)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at davinci.usermgt.ias.AuthenticationSecurityFilter.doFilter(AuthenticationSecurityFilter.java:208)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.jboss.web.tomcat.filters.ReplyHeaderFilter.doFilter(ReplyHeaderFilter.java:96)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.hyperic.hq.product.servlet.filter.JMXFilter.doFilter(JMXFilter.java:324)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:235)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:206)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:230)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:175)
+	at org.jboss.web.tomcat.security.SecurityAssociationValve.invoke(SecurityAssociationValve.java:182)
+	at org.jboss.web.tomcat.security.JaccContextValve.invoke(JaccContextValve.java:84)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:127)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:102)
+	at org.jboss.web.tomcat.service.jca.CachedConnectionValve.invoke(CachedConnectionValve.java:157)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:109)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:262)
+	at org.apache.coyote.ajp.AjpProcessor.process(AjpProcessor.java:437)
+	at org.apache.coyote.ajp.AjpProtocol$AjpConnectionHandler.process(AjpProtocol.java:366)
+	at org.apache.tomcat.util.net.JIoEndpoint$Worker.run(JIoEndpoint.java:446)
+	at java.lang.Thread.run(Thread.java:619)
+2013-11-12 11:53:02,309 INFO  [org.apache.cxf.service.factory.ReflectionServiceFactoryBean] Creating Service {http://schemas.microsoft.com/sharepoint/soap/}Lists from WSDL: http://infoportal.bgc.net/sites/SDE_SNA/1LCC/_vti_bin/Lists.asmx?wsdl
+2013-11-12 11:53:02,327 WARN  [org.apache.cxf.service.factory.ReflectionServiceFactoryBean] Could not find a matching method for operation {http://schemas.microsoft.com/sharepoint/soap/}GetListItemChangesWithKnowledge. Operation will be unavailable.
+2013-11-12 11:53:02,328 WARN  [org.apache.cxf.service.factory.ReflectionServiceFactoryBean] Could not find a matching method for operation {http://schemas.microsoft.com/sharepoint/soap/}UpdateListItemsWithKnowledge. Operation will be unavailable.
+2013-11-12 11:53:02,329 WARN  [org.apache.cxf.service.factory.ReflectionServiceFactoryBean] Could not find a matching method for operation {http://schemas.microsoft.com/sharepoint/soap/}AddWikiPage. Operation will be unavailable.
+2013-11-12 11:53:02,332 WARN  [org.apache.cxf.service.factory.ReflectionServiceFactoryBean] Could not find a matching method for operation {http://schemas.microsoft.com/sharepoint/soap/}GetListContentTypesAndProperties. Operation will be unavailable.
+2013-11-12 11:53:02,600 INFO  [org.apache.cxf.service.factory.ReflectionServiceFactoryBean] Creating Service {http://schemas.microsoft.com/sharepoint/soap/}Lists from WSDL: http://infoportal.bgc.net/sites/SDE_SNA/1LCC/_vti_bin/Lists.asmx?wsdl
+2013-11-12 11:53:02,615 WARN  [org.apache.cxf.service.factory.ReflectionServiceFactoryBean] Could not find a matching method for operation {http://schemas.microsoft.com/sharepoint/soap/}GetListItemChangesWithKnowledge. Operation will be unavailable.
+2013-11-12 11:53:02,616 WARN  [org.apache.cxf.service.factory.ReflectionServiceFactoryBean] Could not find a matching method for operation {http://schemas.microsoft.com/sharepoint/soap/}UpdateListItemsWithKnowledge. Operation will be unavailable.
+2013-11-12 11:53:02,617 WARN  [org.apache.cxf.service.factory.ReflectionServiceFactoryBean] Could not find a matching method for operation {http://schemas.microsoft.com/sharepoint/soap/}AddWikiPage. Operation will be unavailable.
+2013-11-12 11:53:02,621 WARN  [org.apache.cxf.service.factory.ReflectionServiceFactoryBean] Could not find a matching method for operation {http://schemas.microsoft.com/sharepoint/soap/}GetListContentTypesAndProperties. Operation will be unavailable.
+2013-11-12 12:06:40,211 INFO  [org.caramba.CarambaContext] CarambaContext unbound for Session 7459FE73F24B44282C94A2C0194A437A
+2013-11-12 12:20:00,019 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob started: 12/11/2013 12:20
+2013-11-12 12:22:47,688 ERROR [org.quartz.core.ErrorLogger] Job (DEFAULT.org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean#6ec15ff6 threw an exception.
+org.quartz.SchedulerException: Job threw an unhandled exception. [See nested exception: org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:206)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+* Nested Exception (Underlying Cause) ---------------
+org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:273)
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:86)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:195)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+Caused by: java.lang.NullPointerException
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.getIncreaseConfiguration(AutoIncreaseInternalEscalationRule.java:102)
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.mustBeExecuted(AutoIncreaseInternalEscalationRule.java:76)
+	at com.bics.btts.job.ActionRepairTimeJob.execute(ActionRepairTimeJob.java:62)
+	at com.bics.btts.job.BttsJob.startJob(BttsJob.java:19)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:273)
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:264)
+	... 3 more
+2013-11-12 12:24:31,401 INFO  [javax.servlet.http.HttpSessionListener] Session destroyed [BTTS] : id -->FD3F11C462A0C3F51E5D6913EEBBE4A6
+2013-11-12 12:32:14,699 ERROR [org.quartz.core.ErrorLogger] Job (DEFAULT.org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean#6ec15ff6 threw an exception.
+org.quartz.SchedulerException: Job threw an unhandled exception. [See nested exception: org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:206)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+* Nested Exception (Underlying Cause) ---------------
+org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:273)
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:86)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:195)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+Caused by: java.lang.NullPointerException
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.getIncreaseConfiguration(AutoIncreaseInternalEscalationRule.java:102)
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.mustBeExecuted(AutoIncreaseInternalEscalationRule.java:76)
+	at com.bics.btts.job.ActionRepairTimeJob.execute(ActionRepairTimeJob.java:62)
+	at com.bics.btts.job.BttsJob.startJob(BttsJob.java:19)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:273)
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:264)
+	... 3 more
+2013-11-12 13:00:06,077 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 133682 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-11-12 13:22:09,429 ERROR [org.quartz.core.ErrorLogger] Job (DEFAULT.org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean#6ec15ff6 threw an exception.
+org.quartz.SchedulerException: Job threw an unhandled exception. [See nested exception: org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException]
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:206)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+* Nested Exception (Underlying Cause) ---------------
+org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:273)
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:86)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:195)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+Caused by: java.lang.NullPointerException
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.getIncreaseConfiguration(AutoIncreaseInternalEscalationRule.java:102)
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.mustBeExecuted(AutoIncreaseInternalEscalationRule.java:76)
+	at com.bics.btts.job.ActionRepairTimeJob.execute(ActionRepairTimeJob.java:62)
+	at com.bics.btts.job.BttsJob.startJob(BttsJob.java:19)
+	at sun.reflect.GeneratedMethodAccessor1030.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:273)
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:264)
+	... 3 more
+2013-11-12 13:22:39,521 WARN  [com.bics.bgpl.davinci.PageUsageLoggerInterceptor] Page Usage is not logged in DaVinci since there is no dvfDataSource available
+2013-11-12 13:30:52,352 WARN  [org.caramba.editors.PropertyEditor] Editor could not get property externalSummary.content on object 264410 : Null property value for 'externalSummary.content' on bean class 'class com.bics.btts.model.Ticket'

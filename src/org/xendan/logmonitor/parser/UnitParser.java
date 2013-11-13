@@ -10,6 +10,13 @@ public abstract class UnitParser<V> {
     protected Pattern samplePattern;
     
     public UnitParser(String samplePatternStr) {
+        this(samplePatternStr, false);
+    }
+
+    public UnitParser(String samplePatternStr, boolean addCurlBraces) {
+        if (addCurlBraces) {
+            samplePatternStr += "(\\\\\\{.+\\\\\\})?";
+        }
         samplePattern = Pattern.compile("%" + samplePatternStr);
     }
 

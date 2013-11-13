@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.dao.impl;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.ejb.Ejb3Configuration;
 import org.hibernate.ejb.HibernatePersistence;
 import org.hibernate.ejb.packaging.PersistenceMetadata;
@@ -27,7 +28,6 @@ import java.util.regex.Pattern;
 public class ConfigurationDaoImpl implements ConfigurationDao {
 
     public static final int MATCHING_INDEX = 5;
-    public static final String ANY_STR_PATTERN = "(.*)";
     protected final EntityManager entityManager;
 
     public ConfigurationDaoImpl(HomeResolver homeResolver) {
@@ -83,6 +83,57 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     @Override
+    public void addMatchConfig(Environment environment, MatchConfig newConfig) {
+        entityManager.getTransaction().begin();
+        for (MatchConfig matchConfig : environment.getMatchConfigs()) {
+            if (matchConfig.isGeneral()) {
+                for (LogEntryGroup group : getMatchedEntryGroups(matchConfig, environment)) {
+                    boolean groupChanged = false;
+                    for (LogEntry entry : new ArrayList<LogEntry>(group.getEntries())) {
+                        restoreMessage(entry, group.getMessagePattern());
+                        if (PatternUtils.isMatch(entry, newConfig)) {
+                            group.getEntries().remove(entry);
+                            groupChanged = true;
+                            //TODO message!
+                            entry.setMatchConfig(newConfig);
+                            entityManager.persist(entry);
+                        }
+                    }
+                    if (groupChanged) {
+                        if (group.getEntries().isEmpty()) {
+                            entityManager.remove(group);
+                        } else {
+                            entityManager.persist(group);
+                        }
+                    }
+
+                }
+                for (LogEntry entry : getNotGroupedMatchedEntries(matchConfig, environment)) {
+                    if (!StringUtils.isEmpty(matchConfig.getMessage())) {
+                        restoreMessage(entry, matchConfig.getMessage());
+                    }
+                    if (PatternUtils.isMatch(entry, newConfig)) {
+                        //TODO message!
+                        entry.setMatchConfig(newConfig);
+                        entityManager.persist(entry);
+                    }
+                }
+            }
+        }
+        environment.getMatchConfigs().add(newConfig);
+        entityManager.persist(environment);
+        entityManager.getTransaction().commit();
+    }
+
+    private void restoreMessage(LogEntry entry, String messagePattern) {
+        if (messagePattern.contains(PatternUtils.ALL_GROUP)) {
+            entry.setMessage(PatternUtils.regexToSimple(messagePattern).replace(PatternUtils.ALL_GROUP, entry.getMessage()));
+        } else {
+            entry.setMessage(messagePattern);
+        }
+    }
+
+    @Override
     public LogEntry getLastEntry(Environment environment) {
         List<LogEntry> entries = entityManager.createQuery(
                 "SELECT e FROM LogEntry e where e.environment = (:environment) ORDER BY e.date DESC ",
@@ -130,55 +181,6 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 .getResultList();
         Collections.sort(groups, new GroupComparator());
         return groups;
-    }
-
-    @Override
-    public void clearEntries(Environment environment) {
-        entityManager.getTransaction().begin();
-        entityManager.createQuery(
-                "DELETE FROM LogEntry e where e.matchConfig = (:matchers) ")
-                .setParameter("matchers", environment.getMatchConfigs())
-                .executeUpdate();
-        entityManager.getTransaction().commit();
-    }
-
-    @Override
-    public void addMatchConfig(MatchConfig matcher, MatchConfig parentMatcher, Environment settings) {
-        entityManager.getTransaction().begin();
-        matcher.setWeight(getMaxWeight(settings.getMatchConfigs()) + 1);
-        settings.getMatchConfigs().add(matcher);
-        entityManager.persist(settings);
-        /*
-        if (matcher.isUseArchive()) {
-            List<LogEntry> entries = entityManager.createQuery(
-                    "SELECT e FROM LogEntry e where e.matchConfig = (:matcher) ORDER BY e.date DESC ",
-                    LogEntry.class)
-                    .setParameter("matcher", parentMatcher)
-                    .getResultList();
-            List<LogEntry> filtered = new ArrayList<LogEntry>();
-            /*
-            EntryMatcher entryMatcher = new EntryMatcher(Arrays.asList(matcher));
-            for (LogEntry entry : entries) {
-                if (entryMatcher.match(entry)) {
-                    filtered.add(entry);
-                    entityManager.remove(entry);
-                }
-            }
-            if (!filtered.isEmpty()) {
-                entityManager.merge(filtered.get(0).createCopy(filtered.size(), matcher));
-            }
-
-        }
-    */
-        entityManager.getTransaction().commit();
-    }
-
-    private int getMaxWeight(List<MatchConfig> matchConfigs) {
-        Collections.sort(matchConfigs);
-        if (matchConfigs.isEmpty()) {
-            return 0;
-        }
-        return matchConfigs.get(0).getWeight() == null ? 0 : matchConfigs.get(0).getWeight();
     }
 
     @Override
@@ -281,7 +283,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         int matchingLength = 2 * noMatchStart + 2 * noMatchEnd;
         int notMatchLength = message1.length() + message2.length() - 2 * noMatchStart - 2 * noMatchEnd;
         if (matchingLength / notMatchLength > MATCHING_INDEX) {
-            return PatternUtils.simpleToRegexp(message1.substring(0, noMatchStart)) + ANY_STR_PATTERN +
+            return PatternUtils.simpleToRegexp(message1.substring(0, noMatchStart)) + PatternUtils.ALL_GROUP +
                     PatternUtils.simpleToRegexp(message1.substring(message1.length() - noMatchEnd));
         }
         return null;
@@ -300,7 +302,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
             return matcher.group(1);
         }
         //TODO log or something
-        throw new IllegalArgumentException("No match of  *******\n" + commonPattern + "\n to message ********\n" + message);
+        throw new IllegalArgumentException("No match of  *******\n" + commonPattern + "\n to message ********\n" + message+"\n********\n");
     }
 
     private LogEntry getLogEntryForNotGeneral(List<LogEntry> entries, LogEntry entry) {

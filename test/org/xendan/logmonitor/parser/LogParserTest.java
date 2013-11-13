@@ -41,8 +41,8 @@ public class LogParserTest {
     }
 
     private LogEntry singleEntry(String pattern, String log) {
-        EntryMatcher genreousMatcher = createGenerousMatcher();
-        LogParser parser = new LogParser(A_WHILE_AGO, pattern, genreousMatcher);
+        EntryMatcher generousMatcher = createGenerousMatcher();
+        LogParser parser = new LogParser(A_WHILE_AGO, pattern, generousMatcher);
         parser.addString(log);
         return parser.getEntries().get(0);
     }

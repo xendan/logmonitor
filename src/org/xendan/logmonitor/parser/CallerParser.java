@@ -5,7 +5,7 @@ import java.util.regex.Matcher;
 class CallerParser extends UnitParser<String> {
 
     public CallerParser() {
-        super("[.\\d-]*C");
+        super("[.\\d-]*C", true);
     }
 
     @Override

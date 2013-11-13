@@ -48,7 +48,6 @@ Caused by: org.springframework.jdbc.UncategorizedSQLException: StatementCallback
 	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:273)
 	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:264)
 	... 3 more
-
 2015-10-22 00:00:00,021 WARN  [org.quartz.core.JobRunShell] lalalla
 2013-10-22 00:00:00,021 ERROR [org.quartz.core.JobRunShell] Caused by: org.springframework.jdbc.UncategorizedSQLException: StatementCallback; uncategorized SQLException for SQL [call P_REFRESH_REPAIR_INFO()]; SQL state [null]; error code [17008]; Closed Connection; nested exception is java.sql.SQLException: Closed Connection
 	at org.springframework.jdbc.support.AbstractFallbackSQLExceptionTranslator.translate(AbstractFallbackSQLExceptionTranslator.java:83)

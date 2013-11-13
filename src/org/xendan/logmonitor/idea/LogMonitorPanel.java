@@ -4,7 +4,6 @@ import com.intellij.execution.impl.ConsoleViewImpl;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
-import org.xendan.logmonitor.idea.model.CreatePatternListener;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.idea.model.OnOkAction;
 import org.xendan.logmonitor.model.Configuration;
@@ -26,7 +25,7 @@ import java.awt.event.MouseEvent;
  * User: id967161
  * Date: 05/09/13
  */
-public class LogMonitorPanel implements CreatePatternListener {
+public class LogMonitorPanel {
     private ConsoleViewImpl console;
     public JPanel contentPanel;
     private JTree logTree;
@@ -107,12 +106,6 @@ public class LogMonitorPanel implements CreatePatternListener {
                 model.getContextMenu(selectedPath, openConfigDialog).show(e.getComponent(), e.getX(), e.getY());
             }
         }
-    }
-
-    @Override
-    public void onMathConfigAdded(MatchConfig matcher) {
-        model.addMatchConfig(matcher, selectedPath);
-
     }
 
 

@@ -7,6 +7,8 @@ import org.junit.Test;
 import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.model.*;
+import org.xendan.logmonitor.parser.EntryAddedListener;
+import org.xendan.logmonitor.read.Serializer;
 
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
@@ -61,7 +63,7 @@ public class LogMonitorPanelModelTest {
     @Before
     public void setUp() {
         dao = mock(ConfigurationDao.class);
-        model = new LogMonitorPanelModel(dao);
+        model = new LogMonitorPanelModel(dao, mock(Serializer.class), mock(EntryAddedListener.class));
 
         Configuration config = new Configuration();
         Environment environment = new Environment();

@@ -15,6 +15,7 @@ import org.xendan.logmonitor.read.LogFileParserTest;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -47,8 +48,8 @@ public class ConfigurationDaoImplTest {
         }
         TestConfigurationDaoImpl daoImpl = new TestConfigurationDaoImpl(homeResolver, TEST_PATH);
         daoImpl.clearAll();
-        //new to recreate droped tables
-        dao =  new TestConfigurationDaoImpl(homeResolver, TEST_PATH);
+        //new to recreate dropped tables
+        dao = new TestConfigurationDaoImpl(homeResolver, TEST_PATH);
         environment = new Environment();
         matchConfig = new MatchConfig();
         matchConfig.setGeneral(true);
@@ -61,14 +62,46 @@ public class ConfigurationDaoImplTest {
     }
 
     @Test
-    public void test_unexpected_error() throws Exception {
-        List<LogEntry> entries = getJobErroresEntries("unexpected-error.log");
+    public void testAddConfig() throws Exception {
+        List<LogEntry> entries = new ArrayList<LogEntry>();
+        String error1 = "this is a long error";
+        for (int i = 0; i < 3; i++) {
+            entries.add(createError(error1));
+        }
+        entries.add(createError("and it is a short error"));
         dao.addEntries(entries);
-        /*
-        List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
-        assertEquals("Expect single group", 1, groups.size());
-        assertTrue(groups.get(0).getMessagePattern().endsWith("(.*)"));
-        */
+        assertEquals(1, dao.getMatchedEntryGroups(matchConfig, environment).size());
+        assertEquals(3, dao.getMatchedEntryGroups(matchConfig, environment).get(0).getEntries().size());
+        assertEquals(1, dao.getNotGroupedMatchedEntries(matchConfig, environment).size());
+
+        MatchConfig textError = new MatchConfig();
+        textError.setLevel(Level.ERROR.toString());
+        textError.setMessage("Error");
+
+        dao.addMatchConfig(environment, textError);
+        environment.getMatchConfigs().add(textError);
+
+        assertEquals(0, dao.getMatchedEntryGroups(matchConfig, environment).size());
+        assertEquals(0, dao.getNotGroupedMatchedEntries(matchConfig, environment).size());
+
+        entries = dao.getNotGroupedMatchedEntries(textError, environment);
+        assertEquals("All errors are now for new config",
+                4, entries.size());
+    }
+
+    private LogEntry createError(String message) {
+        LogEntry entry = new LogEntry();
+        entry.setLevel(Level.ERROR.toString());
+        entry.setMessage(message);
+        entry.setEnvironment(environment);
+        entry.setMatchConfig(matchConfig);
+        return entry;
+    }
+
+    @Test
+    public void test_misc_error() throws Exception {
+        dao.addEntries(getJobErroresEntries("unexpected-error.log"));
+        dao.addEntries(getJobErroresEntries("error_line_89.log"));
     }
 
     @Test

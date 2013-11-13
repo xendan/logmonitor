@@ -15,7 +15,7 @@ public class DateParser extends UnitParser<LocalDateTime> {
     private DateTimeFormatter dateFormatter;
 
     public DateParser() {
-        super("d(\\{(.+?)\\})?");
+        super("d(\\\\\\{(.+?)\\\\\\})?");
     }
 
     @Override

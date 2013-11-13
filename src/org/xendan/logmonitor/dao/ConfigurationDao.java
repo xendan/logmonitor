@@ -22,7 +22,5 @@ public interface ConfigurationDao {
 
     List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment);
 
-    void addMatchConfig(MatchConfig matcher, MatchConfig parentMatcher, Environment settings);
-
-    void clearEntries(Environment settings);
+    void addMatchConfig(Environment environment, MatchConfig config);
 }

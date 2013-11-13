@@ -19,7 +19,7 @@ public class LogParser {
     private final UnitParser<LocalDateTime> dateParser = new DateParser();
     private final UnitParser<String> levelParser = new LevelParser();
     private final UnitParser<String> messageParser = new SimpleParser("m");
-    private final UnitParser<String> categoryParser = new SimpleParser("c");
+    private final UnitParser<String> categoryParser = new SimpleParser("c", true);
     private final UnitParser<Integer> lineNumberParser = new LineNumberParser();
 
     private final UnitParser<?>[] allParsers = {callerParser, dateParser, levelParser, messageParser, categoryParser, lineNumberParser};
@@ -29,6 +29,7 @@ public class LogParser {
     private final String pattern;
     private final EntryMatcher entryMatcher;
     private final LocalDateTime since;
+    private LogEntry lastEntry;
 
     public LogParser(LocalDateTime since, String pattern, Environment environment) {
         this(since, pattern, new EntryMatcher(environment));
@@ -37,8 +38,38 @@ public class LogParser {
     public LogParser(LocalDateTime since, String pattern, EntryMatcher entryMatcher) {
         this.since = since;
         this.entryMatcher = entryMatcher;
-        this.pattern = PatternUtils.simpleToRegexp(pattern).replace("%n", "");
+        this.pattern = slashRegexpSymbols(pattern.replace("%n", ""));
         regexPattern = getRegexPattern();
+    }
+
+    private String slashRegexpSymbols(String pattern) {
+        return PatternUtils.simpleToRegexp(pattern);
+        /*
+        //Although {} is regexp special, it can be used in log4j, so should not be slashed
+        Matcher patternMatcher = PATTERN_MATCHER.matcher(pattern);
+        List<String> notSpecialPatterns = new ArrayList<String>();
+        List<String> specialPatterns = new ArrayList<String>();
+        int index = 0;
+        while (patternMatcher.find()) {
+            notSpecialPatterns.add(pattern.substring(index, patternMatcher.start()));
+            specialPatterns.add(patternMatcher.group());
+            index = patternMatcher.end();
+        }
+        notSpecialPatterns.add(pattern.substring(index));
+        List<String> notSpecialSlashed = new ArrayList<String>(notSpecialPatterns.size());
+        for (String notSpecialPattern : notSpecialPatterns) {
+            notSpecialSlashed.add(PatternUtils.simpleToRegexp(notSpecialPattern));
+        }
+        String result = "";
+        int i;
+        for (i= 0; i < specialPatterns.size(); i++) {
+           result += notSpecialSlashed.get(i);
+           result += specialPatterns.get(i);
+        }
+        if (i + 1 < specialPatterns.size()) {
+            result += specialPatterns.get(i + 1);
+        }
+        return result;    */
     }
 
 
@@ -78,16 +109,18 @@ public class LogParser {
     public void addString(String log) {
         Matcher matcher = regexPattern.matcher(log);
         if (!matcher.find()) {
-            if (entries.isEmpty()) {
+            if (lastEntry == null) {
                 return;
             }
-            LogEntry last = entries.get(entries.size() - 1);
-            last.setMessage(last.getMessage() + NEW_LINE + log);
+            lastEntry.setMessage(lastEntry.getMessage() + NEW_LINE + log);
             return;
         }
         LogEntry newEntry = createEntry(matcher);
         if ((newEntry.getDate() == null || since ==null || newEntry.getDate().isAfter(since)) && entryMatcher.match(newEntry)) {
             entries.add(newEntry);
+            lastEntry = newEntry;
+        } else  {
+            lastEntry = null;
         }
     }
 
