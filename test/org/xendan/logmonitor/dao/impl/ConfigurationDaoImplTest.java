@@ -38,6 +38,8 @@ public class ConfigurationDaoImplTest {
     @Before
     public void setUp() {
         homeResolver = new HomeResolver();
+        dao = new ConfigurationDaoImpl(homeResolver, TEST_PATH);
+        dao.clearAll(false);
         File directory = new File(homeResolver.getPath(TEST_FILES));
         if (directory.exists()) {
             try {
@@ -46,10 +48,6 @@ public class ConfigurationDaoImplTest {
                 throw new IllegalStateException("Can't delete directory", e);
             }
         }
-        TestConfigurationDaoImpl daoImpl = new TestConfigurationDaoImpl(homeResolver, TEST_PATH);
-        daoImpl.clearAll();
-        //new to recreate dropped tables
-        dao = new TestConfigurationDaoImpl(homeResolver, TEST_PATH);
         environment = new Environment();
         matchConfig = new MatchConfig();
         matchConfig.setGeneral(true);
@@ -180,15 +178,4 @@ public class ConfigurationDaoImplTest {
         return new LogFileReader(new LocalDateTime(1980, 1, 1, 1, 1), path, LogFileParserTest.DEF_PATTERN, environment).getEntries();
     }
 
-    private class TestConfigurationDaoImpl extends ConfigurationDaoImpl {
-        public TestConfigurationDaoImpl(HomeResolver homeResolver, String testPath) {
-            super(homeResolver, testPath);
-        }
-
-        public void clearAll() {
-            entityManager.getTransaction().begin();
-            entityManager.createNativeQuery("DROP ALL OBJECTS ").executeUpdate();
-            entityManager.getTransaction().commit();
-        }
-    }
 }

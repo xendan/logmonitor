@@ -19,6 +19,8 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -64,6 +66,12 @@ public class LogMonitorPanel {
         console = new ConsoleViewImpl(project, false);
         consolePanel.setLayout(new BoxLayout(consolePanel, BoxLayout.PAGE_AXIS));
         consolePanel.add(console.getComponent());
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                logMonitorSettingsConfigurable.tmpReload();
+            }
+        });
     }
 
     public void onException(Exception e) {
@@ -110,7 +118,11 @@ public class LogMonitorPanel {
                     }
                 }
             } else {
-                model.getContextMenu(selectedPath, openConfigDialog).show(e.getComponent(), e.getX(), e.getY());
+                model.getContextMenu(selectedPath,
+                        openConfigDialog,
+                        (DefaultTreeModel) logTree.getModel(),
+                        LogMonitorPanel.this.contentPanel)
+                        .show(e.getComponent(), e.getX(), e.getY());
             }
         }
     }
@@ -159,7 +171,7 @@ public class LogMonitorPanel {
                 return "environment";
             }
             if (userObject instanceof LogMonitorPanelModel.MatchConfigObject) {
-                MatchConfig config = ((LogMonitorPanelModel.MatchConfigObject) userObject).getMatchConfig();
+                MatchConfig config = ((LogMonitorPanelModel.MatchConfigObject) userObject).getEntity();
                 return config.isGeneral() ? "list-unknown" : "list-error";
             }
             if (userObject instanceof LogMonitorPanelModel.EntryObject) {

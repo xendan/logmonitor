@@ -3,6 +3,7 @@ package org.xendan.logmonitor.idea.model;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.ui.popup.JBPopupFactory;
 import com.jgoodies.binding.value.ValueHolder;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
@@ -19,6 +20,7 @@ import org.xendan.logmonitor.read.Serializer;
 
 import javax.swing.*;
 import javax.swing.tree.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -158,6 +160,23 @@ public class LogMonitorPanelModel {
         return null;
     }
 
+    private DefaultMutableTreeNode getNodeFromPath(TreePath path, Class<?> objectClass) {
+        if (path == null) {
+            return null;
+        }
+        for (int i = 0; i < path.getPathCount(); i++) {
+            Object component = path.getPathComponent(i);
+            if (component instanceof DefaultMutableTreeNode) {
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) component;
+                Object obj = node.getUserObject();
+                if (obj != null && objectClass.equals(obj.getClass())) {
+                    return node;
+                }
+            }
+        }
+        return null;
+    }
+
     public void onEntriesAdded(LocalDateTime since, Environment environment, DefaultTreeModel model) {
         updateSince.put(environment, since);
         nextUpdate.put(environment, new LocalDateTime(System.currentTimeMillis() + environment.getUpdateInterval() * 60 * 1000));
@@ -168,9 +187,7 @@ public class LogMonitorPanelModel {
             if (node == null) {
                 model.insertNodeInto(createMatchNode(matchConfig, environment, false), envNode, envNode.getChildCount());
             } else {
-                while (node.getChildCount() != 0) {
-                    model.removeNodeFromParent((MutableTreeNode) node.getChildAt(0));
-                }
+                removeAllChild(model, node);
                 MatchConfigObject configObject = (MatchConfigObject) node.getUserObject();
                 int itemsNum = 0;
                 for (LogEntryGroup group : dao.getMatchedEntryGroups(matchConfig, environment)) {
@@ -189,6 +206,12 @@ public class LogMonitorPanelModel {
         }
 
         Notifications.Bus.notify(getMessage(newEntries, environment));
+    }
+
+    private void removeAllChild(DefaultTreeModel model, DefaultMutableTreeNode node) {
+        while (node.getChildCount() != 0) {
+            model.removeNodeFromParent((MutableTreeNode) node.getChildAt(0));
+        }
     }
 
     private Notification getMessage(List<LogEntry> newEntries, Environment environment) {
@@ -215,15 +238,29 @@ public class LogMonitorPanelModel {
         return null;
     }
 
-    public JPopupMenu getContextMenu(TreePath path, Runnable openConfigDialog) {
+    public JPopupMenu getContextMenu(TreePath path, Runnable openConfigDialog, final DefaultTreeModel treeModel, Component component) {
         JPopupMenu menu = new JPopupMenu();
         menu.add(new JMenuItem(new OpenConfig(openConfigDialog)));
-
         MatchConfigObject config = getObjectFromPath(path, MatchConfigObject.class);
         Configuration configuration = getObjectFromPath(path, Configuration.class);
-        GroupObject group = getObjectFromPath(path, GroupObject.class);
-        if (group != null) {
-            menu.add(new JMenuItem(new CreateGroupedMatchConfig(configuration, group.getGroup(), config.matchConfig.getLevel())));
+        final DefaultMutableTreeNode groupNode = getNodeFromPath(path, GroupObject.class);
+        if (groupNode != null) {
+            final LogEntryGroup group = getObjectFromPath(path, GroupObject.class).getEntity();
+            menu.add(new JMenuItem(new CreateGroupedMatchConfig(configuration, group, config.getEntity().getLevel())));
+            menu.add(new JMenuItem(new RemoveAction(component, new RemoveGroup(treeModel, groupNode, group), "group", "group and all entries in it" )));
+        }
+        final DefaultMutableTreeNode lastNode = (DefaultMutableTreeNode) path.getLastPathComponent();
+        final Object object = lastNode.getUserObject();
+        if (object instanceof Environment) {
+            final Environment environment = (Environment) object;
+            menu.add(new JMenuItem(new RemoveAction(component, new RemoveEntriesInEnvironment(treeModel, lastNode, environment), "log entries in " + environment , "all log entries found in " + environment)));
+        } else if (object instanceof MatchConfigObject) {
+                final MatchConfig matchConfig = ((MatchConfigObject) object).getEntity();
+                menu.add(new JMenuItem(new RemoveAction(component, new RemoveEntriesMatching(lastNode, treeModel), "log entries matching " + matchConfig , "all log entries matching " + matchConfig)));
+        } else if (object instanceof EntryObject) {
+            final DefaultMutableTreeNode parent = (DefaultMutableTreeNode) lastNode.getParent();
+            final LogEntry entry = ((EntryObject) object).getEntity();
+            menu.add(new JMenuItem(new RemoveAction(component, new RemoveSingleEntry(parent, lastNode, treeModel, entry), "log entry", "log entry" )));
         }
         return menu;
     }
@@ -234,14 +271,17 @@ public class LogMonitorPanelModel {
 
     public boolean isNodeUpdated(DefaultMutableTreeNode node, LocalDateTime since) {
         Object userObject = node.getUserObject();
-        if (since == null) {
+        if (userObject instanceof String) {
             //userObject is String - it is initial tree.
-            if (userObject != null && !(userObject instanceof String) && !(userObject instanceof Configuration)) {
+            return false;
+        }
+        if (since == null) {
+            if (userObject != null && !(userObject instanceof Configuration)) {
                 since = findSince(node);
             }
         }
         if (userObject instanceof EntryObject) {
-            LogEntry entry = ((EntryObject) userObject).getEntry();
+            LogEntry entry = ((EntryObject) userObject).getEntity();
             return since != null && entry.getDate().isAfter(since);
         }
         for (int i = 0; i < node.getChildCount(); i++) {
@@ -287,12 +327,23 @@ public class LogMonitorPanelModel {
         String toConsoleString();
     }
 
-    public class MatchConfigObject implements ConsoleDisplayable {
-        private final MatchConfig matchConfig;
+    private static class EntityObject<E extends BaseObject> {
+        protected final E entity;
+
+        private EntityObject(E entity) {
+            this.entity = entity;
+        }
+
+        public E getEntity() {
+            return entity;
+        }
+    }
+
+    public class MatchConfigObject extends EntityObject<MatchConfig> implements ConsoleDisplayable {
         private int childNum;
 
         public MatchConfigObject(MatchConfig matchConfig) {
-            this.matchConfig = matchConfig;
+            super(matchConfig);
         }
 
         public void setChildNum(int childNum) {
@@ -301,16 +352,12 @@ public class LogMonitorPanelModel {
 
         @Override
         public String toString() {
-            return matchConfig.toString() + "(" + childNum + ")";
+            return entity.toString() + "(" + childNum + ")";
         }
 
         @Override
         public String toConsoleString() {
-            return matchConfig.toString() + "\nLEVEL>=" + matchConfig.getLevel() + "\nPattern:\n" + matchConfig.getMessage();
-        }
-
-        public MatchConfig getMatchConfig() {
-            return matchConfig;
+            return entity.toString() + "\nLEVEL>=" + entity.getLevel() + "\nPattern:\n" + entity.getMessage();
         }
 
         @Override
@@ -320,44 +367,39 @@ public class LogMonitorPanelModel {
 
             MatchConfigObject that = (MatchConfigObject) o;
 
-            if (matchConfig != null ? !matchConfig.equals(that.matchConfig) : that.matchConfig != null) return false;
+            if (entity != null ? !entity.equals(that.entity) : that.entity != null) return false;
 
             return true;
         }
 
         @Override
         public int hashCode() {
-            return matchConfig != null ? matchConfig.hashCode() : 0;
+            return entity != null ? entity.hashCode() : 0;
         }
     }
 
-    public static class EntryObject implements ConsoleDisplayable {
-        private final LogEntry entry;
+    public static class EntryObject extends EntityObject<LogEntry> implements ConsoleDisplayable {
 
         public EntryObject(LogEntry entry) {
-            this.entry = entry;
+            super(entry);
         }
 
         @Override
         public String toString() {
-            return entry.getLevel() + ":" + entry.getDate() + StringUtils.abbreviate(entry.getMessage(), 10);
+            return entity.getLevel() + ":" + entity.getDate() + StringUtils.abbreviate(entity.getMessage(), 10);
         }
 
         @Override
         public String toConsoleString() {
-            return entry.getLevel() + ":" + entry.getDate() + "\n" + getMessage();
+            return entity.getLevel() + ":" + entity.getDate() + "\n" + getMessage();
         }
 
         protected String getMessage() {
-            return entry.getMessage();
+            return entity.getMessage();
         }
 
         public boolean isError() {
-            return Level.toLevel(entry.getLevel()).isGreaterOrEqual(Level.ERROR);
-        }
-
-        public LogEntry getEntry() {
-            return entry;
+            return Level.toLevel(entity.getLevel()).isGreaterOrEqual(Level.ERROR);
         }
     }
 
@@ -376,25 +418,20 @@ public class LogMonitorPanelModel {
         }
     }
 
-    private static class GroupObject implements ConsoleDisplayable {
-        private final LogEntryGroup group;
+    private static class GroupObject extends EntityObject<LogEntryGroup> implements ConsoleDisplayable {
 
         public GroupObject(LogEntryGroup group) {
-            this.group = group;
+            super(group);
         }
 
         @Override
         public String toString() {
-            return group.getEntries().size() + " similar entries";
+            return entity.getEntries().size() + " similar entries";
         }
 
         @Override
         public String toConsoleString() {
-            return toString() + " matched by \n" + group.getMessagePattern();
-        }
-
-        private LogEntryGroup getGroup() {
-            return group;
+            return toString() + " matched by \n" + entity.getMessagePattern();
         }
     }
 
@@ -471,5 +508,124 @@ public class LogMonitorPanelModel {
         public void actionPerformed(ActionEvent e) {
             openConfigDialog.run();
         }
+    }
+
+    private class RemoveAction extends AbstractAction {
+
+
+        private final Component component;
+        private final Runnable onYes;
+        private final String fullDescription;
+
+        public RemoveAction(Component component, Runnable onYes, String what, String fullDescription) {
+            super("Remove " + what);
+            this.component = component;
+            this.onYes = onYes;
+            this.fullDescription = fullDescription;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JBPopupFactory.getInstance()
+                    .createConfirmation("Delete " + fullDescription, "Yes", "Cancel", onYes, 0)
+                    .showInCenterOf(component);
+
+        }
+    }
+
+    private class RemoveSingleEntry implements Runnable {
+        private final DefaultMutableTreeNode parent;
+        private final DefaultMutableTreeNode lastNode;
+        private final DefaultTreeModel treeModel;
+        private final LogEntry entry;
+
+        public RemoveSingleEntry(DefaultMutableTreeNode parent, DefaultMutableTreeNode lastNode, DefaultTreeModel treeModel, LogEntry entry) {
+            this.parent = parent;
+            this.lastNode = lastNode;
+            this.treeModel = treeModel;
+            this.entry = entry;
+        }
+
+        @Override
+        public void run() {
+            Object parentObject = parent.getUserObject();
+            boolean simpleRemove = true;
+            if (parentObject instanceof GroupObject) {
+                if (parent.getChildCount() == 2) {
+                    DefaultMutableTreeNode other = (parent.getFirstLeaf() == lastNode) ? parent.getLastLeaf() : parent.getFirstLeaf();
+                    MutableTreeNode grandParent = (MutableTreeNode) parent.getParent();
+                    int index = treeModel.getIndexOfChild(grandParent, parent);
+                    treeModel.removeNodeFromParent(parent);
+                    //TODO create normal entry message
+                    treeModel.insertNodeInto(other, grandParent, index);
+                    LogEntryGroup group = ((GroupObject) parentObject).getEntity();
+                    group.getEntries().remove(entry);
+                    dao.remove(group);
+                    simpleRemove = false;
+                }
+            }
+            if (simpleRemove) {
+               treeModel.removeNodeFromParent(lastNode);
+            }
+            dao.remove(entry);
+
+        }
+    }
+
+    private class RemoveEntriesInEnvironment implements Runnable {
+        private final DefaultTreeModel treeModel;
+        private final DefaultMutableTreeNode lastNode;
+        private final Environment environment;
+
+        public RemoveEntriesInEnvironment(DefaultTreeModel treeModel, DefaultMutableTreeNode lastNode, Environment environment) {
+            this.treeModel = treeModel;
+            this.lastNode = lastNode;
+            this.environment = environment;
+        }
+
+        @Override
+        public void run() {
+            removeAllChild(treeModel, lastNode);
+            dao.removeAllEntries(environment);
+        }
+    }
+
+    private class RemoveGroup implements Runnable {
+        private final DefaultTreeModel treeModel;
+        private final DefaultMutableTreeNode groupNode;
+        private final LogEntryGroup group;
+
+        public RemoveGroup(DefaultTreeModel treeModel, DefaultMutableTreeNode groupNode, LogEntryGroup group) {
+            this.treeModel = treeModel;
+            this.groupNode = groupNode;
+            this.group = group;
+        }
+
+        @Override
+        public void run() {
+            treeModel.removeNodeFromParent(groupNode);
+            dao.remove(group);
+        }
+    }
+
+    private class RemoveEntriesMatching implements Runnable {
+        private final DefaultMutableTreeNode lastNode;
+        private final DefaultTreeModel treeModel;
+
+        public RemoveEntriesMatching(DefaultMutableTreeNode lastNode, DefaultTreeModel treeModel) {
+            this.lastNode = lastNode;
+            this.treeModel = treeModel;
+        }
+
+        @Override
+        public void run() {
+            while (lastNode.getChildCount() != 0) {
+                DefaultMutableTreeNode child = (DefaultMutableTreeNode) lastNode.getChildAt(0);
+                treeModel.removeNodeFromParent(child);
+                dao.remove(((EntityObject)child.getUserObject()).getEntity());
+            }
+        }
+
+
     }
 }

@@ -3,3 +3,4 @@ atlassian-ide-plugin.xml
 out
 logmonitor.zip
 gradle.properties
+tmp.config

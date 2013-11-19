@@ -16,6 +16,7 @@
       <entry name="?*.ftl" />
       <entry name="?*.py" />
       <entry name="?*.log" />
+      <entry name="?*.config" />
     </wildcardResourcePatterns>
     <annotationProcessing>
       <profile default="true" name="Default" enabled="false">

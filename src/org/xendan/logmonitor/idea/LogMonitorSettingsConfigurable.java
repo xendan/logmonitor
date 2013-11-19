@@ -170,6 +170,11 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         scheduler.reload();
     }
 
+    public void tmpReload() {
+        dao.clearAll(true);
+        scheduler.reload();
+    }
+
 
     @Override
     public void reset() {
@@ -209,6 +214,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         projectNameTextField.setVisible(false);
         addProjectButton.setText("New project");
     }
+
 
 
     private class AddProjectActionListener implements ActionListener {

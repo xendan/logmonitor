@@ -6,21 +6,21 @@
     <ignored path=".idea/workspace.xml" />
     <file path="/bbb.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378367347000" ignored="false" />
     <file path="/LogMonitorSettingsDaoImpl.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378985039607" ignored="false" />
-    <file path="/fragment.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384790947499" ignored="false" />
+    <file path="/fragment.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384863368507" ignored="false" />
     <file path="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/IdeaPersistenceProviderResolver.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378370728928" ignored="false" />
     <file path="/persistence.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378371501540" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/trunk/externalResources/dataMigration/BTS 3.7.8/10_1213_add_product_settings.sql" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1382518864242" ignored="false" />
-    <file path="/Dummy.txt" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384780735623" ignored="false" />
+    <file path="/Dummy.txt" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384864108648" ignored="false" />
     <file path="/LogMonitorConfiguration.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379595736992" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/trunk/externalResources/dataMigration/BTS 3.7.8/60_1338_add_new_products.sql" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378372333979" ignored="false" />
     <file path="/60_1338_add_new_products.sql" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378372332027" ignored="false" />
     <file path="/ServerSettings.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378809096236" ignored="false" />
     <file path="/local [2]" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378374608465" ignored="false" />
-    <file path="/LogMonitorSettingsConfigurable.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384184226041" ignored="false" />
-    <file path="/a.dummy" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384790947499" ignored="false" />
+    <file path="/LogMonitorSettingsConfigurable.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384870740459" ignored="false" />
+    <file path="/a.dummy" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384874911591" ignored="false" />
     <file path="/plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384175597835" ignored="false" />
     <file path="/LogMonitorToolWindowFactory.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384253220419" ignored="false" />
-    <file path="/LogMonitorPanel.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384849678231" ignored="false" />
+    <file path="/LogMonitorPanel.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384875650325" ignored="false" />
     <file path="/ScpDownloader.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378393673313" ignored="false" />
     <file path="/build.gradle" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378807144470" ignored="false" />
     <file path="/grep_errores.py" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378384776080" ignored="false" />
@@ -130,7 +130,7 @@
     <file path="/LevelParserTest.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378485431848" ignored="false" />
     <file path="/ServerReaderTaskTest.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378742802040" ignored="false" />
     <file path="/ServerReaderTask.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378733487263" ignored="false" />
-    <file path="/Serializer.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378731851590" ignored="false" />
+    <file path="/Serializer.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384870226157" ignored="false" />
     <file path="/EntryMatcherTest.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1380124770359" ignored="false" />
     <file path="/LogEntry.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1381843941953" ignored="false" />
     <file path="/LogEntryDao.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378830299620" ignored="false" />
@@ -139,7 +139,7 @@
     <file path="/LogEntryDaoImpl.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378888333414" ignored="false" />
     <file path="/LogFileParserTest.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384264597577" ignored="false" />
     <file path="/FastPortableSuite.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379061745013" ignored="false" />
-    <file path="/LogMonitorPanelModel.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384852322813" ignored="false" />
+    <file path="/LogMonitorPanelModel.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384875619514" ignored="false" />
     <file path="/MatchPattern.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378801213390" ignored="false" />
     <file path="/MatchConfig.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1380125291998" ignored="false" />
     <file path="/CreatePattern.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1378887427213" ignored="false" />
@@ -207,7 +207,7 @@
     <file path="$PROJECT_DIR$/../BTS/trunk/externalResources/dataMigration/BTS 3.8.0/20_1391_add_destinations.sql" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1380116890276" ignored="false" />
     <file path="/20_1391_add_destinations.sql" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1380116888548" ignored="false" />
     <file path="/BeanChangeListener.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379607923475" ignored="false" />
-    <file path="$PROJECT_DIR$/../BTS/trunk/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384777364635" ignored="false" />
+    <file path="$PROJECT_DIR$/../BTS/trunk/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384872290599" ignored="false" />
     <file path="/LogMonitorPanelModelTest.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384532770430" ignored="false" />
     <file path="/LogService.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1381853150789" ignored="false" />
     <file path="/LogServiceImp.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1381853164235" ignored="false" />
@@ -245,7 +245,7 @@
     <file path="$PROJECT_DIR$/../BTS/trunk/btts-war/src/main/webapp/css/messages.css" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379937604935" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/trunk/btts-war/src/main/webapp/js/show_error.js" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379937737668" ignored="false" />
     <file path="/show_error.js" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379936496663" ignored="false" />
-    <file path="$PROJECT_DIR$/../BTS/trunk-3.7.8/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384852677336" ignored="false" />
+    <file path="$PROJECT_DIR$/../BTS/trunk-3.7.8/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384854750308" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/trunk-3.7.8/externalResources/dataMigration/BTS 3.7.8/rollback.sql" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379934565927" ignored="false" />
     <file path="/rollback.sql" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1382631639026" ignored="false" />
     <file path="/ConfigureDialog.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1379953320447" ignored="false" />
@@ -269,9 +269,9 @@
     <file path="$PROJECT_DIR$/../BTS/trunk/btts-commonweb/src/main/java/com/bics/btts/caramba/model/ViewModelServiceImpl.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1382633386542" ignored="false" />
     <file path="/ViewModelServiceImpl.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1382633370964" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/trunk/btts-war/src/main/java/com/bics/btts/caramba/sla/BasicConfigByEscalationPanel.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1380119215864" ignored="false" />
-    <file path="/ConfigurationDaoImpl.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384353724207" ignored="false" />
-    <file path="/ConfigurationDaoImplTest.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384345942759" ignored="false" />
-    <file path="/ConfigurationDao.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384252988056" ignored="false" />
+    <file path="/ConfigurationDaoImpl.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384874544737" ignored="false" />
+    <file path="/ConfigurationDaoImplTest.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384870428128" ignored="false" />
+    <file path="/ConfigurationDao.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384874246085" ignored="false" />
     <file path="/LogEntryGroup.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384846404313" ignored="false" />
     <file path="/BaseEntryObject.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1381843487946" ignored="false" />
     <file path="/a.sql" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1381848479632" ignored="false" />
@@ -426,7 +426,7 @@
     <file path="/ProxyDao.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383650241380" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/repair_separation/btts-specImpl/src/main/java/com/bics/btts/dao/impl/ProxyDaoImpl.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383651450344" ignored="false" />
     <file path="/ProxyDaoImpl.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383651422581" ignored="false" />
-    <file path="$PROJECT_DIR$/../BTS/repair_separation/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383747756188" ignored="false" />
+    <file path="$PROJECT_DIR$/../BTS/repair_separation/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384871709416" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/repair_separation/btts-specImpl/src/main/java/com/bics/btts/dao/impl/RepairSqlDao.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383656809205" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/repair_separation/btts-spec/src/main/java/com/bics/btts/dao/RepairDao.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383657411750" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/repair_separation/btts-specImpl/src/main/resources/daoContext.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383656797833" ignored="false" />
@@ -450,7 +450,7 @@
     <file path="$PROJECT_DIR$/../BTS/trunk/btts-intake-war/src/main/webapp/WEB-INF/jsp/repair/panel/voice/voiceBics.jsp" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383817080473" ignored="false" />
     <file path="/voiceBics.jsp" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383816293601" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/Btts-selenium/.idea/workspace.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383827949047" ignored="false" />
-    <file path="$PROJECT_DIR$/../BTS/Btts-selenium/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384852677336" ignored="false" />
+    <file path="$PROJECT_DIR$/../BTS/Btts-selenium/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384868064461" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/Btts-selenium/gradle.properties" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383820268736" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/Btts-selenium/build.gradle" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383820836485" ignored="false" />
     <file path="$PROJECT_DIR$/../BTS/Btts-selenium/src/com/bics/btts/selenium/First.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1383820804068" ignored="false" />
@@ -525,6 +525,8 @@
     <file path="$PROJECT_DIR$/../BTS/trunk-3.7.8/btts-war/src/main/java/com/bics/btts/caramba/ticket/vieweditpanel/ActionPanel.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384780016638" ignored="false" />
     <file path="/AssignCheck.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384779795862" ignored="false" />
     <file path="/ActionPanel.java" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384779957271" ignored="false" />
+    <file path="$PROJECT_DIR$/../idea-plugins/JetBrains-intellij-community-4735be8/atlassian-ide-plugin.xml" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384863867487" ignored="false" />
+    <file path="/tmp" changelist="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" time="1384869465149" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -539,10 +541,10 @@
     <SUITE FILE_PATH="coverage/logmonitor$AllSuite.coverage" NAME="AllSuite Coverage Results" MODIFIED="1379672931088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.xendan.logmonitor.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/logmonitor$ALL.coverage" NAME="ALL Coverage Results" MODIFIED="1384259669280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/logmonitor$ConfigurationDaoImplTest_testAddConfig.coverage" NAME="ConfigurationDaoImplTest.testAddConfig Coverage Results" MODIFIED="1384349318803" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>org.xendan.logmonitor.dao.impl.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/logmonitor$ALL.coverage" NAME="ALL Coverage Results" MODIFIED="1384259669280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="CoverageViewManager">
     <option name="myFlattenPackages" value="true" />
@@ -560,59 +562,6 @@
   </component>
   <component name="DebuggerManager">
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint>
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint>
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="jar://C:/java/src.zip!/javax/swing/tree/DefaultMutableTreeNode.java" line="167" class="javax.swing.tree.DefaultMutableTreeNode" package="javax.swing.tree">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-    </line_breakpoints>
     <exception_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint class_name="org.h2.jdbc.JdbcSQLException" package_name="org.h2.jdbc">
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -784,7 +733,77 @@
         <option name="CONDITION" value="&#13;&#13;JAVA" />
         <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
+      <breakpoint class_name="java.lang.ClassCastException" package_name="java.lang">
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="&#13;&#13;JAVA" />
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+      </breakpoint>
     </exception_breakpoints>
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="jar://C:/java/src.zip!/javax/swing/tree/DefaultMutableTreeNode.java" line="167" class="javax.swing.tree.DefaultMutableTreeNode" package="javax.swing.tree">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="&#13;&#13;JAVA" />
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+      </breakpoint>
+    </line_breakpoints>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -794,16 +813,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="LogMonitorPanelModel.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="LogMonitorPanelModel.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/model/LogMonitorPanelModel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="276" column="0" selection-start="11729" selection-end="11729" vertical-scroll-proportion="0.33333334">
+            <state line="560" column="82" selection-start="22481" selection-end="22481" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#1463#1491#0" expanded="true" />
-                <element signature="e#1563#1591#0" expanded="true" />
-                <element signature="e#5736#5766#0" expanded="true" />
-                <element signature="e#6670#6680#0" expanded="true" />
+                <element signature="e#5808#5838#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogMonitorPanel.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="37" column="47" selection-start="1297" selection-end="1297" vertical-scroll-proportion="0.4470377">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -903,22 +928,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/PatternUtils.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/DateParser.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/UnitParserWithLength.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/CallerParser.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/SimpleParser.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/UnitParser.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/dao/impl/ConfigurationDaoImplTest.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/ConfigurationDaoImpl.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/EntryAddedListener.java" />
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/idea/LogMonitorPanelModelTest.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/DownloadAndParse.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntryGroup.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReaderScheduler.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.form" />
+        <option value="db-console:/cee21cd2/2467e6b1-d415-4d90-8d96-3ebaef808358/" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/Serializer.java" />
+        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/dao/impl/ConfigurationDaoImplTest.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/ConfigurationDaoImpl.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDao.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/model/LogMonitorPanelModel.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java" />
       </list>
     </option>
   </component>
@@ -954,6 +979,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -1088,6 +1114,20 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="logmonitor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
@@ -1159,34 +1199,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="MatchConfigForm" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
+              <option name="myItemId" value="model" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="idea" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="LogMonitorPanel" />
-              <option name="myItemType" value="com.intellij.uiDesigner.projectView.FormNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -1231,17 +1245,16 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
-    <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
+    <property name="OverrideImplement.combined" value="true" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../BTS/trunk-3.7.8/Btts.ipr" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="Database.TableEditor.Splitter" value="0.9" />
@@ -1253,14 +1266,14 @@
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="options.lastSelected" value="reference.settings.ide.settings.notifications" />
+    <property name="options.lastSelected" value="project.propCompiler" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="gradle.tool.window.active" value="Tasks" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.RecentsKey">
@@ -1360,7 +1373,13 @@
       </option>
       <envs />
       <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -1468,6 +1487,12 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="logmonitor" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
     <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
       <module name="" />
       <setting name="path" value="" />
@@ -1477,31 +1502,12 @@
       <setting name="debug" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="logmonitor" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
-      <option name="PROGRAM_PARAMETERS" />
-      <method />
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -1530,6 +1536,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1685,10 +1704,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.LogMonitorPanelModelTest.test_isNodeUpdated" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.LogMonitorPanelModelTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.testAddConfig" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.LogMonitorPanelModelTest.test_isNodeUpdated" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.LogMonitorPanelModelTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.ConfigurationDaoImplTest.testAddConfig" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.LogParserTest.test_category_and_line" />
       </list>
     </recent_temporary>
@@ -1750,12 +1769,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
+    <frame x="-8" y="-8" width="1696" height="1026" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.6009227" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22827417" sideWeight="0.67012686" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22827417" sideWeight="0.68742794" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979239" sideWeight="0.2607099" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -1773,7 +1792,7 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3125721" sideWeight="0.73929006" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Ticket History" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871974" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.6286044" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1784,7 +1803,7 @@
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3702422" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3298731" sideWeight="0.54161566" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871974" sideWeight="0.54161566" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -1880,119 +1899,113 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/EntryAddedListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="670" selection-end="670" vertical-scroll-proportion="-7.6">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/engine/internal/Collections.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="215" column="0" selection-start="8478" selection-end="8478" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#10282#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#2272#2303#0" expanded="false" />
-            <element signature="e#8251#8282#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/ConfigurationDaoImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="192" column="0" selection-start="7721" selection-end="7721" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="13" selection-start="164" selection-end="164" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/openapi.jar!/com/intellij/notification/Notification.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="11" selection-start="759" selection-end="759" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntryGroup.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="28" selection-start="461" selection-end="461" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/java/src.zip!/java/lang/Math.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="692" column="25" selection-start="29149" selection-end="29149" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="13" selection-start="381" selection-end="381" vertical-scroll-proportion="0.091561936">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/read/LogFileParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="54" selection-start="780" selection-end="797" vertical-scroll-proportion="0.030520646">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="50" selection-start="5825" selection-end="5825" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/java/src.zip!/java/util/Timer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="290" column="16" selection-start="13051" selection-end="13051" vertical-scroll-proportion="0.33333334" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReaderScheduler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="50" selection-start="1153" selection-end="1153" vertical-scroll-proportion="0.0">
+        <state line="20" column="26" selection-start="474" selection-end="474" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/DownloadAndParse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="75" selection-start="1613" selection-end="1613" vertical-scroll-proportion="0.0">
+        <state line="17" column="21" selection-start="501" selection-end="501" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/ReaderScheduler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="22" selection-start="422" selection-end="437" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/joda-time/joda-time/2.3/source/ecd8588d8ce0963eb443de31d5fea29e3205f160/joda-time-2.3-sources.jar!/org/joda/time/LocalDateTime.java">
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/Serializer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="303" column="11" selection-start="11409" selection-end="11409" vertical-scroll-proportion="0.0">
+        <state line="53" column="11" selection-start="1179" selection-end="1496" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/DateParser.java">
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/impl/ConfigurationDaoImplTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="28" selection-start="1132" selection-end="1157" vertical-scroll-proportion="0.0">
+        <state line="41" column="26" selection-start="1252" selection-end="1252" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/read/LogFileParserTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="53" selection-start="780" selection-end="797" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="172" column="39" selection-start="6055" selection-end="6055" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/java/src.zip!/javax/swing/tree/DefaultTreeModel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="215" column="16" selection-start="7468" selection-end="7468" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="9" selection-start="637" selection-end="637" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/impl/ConfigurationDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="129" column="16" selection-start="4755" selection-end="4755" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntryGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="183" selection-end="183" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/BaseObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="13" selection-start="256" selection-end="256" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/model/LogMonitorPanelModel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="0" selection-start="11729" selection-end="11729" vertical-scroll-proportion="0.33333334">
+        <state line="560" column="82" selection-start="22481" selection-end="22481" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#1463#1491#0" expanded="true" />
-            <element signature="e#1563#1591#0" expanded="true" />
-            <element signature="e#5736#5766#0" expanded="true" />
-            <element signature="e#6670#6680#0" expanded="true" />
+            <element signature="e#5808#5838#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/java/src.zip!/java/util/ResourceBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2288" column="27" selection-start="91106" selection-end="91106" vertical-scroll-proportion="0.54578096">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/Environment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="13" selection-start="183" selection-end="183" vertical-scroll-proportion="0.27468583">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="47" selection-start="1297" selection-end="1297" vertical-scroll-proportion="0.4470377">
+          <folding />
         </state>
       </provider>
     </entry>

@@ -1,10 +1,8 @@
 package org.xendan.logmonitor.read;
 
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.model.LogEntry;
 
 import java.io.*;
-import java.util.List;
 
 /**
  * User: id967161
@@ -18,38 +16,6 @@ public class Serializer {
 
     public Serializer(HomeResolver resolver) {
         this.resolver = resolver;
-    }
-
-    public List<LogEntry> readEntries(String project) {
-        FileInputStream fin = null;
-        ObjectInputStream in = null;
-        try {
-            fin = new FileInputStream(getEntriesPath(project));
-            in = new ObjectInputStream(fin);
-            return (List<LogEntry>) in.readObject();
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Error reading entires", e);
-        } finally {
-            close(fin, in);
-        }
-    }
-
-    public void writeEntries(List<LogEntry> entries, String project) {
-        String filePath = getEntriesPath(project);
-        File file = new File(filePath);
-        try {
-            if (!file.exists() && !file.createNewFile()) {
-                throw new IllegalStateException("Error creating file " + filePath);
-            }
-            OutputStream outputStream = new FileOutputStream(filePath);
-            toByteArrayOutputStream(entries).writeTo(outputStream);
-        } catch (Exception e) {
-            throw new IllegalStateException("Error writing entries", e);
-        }
-    }
-
-    private String getEntriesPath(String project) {
-        return resolver.joinMkDirs(ENTRIES_FILE, project);
     }
 
     public <T> T doCopy(T source) {
@@ -66,7 +32,7 @@ public class Serializer {
         }
     }
 
-    private void close(Closeable... str) {
+    public static void close(Closeable... str) {
         for (Closeable closeable : str) {
             if (closeable != null) {
                 try {

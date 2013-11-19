@@ -1,3 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project version="4" />
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2883560582">
+    <data-source source="LOCAL" name="Data Source" product="H2" version="1.0 (2006-12-17)" jdbc-version="3.0" driver-name="H2 JDBC Driver" driver-version="1.0 (2006-12-17)" uuid="4a31ff96-37fa-4321-9336-c64cca963954">
+      <identifier-quote-string>&quot;</identifier-quote-string>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.h2.Driver</jdbc-driver>
+      <jdbc-url>jdbc:h2:/C:\Users\id967161\.logmonitor\\db\db</jdbc-url>
+      <user-name>admin</user-name>
+      <user-password>dfcbdfcedfc7dfc3dfc4</user-password>
+      <libraries>
+        <library>
+          <url>jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.h2database/h2/1.0.20061217/jar/b3c8f883d3b832cf5d865a6c747462a3ce963f47/h2-1.0.20061217.jar!/</url>
+        </library>
+      </libraries>
+    </data-source>
+  </component>
+</project>
 

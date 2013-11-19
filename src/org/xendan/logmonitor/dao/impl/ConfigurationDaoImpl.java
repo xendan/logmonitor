@@ -8,6 +8,7 @@ import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.model.*;
 import org.xendan.logmonitor.parser.PatternUtils;
+import org.xendan.logmonitor.read.Serializer;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,6 +17,7 @@ import javax.persistence.spi.PersistenceProvider;
 import javax.persistence.spi.PersistenceProviderResolver;
 import javax.persistence.spi.PersistenceProviderResolverHolder;
 import javax.persistence.spi.PersistenceUnitTransactionType;
+import java.io.*;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -28,14 +30,15 @@ import java.util.regex.Pattern;
 public class ConfigurationDaoImpl implements ConfigurationDao {
 
     public static final int MATCHING_INDEX = 5;
-    protected final EntityManager entityManager;
+    protected EntityManager entityManager;
+    private final HomeResolver homeResolver;
 
     public ConfigurationDaoImpl(HomeResolver homeResolver) {
-        this(createUnit(homeResolver, "db"));
+        this(homeResolver, "db");
     }
 
     protected ConfigurationDaoImpl(HomeResolver homeResolver, String dbPath) {
-        this(createUnit(homeResolver, dbPath));
+        this(createUnit(homeResolver, dbPath), homeResolver);
     }
 
     private static EntityManager createUnit(HomeResolver homeResolver, String dbPath) {
@@ -43,11 +46,32 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         return Persistence.createEntityManagerFactory("defaultPersistentUnit").createEntityManager();
     }
 
-    public ConfigurationDaoImpl(EntityManager entityManager) {
+    private ConfigurationDaoImpl(EntityManager entityManager, HomeResolver homeResolver) {
         this.entityManager = entityManager;
-
+        this.homeResolver = homeResolver;
     }
 
+    public void clearAll(boolean createTestTmp) {
+        entityManager.getTransaction().begin();
+        entityManager.createNativeQuery("DROP ALL OBJECTS ").executeUpdate();
+        entityManager.getTransaction().commit();
+        entityManager = createUnit(homeResolver, "db");
+        save(createTmpConfig());
+    }
+
+    private List<Configuration> createTmpConfig() {
+        ObjectInputStream in = null;
+        InputStream rin = null;
+        try {
+            rin = getClass().getResourceAsStream("/tmp.config");
+            in = new ObjectInputStream(rin);
+            return (List<Configuration>) in.readObject();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Error reading entires", e);
+        } finally {
+            Serializer.close(rin, in);
+        }
+    }
 
     private void initMatcherException(Configuration configuration) {
         for (Environment environment : configuration.getEnvironments()) {
@@ -72,14 +96,73 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     }
 
+    private <T> ByteArrayOutputStream toByteArrayOutputStream(T source) throws IOException {
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream out = new ObjectOutputStream(bos);
+        out.writeObject(source);
+        out.flush();
+        out.close();
+        return bos;
+    }
+
     @Override
     public void save(List<Configuration> configs) {
+            String filePath = homeResolver.joinMkDirs("tmp.config", "tmpconfig");
+            File file = new File(filePath);
+            try {
+                if (!file.exists() && !file.createNewFile()) {
+                    throw new IllegalStateException("Error creating file " + filePath);
+                }
+                OutputStream outputStream = new FileOutputStream(filePath);
+                toByteArrayOutputStream(configs).writeTo(outputStream);
+            } catch (Exception e) {
+                throw new IllegalStateException("Error writing entries", e);
+            }
         entityManager.getTransaction().begin();
         for (Configuration config : configs) {
             entityManager.persist(config);
         }
         entityManager.getTransaction().commit();
 
+    }
+
+    @Override
+    public void remove(BaseObject object) {
+        entityManager.getTransaction().begin();
+        if (object instanceof LogEntryGroup) {
+            LogEntryGroup group = (LogEntryGroup) object;
+            for (LogEntry logEntry : group.getEntries()) {
+                entityManager.remove(logEntry);
+            }
+        }
+        entityManager.remove(object);
+        entityManager.getTransaction().commit();
+
+    }
+
+    @Override
+    public void removeAllEntries(Environment environment) {
+        entityManager.getTransaction().begin();
+        //TODO maybe it is possible by JPA
+        entityManager.createNativeQuery("DELETE FROM LOG_ENTRY_GROUP_ENTRIES " +
+                "WHERE ENTRIES IN (" +
+                    "SELECT ID FROM LOG_ENTRY " +
+                    " WHERE ENVIRONMENT = ?" +
+
+                ")").setParameter(1, environment.getId())
+                    .executeUpdate();
+        entityManager.createNativeQuery("DELETE FROM LOG_ENTRY_GROUP g " +
+                " WHERE NOT EXISTS (" +
+                    "SELECT LOG_ENTRY_GROUP " +
+                    " FROM LOG_ENTRY_GROUP_ENTRIES lg " +
+                    " WHERE lg.LOG_ENTRY_GROUP = g.ID" +
+                ")").executeUpdate();
+        LogEntry last = getLastEntry(environment);
+        entityManager.createNativeQuery("DELETE FROM LOG_ENTRY  WHERE ENVIRONMENT = ? AND ID <> ?")
+                .setParameter(1, environment.getId())
+                .setParameter(2, last.getId())
+                .executeUpdate();
+        entityManager.getTransaction().commit();
     }
 
     @Override
@@ -136,7 +219,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     @Override
     public LogEntry getLastEntry(Environment environment) {
         List<LogEntry> entries = entityManager.createQuery(
-                "SELECT e FROM LogEntry e where e.environment = (:environment) ORDER BY e.date DESC ",
+                "SELECT e FROM LogEntry e WHERE e.environment = (:environment) ORDER BY e.date DESC ",
                 LogEntry.class)
                 .setParameter("environment", environment)
                 .setMaxResults(1)

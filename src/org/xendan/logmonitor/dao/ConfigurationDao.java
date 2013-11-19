@@ -23,4 +23,10 @@ public interface ConfigurationDao {
     List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment);
 
     void addMatchConfig(Environment environment, MatchConfig config);
+
+    void remove(BaseObject group);
+
+    void removeAllEntries(Environment environment);
+
+    void clearAll(boolean createTmpTest);
 }
