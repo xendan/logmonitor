@@ -41,9 +41,8 @@ public class DownloadAndParse extends TimerTask {
             LocalDateTime since = lastEntry == null ? null : lastEntry.getDate();
             String lastRead = since == null ? null : dateParser.getDateAsString(logPattern, since);
             dao.addEntries(new LogFileReader(since, getLogFile(lastRead), logPattern, environment).getEntries());
-            listener.onEntriesAdded(environment);
+            listener.onEntriesAdded(environment, since);
         } catch (Exception e) {
-            //Notifications.Bus.notify(new Notification("i don't know what is this", "Error loading ", e.getMessage(), NotificationType.ERROR));
             logger.error(e);
             listener.onError(e);
         }

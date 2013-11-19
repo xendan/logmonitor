@@ -1,8 +1,14 @@
 package org.xendan.logmonitor.idea.model;
 
+import com.intellij.notification.Notification;
+import com.intellij.notification.NotificationType;
+import com.intellij.notification.Notifications;
 import com.jgoodies.binding.value.ValueHolder;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.xendan.logmonitor.dao.ConfigurationDao;
 import org.xendan.logmonitor.idea.BaseDialog;
 import org.xendan.logmonitor.idea.MatchConfigForm;
@@ -14,7 +20,10 @@ import org.xendan.logmonitor.read.Serializer;
 import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: id967161
@@ -22,10 +31,15 @@ import java.util.List;
  */
 public class LogMonitorPanelModel {
 
+    private static final DateTimeFormatter HOURS_MINUTES = DateTimeFormat.forPattern("HH:mm");
+
     public static final String LOADING = "Loading...";
+    public static final String GROUP_DISPLAY_ID = "logmonitor messages";
     private final ConfigurationDao dao;
     private final Serializer serializer;
     private final EntryAddedListener listener;
+    private Map<Environment, LocalDateTime> updateSince = new HashMap<Environment, LocalDateTime>();
+    private Map<Environment, LocalDateTime> nextUpdate = new HashMap<Environment, LocalDateTime>();
 
     public LogMonitorPanelModel(ConfigurationDao dao, Serializer serializer, EntryAddedListener listener) {
         this.dao = dao;
@@ -83,7 +97,7 @@ public class LogMonitorPanelModel {
 
     private DefaultMutableTreeNode addGroupsAndEntries(DefaultMutableTreeNode node, List<LogEntryGroup> groups, List<LogEntry> entries) {
         for (LogEntryGroup group : groups) {
-            node.add(createLogEntryGroupNode(group));
+            node.add(createLogEntryGroupNode(group, null, null));
         }
         for (LogEntry entry : entries) {
             node.add(createEntryNode(entry));
@@ -91,9 +105,12 @@ public class LogMonitorPanelModel {
         return node;
     }
 
-    private MutableTreeNode createLogEntryGroupNode(LogEntryGroup group) {
+    private MutableTreeNode createLogEntryGroupNode(LogEntryGroup group, List<LogEntry> newEntries, LocalDateTime since) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(new GroupObject(group));
         for (LogEntry logEntry : group.getEntries()) {
+            if (newEntries != null && (since == null || logEntry.getDate().isAfter(since))) {
+                newEntries.add(logEntry);
+            }
             node.add(new DefaultMutableTreeNode(new GroupedEntryObject(logEntry, group)));
         }
         return node;
@@ -141,7 +158,10 @@ public class LogMonitorPanelModel {
         return null;
     }
 
-    public void onEntriesAdded(Environment environment, DefaultTreeModel model) {
+    public void onEntriesAdded(LocalDateTime since, Environment environment, DefaultTreeModel model) {
+        updateSince.put(environment, since);
+        nextUpdate.put(environment, new LocalDateTime(System.currentTimeMillis() + environment.getUpdateInterval() * 60 * 1000));
+        List<LogEntry> newEntries = new ArrayList<LogEntry>();
         DefaultMutableTreeNode envNode = findNode((DefaultMutableTreeNode) model.getRoot(), environment);
         for (MatchConfig matchConfig : environment.getMatchConfigs()) {
             DefaultMutableTreeNode node = findNode(envNode, new MatchConfigObject(matchConfig));
@@ -149,22 +169,36 @@ public class LogMonitorPanelModel {
                 model.insertNodeInto(createMatchNode(matchConfig, environment, false), envNode, envNode.getChildCount());
             } else {
                 while (node.getChildCount() != 0) {
-                    TreeNode child = node.getChildAt(0);
-                    model.removeNodeFromParent((MutableTreeNode) child);
+                    model.removeNodeFromParent((MutableTreeNode) node.getChildAt(0));
                 }
                 MatchConfigObject configObject = (MatchConfigObject) node.getUserObject();
                 int itemsNum = 0;
                 for (LogEntryGroup group : dao.getMatchedEntryGroups(matchConfig, environment)) {
-                    model.insertNodeInto(createLogEntryGroupNode(group), node, node.getChildCount());
+                    model.insertNodeInto(createLogEntryGroupNode(group, newEntries, since), node, node.getChildCount());
                     itemsNum++;
                 }
                 for (LogEntry entry : dao.getNotGroupedMatchedEntries(matchConfig, environment)) {
+                    if (since == null || entry.getDate().isAfter(since)) {
+                        newEntries.add(entry);
+                    }
                     model.insertNodeInto(createEntryNode(entry), node, node.getChildCount());
                     itemsNum++;
                 }
                 configObject.setChildNum(itemsNum);
             }
         }
+
+        Notifications.Bus.notify(getMessage(newEntries, environment));
+    }
+
+    private Notification getMessage(List<LogEntry> newEntries, Environment environment) {
+        if (!newEntries.isEmpty()) {
+            return new Notification(GROUP_DISPLAY_ID,
+                    "Found Message" + (newEntries.size() == 1 ? "" : "s") + newEntries.size(),
+                    "Something about new messages",
+                    NotificationType.WARNING);
+        }
+        return new Notification(GROUP_DISPLAY_ID, environment + " log updated", "No new log entries found ", NotificationType.INFORMATION);
     }
 
     private DefaultMutableTreeNode findNode(DefaultMutableTreeNode node, Object userObject) {
@@ -192,6 +226,61 @@ public class LogMonitorPanelModel {
             menu.add(new JMenuItem(new CreateGroupedMatchConfig(configuration, group.getGroup(), config.matchConfig.getLevel())));
         }
         return menu;
+    }
+
+    public boolean isNodeUpdated(DefaultMutableTreeNode node) {
+        return isNodeUpdated(node, null);
+    }
+
+    public boolean isNodeUpdated(DefaultMutableTreeNode node, LocalDateTime since) {
+        Object userObject = node.getUserObject();
+        if (since == null) {
+            //userObject is String - it is initial tree.
+            if (userObject != null && !(userObject instanceof String) && !(userObject instanceof Configuration)) {
+                since = findSince(node);
+            }
+        }
+        if (userObject instanceof EntryObject) {
+            LogEntry entry = ((EntryObject) userObject).getEntry();
+            return since != null && entry.getDate().isAfter(since);
+        }
+        for (int i = 0; i < node.getChildCount(); i++) {
+            DefaultMutableTreeNode child = (DefaultMutableTreeNode) node.getChildAt(i);
+            if (isNodeUpdated(child, since)) {
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    private LocalDateTime findSince(DefaultMutableTreeNode node) {
+        Object userObject = node.getUserObject();
+        if (userObject instanceof Environment) {
+            return updateSince.get(userObject);
+        }
+        return findSince((DefaultMutableTreeNode) node.getParent());
+    }
+
+    public String getTooltipText(DefaultMutableTreeNode node) {
+        Object userObject = node.getUserObject();
+        if (userObject instanceof Environment) {
+            LocalDateTime nextUpdate = this.nextUpdate.get(userObject);
+            if (nextUpdate !=  null) {
+                return "Next update at: " + HOURS_MINUTES.print(nextUpdate) + "\n new: " + findNewCount(node, 0);
+            }
+        }
+        return "";
+    }
+
+    private int findNewCount(DefaultMutableTreeNode node, int count) {
+        if (isNodeUpdated(node)) {
+            count++;
+        }
+        for (int i = 0; i < node.getChildCount(); i++) {
+            count += findNewCount((DefaultMutableTreeNode) node.getChildAt(i), count);
+        }
+        return count;
     }
 
     private interface ConsoleDisplayable {
@@ -266,6 +355,10 @@ public class LogMonitorPanelModel {
         public boolean isError() {
             return Level.toLevel(entry.getLevel()).isGreaterOrEqual(Level.ERROR);
         }
+
+        public LogEntry getEntry() {
+            return entry;
+        }
     }
 
     private static class GroupedEntryObject extends EntryObject {
@@ -339,7 +432,7 @@ public class LogMonitorPanelModel {
             for (int i = 0; i < copies.size(); i++) {
                 if (copies.get(i).getMatchConfigs().contains(config)) {
                     dao.addMatchConfig(originals.get(i), config);
-                    listener.onEntriesAdded(originals.get(i));
+                    listener.onEntriesAdded(originals.get(i), null);
                 }
             }
         }

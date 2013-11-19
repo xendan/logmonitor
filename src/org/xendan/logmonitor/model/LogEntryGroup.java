@@ -1,9 +1,6 @@
 package org.xendan.logmonitor.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +23,7 @@ public class LogEntryGroup extends BaseObject {
     }
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @OrderBy(value="date asc")
     public List<LogEntry> getEntries() {
         return entries;
     }

@@ -4,6 +4,7 @@ import com.intellij.execution.impl.ConsoleViewImpl;
 import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
+import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.idea.model.OnOkAction;
 import org.xendan.logmonitor.model.Configuration;
@@ -39,6 +40,7 @@ public class LogMonitorPanel {
     private JEditorPane linkPanel;
     private String errorLog = "";
     private final Runnable openConfigDialog;
+    private boolean treeModelInited;
 
     public LogMonitorPanel(LogMonitorPanelModel model, Project project, LogMonitorSettingsConfigurable logMonitorSettingsConfigurable) {
         this.model = model;
@@ -65,6 +67,7 @@ public class LogMonitorPanel {
     }
 
     public void onException(Exception e) {
+        //TODO if tree is shown
         errorLog += "\n" + e.getMessage();
         linkPanel.setText(errorLog);
     }
@@ -76,16 +79,20 @@ public class LogMonitorPanel {
         return "No configuration found.<a href='open_config'> Configure...</a>";
     }
 
-    public void onEntriesAdded(Environment environment) {
-        model.onEntriesAdded(environment, (DefaultTreeModel) logTree.getModel());
+    public void onEntriesAdded(Environment environment, LocalDateTime since) {
+        initModel();
+        model.onEntriesAdded(since, environment, (DefaultTreeModel) logTree.getModel());
     }
 
     public void initModel() {
-        DefaultTreeModel treeModel = model.initTreeModel();
-        if (treeModel != null) {
-            treePanel.getViewport().remove(linkPanel);
-            treePanel.setViewportView(logTree);
-            logTree.setModel(treeModel);
+        if (!treeModelInited) {
+            DefaultTreeModel treeModel = model.initTreeModel();
+            if (treeModel != null) {
+                treePanel.getViewport().remove(linkPanel);
+                treePanel.setViewportView(logTree);
+                logTree.setModel(treeModel);
+                treeModelInited = true;
+            }
         }
     }
 
@@ -119,14 +126,27 @@ public class LogMonitorPanel {
     }
 
     private class LogTreeCellRenderer extends DefaultTreeCellRenderer {
+        private final Font bold;
+
+        private LogTreeCellRenderer() {
+            bold = new Font(logTree.getFont().getName(), Font.BOLD, logTree.getFont().getSize());
+        }
+
         @Override
         public Component getTreeCellRendererComponent(JTree tree, Object value, boolean selected, boolean expanded, boolean leaf, int row, boolean hasFocus) {
             super.getTreeCellRendererComponent(tree, value, selected, expanded, leaf, row, hasFocus);
             if (value instanceof DefaultMutableTreeNode) {
-                String name = getIconImgName(((DefaultMutableTreeNode) value).getUserObject());
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
+                String name = getIconImgName(node.getUserObject());
                 if (name != null) {
                     setIcon(new ImageIcon(getClass().getResource("/org/xendan/logmonitor/idea/img/" + name + ".png")));
                 }
+                if (model.isNodeUpdated(node)) {
+                    setFont(bold);
+                } else  {
+                    setFont(logTree.getFont());
+                }
+                setToolTipText(model.getTooltipText(node));
             }
             return this;
         }

@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.parser;
 
+import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.idea.LogMonitorPanel;
 import org.xendan.logmonitor.model.Environment;
 
@@ -17,11 +18,11 @@ public class EntryAddedListener {
         this.logMonitorPanel = logMonitorPanel;
     }
 
-    public void onEntriesAdded(final Environment environment) {
+    public void onEntriesAdded(final Environment environment, final LocalDateTime since) {
         if (logMonitorPanel != null) {
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
-                    logMonitorPanel.onEntriesAdded(environment);
+                    logMonitorPanel.onEntriesAdded(environment, since);
                 }
             });
         }

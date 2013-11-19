@@ -42,6 +42,12 @@ public class ReaderScheduler {
                         configuration.getProjectName()
                 ), 0, environment.getUpdateInterval() * 60 * 1000);
             }
+            try {
+                //For not execute all simultaneously
+                Thread.sleep(3000 * Math.round(Math.random()));
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Error sleeping ", e);
+            }
         }
         inited = true;
     }
