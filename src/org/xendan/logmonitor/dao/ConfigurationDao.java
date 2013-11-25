@@ -14,13 +14,15 @@ public interface ConfigurationDao {
 
     List<Configuration> getConfigs();
 
+    List<LogEntry> getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment);
+
+    List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment);
+
+
     LogEntry getLastEntry(Environment settings);
 
     void addEntries(List<LogEntry> entries);
 
-    List<LogEntry> getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment);
-
-    List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment);
 
     void addMatchConfig(Environment environment, MatchConfig config);
 

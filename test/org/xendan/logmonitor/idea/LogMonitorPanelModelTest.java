@@ -4,7 +4,10 @@ import org.apache.log4j.Level;
 import org.joda.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
+import org.xendan.logmonitor.dao.Callback;
 import org.xendan.logmonitor.dao.ConfigurationDao;
+import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
+import org.xendan.logmonitor.dao.impl.DefaultCallBack;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.model.*;
 import org.xendan.logmonitor.parser.EntryAddedListener;
@@ -12,7 +15,6 @@ import org.xendan.logmonitor.read.Serializer;
 
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 import java.util.Arrays;
 import java.util.List;
@@ -35,65 +37,79 @@ public class LogMonitorPanelModelTest {
 
     @Test
     public void test_isNodeUpdated() throws Exception {
-        TreeModel treeModel = model.initTreeModel();
-        long now = System.currentTimeMillis();
+        model.initTreeModel(new DefaultCallBack<DefaultTreeModel>() {
+            @Override
+            public void onAnswer(DefaultTreeModel treeModel) {
+                long now = System.currentTimeMillis();
 
-        group.getEntries().add(createEntry(now + 500000));
-        when(dao.getMatchedEntryGroups(matchConfig, environment))
-                .thenReturn(Arrays.asList(group));
-        model.onEntriesAdded(new LocalDateTime(now), environment, (DefaultTreeModel) treeModel);
-        Object root = treeModel.getRoot();
-        assertTrue("Root should be updated", model.isNodeUpdated((DefaultMutableTreeNode) root));
-        DefaultMutableTreeNode configNode = (DefaultMutableTreeNode) treeModel.getChild(root, 0);
-        assertTrue("Config should be updated", model.isNodeUpdated(configNode));
-        DefaultMutableTreeNode matchNode = (DefaultMutableTreeNode) treeModel.getChild(configNode, 0);
-        assertTrue("Match should be updated", model.isNodeUpdated(matchNode));
-        DefaultMutableTreeNode envNode = (DefaultMutableTreeNode) treeModel.getChild(matchNode, 0);
-        assertTrue("Environment should be updated", model.isNodeUpdated(envNode));
-        DefaultMutableTreeNode groupNode = (DefaultMutableTreeNode) treeModel.getChild(envNode, 0);
-        assertTrue("groupNode should be updated", model.isNodeUpdated(groupNode));
-        DefaultMutableTreeNode firstGrouped = (DefaultMutableTreeNode) treeModel.getChild(groupNode, 0);
-        assertFalse("First grouped not updated", model.isNodeUpdated(firstGrouped));
-        DefaultMutableTreeNode secondGrouped = (DefaultMutableTreeNode) treeModel.getChild(groupNode, 1);
-        assertTrue("Second grouped updated", model.isNodeUpdated(secondGrouped));
-        DefaultMutableTreeNode notGrouped = (DefaultMutableTreeNode) treeModel.getChild(envNode, 1);
-        assertFalse("Expect not group not updated", model.isNodeUpdated(notGrouped));
+                group.getEntries().add(createEntry(now + 500000));
+                when(dao.getMatchedEntryGroups(matchConfig, environment))
+                        .thenReturn(Arrays.asList(group));
+                model.onEntriesAdded(new LocalDateTime(now), environment, (DefaultTreeModel) treeModel);
+                Object root = treeModel.getRoot();
+                assertTrue("Root should be updated", model.isNodeUpdated((DefaultMutableTreeNode) root));
+                DefaultMutableTreeNode configNode = (DefaultMutableTreeNode) treeModel.getChild(root, 0);
+                assertTrue("Config should be updated", model.isNodeUpdated(configNode));
+                DefaultMutableTreeNode matchNode = (DefaultMutableTreeNode) treeModel.getChild(configNode, 0);
+                assertTrue("Match should be updated", model.isNodeUpdated(matchNode));
+                DefaultMutableTreeNode envNode = (DefaultMutableTreeNode) treeModel.getChild(matchNode, 0);
+                assertTrue("Environment should be updated", model.isNodeUpdated(envNode));
+                DefaultMutableTreeNode groupNode = (DefaultMutableTreeNode) treeModel.getChild(envNode, 0);
+                assertTrue("groupNode should be updated", model.isNodeUpdated(groupNode));
+                DefaultMutableTreeNode firstGrouped = (DefaultMutableTreeNode) treeModel.getChild(groupNode, 0);
+                assertFalse("First grouped not updated", model.isNodeUpdated(firstGrouped));
+                DefaultMutableTreeNode secondGrouped = (DefaultMutableTreeNode) treeModel.getChild(groupNode, 1);
+                assertTrue("Second grouped updated", model.isNodeUpdated(secondGrouped));
+                DefaultMutableTreeNode notGrouped = (DefaultMutableTreeNode) treeModel.getChild(envNode, 1);
+                assertFalse("Expect not group not updated", model.isNodeUpdated(notGrouped));
+            }
+        });
+
     }
 
 
 
     @Test
     public void test_rebuildTreeModel() throws Exception {
-        TreeModel treeModel = model.initTreeModel();
-        assertEquals("Expect config only for one project", 1, treeModel.getChildCount(treeModel.getRoot()));
-        Object configNode = treeModel.getChild(treeModel.getRoot(), 0);
-        assertEquals("Expect 1 environment", 1, treeModel.getChildCount(configNode));
-        Object matchNode = treeModel.getChild(configNode, 0);
-        assertEquals("Expect 1 match config", 1, treeModel.getChildCount(matchNode));
-        Object envNode = treeModel.getChild(matchNode, 0);
-        assertEquals("Expect 2 node for grouped entries and for single entries ", 2, treeModel.getChildCount(envNode));
-        Object groupNode = treeModel.getChild(envNode, 0);
-        assertEquals("Expect 1 node for grouped entries", 1 , treeModel.getChildCount(groupNode));
+        model.initTreeModel(new DefaultCallBack<DefaultTreeModel>() {
+            @Override
+            public void onAnswer(DefaultTreeModel treeModel) {
+                assertEquals("Expect config only for one project", 1, treeModel.getChildCount(treeModel.getRoot()));
+                Object configNode = treeModel.getChild(treeModel.getRoot(), 0);
+                assertEquals("Expect 1 environment", 1, treeModel.getChildCount(configNode));
+                Object matchNode = treeModel.getChild(configNode, 0);
+                assertEquals("Expect 1 match config", 1, treeModel.getChildCount(matchNode));
+                Object envNode = treeModel.getChild(matchNode, 0);
+                assertEquals("Expect 2 node for grouped entries and for single entries ", 2, treeModel.getChildCount(envNode));
+                Object groupNode = treeModel.getChild(envNode, 0);
+                assertEquals("Expect 1 node for grouped entries", 1, treeModel.getChildCount(groupNode));
+            }
+        });
+
     }
 
     @Test
     public void test_getMessage() throws Exception {
-        TreeModel treeModel = model.initTreeModel();
-        Object configNode = treeModel.getChild(treeModel.getRoot(), 0);
-        Object matchNode = treeModel.getChild(configNode, 0);
-        Object envNode = treeModel.getChild(matchNode, 0);
-        Object groupNode = treeModel.getChild(envNode, 0);
-        TreePath path = new TreePath(new Object[]{treeModel.getRoot(), configNode, matchNode, envNode, groupNode});
-        assertEquals("1 similar entries matched by \nS\\[S\\]S\\\\", model.getMessage(path));
-        Object groupedEntryNode = treeModel.getChild(groupNode, 0);
-        path = new TreePath(new Object[]{treeModel.getRoot(), configNode, matchNode, envNode, groupNode, groupedEntryNode});
-        assertEquals("ERROR:1970-01-01T01:00:00.000\nS[S]S\\", model.getMessage(path));
+        model.initTreeModel(new DefaultCallBack<DefaultTreeModel>() {
+            @Override
+            public void onAnswer(DefaultTreeModel treeModel) {
+                Object configNode = treeModel.getChild(treeModel.getRoot(), 0);
+                Object matchNode = treeModel.getChild(configNode, 0);
+                Object envNode = treeModel.getChild(matchNode, 0);
+                Object groupNode = treeModel.getChild(envNode, 0);
+                TreePath path = new TreePath(new Object[]{treeModel.getRoot(), configNode, matchNode, envNode, groupNode});
+                assertEquals("1 similar entries matched by \nS\\[S\\]S\\\\", model.getMessage(path));
+                Object groupedEntryNode = treeModel.getChild(groupNode, 0);
+                path = new TreePath(new Object[]{treeModel.getRoot(), configNode, matchNode, envNode, groupNode, groupedEntryNode});
+                assertEquals("ERROR:1970-01-01T01:00:00.000\nS[S]S\\", model.getMessage(path));
+            }
+        });
     }
 
     @Before
     public void setUp() {
         dao = mock(ConfigurationDao.class);
-        model = new LogMonitorPanelModel(dao, mock(Serializer.class), mock(EntryAddedListener.class));
+        model = new LogMonitorPanelModel(new SynchronousConfigurationCallbackDao(dao), mock(Serializer.class), mock(EntryAddedListener.class));
 
         Configuration config = new Configuration();
         environment = new Environment();
@@ -118,5 +134,51 @@ public class LogMonitorPanelModelTest {
         LogEntry entry = new LogEntry();
         entry.setDate(new LocalDateTime(instant));
         return entry;
+    }
+
+    private static class SynchronousConfigurationCallbackDao extends ConfigurationCallbackDao {
+        public SynchronousConfigurationCallbackDao(ConfigurationDao dao) {
+            super(dao);
+        }
+
+        @Override
+        public void getConfigs(Callback<List<Configuration>> callback) {
+            callback.onAnswer(wrapped.getConfigs());
+        }
+
+        @Override
+        public void getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment, Callback<List<LogEntry>> callback) {
+            callback.onAnswer(wrapped.getNotGroupedMatchedEntries(matchConfig, environment));
+        }
+
+        @Override
+        public void getMatchedEntryGroups(MatchConfig matchConfig, Environment environment, Callback<List<LogEntryGroup>> callback) {
+            callback.onAnswer(wrapped.getMatchedEntryGroups(matchConfig, environment));
+        }
+
+        @Override
+        public void addMatchConfig(Environment environment, MatchConfig config) {
+            wrapped.addMatchConfig(environment, config);
+        }
+
+        @Override
+        public void remove(BaseObject object) {
+            wrapped.remove(object);
+        }
+
+        @Override
+        public void removeAllEntries(Environment environment) {
+            wrapped.removeAllEntries(environment);
+        }
+
+        @Override
+        public void save(List<Configuration> configsModel, Callback<Void> callback) {
+            wrapped.save(configsModel);
+        }
+
+        @Override
+        public void clearAll(boolean createTestTmp, Callback<Void> callback) {
+            wrapped.clearAll(createTestTmp);
+        }
     }
 }

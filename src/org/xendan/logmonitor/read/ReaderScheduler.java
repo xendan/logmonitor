@@ -7,7 +7,9 @@ import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.parser.DownloadAndParse;
 import org.xendan.logmonitor.parser.EntryAddedListener;
 
-import java.util.Timer;
+import java.util.List;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * User: id967161
@@ -17,9 +19,9 @@ public class ReaderScheduler {
 
     private final ConfigurationDao dao;
     private final EntryAddedListener listener;
-    private Timer timer = new Timer();
     private boolean inited;
     private HomeResolver homeResolver;
+    private ScheduledThreadPoolExecutor executor;
 
     public ReaderScheduler(ConfigurationDao dao, EntryAddedListener listener, HomeResolver homeResolver) {
         this.homeResolver = homeResolver;
@@ -29,26 +31,28 @@ public class ReaderScheduler {
 
     public void reload() {
         listener.beforeReload();
-        timer.cancel();
-        timer = new Timer();
-        for (Configuration configuration : dao.getConfigs()) {
-            for (Environment environment : configuration.getEnvironments()) {
-                timer.scheduleAtFixedRate(new DownloadAndParse(
-                        configuration.getLogPattern(),
-                        environment,
-                        dao,
-                        listener,
-                        homeResolver,
-                        configuration.getProjectName()
-                ), 0, environment.getUpdateInterval() * 60 * 1000);
-            }
-            try {
-                //For not execute all simultaneously
-                Thread.sleep(3000 * Math.round(Math.random()));
-            } catch (InterruptedException e) {
-                throw new RuntimeException("Error sleeping ", e);
-            }
+        if (executor != null) {
+            executor.shutdownNow();
         }
+        new Thread() {
+            @Override
+            public void run() {
+                List<Configuration> configs = dao.getConfigs();
+                int nOfThreads = 0;
+                for (Configuration config : configs) {
+                    nOfThreads += config.getEnvironments().size();
+                }
+                if (nOfThreads > 0) {
+                    executor = new ScheduledThreadPoolExecutor(nOfThreads);
+                    for (Configuration configuration : dao.getConfigs()) {
+                        for (Environment environment : configuration.getEnvironments()) {
+                            Runnable command = new DownloadAndParse(configuration.getLogPattern(), environment, dao, listener, homeResolver,configuration.getProjectName());
+                            executor.scheduleWithFixedDelay(command, 3 * Math.round(Math.random()), environment.getUpdateInterval() * 60, TimeUnit.SECONDS);
+                        }
+                    }
+                }
+            }
+        }.start();
         inited = true;
     }
 

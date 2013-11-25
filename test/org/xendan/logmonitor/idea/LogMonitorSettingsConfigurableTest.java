@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.dao.ConfigurationDao;
+import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
@@ -225,6 +226,8 @@ public class LogMonitorSettingsConfigurableTest {
         config.setProjectName("AAA");
         when(dao.getConfigs()).thenReturn(new ArrayList<Configuration>(Arrays.asList(config)));
         ReaderScheduler readerScheduler = mock(ReaderScheduler.class);
-        configurable = new LogMonitorSettingsConfigurable(project, dao, new Serializer(new HomeResolver()), readerScheduler);
+        HomeResolver resolver = new HomeResolver();
+        configurable = new LogMonitorSettingsConfigurable(project, new ConfigurationCallbackDao(dao), new Serializer(resolver), readerScheduler, resolver);
     }
+
 }

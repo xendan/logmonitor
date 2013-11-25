@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
  * Date: 04/09/13
  */
 @SuppressWarnings("unchecked")
-public class ConfigurationDaoImpl implements ConfigurationDao {
+class ConfigurationDaoImpl implements ConfigurationDao {
 
     public static final int MATCHING_INDEX = 5;
     protected EntityManager entityManager;
@@ -209,11 +209,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     private void restoreMessage(LogEntry entry, String messagePattern) {
-        if (messagePattern.contains(PatternUtils.ALL_GROUP)) {
-            entry.setMessage(PatternUtils.regexToSimple(messagePattern).replace(PatternUtils.ALL_GROUP, entry.getMessage()));
-        } else {
-            entry.setMessage(PatternUtils.regexToSimple(messagePattern));
-        }
+        entry.setMessage(PatternUtils.restoreMessage(entry, messagePattern));
     }
 
     @Override

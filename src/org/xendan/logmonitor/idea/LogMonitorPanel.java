@@ -2,14 +2,18 @@ package org.xendan.logmonitor.idea;
 
 import com.intellij.execution.impl.ConsoleViewImpl;
 import com.intellij.execution.ui.ConsoleViewContentType;
+import com.intellij.idea.LoggerFactory;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
 import org.joda.time.LocalDateTime;
+import org.xendan.logmonitor.dao.Callback;
+import org.xendan.logmonitor.dao.impl.DefaultCallBack;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
-import org.xendan.logmonitor.idea.model.OnOkAction;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
+import org.xendan.logmonitor.model.OnOkAction;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
@@ -43,6 +47,7 @@ public class LogMonitorPanel {
     private String errorLog = "";
     private final Runnable openConfigDialog;
     private boolean treeModelInited;
+    private static final Logger logger = LoggerFactory.getInstance().getLoggerInstance(LogMonitorPanel.class.getCanonicalName());
 
     public LogMonitorPanel(LogMonitorPanelModel model, Project project, LogMonitorSettingsConfigurable logMonitorSettingsConfigurable) {
         this.model = model;
@@ -58,7 +63,18 @@ public class LogMonitorPanel {
         logTree.setModel(new DefaultTreeModel(new DefaultMutableTreeNode("Loading...")));
         linkPanel = new JEditorPane();
         linkPanel.setContentType("text/html");
-        linkPanel.setText(getInitialText());
+
+        model.hasConfig(new DefaultCallBack<Boolean>() {
+            @Override
+            public void onAnswer(Boolean answer) {
+                if (answer) {
+                    linkPanel.setText(LogMonitorPanelModel.LOADING);
+                } else {
+                    linkPanel.setText("No configuration found.<a href='open_config'> Configure...</a>");
+                }
+            }
+        });
+
         linkPanel.addHyperlinkListener(new OpenConfigurationListener());
         linkPanel.setEditable(false);
         linkPanel.setOpaque(false);
@@ -72,35 +88,47 @@ public class LogMonitorPanel {
                 logMonitorSettingsConfigurable.tmpReload();
             }
         });
+
     }
 
-    public void onException(Exception e) {
+    public void onException(final Throwable e) {
         //TODO if tree is shown
-        errorLog += "\n" + e.getMessage();
-        linkPanel.setText(errorLog);
-    }
-
-    private String getInitialText() {
-        if (model.hasConfig()) {
-            return LogMonitorPanelModel.LOADING;
-        }
-        return "No configuration found.<a href='open_config'> Configure...</a>";
-    }
-
-    public void onEntriesAdded(Environment environment, LocalDateTime since) {
-        initModel();
-        model.onEntriesAdded(since, environment, (DefaultTreeModel) logTree.getModel());
-    }
-
-    public void initModel() {
-        if (!treeModelInited) {
-            DefaultTreeModel treeModel = model.initTreeModel();
-            if (treeModel != null) {
-                treePanel.getViewport().remove(linkPanel);
-                treePanel.setViewportView(logTree);
-                logTree.setModel(treeModel);
-                treeModelInited = true;
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                errorLog += "\n" + e.getMessage();
+                linkPanel.setText(errorLog);
+                logger.error(e);
             }
+        });
+    }
+
+    public void onEntriesAdded(final Environment environment, final LocalDateTime since) {
+        initModel(new DefaultCallBack<Void>(){
+            @Override
+            public void onAnswer(Void answer) {
+                model.onEntriesAdded(since, environment, (DefaultTreeModel) logTree.getModel());
+            }
+        });
+
+    }
+
+    public synchronized void initModel(final Callback<Void> onLoaded) {
+        if (!treeModelInited) {
+            model.initTreeModel(new Callback<DefaultTreeModel>() {
+                @Override
+                public void onAnswer(DefaultTreeModel treeModel) {
+                    treePanel.getViewport().remove(linkPanel);
+                    treePanel.setViewportView(logTree);
+                    logTree.setModel(treeModel);
+                    treeModelInited = true;
+                    onLoaded.onAnswer(null);
+                }
+
+                @Override
+                public void onFail(Throwable error) {
+                    onException(error);
+                }
+            });
         }
     }
 
@@ -155,7 +183,7 @@ public class LogMonitorPanel {
                 }
                 if (model.isNodeUpdated(node)) {
                     setFont(bold);
-                } else  {
+                } else {
                     setFont(logTree.getFont());
                 }
                 setToolTipText(model.getTooltipText(node));
@@ -193,7 +221,7 @@ public class LogMonitorPanel {
 
         private class ConfigureDialogOnOkAction implements OnOkAction {
             @Override
-            public boolean doAction() {
+            public boolean canClose() {
                 try {
                     logMonitorSettingsConfigurable.apply();
                     return true;

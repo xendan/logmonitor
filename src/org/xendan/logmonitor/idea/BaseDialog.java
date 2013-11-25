@@ -1,6 +1,6 @@
 package org.xendan.logmonitor.idea;
 
-import org.xendan.logmonitor.idea.model.OnOkAction;
+import org.xendan.logmonitor.model.OnOkAction;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,7 +50,7 @@ public class BaseDialog extends JDialog {
     }
 
     private void onOK() {
-        if (onOkAction.doAction()) {
+        if (onOkAction.canClose()) {
             dispose();
         }
     }

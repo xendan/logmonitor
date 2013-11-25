@@ -39,4 +39,12 @@ public class PatternUtils {
     private static boolean messageMatch(String message, String messagePattern) {
         return Pattern.compile(messagePattern, Pattern.CASE_INSENSITIVE).matcher(message).find();
     }
+
+    public static String restoreMessage(LogEntry entry, String messagePattern) {
+        if (messagePattern.contains(PatternUtils.ALL_GROUP)) {
+            return PatternUtils.regexToSimple(messagePattern).replace(PatternUtils.ALL_GROUP, entry.getMessage());
+        } else {
+            return PatternUtils.regexToSimple(messagePattern);
+        }
+    }
 }

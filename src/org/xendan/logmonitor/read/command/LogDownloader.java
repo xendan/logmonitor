@@ -1,10 +1,18 @@
 package org.xendan.logmonitor.read.command;
 
+import com.intellij.idea.LoggerFactory;
+import com.intellij.openapi.diagnostic.Logger;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.optional.ssh.SSHExec;
 import org.apache.tools.ant.taskdefs.optional.ssh.Scp;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.Environment;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * User: kcyxa
@@ -12,9 +20,13 @@ import org.xendan.logmonitor.model.Environment;
  */
 public class LogDownloader extends BaseCommand {
 
+    private static final String FILTER_LAST_SH = "filter_last.sh";
+
     private static final String LAST_LOG = "last.log";
     private final String path;
     private final HomeResolver homeResolver;
+
+    private static final Logger logger = LoggerFactory.getInstance().getLoggerInstance(LogDownloader.class.getCanonicalName());
 
     public LogDownloader(Environment settings, HomeResolver homeResolver) {
         super(settings.getServer());
@@ -59,11 +71,49 @@ public class LogDownloader extends BaseCommand {
     }
 
     private String buildCommand(String datePattern) {
-        String serverPath = "~/" + HomeResolver.HOME + "/" + LAST_LOG;
-        String mkdir = "mkdir -p ~/" + HomeResolver.HOME;
-        String ifContains = "if grep -q '" + datePattern + "' " + path + "; then \n";
-        String sed = "sed \"0,/" + datePattern + "/d\" <" + path + " > " + serverPath;
-        return mkdir + "\n" + ifContains + sed + "\n else cp " + path + " " + serverPath + "\n fi";
+        return "mkdir -p ~/" + HomeResolver.HOME + "\n" +
+                getFilterLastCommand()
+                        .replaceAll("\\$date", datePattern)
+                        .replaceAll("\\$log_path", path)
+                        .replaceAll("\\$download_path", "~/" + HomeResolver.HOME + "/" + LAST_LOG)
+                        .replaceAll("\r\n", "\n")
+                        .replaceAll("\r", "\n");
     }
 
+    private String getFilterLastCommand() {
+        File file = getCommandFile(homeResolver);
+        if (file.exists()) {
+            return readCommandFromFile(file);
+        }
+        return readCommandFromResource();
+    }
+
+    public static String readCommandFromResource() {
+        InputStream resource = LogDownloader.class.getResourceAsStream("/" + FILTER_LAST_SH);
+        try {
+            return IOUtils.toString(resource);
+        } catch (IOException e) {
+             throw new IllegalStateException("Error reading command", e);
+        } finally {
+            try {
+                if (resource != null) {
+                    resource.close();
+                }
+            } catch (IOException e) {
+                logger.error(e);
+            }
+        }
+    }
+
+    public static String readCommandFromFile(File file) {
+        try {
+            return FileUtils.readFileToString(file);
+        } catch (IOException e) {
+            throw new IllegalStateException("Error reading command", e);
+        }
+    }
+
+    public static File getCommandFile(HomeResolver homeResolver) {
+        return new File(homeResolver.getPath(FILTER_LAST_SH));
+    }
 }

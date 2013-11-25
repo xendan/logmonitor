@@ -1,6 +1,7 @@
 package org.xendan.logmonitor.parser;
 
 import org.joda.time.LocalDateTime;
+import org.xendan.logmonitor.dao.impl.DefaultCallBack;
 import org.xendan.logmonitor.idea.LogMonitorPanel;
 import org.xendan.logmonitor.model.Environment;
 
@@ -30,21 +31,13 @@ public class EntryAddedListener {
 
     public void onError(final Exception e) {
         if (logMonitorPanel != null) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    logMonitorPanel.onException(e);
-                }
-            });
+            logMonitorPanel.onException(e);
         }
     }
 
     public void beforeReload() {
         if (logMonitorPanel != null) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    logMonitorPanel.initModel();
-                }
-            });
+            logMonitorPanel.initModel(DefaultCallBack.DO_NOTHING);
         }
     }
 }

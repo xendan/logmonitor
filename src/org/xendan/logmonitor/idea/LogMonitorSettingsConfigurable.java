@@ -17,7 +17,9 @@ import org.apache.log4j.Level;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.xendan.logmonitor.dao.ConfigurationDao;
+import org.xendan.logmonitor.HomeResolver;
+import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
+import org.xendan.logmonitor.dao.impl.DefaultCallBack;
 import org.xendan.logmonitor.idea.model.LogChooseListener;
 import org.xendan.logmonitor.idea.model.SetItemFromListModel;
 import org.xendan.logmonitor.idea.model.VerboseBeanAdapter;
@@ -46,10 +48,11 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private final Serializer serializer;
     private final ReaderScheduler scheduler;
     private final Project project;
+    private final HomeResolver homeResolver;
     final EnvironmentsModel environmentsModel;
     final MatchConfigModel matchConfigModel;
     private final ArrayListModel<Configuration> configsModel;
-    private final ConfigurationDao dao;
+    private final ConfigurationCallbackDao dao;
     private List<Configuration> initialConfigs;
     private JPanel contentPanel;
     JButton removeLogSettingsButton;
@@ -87,15 +90,17 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JPanel matchConfigPanel;
     private JPanel logSettingsPanel;
     JButton projectRemoveButton;
+    private JButton advancedSettingsButton;
     private static final Server ADD_NEW = new Server("Add new...", -2);
     public static final Server LOCALHOST = new Server(Server.LOCALHOST, -1);
     final VerboseBeanAdapter<Configuration> configAdapter;
 
-    public LogMonitorSettingsConfigurable(Project project, ConfigurationDao dao, Serializer serializer, ReaderScheduler readerScheduler) {
+    public LogMonitorSettingsConfigurable(Project project, ConfigurationCallbackDao dao, Serializer serializer, ReaderScheduler readerScheduler, HomeResolver homeResolver) {
         this.dao = dao;
         this.serializer = serializer;
         this.scheduler = readerScheduler;
         this.project = project;
+        this.homeResolver = homeResolver;
 
         this.configAdapter = new VerboseBeanAdapter<Configuration>(new Configuration());
         configsModel = new ArrayListModel<Configuration>();
@@ -113,6 +118,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         projectRemoveButton.addActionListener(new RemoveProjectListener());
         browsLogButton.addActionListener(new BrowseLogButtonActionListener());
         selectKeyFileButton.addActionListener(new KeyFileSelectionListener());
+        advancedSettingsButton.addActionListener(new AdavancedSettingsListener());
         projectComboBox.setRenderer(new ConfigProjectRenderer());
         ValueHolder configSelection = new ValueHolder();
         Bindings.bind(projectComboBox, new SelectionInList<Configuration>((ListModel) configsModel, configSelection));
@@ -165,36 +171,50 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     public void apply() throws ConfigurationException {
         environmentsModel.onItemCommit();
         matchConfigModel.onItemCommit();
-        dao.save(configsModel);
-        resetInitial();
-        scheduler.reload();
+        dao.save(configsModel, new DefaultCallBack<Void>() {
+            @Override
+            public void onAnswer(Void answer) {
+                resetInitial();
+                scheduler.reload();
+            }
+
+        });
     }
 
     public void tmpReload() {
-        dao.clearAll(true);
-        scheduler.reload();
+        dao.clearAll(true, new DefaultCallBack<Void>() {
+            @Override
+            public void onAnswer(Void answer) {
+                scheduler.reload();
+            }
+        });
+
     }
 
 
     @Override
     public void reset() {
-        List<Configuration> configs = dao.getConfigs();
-        initialConfigs = new ArrayList<Configuration>();
-        Configuration configForProject = findConfigForProject(configs);
-        if (configForProject == null) {
-            configForProject = new Configuration();
-            configForProject.setProjectName(project.getName());
-            initialConfigs.add(configForProject);
-        }
-        initialConfigs.addAll(configs);
-        configsModel.clear();
-        configsModel.addAll(initialConfigs);
-        initialConfigs = serializer.doCopy(initialConfigs);
-        projectComboBox.setSelectedItem(configForProject);
-        setProjectButtonCreate();
-        projectNameTextField.setText("");
-        environmentsModel.disableItemPanel();
-        matchConfigModel.disableItemPanel();
+        dao.getConfigs(new DefaultCallBack<List<Configuration>>() {
+            @Override
+            public void onAnswer(List<Configuration> configs) {
+                initialConfigs = new ArrayList<Configuration>();
+                Configuration configForProject = findConfigForProject(configs);
+                if (configForProject == null) {
+                    configForProject = new Configuration();
+                    configForProject.setProjectName(project.getName());
+                    initialConfigs.add(configForProject);
+                }
+                initialConfigs.addAll(configs);
+                configsModel.clear();
+                configsModel.addAll(initialConfigs);
+                initialConfigs = serializer.doCopy(initialConfigs);
+                projectComboBox.setSelectedItem(configForProject);
+                setProjectButtonCreate();
+                projectNameTextField.setText("");
+                environmentsModel.disableItemPanel();
+                matchConfigModel.disableItemPanel();
+            }
+        });
     }
 
     private Configuration findConfigForProject(List<Configuration> configs) {
@@ -515,6 +535,17 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             if (file != null) {
                 keyFileTextField.setText(file.getAbsolutePath());
             }
+        }
+    }
+
+
+    private class AdavancedSettingsListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            AdvancedSettings advancedSettings = new AdvancedSettings(homeResolver);
+            BaseDialog dialog = new BaseDialog(advancedSettings.getOnOkAction(), advancedSettings.getContentPanel());
+            dialog.setTitleAndShow("Advanced settings");
+
         }
     }
 }

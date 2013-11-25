@@ -10,7 +10,9 @@ import org.apache.log4j.Level;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import org.xendan.logmonitor.dao.ConfigurationDao;
+import org.xendan.logmonitor.dao.Callback;
+import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
+import org.xendan.logmonitor.dao.impl.DefaultCallBack;
 import org.xendan.logmonitor.idea.BaseDialog;
 import org.xendan.logmonitor.idea.MatchConfigForm;
 import org.xendan.logmonitor.model.*;
@@ -32,82 +34,111 @@ import java.util.Map;
  * Date: 10/09/13
  */
 public class LogMonitorPanelModel {
-
-    private static final DateTimeFormatter HOURS_MINUTES = DateTimeFormat.forPattern("HH:mm");
-
     public static final String LOADING = "Loading...";
     public static final String GROUP_DISPLAY_ID = "logmonitor messages";
-    private final ConfigurationDao dao;
+
+    private static final DateTimeFormatter HOURS_MINUTES = DateTimeFormat.forPattern("HH:mm");
+    private static final DateTimeFormatter SHORT_DATE = DateTimeFormat.forPattern("dd HH:mm:ss");
+    private static final int MSG_WIDTH = 15;
+
+    private final ConfigurationCallbackDao dao;
     private final Serializer serializer;
     private final EntryAddedListener listener;
     private Map<Environment, LocalDateTime> updateSince = new HashMap<Environment, LocalDateTime>();
     private Map<Environment, LocalDateTime> nextUpdate = new HashMap<Environment, LocalDateTime>();
+    private List<Configuration> configs;
+    private boolean configsLoading;
+    private Callback<Boolean> hasConfigsCallback;
+    private BuildTreeCallback buildTreeCallback;
 
-    public LogMonitorPanelModel(ConfigurationDao dao, Serializer serializer, EntryAddedListener listener) {
+    public LogMonitorPanelModel(ConfigurationCallbackDao dao, Serializer serializer, EntryAddedListener listener) {
         this.dao = dao;
         this.serializer = serializer;
         this.listener = listener;
     }
 
-    public boolean hasConfig() {
-        return !dao.getConfigs().isEmpty();
+    public void hasConfig(final Callback<Boolean> callback) {
+        if (configs != null) {
+            callback.onAnswer(!configs.isEmpty());
+        } else  {
+            hasConfigsCallback = callback;
+            doGetConfigs();
+        }
     }
 
-    public DefaultTreeModel initTreeModel() {
-        List<Configuration> configs = dao.getConfigs();
-        if (configs.isEmpty()) {
-            return null;
+    private synchronized void doGetConfigs() {
+        if (!configsLoading) {
+            configsLoading = true;
+            dao.getConfigs(new DefaultCallBack<List<Configuration>>() {
+                @Override
+                public void onAnswer(List<Configuration> answer) {
+                    configs = answer;
+                    if (hasConfigsCallback != null) {
+                        hasConfigsCallback.onAnswer(!configs.isEmpty());
+                    }
+                    if (buildTreeCallback != null) {
+                        buildTreeCallback.onAnswer(configs);
+                    }
+                    configsLoading = false;
+                }
+            });
         }
-        DefaultMutableTreeNode root = new DefaultMutableTreeNode();
-        for (Configuration configuration : configs) {
-            root.add(createConfigNode(configuration));
-        }
-        return new DefaultTreeModel(root);
     }
 
-    private MutableTreeNode createConfigNode(Configuration configuration) {
+    public void initTreeModel(final Callback<DefaultTreeModel> callback) {
+        buildTreeCallback = new BuildTreeCallback(callback);
+        if (configs != null) {
+            buildTreeCallback.onAnswer(configs);
+        } else  {
+            doGetConfigs();
+        }
+    }
+
+    private MutableTreeNode createConfigNode(Configuration configuration, DefaultTreeModel treeModel) {
         DefaultMutableTreeNode configNode = new DefaultMutableTreeNode(configuration);
         for (Environment environment : configuration.getEnvironments()) {
-            configNode.add(createEnvironment(environment));
+            configNode.add(createEnvironment(environment, treeModel));
         }
         return configNode;
     }
 
-    private MutableTreeNode createEnvironment(Environment environment) {
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(environment);
+    private MutableTreeNode createEnvironment(Environment environment, final DefaultTreeModel treeModel) {
+        final DefaultMutableTreeNode node = new DefaultMutableTreeNode(environment);
         for (MatchConfig matchConfig : environment.getMatchConfigs()) {
-            node.add(createMatchNode(matchConfig, environment, true));
+            insertNode(createMatchNode(matchConfig, environment, true, treeModel), node, treeModel);
         }
         return node;
     }
 
-    private DefaultMutableTreeNode createMatchNode(MatchConfig matchConfig, Environment environment, boolean addIsLoading) {
+    private DefaultMutableTreeNode createMatchNode(MatchConfig matchConfig, Environment environment, boolean addIsLoading, final DefaultTreeModel treeModel) {
         MatchConfigObject matchConfigObject = new MatchConfigObject(matchConfig);
-        DefaultMutableTreeNode node = new DefaultMutableTreeNode(matchConfigObject);
-        List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
-        List<LogEntry> entries = dao.getNotGroupedMatchedEntries(matchConfig, environment);
-        matchConfigObject.setChildNum(groups.size() + entries.size());
-        if (!groups.isEmpty() || !entries.isEmpty()) {
-            return addGroupsAndEntries(node, groups, entries);
-        }
+        final DefaultMutableTreeNode node = new DefaultMutableTreeNode(matchConfigObject);
         if (addIsLoading) {
-            node.add(new DefaultMutableTreeNode(LOADING));
+            insertNode(new DefaultMutableTreeNode(LOADING), node, treeModel);
         }
-        return node;
 
+        dao.getMatchedEntryGroups(matchConfig, environment, new DefaultCallBack<List<LogEntryGroup>>() {
+            @Override
+            public void onAnswer(List<LogEntryGroup> groups) {
+                for (LogEntryGroup group : groups) {
+                    insertNode(createLogEntryGroupNode(group, null, null), node, treeModel);
+
+                }
+            }
+        });
+        dao.getNotGroupedMatchedEntries(matchConfig, environment, new DefaultCallBack<List<LogEntry>>() {
+            @Override
+            public void onAnswer(List<LogEntry> entries) {
+                for (LogEntry entry : entries) {
+                    insertNode(createEntryNode(entry), node, treeModel);
+                }
+
+            }
+        });
+        return node;
     }
 
-    private DefaultMutableTreeNode addGroupsAndEntries(DefaultMutableTreeNode node, List<LogEntryGroup> groups, List<LogEntry> entries) {
-        for (LogEntryGroup group : groups) {
-            node.add(createLogEntryGroupNode(group, null, null));
-        }
-        for (LogEntry entry : entries) {
-            node.add(createEntryNode(entry));
-        }
-        return node;
-    }
-
-    private MutableTreeNode createLogEntryGroupNode(LogEntryGroup group, List<LogEntry> newEntries, LocalDateTime since) {
+    private DefaultMutableTreeNode createLogEntryGroupNode(LogEntryGroup group, List<LogEntry> newEntries, LocalDateTime since) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(new GroupObject(group));
         for (LogEntry logEntry : group.getEntries()) {
             if (newEntries != null && (since == null || logEntry.getDate().isAfter(since))) {
@@ -118,7 +149,7 @@ public class LogMonitorPanelModel {
         return node;
     }
 
-    private MutableTreeNode createEntryNode(LogEntry entry) {
+    private DefaultMutableTreeNode createEntryNode(LogEntry entry) {
         return new DefaultMutableTreeNode(new EntryObject(entry));
     }
 
@@ -177,36 +208,52 @@ public class LogMonitorPanelModel {
         return null;
     }
 
-    public void onEntriesAdded(LocalDateTime since, Environment environment, DefaultTreeModel model) {
+    public void onEntriesAdded(final LocalDateTime since, Environment environment, final DefaultTreeModel model) {
         updateSince.put(environment, since);
         nextUpdate.put(environment, new LocalDateTime(System.currentTimeMillis() + environment.getUpdateInterval() * 60 * 1000));
-        List<LogEntry> newEntries = new ArrayList<LogEntry>();
-        DefaultMutableTreeNode envNode = findNode((DefaultMutableTreeNode) model.getRoot(), environment);
+        final List<LogEntry> newEntries = new ArrayList<LogEntry>();
+        final DefaultMutableTreeNode envNode = findNode((DefaultMutableTreeNode) model.getRoot(), environment);
         for (MatchConfig matchConfig : environment.getMatchConfigs()) {
-            DefaultMutableTreeNode node = findNode(envNode, new MatchConfigObject(matchConfig));
+            final DefaultMutableTreeNode node = findNode(envNode, new MatchConfigObject(matchConfig));
             if (node == null) {
-                model.insertNodeInto(createMatchNode(matchConfig, environment, false), envNode, envNode.getChildCount());
+                createMatchNode(matchConfig, environment, false, model);
             } else {
                 removeAllChild(model, node);
-                MatchConfigObject configObject = (MatchConfigObject) node.getUserObject();
-                int itemsNum = 0;
-                for (LogEntryGroup group : dao.getMatchedEntryGroups(matchConfig, environment)) {
-                    model.insertNodeInto(createLogEntryGroupNode(group, newEntries, since), node, node.getChildCount());
-                    itemsNum++;
-                }
-                for (LogEntry entry : dao.getNotGroupedMatchedEntries(matchConfig, environment)) {
-                    if (since == null || entry.getDate().isAfter(since)) {
-                        newEntries.add(entry);
+                dao.getMatchedEntryGroups(matchConfig, environment, new DefaultCallBack<List<LogEntryGroup>>() {
+                    @Override
+                    public void onAnswer(List<LogEntryGroup> groups) {
+                        for (LogEntryGroup group : groups) {
+                            insertNode(createLogEntryGroupNode(group, newEntries, since), node, model);
+                        }
                     }
-                    model.insertNodeInto(createEntryNode(entry), node, node.getChildCount());
-                    itemsNum++;
-                }
-                configObject.setChildNum(itemsNum);
+                });
+                dao.getNotGroupedMatchedEntries(matchConfig, environment, new DefaultCallBack<List<LogEntry>>() {
+                    @Override
+                    public void onAnswer(List<LogEntry> entries) {
+                        for (LogEntry entry : entries) {
+                            if (since == null || entry.getDate().isAfter(since)) {
+                                newEntries.add(entry);
+                            }
+                            insertNode(createEntryNode(entry), node, model);
+                        }
+                    }
+                });
+
             }
         }
 
         Notifications.Bus.notify(getMessage(newEntries, environment));
     }
+
+    private void insertNode(DefaultMutableTreeNode newChild, DefaultMutableTreeNode root, DefaultTreeModel model) {
+        //not yet in model
+        if (root.getParent() == null) {
+            root.add(newChild);
+        } else {
+            model.insertNodeInto(newChild, root, root.getChildCount());
+        }
+    }
+
 
     private void removeAllChild(DefaultTreeModel model, DefaultMutableTreeNode node) {
         while (node.getChildCount() != 0) {
@@ -247,20 +294,20 @@ public class LogMonitorPanelModel {
         if (groupNode != null) {
             final LogEntryGroup group = getObjectFromPath(path, GroupObject.class).getEntity();
             menu.add(new JMenuItem(new CreateGroupedMatchConfig(configuration, group, config.getEntity().getLevel())));
-            menu.add(new JMenuItem(new RemoveAction(component, new RemoveGroup(treeModel, groupNode, group), "group", "group and all entries in it" )));
+            menu.add(new JMenuItem(new RemoveAction(component, new RemoveGroup(treeModel, groupNode, group), "group", "group and all entries in it")));
         }
         final DefaultMutableTreeNode lastNode = (DefaultMutableTreeNode) path.getLastPathComponent();
         final Object object = lastNode.getUserObject();
         if (object instanceof Environment) {
             final Environment environment = (Environment) object;
-            menu.add(new JMenuItem(new RemoveAction(component, new RemoveEntriesInEnvironment(treeModel, lastNode, environment), "log entries in " + environment , "all log entries found in " + environment)));
+            menu.add(new JMenuItem(new RemoveAction(component, new RemoveEntriesInEnvironment(treeModel, lastNode, environment), "log entries in " + environment, "all log entries found in " + environment)));
         } else if (object instanceof MatchConfigObject) {
-                final MatchConfig matchConfig = ((MatchConfigObject) object).getEntity();
-                menu.add(new JMenuItem(new RemoveAction(component, new RemoveEntriesMatching(lastNode, treeModel), "log entries matching " + matchConfig , "all log entries matching " + matchConfig)));
+            final MatchConfig matchConfig = ((MatchConfigObject) object).getEntity();
+            menu.add(new JMenuItem(new RemoveAction(component, new RemoveEntriesMatching(lastNode, treeModel), "log entries matching " + matchConfig, "all log entries matching " + matchConfig)));
         } else if (object instanceof EntryObject) {
             final DefaultMutableTreeNode parent = (DefaultMutableTreeNode) lastNode.getParent();
             final LogEntry entry = ((EntryObject) object).getEntity();
-            menu.add(new JMenuItem(new RemoveAction(component, new RemoveSingleEntry(parent, lastNode, treeModel, entry), "log entry", "log entry" )));
+            menu.add(new JMenuItem(new RemoveAction(component, new RemoveSingleEntry(parent, lastNode, treeModel, entry), "log entry", "log entry")));
         }
         return menu;
     }
@@ -306,7 +353,7 @@ public class LogMonitorPanelModel {
         Object userObject = node.getUserObject();
         if (userObject instanceof Environment) {
             LocalDateTime nextUpdate = this.nextUpdate.get(userObject);
-            if (nextUpdate !=  null) {
+            if (nextUpdate != null) {
                 return "Next update at: " + HOURS_MINUTES.print(nextUpdate) + "\n new: " + findNewCount(node, 0);
             }
         }
@@ -357,7 +404,8 @@ public class LogMonitorPanelModel {
 
         @Override
         public String toConsoleString() {
-            return entity.toString() + "\nLEVEL>=" + entity.getLevel() + "\nPattern:\n" + entity.getMessage();
+            String patternStr = entity.getMessage() == null ? "" : "\nPattern:\n" + entity.getMessage();
+            return entity.toString() + "\nLEVEL>=" + entity.getLevel() + patternStr;
         }
 
         @Override
@@ -380,13 +428,14 @@ public class LogMonitorPanelModel {
 
     public static class EntryObject extends EntityObject<LogEntry> implements ConsoleDisplayable {
 
+
         public EntryObject(LogEntry entry) {
             super(entry);
         }
 
         @Override
         public String toString() {
-            return entity.getLevel() + ":" + entity.getDate() + StringUtils.abbreviate(entity.getMessage(), 10);
+            return entity.getLevel() + ":" + SHORT_DATE.print(entity.getDate()) + " " + StringUtils.abbreviate(getMessage(), MSG_WIDTH);
         }
 
         @Override
@@ -414,7 +463,7 @@ public class LogMonitorPanelModel {
 
         @Override
         protected String getMessage() {
-            return PatternUtils.regexToSimple(group.getMessagePattern());
+            return PatternUtils.restoreMessage(entity, group.getMessagePattern());
         }
     }
 
@@ -426,12 +475,16 @@ public class LogMonitorPanelModel {
 
         @Override
         public String toString() {
-            return entity.getEntries().size() + " similar entries";
+            return entity.getEntries().size() + " similar entries" + " " + StringUtils.abbreviate(getMessage(), MSG_WIDTH);
         }
 
         @Override
         public String toConsoleString() {
-            return toString() + " matched by \n" + entity.getMessagePattern();
+            return toString() + " matched by \n" + getMessage();
+        }
+
+        private String getMessage() {
+            return PatternUtils.regexToSimple(entity.getMessagePattern());
         }
     }
 
@@ -484,7 +537,7 @@ public class LogMonitorPanelModel {
             }
 
             @Override
-            public boolean doAction() {
+            public boolean canClose() {
                 start();
                 return true;
             }
@@ -565,7 +618,7 @@ public class LogMonitorPanelModel {
                 }
             }
             if (simpleRemove) {
-               treeModel.removeNodeFromParent(lastNode);
+                treeModel.removeNodeFromParent(lastNode);
             }
             dao.remove(entry);
 
@@ -622,10 +675,31 @@ public class LogMonitorPanelModel {
             while (lastNode.getChildCount() != 0) {
                 DefaultMutableTreeNode child = (DefaultMutableTreeNode) lastNode.getChildAt(0);
                 treeModel.removeNodeFromParent(child);
-                dao.remove(((EntityObject)child.getUserObject()).getEntity());
+                dao.remove(((EntityObject) child.getUserObject()).getEntity());
             }
         }
 
 
+    }
+
+    private class BuildTreeCallback extends DefaultCallBack<List<Configuration>> {
+        private final Callback<DefaultTreeModel> callback;
+
+        public BuildTreeCallback(Callback<DefaultTreeModel> callback) {
+            this.callback = callback;
+        }
+
+        @Override
+        public void onAnswer(List<Configuration> configs) {
+            if (configs.isEmpty()) {
+                callback.onAnswer(null);
+            }
+            DefaultMutableTreeNode root = new DefaultMutableTreeNode();
+            DefaultTreeModel treeModel = new DefaultTreeModel(root);
+            for (Configuration configuration : configs) {
+                root.add(createConfigNode(configuration, treeModel));
+            }
+            callback.onAnswer(treeModel);
+        }
     }
 }
