@@ -24,10 +24,8 @@ import javax.swing.*;
 import javax.swing.tree.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: id967161
@@ -39,7 +37,7 @@ public class LogMonitorPanelModel {
 
     private static final DateTimeFormatter HOURS_MINUTES = DateTimeFormat.forPattern("HH:mm");
     private static final DateTimeFormatter SHORT_DATE = DateTimeFormat.forPattern("dd HH:mm:ss");
-    private static final int MSG_WIDTH = 20;
+    private static final int MSG_WIDTH = 30;
 
     private final ConfigurationCallbackDao dao;
     private final Serializer serializer;
@@ -143,13 +141,20 @@ public class LogMonitorPanelModel {
 
     private DefaultMutableTreeNode createLogEntryGroupNode(LogEntryGroup group, List<LogEntry> newEntries, LocalDateTime since) {
         DefaultMutableTreeNode node = new DefaultMutableTreeNode(new GroupObject(group));
-        for (LogEntry logEntry : group.getEntries()) {
-            if (newEntries != null && (since == null || logEntry.getDate().isAfter(since))) {
-                newEntries.add(logEntry);
-            }
+        for (LogEntry logEntry : sorted(group.getEntries(), newEntries, since)) {
             node.add(new DefaultMutableTreeNode(new GroupedEntryObject(logEntry, group)));
         }
         return node;
+    }
+
+    private List<LogEntry> sorted(List<LogEntry> entries, final List<LogEntry> newEntries, LocalDateTime since) {
+        for (LogEntry entry : entries) {
+            if (newEntries != null && (since == null || entry.getDate().isAfter(since))) {
+                newEntries.add(entry);
+            }
+        }
+        Collections.sort(entries, new EntriesComparator(newEntries));
+        return entries;
     }
 
     private DefaultMutableTreeNode createEntryNode(LogEntry entry) {
@@ -209,12 +214,12 @@ public class LogMonitorPanelModel {
             if (parent.getParent() == null) {
                 parent.remove(loading);
             } else {
-                SwingUtilities.invokeLater(new Runnable() {
-                        @Override
-                        public void run() {
-                            treeModel.removeNodeFromParent(loading);
-                        }
-                    });
+                invokeSwingAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        treeModel.removeNodeFromParent(loading);
+                    }
+                });
 
             }
         }
@@ -225,7 +230,7 @@ public class LogMonitorPanelModel {
         if (root.getParent() == null) {
             root.add(newChild);
         } else {
-            SwingUtilities.invokeLater(new Runnable() {
+            invokeSwingAndWait(new Runnable() {
                 @Override
                 public void run() {
                     model.insertNodeInto(newChild, root, root.getChildCount());
@@ -235,9 +240,20 @@ public class LogMonitorPanelModel {
         }
     }
 
+    private void invokeSwingAndWait(Runnable runnable) {
+        if (Thread.currentThread().getName().contains("AWT")) {
+            runnable.run();
+        } else
+            try {
+                SwingUtilities.invokeAndWait(runnable);
+            } catch (Exception e) {
+                throw new IllegalStateException("Error waiting task", e);
+            }
+    }
+
     private void removeAllChild(final DefaultTreeModel model, final DefaultMutableTreeNode node) {
         while (node.getChildCount() != 0) {
-            SwingUtilities.invokeLater(new Runnable() {
+            invokeSwingAndWait(new Runnable() {
                 @Override
                 public void run() {
                     model.removeNodeFromParent((MutableTreeNode) node.getChildAt(0));
@@ -275,10 +291,13 @@ public class LogMonitorPanelModel {
         menu.add(new JMenuItem(new OpenConfig(openConfigDialog)));
         MatchConfigObject config = getObjectFromPath(path, MatchConfigObject.class);
         Configuration configuration = getObjectFromPath(path, Configuration.class);
+        if (configuration != null) {
+            menu.add(new JMenuItem(new CreateMatchAction(configuration, "Create new match...", Level.ERROR.toString(), "")));
+        }
         final DefaultMutableTreeNode groupNode = getNodeFromPath(path, GroupObject.class);
         if (groupNode != null) {
             final LogEntryGroup group = getObjectFromPath(path, GroupObject.class).getEntity();
-            menu.add(new JMenuItem(new CreateGroupedMatchConfig(configuration, group, config.getEntity().getLevel())));
+            menu.add(new JMenuItem(new CreateMatchAction(configuration, "Create match for group...", config.getEntity().getLevel(), group.getMessagePattern())));
             menu.add(new JMenuItem(new RemoveAction(component, new RemoveGroup(treeModel, groupNode, group), "group", "group and all entries in it")));
         }
         final DefaultMutableTreeNode lastNode = (DefaultMutableTreeNode) path.getLastPathComponent();
@@ -394,6 +413,29 @@ public class LogMonitorPanelModel {
         }
     }
 
+    private static class EntriesComparator implements Comparator<LogEntry> {
+        private final List<LogEntry> newEntries;
+
+        public EntriesComparator(List<LogEntry> newEntries) {
+            this.newEntries = newEntries;
+        }
+
+        @Override
+        public int compare(LogEntry o1, LogEntry o2) {
+            if (newEntries != null) {
+                boolean new1 = newEntries.contains(o1);
+                boolean new2 = newEntries.contains(o2);
+                if (new1 && !new2) {
+                    return -1;
+                }
+                if (new2 && !new1) {
+                    return 1;
+                }
+            }
+            return o2.getDate().compareTo(o1.getDate());
+        }
+    }
+
     public class EnvironmentObject extends EntityObject<Environment> implements ConsoleDisplayable {
 
         private EnvironmentObject(Environment entity) {
@@ -506,23 +548,26 @@ public class LogMonitorPanelModel {
         }
     }
 
-    private class CreateGroupedMatchConfig extends AbstractAction {
-        private final LogEntryGroup group;
-        private final String level;
-        private final Configuration configuration;
+    private class CreateMatchAction extends AbstractAction {
 
-        public CreateGroupedMatchConfig(Configuration configuration, LogEntryGroup group, String level) {
-            super("Create match...");
+        private final Configuration configuration;
+        private final String name;
+        private final String level;
+        private final String message;
+
+        public CreateMatchAction(Configuration configuration, String name, String level, String message) {
+            super(name);
             this.configuration = configuration;
-            this.group = group;
+            this.name = name;
             this.level = level;
+            this.message = message;
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
             MatchConfigForm matchConfigForm = new MatchConfigForm();
             final MatchConfig config = new MatchConfig();
-            config.setMessage(group.getMessagePattern());
+            config.setMessage(message);
             config.setLevel(level);
             VerboseBeanAdapter<MatchConfig> beanAdapter = new VerboseBeanAdapter<MatchConfig>(config);
             matchConfigForm.setBeanAdapters(beanAdapter);
@@ -534,15 +579,6 @@ public class LogMonitorPanelModel {
             matchConfigForm.setIsSpecific();
             BaseDialog dialog = new BaseDialog(new OnMatchConfigOkAction(config, copy), matchConfigForm.getContentPanel());
             dialog.setTitleAndShow("Add new match config");
-        }
-
-        private void doSaveSettings(MatchConfig config, List<Environment> copies, List<Environment> originals) {
-            for (int i = 0; i < copies.size(); i++) {
-                if (copies.get(i).getMatchConfigs().contains(config)) {
-                    dao.addMatchConfig(originals.get(i), config);
-                    listener.onEntriesAdded(originals.get(i), null);
-                }
-            }
         }
 
         private class OnMatchConfigOkAction extends Thread implements OnOkAction {
@@ -562,7 +598,13 @@ public class LogMonitorPanelModel {
 
             @Override
             public void run() {
-                doSaveSettings(config, copy, configuration.getEnvironments());
+                List<Environment> originals = configuration.getEnvironments();
+                for (int i = 0; i < copy.size(); i++) {
+                    if (copy.get(i).getMatchConfigs().contains(config)) {
+                        dao.addMatchConfig(originals.get(i), config);
+                        listener.onEntriesAdded(originals.get(i), null);
+                    }
+                }
             }
         }
     }
@@ -756,10 +798,7 @@ public class LogMonitorPanelModel {
                     dao.getNotGroupedMatchedEntries(matchConfig, environment, new DefaultCallBack<List<LogEntry>>() {
                         @Override
                         public void onAnswer(List<LogEntry> entries) {
-                            for (LogEntry entry : entries) {
-                                if (since == null || entry.getDate().isAfter(since)) {
-                                    newEntries.add(entry);
-                                }
+                            for (LogEntry entry : sorted(entries, newEntries, since)) {
                                 insertNode(createEntryNode(entry), node, model);
                             }
                         }
