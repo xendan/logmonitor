@@ -82,11 +82,13 @@ class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     @Override
-    public List<Configuration> getConfigs() {
+    public synchronized List<Configuration> getConfigs() {
+        entityManager.getTransaction().begin();
         List<Configuration> configs = getAll(Configuration.class);
         for (Configuration configuration : configs) {
             initMatcherException(configuration);
         }
+        entityManager.getTransaction().commit();
         return configs;
     }
 

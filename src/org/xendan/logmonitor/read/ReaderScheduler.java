@@ -47,7 +47,7 @@ public class ReaderScheduler {
                     for (Configuration configuration : dao.getConfigs()) {
                         for (Environment environment : configuration.getEnvironments()) {
                             Runnable command = new DownloadAndParse(configuration.getLogPattern(), environment, dao, listener, homeResolver,configuration.getProjectName());
-                            executor.scheduleWithFixedDelay(command, 3 * Math.round(Math.random()), environment.getUpdateInterval() * 60, TimeUnit.SECONDS);
+                            executor.scheduleAtFixedRate(command, 3 * Math.round(Math.random()), environment.getUpdateInterval() * 60, TimeUnit.SECONDS);
                         }
                     }
                 }

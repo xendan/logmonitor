@@ -117,11 +117,13 @@ public class LogMonitorPanel {
             model.initTreeModel(new Callback<DefaultTreeModel>() {
                 @Override
                 public void onAnswer(DefaultTreeModel treeModel) {
-                    treePanel.getViewport().remove(linkPanel);
-                    treePanel.setViewportView(logTree);
-                    logTree.setModel(treeModel);
-                    treeModelInited = true;
-                    onLoaded.onAnswer(null);
+                    if (treeModel != null) {
+                        treePanel.getViewport().remove(linkPanel);
+                        treePanel.setViewportView(logTree);
+                        logTree.setModel(treeModel);
+                        treeModelInited = true;
+                        onLoaded.onAnswer(null);
+                    }
                 }
 
                 @Override
@@ -129,6 +131,8 @@ public class LogMonitorPanel {
                     onException(error);
                 }
             });
+        } else {
+            onLoaded.onAnswer(null);
         }
     }
 
@@ -195,7 +199,7 @@ public class LogMonitorPanel {
             if (userObject instanceof Configuration) {
                 return "project";
             }
-            if (userObject instanceof Environment) {
+            if (userObject instanceof LogMonitorPanelModel.EnvironmentObject) {
                 return "environment";
             }
             if (userObject instanceof LogMonitorPanelModel.MatchConfigObject) {
