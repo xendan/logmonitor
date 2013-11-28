@@ -4,8 +4,6 @@ import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
-import com.jgoodies.binding.value.ValueHolder;
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Level;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -13,11 +11,9 @@ import org.joda.time.format.DateTimeFormatter;
 import org.xendan.logmonitor.dao.Callback;
 import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
 import org.xendan.logmonitor.dao.impl.DefaultCallBack;
-import org.xendan.logmonitor.idea.BaseDialog;
-import org.xendan.logmonitor.idea.MatchConfigForm;
+import org.xendan.logmonitor.idea.model.node.*;
 import org.xendan.logmonitor.model.*;
 import org.xendan.logmonitor.parser.EntryAddedListener;
-import org.xendan.logmonitor.parser.PatternUtils;
 import org.xendan.logmonitor.read.Serializer;
 
 import javax.swing.*;
@@ -35,15 +31,16 @@ public class LogMonitorPanelModel {
     public static final String LOADING = "Loading...";
     public static final String GROUP_DISPLAY_ID = "logmonitor messages";
 
-    private static final DateTimeFormatter HOURS_MINUTES = DateTimeFormat.forPattern("HH:mm");
-    private static final DateTimeFormatter SHORT_DATE = DateTimeFormat.forPattern("dd HH:mm:ss");
-    private static final int MSG_WIDTH = 30;
+    public static final DateTimeFormatter HOURS_MINUTES = DateTimeFormat.forPattern("HH:mm");
+    public static final DateTimeFormatter SHORT_DATE = DateTimeFormat.forPattern("dd HH:mm:ss");
+    public static final int MSG_WIDTH = 30;
 
     private final ConfigurationCallbackDao dao;
     private final Serializer serializer;
     private final EntryAddedListener listener;
     private Map<Environment, LocalDateTime> updateSince = new HashMap<Environment, LocalDateTime>();
     private Map<Environment, LocalDateTime> nextUpdate = new HashMap<Environment, LocalDateTime>();
+    private Map<Environment, Boolean> newEntriesCalculated = new HashMap<Environment, Boolean>();
     private List<Configuration> configs;
     private boolean configsLoading;
     private Callback<Boolean> hasConfigsCallback;
@@ -56,12 +53,8 @@ public class LogMonitorPanelModel {
     }
 
     public void hasConfig(final Callback<Boolean> callback) {
-        if (configs != null) {
-            callback.onAnswer(!configs.isEmpty());
-        } else {
-            hasConfigsCallback = callback;
-            doGetConfigs();
-        }
+        hasConfigsCallback = callback;
+        doGetConfigs();
     }
 
     private synchronized void doGetConfigs() {
@@ -85,11 +78,7 @@ public class LogMonitorPanelModel {
 
     public void initTreeModel(final Callback<DefaultTreeModel> callback) {
         buildTreeCallback = new BuildTreeCallback(callback);
-        if (configs != null) {
-            buildTreeCallback.onAnswer(configs);
-        } else {
-            doGetConfigs();
-        }
+        doGetConfigs();
     }
 
     private MutableTreeNode createConfigNode(Configuration configuration, DefaultTreeModel treeModel) {
@@ -101,7 +90,7 @@ public class LogMonitorPanelModel {
     }
 
     private MutableTreeNode createEnvironment(Environment environment, final DefaultTreeModel treeModel) {
-        final DefaultMutableTreeNode node = new DefaultMutableTreeNode(new EnvironmentObject(environment));
+        final DefaultMutableTreeNode node = new DefaultMutableTreeNode(new EnvironmentObject(environment, nextUpdate));
         for (MatchConfig matchConfig : environment.getMatchConfigs()) {
             insertNode(createMatchNode(matchConfig, environment, true, treeModel), node, treeModel);
         }
@@ -214,12 +203,14 @@ public class LogMonitorPanelModel {
             if (parent.getParent() == null) {
                 parent.remove(loading);
             } else {
-                invokeSwingAndWait(new Runnable() {
-                    @Override
-                    public void run() {
-                        treeModel.removeNodeFromParent(loading);
-                    }
-                });
+                swingInvokeAndWait(
+                        new Runnable() {
+                            @Override
+                            public void run() {
+                                treeModel.removeNodeFromParent(loading);
+                            }
+                        }
+                );
 
             }
         }
@@ -230,30 +221,30 @@ public class LogMonitorPanelModel {
         if (root.getParent() == null) {
             root.add(newChild);
         } else {
-            invokeSwingAndWait(new Runnable() {
+            swingInvokeAndWait(new Runnable() {
                 @Override
                 public void run() {
                     model.insertNodeInto(newChild, root, root.getChildCount());
                 }
-
             });
         }
     }
 
-    private void invokeSwingAndWait(Runnable runnable) {
+    private void swingInvokeAndWait(Runnable runnable) {
         if (Thread.currentThread().getName().contains("AWT")) {
             runnable.run();
-        } else
+        } else {
             try {
                 SwingUtilities.invokeAndWait(runnable);
             } catch (Exception e) {
-                throw new IllegalStateException("Error waiting task", e);
+                throw new IllegalStateException("Error invoking task", e);
             }
+        }
     }
 
     private void removeAllChild(final DefaultTreeModel model, final DefaultMutableTreeNode node) {
         while (node.getChildCount() != 0) {
-            invokeSwingAndWait(new Runnable() {
+            swingInvokeAndWait(new Runnable() {
                 @Override
                 public void run() {
                     model.removeNodeFromParent((MutableTreeNode) node.getChildAt(0));
@@ -292,12 +283,12 @@ public class LogMonitorPanelModel {
         MatchConfigObject config = getObjectFromPath(path, MatchConfigObject.class);
         Configuration configuration = getObjectFromPath(path, Configuration.class);
         if (configuration != null) {
-            menu.add(new JMenuItem(new CreateMatchAction(configuration, "Create new match...", Level.ERROR.toString(), "")));
+            menu.add(new JMenuItem(newCreateMatchAction(configuration, "Create new match...", Level.ERROR.toString(), "")));
         }
         final DefaultMutableTreeNode groupNode = getNodeFromPath(path, GroupObject.class);
         if (groupNode != null) {
             final LogEntryGroup group = getObjectFromPath(path, GroupObject.class).getEntity();
-            menu.add(new JMenuItem(new CreateMatchAction(configuration, "Create match for group...", config.getEntity().getLevel(), group.getMessagePattern())));
+            menu.add(new JMenuItem(newCreateMatchAction(configuration, "Create match for group...", config.getEntity().getLevel(), group.getMessagePattern())));
             menu.add(new JMenuItem(new RemoveAction(component, new RemoveGroup(treeModel, groupNode, group), "group", "group and all entries in it")));
         }
         final DefaultMutableTreeNode lastNode = (DefaultMutableTreeNode) path.getLastPathComponent();
@@ -308,12 +299,18 @@ public class LogMonitorPanelModel {
         } else if (object instanceof MatchConfigObject) {
             final MatchConfig matchConfig = ((MatchConfigObject) object).getEntity();
             menu.add(new JMenuItem(new RemoveAction(component, new RemoveEntriesMatching(lastNode, treeModel), "log entries matching " + matchConfig, "all log entries matching " + matchConfig)));
+            Environment environment = getObjectFromPath(path, EnvironmentObject.class).getEntity();
+            menu.add(new JMenuItem(new RemoveAction(component, new RemoveMatchAndEntries(lastNode, treeModel, environment), "match and entries" + matchConfig, "match and entries" + matchConfig)));
         } else if (object instanceof EntryObject) {
             final DefaultMutableTreeNode parent = (DefaultMutableTreeNode) lastNode.getParent();
             final LogEntry entry = ((EntryObject) object).getEntity();
             menu.add(new JMenuItem(new RemoveAction(component, new RemoveSingleEntry(parent, lastNode, treeModel, entry), "log entry", "log entry")));
         }
         return menu;
+    }
+
+    private AbstractAction newCreateMatchAction(Configuration configuration, String name, String level, String message) {
+        return new CreateMatchAction(serializer, listener, dao, configuration, name, level, message);
     }
 
     public boolean isNodeUpdated(DefaultMutableTreeNode node) {
@@ -372,241 +369,6 @@ public class LogMonitorPanelModel {
             count += findNewCount((DefaultMutableTreeNode) node.getChildAt(i), count);
         }
         return count;
-    }
-
-    private interface ConsoleDisplayable {
-        String toConsoleString();
-    }
-
-    private static class EntityObject<E extends BaseObject> {
-
-        protected final E entity;
-
-        private EntityObject(E entity) {
-            this.entity = entity;
-        }
-
-        public E getEntity() {
-            return entity;
-        }
-
-        @Override
-        public String toString() {
-            return entity.toString();
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            EntityObject that = (EntityObject) o;
-
-            if (entity != null ? !entity.equals(that.entity) : that.entity != null) return false;
-
-            return true;
-        }
-
-        @Override
-        public int hashCode() {
-            return entity != null ? entity.hashCode() : 0;
-        }
-    }
-
-    private static class EntriesComparator implements Comparator<LogEntry> {
-        private final List<LogEntry> newEntries;
-
-        public EntriesComparator(List<LogEntry> newEntries) {
-            this.newEntries = newEntries;
-        }
-
-        @Override
-        public int compare(LogEntry o1, LogEntry o2) {
-            if (newEntries != null) {
-                boolean new1 = newEntries.contains(o1);
-                boolean new2 = newEntries.contains(o2);
-                if (new1 && !new2) {
-                    return -1;
-                }
-                if (new2 && !new1) {
-                    return 1;
-                }
-            }
-            return o2.getDate().compareTo(o1.getDate());
-        }
-    }
-
-    public class EnvironmentObject extends EntityObject<Environment> implements ConsoleDisplayable {
-
-        private EnvironmentObject(Environment entity) {
-            super(entity);
-        }
-
-        @Override
-        public String toConsoleString() {
-            return entity.getName() + ", " + getServerStr(entity.getServer()) + "\n Next update:" + getUpdate(nextUpdate.get(entity));
-        }
-
-        private String getUpdate(LocalDateTime time) {
-            if (time == null) {
-                return "soon";
-            }
-            return HOURS_MINUTES.print(time);
-        }
-
-        private String getServerStr(Server server) {
-            if (server == null) {
-                return Server.LOCALHOST;
-            }
-            return server.getLogin() + "@" + server.getHost();
-        }
-    }
-
-    public class MatchConfigObject extends EntityObject<MatchConfig> implements ConsoleDisplayable {
-        private int childNum;
-
-        public MatchConfigObject(MatchConfig matchConfig) {
-            super(matchConfig);
-        }
-//        TODO:implement normal child count
-//
-//        public void setChildNum(int childNum) {
-//            this.childNum = childNum;
-//        }
-
-        @Override
-        public String toString() {
-            return entity.toString() + "(" + childNum + ")";
-        }
-
-        @Override
-        public String toConsoleString() {
-            String patternStr = entity.getMessage() == null ? "" : "\nPattern:\n" + entity.getMessage();
-            return entity.toString() + "\nLEVEL>=" + entity.getLevel() + patternStr;
-        }
-    }
-
-    public static class EntryObject extends EntityObject<LogEntry> implements ConsoleDisplayable {
-
-
-        public EntryObject(LogEntry entry) {
-            super(entry);
-        }
-
-        @Override
-        public String toString() {
-            return entity.getLevel() + ":" + SHORT_DATE.print(entity.getDate()) + " " + StringUtils.abbreviate(getMessage(), MSG_WIDTH);
-        }
-
-        @Override
-        public String toConsoleString() {
-            return entity.getLevel() + ":" + entity.getDate() + "\n" + getMessage();
-        }
-
-        protected String getMessage() {
-            return entity.getMessage();
-        }
-
-        public boolean isError() {
-            return Level.toLevel(entity.getLevel()).isGreaterOrEqual(Level.ERROR);
-        }
-    }
-
-    private static class GroupedEntryObject extends EntryObject {
-
-        private final LogEntryGroup group;
-
-        public GroupedEntryObject(LogEntry entry, LogEntryGroup group) {
-            super(entry);
-            this.group = group;
-        }
-
-        @Override
-        protected String getMessage() {
-            return PatternUtils.restoreMessage(entity, group.getMessagePattern());
-        }
-    }
-
-    private static class GroupObject extends EntityObject<LogEntryGroup> implements ConsoleDisplayable {
-
-        public GroupObject(LogEntryGroup group) {
-            super(group);
-        }
-
-        @Override
-        public String toString() {
-            return entity.getEntries().size() + " similar entries" + " " + StringUtils.abbreviate(getMessage(), MSG_WIDTH);
-        }
-
-        @Override
-        public String toConsoleString() {
-            return toString() + " matched by \n" + getMessage();
-        }
-
-        private String getMessage() {
-            return PatternUtils.regexToSimple(entity.getMessagePattern());
-        }
-    }
-
-    private class CreateMatchAction extends AbstractAction {
-
-        private final Configuration configuration;
-        private final String name;
-        private final String level;
-        private final String message;
-
-        public CreateMatchAction(Configuration configuration, String name, String level, String message) {
-            super(name);
-            this.configuration = configuration;
-            this.name = name;
-            this.level = level;
-            this.message = message;
-        }
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            MatchConfigForm matchConfigForm = new MatchConfigForm();
-            final MatchConfig config = new MatchConfig();
-            config.setMessage(message);
-            config.setLevel(level);
-            VerboseBeanAdapter<MatchConfig> beanAdapter = new VerboseBeanAdapter<MatchConfig>(config);
-            matchConfigForm.setBeanAdapters(beanAdapter);
-            final List<Environment> copy = serializer.doCopy(configuration.getEnvironments());
-            for (Environment environment : copy) {
-                environment.getMatchConfigs().add(config);
-            }
-            matchConfigForm.setEnvironments(new ValueHolder(copy));
-            matchConfigForm.setIsSpecific();
-            BaseDialog dialog = new BaseDialog(new OnMatchConfigOkAction(config, copy), matchConfigForm.getContentPanel());
-            dialog.setTitleAndShow("Add new match config");
-        }
-
-        private class OnMatchConfigOkAction extends Thread implements OnOkAction {
-            private final MatchConfig config;
-            private final List<Environment> copy;
-
-            private OnMatchConfigOkAction(MatchConfig config, List<Environment> copy) {
-                this.config = config;
-                this.copy = copy;
-            }
-
-            @Override
-            public boolean canClose() {
-                start();
-                return true;
-            }
-
-            @Override
-            public void run() {
-                List<Environment> originals = configuration.getEnvironments();
-                for (int i = 0; i < copy.size(); i++) {
-                    if (copy.get(i).getMatchConfigs().contains(config)) {
-                        dao.addMatchConfig(originals.get(i), config);
-                        listener.onEntriesAdded(originals.get(i), null);
-                    }
-                }
-            }
-        }
     }
 
     private class OpenConfig extends AbstractAction {
@@ -721,6 +483,7 @@ public class LogMonitorPanelModel {
         }
     }
 
+
     private class RemoveEntriesMatching implements Runnable {
         private final DefaultMutableTreeNode lastNode;
         private final DefaultTreeModel treeModel;
@@ -778,13 +541,19 @@ public class LogMonitorPanelModel {
         @Override
         public void run() {
             updateSince.put(environment, since);
+            newEntriesCalculated.put(environment, false);
             nextUpdate.put(environment, new LocalDateTime(System.currentTimeMillis() + environment.getUpdateInterval() * 60 * 1000));
             final List<LogEntry> newEntries = new ArrayList<LogEntry>();
-            final DefaultMutableTreeNode envNode = findNode((DefaultMutableTreeNode) model.getRoot(), new EnvironmentObject(environment));
-            for (MatchConfig matchConfig : environment.getMatchConfigs()) {
+            final DefaultMutableTreeNode envNode = findNode((DefaultMutableTreeNode) model.getRoot(), new EnvironmentObject(environment, nextUpdate));
+            for (final MatchConfig matchConfig : environment.getMatchConfigs()) {
                 final DefaultMutableTreeNode node = findNode(envNode, new MatchConfigObject(matchConfig));
                 if (node == null) {
-                    createMatchNode(matchConfig, environment, false, model);
+                    swingInvokeAndWait(new Runnable() {
+                        @Override
+                        public void run() {
+                            model.insertNodeInto(createMatchNode(matchConfig, environment, false, model), envNode, 0);
+                        }
+                    });
                 } else {
                     removeAllChild(model, node);
                     dao.getMatchedEntryGroups(matchConfig, environment, new DefaultCallBack<List<LogEntryGroup>>() {
@@ -793,6 +562,7 @@ public class LogMonitorPanelModel {
                             for (LogEntryGroup group : groups) {
                                 insertNode(createLogEntryGroupNode(group, newEntries, since), node, model);
                             }
+                            checkShowNotifications(newEntries);
                         }
                     });
                     dao.getNotGroupedMatchedEntries(matchConfig, environment, new DefaultCallBack<List<LogEntry>>() {
@@ -801,11 +571,38 @@ public class LogMonitorPanelModel {
                             for (LogEntry entry : sorted(entries, newEntries, since)) {
                                 insertNode(createEntryNode(entry), node, model);
                             }
+                            checkShowNotifications(newEntries);
                         }
+
                     });
                 }
             }
-            Notifications.Bus.notify(getMessage(newEntries, environment));
+
+        }
+
+        private void checkShowNotifications(List<LogEntry> newEntries) {
+            if (Boolean.TRUE.equals(newEntriesCalculated.get(environment))) {
+                Notifications.Bus.notify(getMessage(newEntries, environment));
+            }
+            newEntriesCalculated.put(environment, Boolean.TRUE);
+        }
+    }
+
+    private class RemoveMatchAndEntries implements Runnable {
+        private final DefaultMutableTreeNode lastNode;
+        private final DefaultTreeModel treeModel;
+        private final Environment environment;
+
+        public RemoveMatchAndEntries(DefaultMutableTreeNode node, DefaultTreeModel treeModel, Environment environment) {
+            this.lastNode = node;
+            this.treeModel = treeModel;
+            this.environment = environment;
+        }
+
+        @Override
+        public void run() {
+            treeModel.removeNodeFromParent(lastNode);
+            dao.removeMatchConfig(((MatchConfigObject) lastNode.getUserObject()).getEntity(), environment);
         }
     }
 }

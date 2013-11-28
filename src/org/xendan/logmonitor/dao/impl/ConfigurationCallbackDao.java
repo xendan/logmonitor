@@ -55,14 +55,14 @@ public class ConfigurationCallbackDao {
         }, callback);
     }
 
-    public void addMatchConfig(final Environment environment, final MatchConfig config) {
-        executor.execute(new NoCallbackTask(new Callable<Void>() {
+    public void addMatchConfig(final Environment environment, final MatchConfig config, Callback<Void> callback) {
+        schedule(new Callable<Void>(){
             @Override
             public Void call() throws Exception {
                 wrapped.addMatchConfig(environment, config);
                 return null;
             }
-        }));
+        }, callback);
     }
 
     public void remove(final BaseObject object) {
@@ -103,6 +103,16 @@ public class ConfigurationCallbackDao {
                 return null;
             }
         }, callback);
+    }
+
+    public void removeMatchConfig(final MatchConfig match, final Environment environment) {
+        executor.execute(new NoCallbackTask(new Callable<Void>(){
+            @Override
+            public Void call() throws Exception {
+                wrapped.removeMatchConfig(environment, match);
+                return null;
+            }
+        }));
     }
 
     private static class RunDaoTask<T> implements Runnable {

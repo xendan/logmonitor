@@ -5,8 +5,6 @@ import org.xendan.logmonitor.dao.impl.DefaultCallBack;
 import org.xendan.logmonitor.idea.LogMonitorPanel;
 import org.xendan.logmonitor.model.Environment;
 
-import javax.swing.*;
-
 /**
  * User: id967161
  * Date: 20/09/13
@@ -20,13 +18,7 @@ public class EntryAddedListener {
     }
 
     public void onEntriesAdded(final Environment environment, final LocalDateTime since) {
-        if (logMonitorPanel != null) {
-            SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    logMonitorPanel.onEntriesAdded(environment, since);
-                }
-            });
-        }
+        logMonitorPanel.onEntriesAdded(environment, since);
     }
 
     public void onError(final Exception e) {

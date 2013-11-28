@@ -38,40 +38,9 @@ public class LogParser {
     public LogParser(LocalDateTime since, String pattern, EntryMatcher entryMatcher) {
         this.since = since;
         this.entryMatcher = entryMatcher;
-        this.pattern = slashRegexpSymbols(pattern.replace("%n", ""));
+        this.pattern = PatternUtils.simpleToRegexp(pattern.replace("%n", ""));
         regexPattern = getRegexPattern();
     }
-
-    private String slashRegexpSymbols(String pattern) {
-        return PatternUtils.simpleToRegexp(pattern);
-        /*
-        //Although {} is regexp special, it can be used in log4j, so should not be slashed
-        Matcher patternMatcher = PATTERN_MATCHER.matcher(pattern);
-        List<String> notSpecialPatterns = new ArrayList<String>();
-        List<String> specialPatterns = new ArrayList<String>();
-        int index = 0;
-        while (patternMatcher.find()) {
-            notSpecialPatterns.add(pattern.substring(index, patternMatcher.start()));
-            specialPatterns.add(patternMatcher.group());
-            index = patternMatcher.end();
-        }
-        notSpecialPatterns.add(pattern.substring(index));
-        List<String> notSpecialSlashed = new ArrayList<String>(notSpecialPatterns.size());
-        for (String notSpecialPattern : notSpecialPatterns) {
-            notSpecialSlashed.add(PatternUtils.simpleToRegexp(notSpecialPattern));
-        }
-        String result = "";
-        int i;
-        for (i= 0; i < specialPatterns.size(); i++) {
-           result += notSpecialSlashed.get(i);
-           result += specialPatterns.get(i);
-        }
-        if (i + 1 < specialPatterns.size()) {
-            result += specialPatterns.get(i + 1);
-        }
-        return result;    */
-    }
-
 
     private Pattern getRegexPattern() {
         initActiveParsers(pattern);

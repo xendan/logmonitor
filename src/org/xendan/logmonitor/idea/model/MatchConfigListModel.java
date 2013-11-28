@@ -1,4 +1,4 @@
-package org.xendan.logmonitor.idea;
+package org.xendan.logmonitor.idea.model;
 
 import com.jgoodies.binding.value.AbstractValueModel;
 import com.jgoodies.binding.value.ValueModel;
@@ -8,6 +8,7 @@ import org.xendan.logmonitor.model.MatchConfig;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SuppressWarnings("unchecked")
@@ -36,6 +37,7 @@ public class MatchConfigListModel extends AbstractValueModel implements Property
                 }
             }
         }
+        Collections.sort(list);
         return list;
     }
 
@@ -43,6 +45,7 @@ public class MatchConfigListModel extends AbstractValueModel implements Property
     public void setValue(Object newValue) {
         Object oldValue = list;
         list = (List<MatchConfig>) newValue;
+        Collections.sort(list);
         fireValueChange(oldValue, list);
     }
 

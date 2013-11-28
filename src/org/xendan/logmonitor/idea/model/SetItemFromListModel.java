@@ -30,7 +30,7 @@ public abstract class SetItemFromListModel<T extends BaseObject> {
     JButton newButton;
     JButton removeButton;
     protected JPanel itemPanel;
-    JList itemsList;
+    protected JList itemsList;
     private final ValueModel listValueModel;
     private final String toStringProperty;
     final VerboseBeanAdapter<T> beanAdapter;

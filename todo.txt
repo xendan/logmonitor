@@ -1,11 +1,24 @@
-FIX
-- add all data patterns
-- modify YYY pattern
++ order of patterns
+- add ignore pattern.
+- show log round message.
+- expand new entries.
+- fix tooltip on environment.
+- series of log entries.
+- delete entries dialog.
+- make horizontal.
+- pattern from entry.
+- tooltips and validation.
+- clear all TODO
+- order of grouped and not grouped
+- number of child (preferably new)
+- open config delay
+- fix order of nodes match config, after config update.
+- fix tons of spam
+- fix number of child
 
 IMPROVEMENTs
-- add version
+- add version (check compatibility with IDEA)
 - add validation
 - add log4j test
-- (?) generating server side script
 - add db config!
-- load settigns from server!
+- (?) load settings from server!

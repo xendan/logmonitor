@@ -9,7 +9,10 @@ import com.intellij.openapi.project.Project;
 import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.dao.Callback;
 import org.xendan.logmonitor.dao.impl.DefaultCallBack;
+import org.xendan.logmonitor.idea.model.node.EntryObject;
+import org.xendan.logmonitor.idea.model.node.EnvironmentObject;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
+import org.xendan.logmonitor.idea.model.node.MatchConfigObject;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
@@ -159,6 +162,10 @@ public class LogMonitorPanel {
         }
     }
 
+    public static ImageIcon getImgIcon(String name) {
+        return new ImageIcon(LogMonitorPanel.class.getResource("/org/xendan/logmonitor/idea/img/" + name + ".png"));
+    }
+
 
     private class OpenConfigurationListener implements HyperlinkListener {
         @Override
@@ -183,7 +190,7 @@ public class LogMonitorPanel {
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
                 String name = getIconImgName(node.getUserObject());
                 if (name != null) {
-                    setIcon(new ImageIcon(getClass().getResource("/org/xendan/logmonitor/idea/img/" + name + ".png")));
+                    setIcon(getImgIcon(name));
                 }
                 if (model.isNodeUpdated(node)) {
                     setFont(bold);
@@ -199,15 +206,15 @@ public class LogMonitorPanel {
             if (userObject instanceof Configuration) {
                 return "project";
             }
-            if (userObject instanceof LogMonitorPanelModel.EnvironmentObject) {
+            if (userObject instanceof EnvironmentObject) {
                 return "environment";
             }
-            if (userObject instanceof LogMonitorPanelModel.MatchConfigObject) {
-                MatchConfig config = ((LogMonitorPanelModel.MatchConfigObject) userObject).getEntity();
+            if (userObject instanceof MatchConfigObject) {
+                MatchConfig config = ((MatchConfigObject) userObject).getEntity();
                 return config.isGeneral() ? "list-unknown" : "list-error";
             }
-            if (userObject instanceof LogMonitorPanelModel.EntryObject) {
-                LogMonitorPanelModel.EntryObject entryObject = (LogMonitorPanelModel.EntryObject) userObject;
+            if (userObject instanceof EntryObject) {
+                EntryObject entryObject = (EntryObject) userObject;
                 return entryObject.isError() ? "error" : "warning";
             }
             return null;

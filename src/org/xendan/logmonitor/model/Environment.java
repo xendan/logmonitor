@@ -25,6 +25,7 @@ public class Environment extends BaseObject {
     }
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OrderBy(value="weight desc")
     public List<MatchConfig> getMatchConfigs() {
         return matchConfigs;
     }

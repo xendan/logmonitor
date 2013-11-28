@@ -68,7 +68,7 @@ public class LogEntry extends BaseObject {
         this.level = level;
     }
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     public MatchConfig getMatchConfig() {
         return matchConfig;
     }
@@ -77,7 +77,7 @@ public class LogEntry extends BaseObject {
         this.matchConfig = matchConfig;
     }
 
-    @ManyToOne(cascade = {CascadeType.ALL})
+    @ManyToOne
     public Environment getEnvironment() {
         return environment;
     }

@@ -99,13 +99,13 @@ public class ConfigurationDaoImplTest {
 
     @Test
     public void test_misc_error() throws Exception {
-        dao.addEntries(getJobErroresEntries("unexpected-error.log"));
-        dao.addEntries(getJobErroresEntries("error_line_89.log"));
+        dao.addEntries(getJobErrorsEntries("unexpected-error.log"));
+        dao.addEntries(getJobErrorsEntries("error_line_89.log"));
     }
 
     @Test
     public void test_similar_start() throws Exception {
-        List<LogEntry> entries = getJobErroresEntries("similar_start.log");
+        List<LogEntry> entries = getJobErrorsEntries("similar_start.log");
         dao.addEntries(entries);
         List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
         assertEquals("Expect single group", 1, groups.size());
@@ -114,7 +114,7 @@ public class ConfigurationDaoImplTest {
 
     @Test
     public void test_dvf_settings() throws Exception {
-        dao.addEntries(getJobErroresEntries("dvf-settings.log"));
+        dao.addEntries(getJobErrorsEntries("dvf-settings.log"));
         List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
         assertEquals("Expect single group", 1, groups.size());
         assertEquals(2, groups.get(0).getEntries().size());
@@ -122,7 +122,7 @@ public class ConfigurationDaoImplTest {
 
     @Test
     public void test_similar_end() throws Exception {
-        List<LogEntry> entries = getJobErroresEntries("similar_end.log");
+        List<LogEntry> entries = getJobErrorsEntries("similar_end.log");
         dao.addEntries(entries);
         List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
         assertEquals("Expect single group", 1, groups.size());
@@ -131,7 +131,7 @@ public class ConfigurationDaoImplTest {
 
     @Test
     public void test_general_error_grouped__full_text() throws Exception {
-        List<LogEntry> entries = getJobErroresEntries("same_errores.log");
+        List<LogEntry> entries = getJobErrorsEntries("same_errores.log");
         for (int i = 1; i < entries.size(); i++) {
             assertEquals(entries.get(0).getMessage(), entries.get(i).getMessage());
         }
@@ -142,7 +142,7 @@ public class ConfigurationDaoImplTest {
 
     @Test
     public void test_general_error_grouped__middle_match() throws Exception {
-        List<LogEntry> entries = getJobErroresEntries("different_internal_errores.log");
+        List<LogEntry> entries = getJobErrorsEntries("different_internal_errores.log");
         dao.addEntries(entries);
         List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
         List<LogEntry> groupedEntries = groups.get(0).getEntries();
@@ -162,7 +162,7 @@ public class ConfigurationDaoImplTest {
         assertEquals("Expect 5 entries found", 5, groups.get(0).getEntries().size());
     }
 
-    public List<LogEntry> getJobErroresEntries(String fileName) throws IOException {
+    public List<LogEntry> getJobErrorsEntries(String fileName) throws IOException {
         String path = homeResolver.joinMkDirs(fileName, TEST_FILES);
         FileOutputStream output = null;
         try {

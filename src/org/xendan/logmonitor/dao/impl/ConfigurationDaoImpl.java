@@ -27,13 +27,13 @@ import java.util.regex.Pattern;
  * Date: 04/09/13
  */
 @SuppressWarnings("unchecked")
-class ConfigurationDaoImpl implements ConfigurationDao {
+public class ConfigurationDaoImpl implements ConfigurationDao {
 
     public static final int MATCHING_INDEX = 5;
     protected EntityManager entityManager;
     private final HomeResolver homeResolver;
 
-    public ConfigurationDaoImpl(HomeResolver homeResolver) {
+    protected ConfigurationDaoImpl(HomeResolver homeResolver) {
         this(homeResolver, "db");
     }
 
@@ -87,6 +87,10 @@ class ConfigurationDaoImpl implements ConfigurationDao {
         List<Configuration> configs = getAll(Configuration.class);
         for (Configuration configuration : configs) {
             initMatcherException(configuration);
+            //TODO why not done by hibernate..
+            for (Environment environment : configuration.getEnvironments()) {
+                Collections.sort(environment.getMatchConfigs());
+            }
         }
         entityManager.getTransaction().commit();
         return configs;
@@ -109,17 +113,17 @@ class ConfigurationDaoImpl implements ConfigurationDao {
 
     @Override
     public void save(List<Configuration> configs) {
-            String filePath = homeResolver.joinMkDirs("tmp.config", "tmpconfig");
-            File file = new File(filePath);
-            try {
-                if (!file.exists() && !file.createNewFile()) {
-                    throw new IllegalStateException("Error creating file " + filePath);
-                }
-                OutputStream outputStream = new FileOutputStream(filePath);
-                toByteArrayOutputStream(configs).writeTo(outputStream);
-            } catch (Exception e) {
-                throw new IllegalStateException("Error writing entries", e);
+        String filePath = homeResolver.joinMkDirs("tmp.config", "tmpconfig");
+        File file = new File(filePath);
+        try {
+            if (!file.exists() && !file.createNewFile()) {
+                throw new IllegalStateException("Error creating file " + filePath);
             }
+            OutputStream outputStream = new FileOutputStream(filePath);
+            toByteArrayOutputStream(configs).writeTo(outputStream);
+        } catch (Exception e) {
+            throw new IllegalStateException("Error writing entries", e);
+        }
         entityManager.getTransaction().begin();
         for (Configuration config : configs) {
             entityManager.persist(config);
@@ -148,16 +152,16 @@ class ConfigurationDaoImpl implements ConfigurationDao {
         //TODO maybe it is possible by JPA
         entityManager.createNativeQuery("DELETE FROM LOG_ENTRY_GROUP_ENTRIES " +
                 "WHERE ENTRIES IN (" +
-                    "SELECT ID FROM LOG_ENTRY " +
-                    " WHERE ENVIRONMENT = ?" +
+                "SELECT ID FROM LOG_ENTRY " +
+                " WHERE ENVIRONMENT = ?" +
 
                 ")").setParameter(1, environment.getId())
-                    .executeUpdate();
+                .executeUpdate();
         entityManager.createNativeQuery("DELETE FROM LOG_ENTRY_GROUP g " +
                 " WHERE NOT EXISTS (" +
-                    "SELECT LOG_ENTRY_GROUP " +
-                    " FROM LOG_ENTRY_GROUP_ENTRIES lg " +
-                    " WHERE lg.LOG_ENTRY_GROUP = g.ID" +
+                "SELECT LOG_ENTRY_GROUP " +
+                " FROM LOG_ENTRY_GROUP_ENTRIES lg " +
+                " WHERE lg.LOG_ENTRY_GROUP = g.ID" +
                 ")").executeUpdate();
         LogEntry last = getLastEntry(environment);
         entityManager.createNativeQuery("DELETE FROM LOG_ENTRY  WHERE ENVIRONMENT = ? AND ID <> ?")
@@ -168,46 +172,73 @@ class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     @Override
+    public void removeMatchConfig(Environment environment, MatchConfig config) {
+        entityManager.getTransaction().begin();
+        environment.getMatchConfigs().remove(config);
+        entityManager.persist(environment);
+        entityManager
+                .createQuery("DELETE FROM LogEntry WHERE matchConfig = ? AND environment = ?")
+                .setParameter(1, config)
+                .setParameter(2, environment)
+                .executeUpdate();
+        entityManager
+                .createNativeQuery("DELETE FROM MATCH_CONFIG c " +
+                        "WHERE NOT EXISTS (" +
+                        "SELECT MATCH_CONFIGS " +
+                        "FROM ENVIRONMENT_MATCH_CONFIGS " +
+                        "WHERE MATCH_CONFIGS = c.ID" +
+                        ")")
+                .executeUpdate();
+        entityManager.getTransaction().commit();
+    }
+
+    @Override
     public synchronized void addMatchConfig(Environment environment, MatchConfig newConfig) {
         entityManager.getTransaction().begin();
+        environment.getMatchConfigs().add(newConfig);
+        entityManager.persist(environment);
         for (MatchConfig matchConfig : environment.getMatchConfigs()) {
-            if (matchConfig.isGeneral()) {
-                for (LogEntryGroup group : getMatchedEntryGroups(matchConfig, environment)) {
-                    boolean groupChanged = false;
-                    for (LogEntry entry : new ArrayList<LogEntry>(group.getEntries())) {
-                        restoreMessage(entry, group.getMessagePattern());
-                        if (PatternUtils.isMatch(entry, newConfig)) {
-                            group.getEntries().remove(entry);
-                            groupChanged = true;
-                            //TODO message!
-                            entry.setMatchConfig(newConfig);
-                            persistEntry(entry);
-                        }
-                    }
-                    if (groupChanged) {
-                        if (group.getEntries().isEmpty()) {
-                            entityManager.remove(group);
-                        } else {
-                            entityManager.persist(group);
-                        }
-                    }
+            if (!matchConfig.equals(newConfig)) {
+                checkMatchConfigContainsExampleForNew(environment, newConfig, matchConfig);
+            }
+        }
+        entityManager.getTransaction().commit();
+    }
 
-                }
-                for (LogEntry entry : getNotGroupedMatchedEntries(matchConfig, environment)) {
-                    if (!StringUtils.isEmpty(matchConfig.getMessage())) {
-                        restoreMessage(entry, matchConfig.getMessage());
-                    }
+    private void checkMatchConfigContainsExampleForNew(Environment environment, MatchConfig newConfig, MatchConfig matchConfig) {
+        if (matchConfig.isGeneral()) {
+            for (LogEntryGroup group : getMatchedEntryGroups(matchConfig, environment)) {
+                boolean groupChanged = false;
+                for (LogEntry entry : new ArrayList<LogEntry>(group.getEntries())) {
+                    restoreMessage(entry, group.getMessagePattern());
                     if (PatternUtils.isMatch(entry, newConfig)) {
+                        group.getEntries().remove(entry);
+                        groupChanged = true;
                         //TODO message!
                         entry.setMatchConfig(newConfig);
                         persistEntry(entry);
                     }
                 }
+                if (groupChanged) {
+                    if (group.getEntries().isEmpty()) {
+                        entityManager.remove(group);
+                    } else {
+                        entityManager.persist(group);
+                    }
+                }
+
+            }
+            for (LogEntry entry : getNotGroupedMatchedEntries(matchConfig, environment)) {
+                if (!StringUtils.isEmpty(matchConfig.getMessage())) {
+                    restoreMessage(entry, matchConfig.getMessage());
+                }
+                if (PatternUtils.isMatch(entry, newConfig)) {
+                    //TODO message!
+                    entry.setMatchConfig(newConfig);
+                    persistEntry(entry);
+                }
             }
         }
-        environment.getMatchConfigs().add(newConfig);
-        entityManager.persist(environment);
-        entityManager.getTransaction().commit();
     }
 
     private void restoreMessage(LogEntry entry, String messagePattern) {
@@ -280,7 +311,7 @@ class ConfigurationDaoImpl implements ConfigurationDao {
 
     private LogEntry assertEntryOk(LogEntry entry) {
 
-        assert  entry.getMessage() != null;
+        assert entry.getMessage() != null;
         assert entry.getLevel() != null;
         assert entry.getDate() != null;
 
@@ -397,7 +428,7 @@ class ConfigurationDaoImpl implements ConfigurationDao {
             return matcher.group(1);
         }
         //TODO log or something
-        throw new IllegalArgumentException("No match of  *******\n" + commonPattern + "\n to message ********\n" + message+"\n********\n");
+        throw new IllegalArgumentException("No match of  *******\n" + commonPattern + "\n to message ********\n" + message + "\n********\n");
     }
 
     private LogEntry getLogEntryForNotGeneral(List<LogEntry> entries, LogEntry entry) {

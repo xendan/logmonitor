@@ -21,6 +21,7 @@ import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
 import org.xendan.logmonitor.dao.impl.DefaultCallBack;
 import org.xendan.logmonitor.idea.model.LogChooseListener;
+import org.xendan.logmonitor.idea.model.MatchConfigListModel;
 import org.xendan.logmonitor.idea.model.SetItemFromListModel;
 import org.xendan.logmonitor.idea.model.VerboseBeanAdapter;
 import org.xendan.logmonitor.model.Configuration;
@@ -31,6 +32,8 @@ import org.xendan.logmonitor.read.ReaderScheduler;
 import org.xendan.logmonitor.read.Serializer;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -38,6 +41,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -118,8 +122,13 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         projectRemoveButton.addActionListener(new RemoveProjectListener());
         browsLogButton.addActionListener(new BrowseLogButtonActionListener());
         selectKeyFileButton.addActionListener(new KeyFileSelectionListener());
-        advancedSettingsButton.addActionListener(new AdavancedSettingsListener());
+        advancedSettingsButton.addActionListener(new AdvancedSettingsListener());
         projectComboBox.setRenderer(new ConfigProjectRenderer());
+        patternUp.addActionListener(new MovePatternActionListener(true));
+        patternUp.setEnabled(false);
+        patternDown.addActionListener(new MovePatternActionListener(false));
+        patternDown.setEnabled(false);
+        paternsList.addListSelectionListener(new PatternSelectionListener());
         ValueHolder configSelection = new ValueHolder();
         Bindings.bind(projectComboBox, new SelectionInList<Configuration>((ListModel) configsModel, configSelection));
         Bindings.bind(patternTextField, configAdapter.getPropertyModel("logPattern"));
@@ -503,6 +512,20 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         }
 
         @Override
+        protected MatchConfig initBean(MatchConfig bean) {
+            MatchConfig newBean = super.initBean(bean);
+            int maxWeight = 0;
+            for (int i = 0; i < itemsList.getModel().getSize(); i++) {
+                MatchConfig config = (MatchConfig) itemsList.getModel().getElementAt(i);
+                if (config.getWeight() != null && config.getWeight() > maxWeight) {
+                    maxWeight = config.getWeight();
+                }
+            }
+            newBean.setWeight(maxWeight + 1);
+            return newBean;
+        }
+
+        @Override
         protected void onNewClicked() {
             super.onNewClicked();
             form.setIsGeneral(true);
@@ -539,13 +562,41 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     }
 
 
-    private class AdavancedSettingsListener implements ActionListener {
+    private class AdvancedSettingsListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             AdvancedSettings advancedSettings = new AdvancedSettings(homeResolver);
             BaseDialog dialog = new BaseDialog(advancedSettings.getOnOkAction(), advancedSettings.getContentPanel());
             dialog.setTitleAndShow("Advanced settings");
+        }
+    }
 
+    private class MovePatternActionListener implements ActionListener {
+        private final boolean up;
+
+        public MovePatternActionListener(boolean isUp) {
+            up = isUp;
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            MatchConfig selected = (MatchConfig) paternsList.getSelectedValue();
+            if (selected != null) {
+                int neighbourIndex = up ? paternsList.getSelectedIndex() - 1 :  paternsList.getSelectedIndex() + 1;
+                MatchConfig neighbor = (MatchConfig) paternsList.getModel().getElementAt(neighbourIndex);
+                Integer weight = selected.getWeight();
+                selected.setWeight(neighbor.getWeight());
+                neighbor.setWeight(weight);
+                Collections.sort((List<Comparable>) paternsList.getModel());
+            }
+        }
+    }
+
+    private class PatternSelectionListener implements ListSelectionListener {
+        @Override
+        public void valueChanged(ListSelectionEvent e) {
+            patternUp.setEnabled(paternsList.getSelectedIndex() != 0);
+            patternDown.setEnabled(paternsList.getSelectedIndex() < paternsList.getModel().getSize() - 1);
         }
     }
 }

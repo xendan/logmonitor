@@ -18,13 +18,13 @@ public interface ConfigurationDao {
 
     List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment);
 
-
     LogEntry getLastEntry(Environment settings);
 
     void addEntries(List<LogEntry> entries);
 
-
     void addMatchConfig(Environment environment, MatchConfig config);
+
+    void removeMatchConfig(Environment environment, MatchConfig config);
 
     void remove(BaseObject group);
 

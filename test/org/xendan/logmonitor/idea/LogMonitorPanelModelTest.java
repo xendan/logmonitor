@@ -157,7 +157,7 @@ public class LogMonitorPanelModelTest {
         }
 
         @Override
-        public void addMatchConfig(Environment environment, MatchConfig config) {
+        public void addMatchConfig(Environment environment, MatchConfig config, Callback<Void> callback) {
             wrapped.addMatchConfig(environment, config);
         }
 
