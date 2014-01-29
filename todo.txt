@@ -1,10 +1,10 @@
 + order of patterns
 + remove ignore pattern.
++ fix JPA
 
-- fix JPA
+- find why empty messages
 
 - find logger
-- find why empty messages
 - show log round message.
 - expand new entries.
 - fix tooltip on environment.

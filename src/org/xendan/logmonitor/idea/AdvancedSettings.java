@@ -2,7 +2,6 @@ package org.xendan.logmonitor.idea;
 
 import org.apache.commons.io.FileUtils;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.model.OnOkAction;
 import org.xendan.logmonitor.read.command.CommandFileLoader;
 
 import javax.swing.*;

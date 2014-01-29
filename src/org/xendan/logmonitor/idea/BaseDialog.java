@@ -1,7 +1,5 @@
 package org.xendan.logmonitor.idea;
 
-import org.xendan.logmonitor.model.OnOkAction;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;

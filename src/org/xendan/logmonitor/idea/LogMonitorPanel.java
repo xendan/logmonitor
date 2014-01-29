@@ -15,7 +15,6 @@ import org.xendan.logmonitor.idea.model.node.MatchConfigObject;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
-import org.xendan.logmonitor.model.OnOkAction;
 
 import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;

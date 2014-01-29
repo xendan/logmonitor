@@ -8,7 +8,7 @@ import org.xendan.logmonitor.idea.MatchConfigForm;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
-import org.xendan.logmonitor.model.OnOkAction;
+import org.xendan.logmonitor.idea.OnOkAction;
 import org.xendan.logmonitor.parser.EntryAddedListener;
 import org.xendan.logmonitor.read.Serializer;
 

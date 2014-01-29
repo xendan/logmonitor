@@ -1,11 +1,13 @@
 package org.xendan.logmonitor.dao;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.ejb.HibernatePersistence;
 import org.hibernate.internal.util.ClassLoaderHelper;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.spi.PersistenceProvider;
 import javax.persistence.spi.PersistenceProviderResolver;
@@ -20,6 +22,8 @@ import java.util.*;
 public class ConfigurationDaoImpl implements ConfigurationDao {
 
     public static final String DEF_PATH = "db";
+    private static EntityManagerFactory factory;
+
     private final String dbPath;
     protected EntityManager entityManager;
     private final HomeResolver homeResolver;
@@ -29,13 +33,16 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     protected ConfigurationDaoImpl(HomeResolver homeResolver, String dbPath) {
-        this(createUnit(homeResolver, dbPath), homeResolver, dbPath);
+        this(createEntityManager(homeResolver, dbPath), homeResolver, dbPath);
     }
 
-    private static EntityManager createUnit(HomeResolver homeResolver, String dbPath) {
-        PersistenceProviderResolverHolder.setPersistenceProviderResolver(new IdeaPersistenceProviderResolver());
-        ClassLoaderHelper.overridenClassLoader = ConfigurationDaoImpl.class.getClassLoader();
-        return Persistence.createEntityManagerFactory("defaultPersistentUnit").createEntityManager(createProperties(homeResolver, dbPath));
+    private static synchronized EntityManager createEntityManager(HomeResolver homeResolver, String dbPath) {
+        if (factory == null) {
+            PersistenceProviderResolverHolder.setPersistenceProviderResolver(new IdeaPersistenceProviderResolver());
+            ClassLoaderHelper.overridenClassLoader = ConfigurationDaoImpl.class.getClassLoader();
+            factory = Persistence.createEntityManagerFactory("defaultPersistentUnit", createProperties(homeResolver, dbPath));
+        }
+        return factory.createEntityManager();
     }
 
     private static Map<String, String> createProperties(HomeResolver homeResolver, String dbPath) {
@@ -62,7 +69,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         if (baseObject instanceof LogEntry) {
             LogEntry entry = (LogEntry) baseObject;
             assert entry.getDate() != null;
-            assert entry.getMessage() != null;
+            assert !StringUtils.isEmpty(entry.getMessage());
         }
         entityManager.merge(baseObject);
     }
@@ -70,7 +77,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     public void clearAll() {
         entityManager.createNativeQuery("DROP ALL OBJECTS ").executeUpdate();
         entityManager.getTransaction().commit();
-        entityManager = createUnit(homeResolver, dbPath);
+        entityManager = createEntityManager(homeResolver, dbPath);
 
     }
 

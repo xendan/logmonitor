@@ -4,16 +4,24 @@
              version="2.0">
     <persistence-unit name="defaultPersistentUnit">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <class>org.xendan.logmonitor.model.Configuration</class>
+        <class>org.xendan.logmonitor.model.Environment</class>
+        <class>org.xendan.logmonitor.model.LogEntry</class>
+        <class>org.xendan.logmonitor.model.LogEntryGroup</class>
+        <class>org.xendan.logmonitor.model.MatchConfig</class>
+        <class>org.xendan.logmonitor.model.Server</class>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
             <property name="hibernate.connection.driver_class" value="org.h2.Driver" />
-            <property name="hibernate.connection.password" value="" />
+            <property name="hibernate.connection.password" value="admin" />
             <property name="hibernate.connection.username" value="admin" />
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.ejb.naming_strategy" value="org.hibernate.cfg.ImprovedNamingStrategy" />
             <property name="hibernate.current_session_context_class" value="thread" />
+            <!--
+            TODO check why not work..
             <property name="hibernate.archive.autodetection" value="class, hbm" />
+            -->
         </properties>
     </persistence-unit>
 </persistence>

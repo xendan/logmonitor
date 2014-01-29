@@ -1,4 +1,4 @@
-package org.xendan.logmonitor.model;
+package org.xendan.logmonitor.idea;
 
 /**
  * User: id967161

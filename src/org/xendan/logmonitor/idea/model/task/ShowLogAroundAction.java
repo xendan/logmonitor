@@ -7,7 +7,7 @@ import com.intellij.ui.components.JBScrollPane;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.idea.BaseDialog;
 import org.xendan.logmonitor.model.Environment;
-import org.xendan.logmonitor.model.OnOkAction;
+import org.xendan.logmonitor.idea.OnOkAction;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

@@ -4,14 +4,12 @@ import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.model.MatchConfig;
 
-import javax.persistence.Entity;
 import java.util.Collections;
 
 /**
  * User: id967161
  * Date: 09/09/13
  */
-@Entity
 public class EntryMatcher {
 
     private final Environment environment;

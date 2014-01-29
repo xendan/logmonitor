@@ -49,36 +49,6 @@
         <option name="CONDITION" value="&#13;&#13;JAVA" />
         <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
-      <breakpoint url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/Ejb3Configuration.java" line="321" class="org.hibernate.ejb.Ejb3Configuration" package="org.hibernate.ejb">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProviderResolverHolder.java" line="135" class="javax.persistence.spi.PersistenceProviderResolverHolder.PersistenceProviderResolverPerClassLoader.CachingPersistenceProviderResolver" package="javax.persistence.spi">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
     </line_breakpoints>
     <exception_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint class_name="org.h2.jdbc.JdbcSQLException" package_name="org.h2.jdbc">
@@ -452,8 +422,25 @@
         <option name="CONDITION_ENABLED" value="true" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
+        <option name="CONDITION" value="&#13;&#13;JAVA" />
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+      </breakpoint>
+      <breakpoint class_name="java.lang.UnsupportedOperationException" package_name="java.lang">
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="&#13;&#13;JAVA" />
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
     </exception_breakpoints>
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
@@ -502,32 +489,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ConfigurationDaoImpl.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java">
+      <file leaf-file-name="todo.txt" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/todo.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="9" selection-start="1162" selection-end="1162" vertical-scroll-proportion="-5.178908" vertical-offset="3175" max-vertical-offset="3706">
-              <folding>
-                <element signature="e#534#564#0" expanded="true" />
-                <element signature="e#1654#1670#0" expanded="true" />
-                <element signature="e#8201#8222#0" expanded="true" />
-                <marker date="1390996177158" expanded="true" signature="4178:4381" placeholder="DELETE FROM ..." />
-                <marker date="1390996177158" expanded="true" signature="4282:4354" placeholder="SELECT ID FR..LOG_ENTRY..." />
-                <marker date="1390996177158" expanded="true" signature="4504:4767" placeholder="DELETE FROM ..." />
-                <marker date="1390996177158" expanded="true" signature="4887:4943" placeholder="DELETE FROM ..." />
-                <marker date="1390996177158" expanded="true" signature="5537:5806" placeholder="DELETE FROM ..." />
-                <marker date="1390996177158" expanded="true" signature="6537:6942" placeholder="SELECT e.* F..LOG_ENTRY..." />
-                <marker date="1390996177158" expanded="true" signature="6739:6862" placeholder="SELECT ENTRI..LOG_ENTRY_GROUP_ENTRIES..." />
-                <marker date="1390996177158" expanded="true" signature="7332:7748" placeholder="SELECT g.* F..LOG_ENTRY_GROUP..." />
-                <marker date="1390996177158" expanded="true" signature="7442:7746" placeholder="SELECT 1 FRO..LOG_ENTRY_GROUP_ENTRIES..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Persistence.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/Persistence.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="75" column="35" selection-start="2862" selection-end="2862" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1666">
+            <state line="6" column="13" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
               <folding />
             </state>
           </provider>
@@ -536,7 +501,7 @@
       <file leaf-file-name="PersistenceProviderResolverHolder.java" pinned="false" current="false" current-in-tab="false">
         <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProviderResolverHolder.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="135" column="0" selection-start="4715" selection-end="4715" vertical-scroll-proportion="0.0" vertical-offset="1591" max-vertical-offset="3417">
+            <state line="141" column="119" selection-start="5116" selection-end="5116" vertical-scroll-proportion="0.0" vertical-offset="1584" max-vertical-offset="3417">
               <folding>
                 <element signature="e#6591#6612#0" expanded="true" />
               </folding>
@@ -547,25 +512,47 @@
       <file leaf-file-name="persistence.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/META-INF/persistence.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="66" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
+            <state line="16" column="71" selection-start="1127" selection-end="1127" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EntityManagerFactory.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/EntityManagerFactory.java">
+      <file leaf-file-name="ConfigurationDaoImpl.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="25" selection-start="1761" selection-end="1761" vertical-scroll-proportion="0.0" vertical-offset="305" max-vertical-offset="2125">
+            <state line="43" column="97" selection-start="1707" selection-end="1707" vertical-scroll-proportion="0.45652175" vertical-offset="275" max-vertical-offset="3791">
+              <folding>
+                <element signature="e#625#655#0" expanded="true" />
+                <element signature="e#1908#1924#0" expanded="true" />
+                <element signature="e#8478#8499#0" expanded="true" />
+                <marker date="1390999534284" expanded="true" signature="4455:4658" placeholder="DELETE FROM ..." />
+                <marker date="1390999534284" expanded="true" signature="4559:4631" placeholder="SELECT ID FR..LOG_ENTRY..." />
+                <marker date="1390999534284" expanded="true" signature="4781:5044" placeholder="DELETE FROM ..." />
+                <marker date="1390999534284" expanded="true" signature="5164:5220" placeholder="DELETE FROM ..." />
+                <marker date="1390999534284" expanded="true" signature="5814:6083" placeholder="DELETE FROM ..." />
+                <marker date="1390999534284" expanded="true" signature="6814:7219" placeholder="SELECT e.* F..LOG_ENTRY..." />
+                <marker date="1390999534284" expanded="true" signature="7016:7139" placeholder="SELECT ENTRI..LOG_ENTRY_GROUP_ENTRIES..." />
+                <marker date="1390999534284" expanded="true" signature="7609:8025" placeholder="SELECT g.* F..LOG_ENTRY_GROUP..." />
+                <marker date="1390999534284" expanded="true" signature="7719:8023" placeholder="SELECT 1 FRO..LOG_ENTRY_GROUP_ENTRIES..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Persistence.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/Persistence.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="73" column="45" selection-start="2779" selection-end="2779" vertical-scroll-proportion="0.0" vertical-offset="696" max-vertical-offset="1666">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Ejb3Configuration.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/Ejb3Configuration.java">
+      <file leaf-file-name="LogService.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="926" column="24" selection-start="37497" selection-end="37497" vertical-scroll-proportion="0.0" vertical-offset="13654" max-vertical-offset="26707">
+            <state line="437" column="34" selection-start="16812" selection-end="16812" vertical-scroll-proportion="0.0" vertical-offset="6305" max-vertical-offset="6868">
               <folding />
             </state>
           </provider>
@@ -682,11 +669,14 @@
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/dao/LogServiceTest.java" />
         <option value="$PROJECT_DIR$/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/command/CommandFileLoader.java" />
-        <option value="$PROJECT_DIR$/todo.txt" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/DownloadAndParse.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/DefaultCallBack.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/OnOkAction.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/EntryMatcher.java" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/EntryMatcher.java" />
         <option value="$PROJECT_DIR$/resources/META-INF/persistence.xml" />
+        <option value="$PROJECT_DIR$/todo.txt" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java" />
       </list>
     </option>
@@ -743,75 +733,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="&lt; IDEA IU-117.1037 &gt;" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
               <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -894,20 +816,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="META-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -983,6 +891,8 @@
       <recent name="org.xendan.logmonitor.service" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.xendan.logmonitor.parser" />
+      <recent name="org.xendan.logmonitor.idea" />
       <recent name="org.xendan.logmonitor.dao" />
       <recent name="org.xendan.logmonitor.dao.impl" />
     </key>
@@ -1566,12 +1476,12 @@
       <created>1378367231033</created>
       <updated>1378367231033</updated>
       <workItem from="1390989492870" duration="105000" />
-      <workItem from="1390990367759" duration="4636000" />
+      <workItem from="1390990367759" duration="8117000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4741000" />
+    <option name="totallyTimeSpent" value="8222000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -1595,7 +1505,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1617,7 +1527,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2637699" sideWeight="0.6730083" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3273743" sideWeight="0.54161566" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="JRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33966482" sideWeight="0.73929006" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33966482" sideWeight="0.73929006" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="JRebel" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.326257" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
@@ -1719,11 +1629,6 @@
         <state line="34" column="97" selection-start="1088" selection-end="1088" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="46" selection-start="2087" selection-end="2087" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="40" column="34" selection-start="1916" selection-end="1916" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
@@ -1814,13 +1719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/todo.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0" vertical-offset="35" max-vertical-offset="629">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="93" selection-start="1603" selection-end="1603" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3604">
@@ -1839,35 +1737,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="4" selection-start="528" selection-end="528" vertical-scroll-proportion="0.51241136" vertical-offset="0" max-vertical-offset="564">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="396" column="0" selection-start="15395" selection-end="15395" vertical-scroll-proportion="0.33333334" vertical-offset="5664" max-vertical-offset="6868">
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/jar/2f4e93876023b3c346c2db21a1d73cd4e9dbf243/hibernate-entitymanager-4.2.5.Final.jar!/META-INF/services/javax.persistence.spi.PersistenceProvider">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="38" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/HibernatePersistence.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="2219" selection-end="2219" vertical-scroll-proportion="0.0" vertical-offset="278" max-vertical-offset="1428">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/EntityManagerFactoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="190" column="25" selection-start="7350" selection-end="7350" vertical-scroll-proportion="0.3321033" vertical-offset="2081" max-vertical-offset="4743">
           <folding />
         </state>
       </provider>
@@ -1879,34 +1756,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/Ejb3Configuration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="926" column="24" selection-start="37497" selection-end="37497" vertical-scroll-proportion="0.0" vertical-offset="13654" max-vertical-offset="26707">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/EntityManagerFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="25" selection-start="1761" selection-end="1761" vertical-scroll-proportion="0.0" vertical-offset="305" max-vertical-offset="2125">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="66" selection-start="473" selection-end="473" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="32" selection-start="1838" selection-end="1838" vertical-scroll-proportion="0.33272058" vertical-offset="346" max-vertical-offset="1122">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProviderResolver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="42" column="30" selection-start="1465" selection-end="1465" vertical-scroll-proportion="0.59375" vertical-offset="136" max-vertical-offset="680">
@@ -1914,16 +1763,132 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/OnOkAction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="22" selection-start="282" selection-end="282" vertical-scroll-proportion="0.35416666" vertical-offset="0" max-vertical-offset="576">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="46" selection-start="2034" selection-end="2034" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2108">
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#1066#1081#0" expanded="false" />
+            <element signature="e#1142#1152#0" expanded="false" />
+            <element signature="e#2352#2361#0" expanded="false" />
+            <element signature="e#2680#2704#0" expanded="false" />
+            <element signature="e#4159#4160#0" expanded="false" />
+            <element signature="e#4189#4190#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/EntryMatcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="256" selection-end="256" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/engine/jdbc/internal/JdbcServicesImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="241" column="0" selection-start="10211" selection-end="10211" vertical-scroll-proportion="0.0" vertical-offset="2917" max-vertical-offset="6477">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/service/jdbc/connections/internal/UserSuppliedConnectionProviderImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="61" column="0" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.28125" vertical-offset="442" max-vertical-offset="986">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/EntityManagerFactoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="190" column="25" selection-start="7350" selection-end="7350" vertical-scroll-proportion="0.33333334" vertical-offset="2077" max-vertical-offset="4743">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="32" selection-start="1838" selection-end="1838" vertical-scroll-proportion="0.0" vertical-offset="339" max-vertical-offset="1122">
+          <folding>
+            <element signature="e#0#2823#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/HibernatePersistence.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="0" selection-start="2219" selection-end="2219" vertical-scroll-proportion="0.0" vertical-offset="271" max-vertical-offset="1428">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/EntityManagerFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="25" selection-start="2297" selection-end="2297" vertical-scroll-proportion="0.0" vertical-offset="431" max-vertical-offset="2125">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/Ejb3Configuration.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="322" column="124" selection-start="13806" selection-end="13806" vertical-scroll-proportion="0.0" vertical-offset="3325" max-vertical-offset="26707">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/QueryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="276" column="0" selection-start="8990" selection-end="8990" vertical-scroll-proportion="0.0" vertical-offset="3342" max-vertical-offset="9860">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="71" selection-start="1127" selection-end="1127" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/todo.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="437" column="34" selection-start="16812" selection-end="16812" vertical-scroll-proportion="0.0" vertical-offset="6305" max-vertical-offset="6868">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/Persistence.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="35" selection-start="2862" selection-end="2862" vertical-scroll-proportion="0.0" vertical-offset="459" max-vertical-offset="1666">
+        <state line="73" column="45" selection-start="2779" selection-end="2779" vertical-scroll-proportion="0.0" vertical-offset="696" max-vertical-offset="1666">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProviderResolverHolder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="135" column="0" selection-start="4715" selection-end="4715" vertical-scroll-proportion="0.0" vertical-offset="1591" max-vertical-offset="3417">
+        <state line="141" column="119" selection-start="5116" selection-end="5116" vertical-scroll-proportion="0.0" vertical-offset="1584" max-vertical-offset="3417">
           <folding>
             <element signature="e#6591#6612#0" expanded="true" />
           </folding>
@@ -1932,20 +1897,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="9" selection-start="1162" selection-end="1162" vertical-scroll-proportion="-5.178908" vertical-offset="3175" max-vertical-offset="3706">
+        <state line="43" column="97" selection-start="1707" selection-end="1707" vertical-scroll-proportion="0.45652175" vertical-offset="275" max-vertical-offset="3791">
           <folding>
-            <element signature="e#534#564#0" expanded="true" />
-            <element signature="e#1654#1670#0" expanded="true" />
-            <element signature="e#8201#8222#0" expanded="true" />
-            <marker date="1390996177158" expanded="true" signature="4178:4381" placeholder="DELETE FROM ..." />
-            <marker date="1390996177158" expanded="true" signature="4282:4354" placeholder="SELECT ID FR..LOG_ENTRY..." />
-            <marker date="1390996177158" expanded="true" signature="4504:4767" placeholder="DELETE FROM ..." />
-            <marker date="1390996177158" expanded="true" signature="4887:4943" placeholder="DELETE FROM ..." />
-            <marker date="1390996177158" expanded="true" signature="5537:5806" placeholder="DELETE FROM ..." />
-            <marker date="1390996177158" expanded="true" signature="6537:6942" placeholder="SELECT e.* F..LOG_ENTRY..." />
-            <marker date="1390996177158" expanded="true" signature="6739:6862" placeholder="SELECT ENTRI..LOG_ENTRY_GROUP_ENTRIES..." />
-            <marker date="1390996177158" expanded="true" signature="7332:7748" placeholder="SELECT g.* F..LOG_ENTRY_GROUP..." />
-            <marker date="1390996177158" expanded="true" signature="7442:7746" placeholder="SELECT 1 FRO..LOG_ENTRY_GROUP_ENTRIES..." />
+            <element signature="e#625#655#0" expanded="true" />
+            <element signature="e#1908#1924#0" expanded="true" />
+            <element signature="e#8478#8499#0" expanded="true" />
+            <marker date="1390999534284" expanded="true" signature="4455:4658" placeholder="DELETE FROM ..." />
+            <marker date="1390999534284" expanded="true" signature="4559:4631" placeholder="SELECT ID FR..LOG_ENTRY..." />
+            <marker date="1390999534284" expanded="true" signature="4781:5044" placeholder="DELETE FROM ..." />
+            <marker date="1390999534284" expanded="true" signature="5164:5220" placeholder="DELETE FROM ..." />
+            <marker date="1390999534284" expanded="true" signature="5814:6083" placeholder="DELETE FROM ..." />
+            <marker date="1390999534284" expanded="true" signature="6814:7219" placeholder="SELECT e.* F..LOG_ENTRY..." />
+            <marker date="1390999534284" expanded="true" signature="7016:7139" placeholder="SELECT ENTRI..LOG_ENTRY_GROUP_ENTRIES..." />
+            <marker date="1390999534284" expanded="true" signature="7609:8025" placeholder="SELECT g.* F..LOG_ENTRY_GROUP..." />
+            <marker date="1390999534284" expanded="true" signature="7719:8023" placeholder="SELECT 1 FRO..LOG_ENTRY_GROUP_ENTRIES..." />
           </folding>
         </state>
       </provider>
