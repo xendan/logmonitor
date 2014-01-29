@@ -1,18 +1,10 @@
 package org.xendan.logmonitor.read.command;
 
-import com.intellij.idea.LoggerFactory;
-import com.intellij.openapi.diagnostic.Logger;
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.taskdefs.optional.ssh.SSHExec;
 import org.apache.tools.ant.taskdefs.optional.ssh.Scp;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.Environment;
-
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * User: kcyxa
@@ -20,18 +12,23 @@ import java.io.InputStream;
  */
 public class LogDownloader extends BaseCommand {
 
-    private static final String FILTER_LAST_SH = "filter_last.sh";
-
-    private static final String LAST_LOG = "last.log";
-    private final String path;
+    protected static final String LAST_LOG = "last.log";
+    protected final String path;
     private final HomeResolver homeResolver;
+    private final CommandFileLoader fileLoader;
 
-    private static final Logger logger = LoggerFactory.getInstance().getLoggerInstance(LogDownloader.class.getCanonicalName());
+    private final String[] dirs;
 
-    public LogDownloader(Environment settings, HomeResolver homeResolver) {
-        super(settings.getServer());
+    public LogDownloader(Environment settings, HomeResolver homeResolver, String project) {
+        this(settings, homeResolver, CommandFileLoader.createFilter(homeResolver) ,project);
+    }
+
+    public LogDownloader(Environment environment, HomeResolver homeResolver, CommandFileLoader fileLoader, String project) {
+        super(environment.getServer());
         this.homeResolver = homeResolver;
-        path = settings.getPath();
+        this.fileLoader = fileLoader;
+        path = environment.getPath();
+        dirs = new String[]{project, environment.getName()};
     }
 
     private String downloadTo(String localPath, Scp scp) {
@@ -52,10 +49,13 @@ public class LogDownloader extends BaseCommand {
     }
 
     private String getServerRoot() {
-        return settings.getLogin() + ":" + settings.getPassword() + "@" + settings.getHost() + ":";
+        return server.getLogin() + ":" + server.getPassword() + "@" + server.getHost() + ":";
     }
 
-    public String downloadToLocal(String datePattern, String... dirs) {
+    public String downloadToLocal(String datePattern) {
+        if (server == null) {
+            return path;
+        }
         String localPath = homeResolver.joinMkDirs(LAST_LOG, dirs);
         if (datePattern == null) {
             Scp scp = initTask(new Scp());
@@ -63,57 +63,25 @@ public class LogDownloader extends BaseCommand {
             return downloadTo(localPath, scp);
         }
         SSHExec exec = initTask(new SSHExec());
-        exec.setCommand(buildCommand(datePattern));
+        String command = buildCommand(datePattern);
+        exec.setCommand(command);
+        System.out.println(command);
         exec.execute();
         Scp scp = initTask(new Scp());
         scp.setFile(getServerDir() + "/" + LAST_LOG);
         return downloadTo(localPath, scp);
     }
 
-    private String buildCommand(String datePattern) {
-        return "mkdir -p ~/" + HomeResolver.HOME + "\n" +
-                getFilterLastCommand()
-                        .replaceAll("\\$date", datePattern)
-                        .replaceAll("\\$log_path", path)
-                        .replaceAll("\\$download_path", "~/" + HomeResolver.HOME + "/" + LAST_LOG)
-                        .replaceAll("\r\n", "\n")
-                        .replaceAll("\r", "\n");
+    protected String buildCommand(String datePattern) {
+        return "mkdir -p ~/" + HomeResolver.HOME + "\n" +  replaceParameters(datePattern, fileLoader.getShCommand());
     }
 
-    private String getFilterLastCommand() {
-        File file = getCommandFile(homeResolver);
-        if (file.exists()) {
-            return readCommandFromFile(file);
-        }
-        return readCommandFromResource();
+    protected String replaceParameters(String datePattern, String shCommand) {
+        return shCommand.replaceAll("\\$date", datePattern)
+                .replaceAll("\\$log_path", path)
+                .replaceAll("\\$download_path", "~/" + HomeResolver.HOME + "/" + LAST_LOG)
+                .replaceAll("\r\n", "\n")
+                .replaceAll("\r", "\n");
     }
 
-    public static String readCommandFromResource() {
-        InputStream resource = LogDownloader.class.getResourceAsStream("/" + FILTER_LAST_SH);
-        try {
-            return IOUtils.toString(resource);
-        } catch (IOException e) {
-             throw new IllegalStateException("Error reading command", e);
-        } finally {
-            try {
-                if (resource != null) {
-                    resource.close();
-                }
-            } catch (IOException e) {
-                logger.error(e);
-            }
-        }
-    }
-
-    public static String readCommandFromFile(File file) {
-        try {
-            return FileUtils.readFileToString(file);
-        } catch (IOException e) {
-            throw new IllegalStateException("Error reading command", e);
-        }
-    }
-
-    public static File getCommandFile(HomeResolver homeResolver) {
-        return new File(homeResolver.getPath(FILTER_LAST_SH));
-    }
 }

@@ -44,7 +44,7 @@ public class Serializer {
         }
     }
 
-    private <T> ByteArrayOutputStream toByteArrayOutputStream(T source) throws IOException {
+    public <T> ByteArrayOutputStream toByteArrayOutputStream(T source) throws IOException {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream out = new ObjectOutputStream(bos);
         out.writeObject(source);

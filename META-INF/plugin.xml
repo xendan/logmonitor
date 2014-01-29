@@ -21,11 +21,11 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
-      <applicationService serviceInterface="org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao"
-                          serviceImplementation="org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao"/>
+      <applicationService serviceInterface="org.xendan.logmonitor.dao.LogService"
+                          serviceImplementation="org.xendan.logmonitor.dao.LogService"/>
 
       <applicationService serviceInterface="org.xendan.logmonitor.dao.ConfigurationDao"
-                      serviceImplementation="org.xendan.logmonitor.dao.impl.ConfigurationDaoImpl"/>
+                      serviceImplementation="org.xendan.logmonitor.dao.ConfigurationDaoImpl"/>
       <applicationService serviceInterface="org.xendan.logmonitor.dao.LogEntryDao"
                       serviceImplementation="org.xendan.logmonitor.dao.impl.LogEntryDaoImpl"/>
 

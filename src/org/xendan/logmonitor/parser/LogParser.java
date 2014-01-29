@@ -44,13 +44,13 @@ public class LogParser {
 
     private Pattern getRegexPattern() {
         initActiveParsers(pattern);
-        return Pattern.compile(buildRegexPattern());
+        return Pattern.compile(buildRegexPattern(true));
     }
 
-    private String buildRegexPattern() {
+    private String buildRegexPattern(boolean useParentheses) {
         String resultPattern = pattern;
         for (UnitParser<?> parser : activeParsers) {
-            resultPattern = parser.replaceInPattern(resultPattern);
+            resultPattern = parser.replaceInPattern(resultPattern, useParentheses);
         }
         return resultPattern;
     }
@@ -73,6 +73,10 @@ public class LogParser {
             }
         }
         return parserMap;
+    }
+
+    public String getRegExpStr() {
+        return buildRegexPattern(false);
     }
 
     public void addString(String log) {

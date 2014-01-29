@@ -4,8 +4,8 @@ import com.intellij.openapi.project.Project;
 import org.junit.Before;
 import org.junit.Test;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.dao.ConfigurationDao;
-import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
+import org.xendan.logmonitor.dao.Callback;
+import org.xendan.logmonitor.dao.LogService;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
@@ -15,6 +15,7 @@ import org.xendan.logmonitor.read.Serializer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
@@ -221,13 +222,21 @@ public class LogMonitorSettingsConfigurableTest {
     public void setUp() {
         Project project = mock(Project.class);
         when(project.getName()).thenReturn("Test project");
-        ConfigurationDao dao = mock(ConfigurationDao.class);
         config = new Configuration();
         config.setProjectName("AAA");
-        when(dao.getConfigs()).thenReturn(new ArrayList<Configuration>(Arrays.asList(config)));
         ReaderScheduler readerScheduler = mock(ReaderScheduler.class);
         HomeResolver resolver = new HomeResolver();
-        configurable = new LogMonitorSettingsConfigurable(project, new ConfigurationCallbackDao(dao), new Serializer(resolver), readerScheduler, resolver);
+        configurable = new LogMonitorSettingsConfigurable(project, new MockService(), new Serializer(resolver), readerScheduler, resolver);
     }
 
+    private class MockService extends LogService {
+        public MockService() {
+            super(null);
+        }
+
+        @Override
+        public void getConfigs(Callback<List<Configuration>> callback) {
+            callback.onAnswer(new ArrayList<Configuration>(Arrays.asList(config)));
+        }
+    }
 }

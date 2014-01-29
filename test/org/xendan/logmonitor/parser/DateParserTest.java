@@ -16,7 +16,7 @@ public class DateParserTest {
     @Test
     public void test_default_date() throws Exception {
         DateParser dateParser = new DateParser();
-        String regexpPattern = dateParser.replaceInPattern("%d");
+        String regexpPattern = dateParser.replaceInPattern("%d", true);
         assertTrue("Expect default ISO8601 date found by patten " + regexpPattern, Pattern.matches(regexpPattern, "2013-09-06 09:30:22,093"));
     }
 

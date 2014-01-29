@@ -2,16 +2,15 @@ package org.xendan.logmonitor.idea;
 
 import com.intellij.execution.impl.ConsoleViewImpl;
 import com.intellij.execution.ui.ConsoleViewContentType;
-import com.intellij.idea.LoggerFactory;
-import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.project.Project;
+import org.apache.log4j.Logger;
 import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.dao.Callback;
-import org.xendan.logmonitor.dao.impl.DefaultCallBack;
+import org.xendan.logmonitor.dao.DefaultCallBack;
+import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.idea.model.node.EntryObject;
 import org.xendan.logmonitor.idea.model.node.EnvironmentObject;
-import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.idea.model.node.MatchConfigObject;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
@@ -50,7 +49,8 @@ public class LogMonitorPanel {
     private String errorLog = "";
     private final Runnable openConfigDialog;
     private boolean treeModelInited;
-    private static final Logger logger = LoggerFactory.getInstance().getLoggerInstance(LogMonitorPanel.class.getCanonicalName());
+//    private static final Logger logger = LoggerFactory.getInstance().getLoggerInstance(LogMonitorPanel.class.getCanonicalName());
+    private static final Logger logger = Logger.getLogger(LogMonitorPanel.class);
 
     public LogMonitorPanel(LogMonitorPanelModel model, Project project, LogMonitorSettingsConfigurable logMonitorSettingsConfigurable) {
         this.model = model;
@@ -95,18 +95,13 @@ public class LogMonitorPanel {
     }
 
     public void onException(final Throwable e) {
-        //TODO if tree is shown
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                errorLog += "\n" + e.getMessage();
-                linkPanel.setText(errorLog);
-                logger.error(e);
-            }
-        });
+        errorLog += "\n" + e.getMessage();
+        linkPanel.setText(errorLog);
+        logger.error(e);
     }
 
     public void onEntriesAdded(final Environment environment, final LocalDateTime since) {
-        initModel(new DefaultCallBack<Void>(){
+        initModel(new DefaultCallBack<Void>() {
             @Override
             public void onAnswer(Void answer) {
                 model.onEntriesAdded(since, environment, (DefaultTreeModel) logTree.getModel());
@@ -119,13 +114,19 @@ public class LogMonitorPanel {
         if (!treeModelInited) {
             model.initTreeModel(new Callback<DefaultTreeModel>() {
                 @Override
-                public void onAnswer(DefaultTreeModel treeModel) {
+                public void onAnswer(final DefaultTreeModel treeModel) {
                     if (treeModel != null) {
-                        treePanel.getViewport().remove(linkPanel);
-                        treePanel.setViewportView(logTree);
-                        logTree.setModel(treeModel);
-                        treeModelInited = true;
-                        onLoaded.onAnswer(null);
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                treePanel.getViewport().remove(linkPanel);
+                                treePanel.setViewportView(logTree);
+                                logTree.setModel(treeModel);
+                                treeModelInited = true;
+                                onLoaded.onAnswer(null);
+                            }
+                        });
+
                     }
                 }
 

@@ -4,10 +4,7 @@ import org.apache.log4j.Level;
 import org.joda.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
-import org.xendan.logmonitor.dao.Callback;
-import org.xendan.logmonitor.dao.ConfigurationDao;
-import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
-import org.xendan.logmonitor.dao.impl.DefaultCallBack;
+import org.xendan.logmonitor.dao.*;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.model.*;
 import org.xendan.logmonitor.parser.EntryAddedListener;
@@ -109,7 +106,8 @@ public class LogMonitorPanelModelTest {
     @Before
     public void setUp() {
         dao = mock(ConfigurationDao.class);
-        model = new LogMonitorPanelModel(new SynchronousConfigurationCallbackDao(dao), mock(Serializer.class), mock(EntryAddedListener.class));
+        //nulll
+        model = new LogMonitorPanelModel(null, new LogService(null), mock(Serializer.class), mock(EntryAddedListener.class), null);
 
         Configuration config = new Configuration();
         environment = new Environment();
@@ -136,49 +134,4 @@ public class LogMonitorPanelModelTest {
         return entry;
     }
 
-    private static class SynchronousConfigurationCallbackDao extends ConfigurationCallbackDao {
-        public SynchronousConfigurationCallbackDao(ConfigurationDao dao) {
-            super(dao);
-        }
-
-        @Override
-        public void getConfigs(Callback<List<Configuration>> callback) {
-            callback.onAnswer(wrapped.getConfigs());
-        }
-
-        @Override
-        public void getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment, Callback<List<LogEntry>> callback) {
-            callback.onAnswer(wrapped.getNotGroupedMatchedEntries(matchConfig, environment));
-        }
-
-        @Override
-        public void getMatchedEntryGroups(MatchConfig matchConfig, Environment environment, Callback<List<LogEntryGroup>> callback) {
-            callback.onAnswer(wrapped.getMatchedEntryGroups(matchConfig, environment));
-        }
-
-        @Override
-        public void addMatchConfig(Environment environment, MatchConfig config, Callback<Void> callback) {
-            wrapped.addMatchConfig(environment, config);
-        }
-
-        @Override
-        public void remove(BaseObject object) {
-            wrapped.remove(object);
-        }
-
-        @Override
-        public void removeAllEntries(Environment environment) {
-            wrapped.removeAllEntries(environment);
-        }
-
-        @Override
-        public void save(List<Configuration> configsModel, Callback<Void> callback) {
-            wrapped.save(configsModel);
-        }
-
-        @Override
-        public void clearAll(boolean createTestTmp, Callback<Void> callback) {
-            wrapped.clearAll(createTestTmp);
-        }
-    }
 }

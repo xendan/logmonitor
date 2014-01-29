@@ -3,7 +3,7 @@ package org.xendan.logmonitor.idea;
 import org.apache.commons.io.FileUtils;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.OnOkAction;
-import org.xendan.logmonitor.read.command.LogDownloader;
+import org.xendan.logmonitor.read.command.CommandFileLoader;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +16,9 @@ import java.io.IOException;
  * Date: 22/11/13
  */
 public class AdvancedSettings {
+
     private final HomeResolver homeResolver;
+    private final CommandFileLoader filterCommandLoader;
     private JCheckBox useDefaultCheckBox;
     private JPanel contentPanel;
     private JTextArea scriptTextArea;
@@ -25,11 +27,12 @@ public class AdvancedSettings {
     public AdvancedSettings(HomeResolver homeResolver) {
         this.homeResolver = homeResolver;
         this.onOkAction = new DoCommitChanges();
+        this.filterCommandLoader = CommandFileLoader.createFilter(homeResolver);
         init();
     }
 
     private void init() {
-        useDefaultCheckBox.setSelected(!LogDownloader.getCommandFile(homeResolver).exists());
+        useDefaultCheckBox.setSelected(!filterCommandLoader.getCommandFile().exists());
         onUseDefaultSelected();
         useDefaultCheckBox.addActionListener(new IsDefaultCheckBox());
     }
@@ -40,11 +43,11 @@ public class AdvancedSettings {
         }
 
     private String getTextAreaText() {
-        File file = LogDownloader.getCommandFile(homeResolver);
+        File file = filterCommandLoader.getCommandFile();
         if (useDefaultCheckBox.isSelected() || !file.exists())  {
-            return LogDownloader.readCommandFromResource();
+            return filterCommandLoader.readCommandFromResource();
         }
-        return LogDownloader.readCommandFromFile(file);
+        return filterCommandLoader.readCommandFromFile(file);
     }
 
 
@@ -67,7 +70,7 @@ public class AdvancedSettings {
     private class DoCommitChanges implements OnOkAction {
         @Override
         public boolean canClose() {
-            File file = LogDownloader.getCommandFile(homeResolver);
+            File file = filterCommandLoader.getCommandFile();
             if (useDefaultCheckBox.isSelected()) {
                 if (file.exists() && !file.delete()) {
                     throw new IllegalStateException("Error deleting file " + file);

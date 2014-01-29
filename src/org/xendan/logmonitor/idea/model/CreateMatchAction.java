@@ -1,8 +1,8 @@
 package org.xendan.logmonitor.idea.model;
 
 import com.jgoodies.binding.value.ValueHolder;
-import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
-import org.xendan.logmonitor.dao.impl.DefaultCallBack;
+import org.xendan.logmonitor.dao.LogService;
+import org.xendan.logmonitor.dao.DefaultCallBack;
 import org.xendan.logmonitor.idea.BaseDialog;
 import org.xendan.logmonitor.idea.MatchConfigForm;
 import org.xendan.logmonitor.model.Configuration;
@@ -24,12 +24,12 @@ class CreateMatchAction extends AbstractAction {
 
     private final Serializer serializer;
     private final EntryAddedListener listener;
-    private final ConfigurationCallbackDao dao;
+    private final LogService dao;
     private final Configuration configuration;
     private final String level;
     private final String message;
 
-    public CreateMatchAction(Serializer serializer, EntryAddedListener listener, ConfigurationCallbackDao dao, Configuration configuration, String name, String level, String message) {
+    public CreateMatchAction(Serializer serializer, EntryAddedListener listener, LogService dao, Configuration configuration, String name, String level, String message) {
         super(name);
         this.serializer = serializer;
         this.listener = listener;

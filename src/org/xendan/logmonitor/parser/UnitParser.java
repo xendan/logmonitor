@@ -28,11 +28,11 @@ public abstract class UnitParser<V> {
         return -1;
     }
 
-    public String replaceInPattern(String pattern) {
+    public String replaceInPattern(String pattern, boolean useParentheses) {
         Matcher matcher = samplePattern.matcher(pattern);
         if (matcher.find()) {
             return pattern.substring(0, matcher.start())
-                    + "(" + toRegExp(matcher) + ")"
+                    + (useParentheses ? "(" : "") + toRegExp(matcher) + (useParentheses ? ")" : "")
                     + pattern.substring(matcher.end());
         }
         return pattern;

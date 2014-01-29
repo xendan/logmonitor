@@ -31,7 +31,7 @@ public class DateParser extends UnitParser<LocalDateTime> {
         }
         formatAsString = getDatePatternString(formatAsString);
         dateFormatter = DateTimeFormat.forPattern(formatAsString);
-        return formatAsString.replaceAll("[yMdHmsS]", "\\\\d");
+        return formatAsString.replaceAll("[yMdHmsS]", "[0-9]");
     }
 
     private String getDatePatternString(String formatAsString) {

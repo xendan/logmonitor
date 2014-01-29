@@ -1,8 +1,7 @@
-package org.xendan.logmonitor.dao.impl;
+package org.xendan.logmonitor.dao;
 
-import com.intellij.idea.LoggerFactory;
-import com.intellij.openapi.diagnostic.Logger;
-import org.xendan.logmonitor.dao.Callback;
+import org.apache.log4j.Logger;
+import org.xendan.logmonitor.idea.LogMonitorPanel;
 
 /**
  * User: id967161
@@ -15,8 +14,8 @@ public abstract class DefaultCallBack<T> implements Callback<T> {
         public void onAnswer(Void answer) {
         }
     };
-    private static final Logger logger = LoggerFactory.getInstance().getLoggerInstance(DefaultCallBack.class.getCanonicalName());
-
+//    private static final Logger logger = LoggerFactory.getInstance().getLoggerInstance(DefaultCallBack.class.getCanonicalName());
+    private static final Logger logger = Logger.getLogger(LogMonitorPanel.class);
     @Override
     public void onFail(Throwable error) {
         logger.error(error);

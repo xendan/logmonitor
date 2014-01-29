@@ -1,12 +1,10 @@
 package org.xendan.logmonitor.idea;
 
 import com.jgoodies.binding.adapter.Bindings;
-import com.jgoodies.binding.list.ArrayListModel;
 import com.jgoodies.binding.list.SelectionInList;
 import com.jgoodies.binding.value.ValueModel;
 import org.apache.log4j.Level;
 import org.xendan.logmonitor.idea.model.BeanChangeListener;
-import org.xendan.logmonitor.idea.model.ListModelUpdater;
 import org.xendan.logmonitor.idea.model.VerboseBeanAdapter;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
@@ -18,7 +16,6 @@ import java.awt.event.ItemListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 /**
@@ -30,15 +27,11 @@ public class MatchConfigForm {
     private JTextField nameTextField;
     private JComboBox levelComboBox;
     private JTextArea messageTextArea;
-    private JList ignorePatterns;
     private JCheckBox isGeneralCheckBox;
-    private JLabel ignoreLabel;
     JLabel applyForLabel;
     JPanel applyFor;
     public JPanel contentPanel;
     private JCheckBox showMessageCheckBox;
-    private JButton addButton;
-    private JScrollPane ignorePatternsScrollPane;
     private ValueModel environmentsModel;
     private VerboseBeanAdapter<MatchConfig> beanAdapter;
 
@@ -50,11 +43,6 @@ public class MatchConfigForm {
         Bindings.bind(messageTextArea, beanAdapter.getPropertyModel("message"));
         Bindings.bind(isGeneralCheckBox, beanAdapter.getPropertyModel("general"));
         Bindings.bind(showMessageCheckBox, beanAdapter.getPropertyModel("showNotification"));
-        ValueModel exceptions = beanAdapter.getPropertyModel("exceptions");
-        ArrayListModel<MatchConfig> listModel = new ArrayListModel<MatchConfig>((Collection<? extends MatchConfig>) exceptions.getValue());
-        ListModelUpdater<MatchConfig> listModelUpdater = new ListModelUpdater<MatchConfig>(listModel);
-        exceptions.addValueChangeListener(listModelUpdater);
-        ignorePatterns.setModel(listModel);
         beanAdapter.addBeanChangeListener(new ApplyEnvironmentAdapter());
     }
 

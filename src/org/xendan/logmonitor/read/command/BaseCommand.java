@@ -10,26 +10,26 @@ import org.xendan.logmonitor.model.Server;
  * Date: 13/09/13
  */
 public class BaseCommand {
-    protected final Server settings;
+    protected final Server server;
 
     public BaseCommand(Server settings) {
-        this.settings = settings;
+        this.server = settings;
     }
 
     protected <T extends SSHBase> T initTask(T task) {
         task.setProject(new Project()); // prevent a NPE (Ant works with projects)
         task.setTrust(true); // workaround for not supplying known hosts file
-        task.setPassword(settings.getPassword());
-        task.setHost(settings.getHost());
-        task.setUsername(settings.getLogin());
+        task.setPassword(server.getPassword());
+        task.setHost(server.getHost());
+        task.setUsername(server.getLogin());
         //TODO: key, passphrase
         return task;
     }
 
     public String getConnectionStr() {
-        if (StringUtils.isEmpty(settings.getLogin())) {
-            return settings.getHost();
+        if (StringUtils.isEmpty(server.getLogin())) {
+            return server.getHost();
         }
-        return settings.getLogin() + "@" + settings.getHost();
+        return server.getLogin() + "@" + server.getHost();
     }
 }

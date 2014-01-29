@@ -15,17 +15,17 @@ public class LevelParserTest {
     @Test
     public void test_match() throws Exception {
         LevelParser parser = new LevelParser();
-        String regexpPattern = parser.replaceInPattern("%p");
+        String regexpPattern = parser.replaceInPattern("%p", true);
         assertTrue("Expect simple found" + regexpPattern, Pattern.matches(regexpPattern, "WARN"));
         assertTrue("Expect simple found" + regexpPattern, Pattern.matches(regexpPattern, "ERROR"));
         assertFalse("Expect simple not found" + regexpPattern, Pattern.matches(regexpPattern, " ERROR "));
 
-        regexpPattern = parser.replaceInPattern("%-5p");
+        regexpPattern = parser.replaceInPattern("%-5p", true);
         assertTrue("Expect aligned left found " + regexpPattern, Pattern.matches(regexpPattern, "WARN "));
         assertFalse("Expect aligned left not found" + regexpPattern, Pattern.matches(regexpPattern, " WARN"));
         assertTrue("Expect aligned left found" + regexpPattern, Pattern.matches(regexpPattern, "DEBUG"));
 
-        regexpPattern = parser.replaceInPattern("%5p");
+        regexpPattern = parser.replaceInPattern("%5p", true);
         assertTrue("Expect aligned right found" + regexpPattern, Pattern.matches(regexpPattern, " WARN"));
         assertFalse("Expect aligned not right found" + regexpPattern, Pattern.matches(regexpPattern, "WARN "));
         assertTrue("Expect aligned right found" + regexpPattern, Pattern.matches(regexpPattern, "DEBUG"));

@@ -18,8 +18,8 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
-import org.xendan.logmonitor.dao.impl.DefaultCallBack;
+import org.xendan.logmonitor.dao.LogService;
+import org.xendan.logmonitor.dao.DefaultCallBack;
 import org.xendan.logmonitor.idea.model.LogChooseListener;
 import org.xendan.logmonitor.idea.model.MatchConfigListModel;
 import org.xendan.logmonitor.idea.model.SetItemFromListModel;
@@ -56,7 +56,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     final EnvironmentsModel environmentsModel;
     final MatchConfigModel matchConfigModel;
     private final ArrayListModel<Configuration> configsModel;
-    private final ConfigurationCallbackDao dao;
+    private final LogService dao;
     private List<Configuration> initialConfigs;
     private JPanel contentPanel;
     JButton removeLogSettingsButton;
@@ -99,7 +99,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     public static final Server LOCALHOST = new Server(Server.LOCALHOST, -1);
     final VerboseBeanAdapter<Configuration> configAdapter;
 
-    public LogMonitorSettingsConfigurable(Project project, ConfigurationCallbackDao dao, Serializer serializer, ReaderScheduler readerScheduler, HomeResolver homeResolver) {
+    public LogMonitorSettingsConfigurable(Project project, LogService dao, Serializer serializer, ReaderScheduler readerScheduler, HomeResolver homeResolver) {
         this.dao = dao;
         this.serializer = serializer;
         this.scheduler = readerScheduler;

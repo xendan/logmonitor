@@ -4,9 +4,6 @@ import org.apache.log4j.Level;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * User: kcyxa
@@ -20,7 +17,6 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
     private String name;
     private String message;
     private Integer weight;
-    private List<MatchConfig> exceptions = new ArrayList<MatchConfig>();
 
     public String getLevel() {
         return level;
@@ -68,15 +64,6 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
         this.general = general;
     }
 
-    @OneToMany
-    public List<MatchConfig> getExceptions() {
-        return exceptions;
-    }
-
-    public void setExceptions(List<MatchConfig> exceptions) {
-        this.exceptions = exceptions;
-    }
-
     @Override
     public int compareTo(MatchConfig o) {
         int otherWeight = o.getWeight() == null ? 0 : o.getWeight();
@@ -102,8 +89,6 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
 
         if (showNotification != that.showNotification) return false;
         if (general != that.general) return false;
-        //new array because persistentbag is compared by identity
-        if (exceptions != null ? !new ArrayList<MatchConfig>(exceptions).equals(new ArrayList<MatchConfig>(that.exceptions)) : that.exceptions != null) return false;
         if (level != null ? !level.equals(that.level) : that.level != null) return false;
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
@@ -120,7 +105,6 @@ public class MatchConfig extends BaseObject implements Comparable<MatchConfig> {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + (weight != null ? weight.hashCode() : 0);
-        result = 31 * result + (exceptions != null ? exceptions.hashCode() : 0);
         return result;
     }
 

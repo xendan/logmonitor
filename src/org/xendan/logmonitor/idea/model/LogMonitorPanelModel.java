@@ -3,17 +3,22 @@ package org.xendan.logmonitor.idea.model;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
+import com.intellij.openapi.project.Project;
 import com.intellij.openapi.ui.popup.JBPopupFactory;
 import org.apache.log4j.Level;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.dao.Callback;
-import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
-import org.xendan.logmonitor.dao.impl.DefaultCallBack;
+import org.xendan.logmonitor.dao.DefaultCallBack;
+import org.xendan.logmonitor.dao.LogService;
 import org.xendan.logmonitor.idea.model.node.*;
+import org.xendan.logmonitor.idea.model.task.ShowLogAroundAction;
 import org.xendan.logmonitor.model.*;
+import org.xendan.logmonitor.parser.DateParser;
 import org.xendan.logmonitor.parser.EntryAddedListener;
+import org.xendan.logmonitor.parser.LogParser;
 import org.xendan.logmonitor.read.Serializer;
 
 import javax.swing.*;
@@ -35,9 +40,10 @@ public class LogMonitorPanelModel {
     public static final DateTimeFormatter SHORT_DATE = DateTimeFormat.forPattern("dd HH:mm:ss");
     public static final int MSG_WIDTH = 30;
 
-    private final ConfigurationCallbackDao dao;
+    private final LogService dao;
     private final Serializer serializer;
     private final EntryAddedListener listener;
+    private final HomeResolver homeResolver;
     private Map<Environment, LocalDateTime> updateSince = new HashMap<Environment, LocalDateTime>();
     private Map<Environment, LocalDateTime> nextUpdate = new HashMap<Environment, LocalDateTime>();
     private Map<Environment, Boolean> newEntriesCalculated = new HashMap<Environment, Boolean>();
@@ -45,11 +51,14 @@ public class LogMonitorPanelModel {
     private boolean configsLoading;
     private Callback<Boolean> hasConfigsCallback;
     private BuildTreeCallback buildTreeCallback;
+    private Project project;
 
-    public LogMonitorPanelModel(ConfigurationCallbackDao dao, Serializer serializer, EntryAddedListener listener) {
+    public LogMonitorPanelModel(Project project, LogService dao, Serializer serializer, EntryAddedListener listener, HomeResolver homeResolver) {
+        this.project = project;
         this.dao = dao;
         this.serializer = serializer;
         this.listener = listener;
+        this.homeResolver = homeResolver;
     }
 
     public void hasConfig(final Callback<Boolean> callback) {
@@ -65,7 +74,12 @@ public class LogMonitorPanelModel {
                 public void onAnswer(List<Configuration> answer) {
                     configs = answer;
                     if (hasConfigsCallback != null) {
-                        hasConfigsCallback.onAnswer(!configs.isEmpty());
+                        SwingUtilities.invokeLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                hasConfigsCallback.onAnswer(!configs.isEmpty());
+                            }
+                        });
                     }
                     if (buildTreeCallback != null) {
                         buildTreeCallback.onAnswer(configs);
@@ -195,7 +209,49 @@ public class LogMonitorPanelModel {
     }
 
     public void onEntriesAdded(final LocalDateTime since, final Environment environment, final DefaultTreeModel model) {
-        new HandleNewEntries(environment, since, model).start();
+        updateSince.put(environment, since);
+        newEntriesCalculated.put(environment, false);
+        nextUpdate.put(environment, new LocalDateTime(System.currentTimeMillis() + environment.getUpdateInterval() * 60 * 1000));
+        final List<LogEntry> newEntries = new ArrayList<LogEntry>();
+        final DefaultMutableTreeNode envNode = findNode((DefaultMutableTreeNode) model.getRoot(), new EnvironmentObject(environment, nextUpdate));
+        for (final MatchConfig matchConfig : environment.getMatchConfigs()) {
+            final DefaultMutableTreeNode node = findNode(envNode, new MatchConfigObject(matchConfig));
+            if (node == null) {
+                swingInvokeAndWait(new Runnable() {
+                    @Override
+                    public void run() {
+                        model.insertNodeInto(createMatchNode(matchConfig, environment, false, model), envNode, 0);
+                    }
+                });
+            } else {
+                removeAllChild(model, node);
+                dao.getMatchedEntryGroups(matchConfig, environment, new DefaultCallBack<List<LogEntryGroup>>() {
+                    @Override
+                    public void onAnswer(List<LogEntryGroup> groups) {
+                        for (LogEntryGroup group : groups) {
+                            insertNode(createLogEntryGroupNode(group, newEntries, since), node, model);
+                        }
+                        checkShowNotifications(newEntries, environment);
+                    }
+                });
+                dao.getNotGroupedMatchedEntries(matchConfig, environment, new DefaultCallBack<List<LogEntry>>() {
+                    @Override
+                    public void onAnswer(List<LogEntry> entries) {
+                        for (LogEntry entry : sorted(entries, newEntries, since)) {
+                            insertNode(createEntryNode(entry), node, model);
+                        }
+                        checkShowNotifications(newEntries, environment);
+                    }
+                });
+            }
+        }
+    }
+
+    private void checkShowNotifications(List<LogEntry> newEntries, Environment environment) {
+        if (Boolean.TRUE.equals(newEntriesCalculated.get(environment))) {
+            Notifications.Bus.notify(getMessage(newEntries, environment));
+        }
+        newEntriesCalculated.put(environment, Boolean.TRUE);
     }
 
     private void removeLoading(final DefaultMutableTreeNode loading, DefaultMutableTreeNode parent, final DefaultTreeModel treeModel) {
@@ -231,7 +287,7 @@ public class LogMonitorPanelModel {
     }
 
     private void swingInvokeAndWait(Runnable runnable) {
-        if (Thread.currentThread().getName().contains("AWT")) {
+        if (SwingUtilities.isEventDispatchThread()) {
             runnable.run();
         } else {
             try {
@@ -282,9 +338,7 @@ public class LogMonitorPanelModel {
         menu.add(new JMenuItem(new OpenConfig(openConfigDialog)));
         MatchConfigObject config = getObjectFromPath(path, MatchConfigObject.class);
         Configuration configuration = getObjectFromPath(path, Configuration.class);
-        if (configuration != null) {
-            menu.add(new JMenuItem(newCreateMatchAction(configuration, "Create new match...", Level.ERROR.toString(), "")));
-        }
+        menu.add(new JMenuItem(newCreateMatchAction(configuration, "Create new match...", Level.ERROR.toString(), "")));
         final DefaultMutableTreeNode groupNode = getNodeFromPath(path, GroupObject.class);
         if (groupNode != null) {
             final LogEntryGroup group = getObjectFromPath(path, GroupObject.class).getEntity();
@@ -293,8 +347,8 @@ public class LogMonitorPanelModel {
         }
         final DefaultMutableTreeNode lastNode = (DefaultMutableTreeNode) path.getLastPathComponent();
         final Object object = lastNode.getUserObject();
-        if (object instanceof Environment) {
-            final Environment environment = (Environment) object;
+        if (object instanceof EnvironmentObject) {
+            final Environment environment = ((EnvironmentObject) object).getEntity();
             menu.add(new JMenuItem(new RemoveAction(component, new RemoveEntriesInEnvironment(treeModel, lastNode, environment), "log entries in " + environment, "all log entries found in " + environment)));
         } else if (object instanceof MatchConfigObject) {
             final MatchConfig matchConfig = ((MatchConfigObject) object).getEntity();
@@ -302,8 +356,12 @@ public class LogMonitorPanelModel {
             Environment environment = getObjectFromPath(path, EnvironmentObject.class).getEntity();
             menu.add(new JMenuItem(new RemoveAction(component, new RemoveMatchAndEntries(lastNode, treeModel, environment), "match and entries" + matchConfig, "match and entries" + matchConfig)));
         } else if (object instanceof EntryObject) {
+            Environment environment = getObjectFromPath(path, EnvironmentObject.class).getEntity();
             final DefaultMutableTreeNode parent = (DefaultMutableTreeNode) lastNode.getParent();
             final LogEntry entry = ((EntryObject) object).getEntity();
+            String date = new DateParser().getDateAsString(configuration.getLogPattern(), entry.getDate());
+            String logPattern = new LogParser(null, configuration.getLogPattern(), environment).getRegExpStr();
+            menu.add(new JMenuItem(new ShowLogAroundAction(environment, homeResolver, date, logPattern, project)));
             menu.add(new JMenuItem(new RemoveAction(component, new RemoveSingleEntry(parent, lastNode, treeModel, entry), "log entry", "log entry")));
         }
         return menu;
@@ -527,66 +585,6 @@ public class LogMonitorPanelModel {
         }
     }
 
-    private class HandleNewEntries extends Thread {
-        private final Environment environment;
-        private final LocalDateTime since;
-        private final DefaultTreeModel model;
-
-        public HandleNewEntries(Environment environment, LocalDateTime since, DefaultTreeModel model) {
-            this.environment = environment;
-            this.since = since;
-            this.model = model;
-        }
-
-        @Override
-        public void run() {
-            updateSince.put(environment, since);
-            newEntriesCalculated.put(environment, false);
-            nextUpdate.put(environment, new LocalDateTime(System.currentTimeMillis() + environment.getUpdateInterval() * 60 * 1000));
-            final List<LogEntry> newEntries = new ArrayList<LogEntry>();
-            final DefaultMutableTreeNode envNode = findNode((DefaultMutableTreeNode) model.getRoot(), new EnvironmentObject(environment, nextUpdate));
-            for (final MatchConfig matchConfig : environment.getMatchConfigs()) {
-                final DefaultMutableTreeNode node = findNode(envNode, new MatchConfigObject(matchConfig));
-                if (node == null) {
-                    swingInvokeAndWait(new Runnable() {
-                        @Override
-                        public void run() {
-                            model.insertNodeInto(createMatchNode(matchConfig, environment, false, model), envNode, 0);
-                        }
-                    });
-                } else {
-                    removeAllChild(model, node);
-                    dao.getMatchedEntryGroups(matchConfig, environment, new DefaultCallBack<List<LogEntryGroup>>() {
-                        @Override
-                        public void onAnswer(List<LogEntryGroup> groups) {
-                            for (LogEntryGroup group : groups) {
-                                insertNode(createLogEntryGroupNode(group, newEntries, since), node, model);
-                            }
-                            checkShowNotifications(newEntries);
-                        }
-                    });
-                    dao.getNotGroupedMatchedEntries(matchConfig, environment, new DefaultCallBack<List<LogEntry>>() {
-                        @Override
-                        public void onAnswer(List<LogEntry> entries) {
-                            for (LogEntry entry : sorted(entries, newEntries, since)) {
-                                insertNode(createEntryNode(entry), node, model);
-                            }
-                            checkShowNotifications(newEntries);
-                        }
-
-                    });
-                }
-            }
-
-        }
-
-        private void checkShowNotifications(List<LogEntry> newEntries) {
-            if (Boolean.TRUE.equals(newEntriesCalculated.get(environment))) {
-                Notifications.Bus.notify(getMessage(newEntries, environment));
-            }
-            newEntriesCalculated.put(environment, Boolean.TRUE);
-        }
-    }
 
     private class RemoveMatchAndEntries implements Runnable {
         private final DefaultMutableTreeNode lastNode;
@@ -605,4 +603,5 @@ public class LogMonitorPanelModel {
             dao.removeMatchConfig(((MatchConfigObject) lastNode.getUserObject()).getEntity(), environment);
         }
     }
+
 }

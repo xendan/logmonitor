@@ -5,8 +5,7 @@ import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.ui.content.impl.ContentImpl;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.dao.ConfigurationDao;
-import org.xendan.logmonitor.dao.impl.ConfigurationCallbackDao;
+import org.xendan.logmonitor.dao.LogService;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.parser.EntryAddedListener;
 import org.xendan.logmonitor.read.ReaderScheduler;
@@ -18,12 +17,12 @@ import org.xendan.logmonitor.read.Serializer;
  */
 public class LogMonitorToolWindowFactory implements ToolWindowFactory {
     private final EntryAddedListener listener;
-    private final ConfigurationCallbackDao dao;
+    private final LogService dao;
     private final ReaderScheduler scheduler;
     private final Serializer serializer;
     private final HomeResolver homeResolver;
 
-    public LogMonitorToolWindowFactory(EntryAddedListener listener, ConfigurationCallbackDao dao, ReaderScheduler scheduler, Serializer serializer, HomeResolver homeResolver) {
+    public LogMonitorToolWindowFactory(EntryAddedListener listener, LogService dao, ReaderScheduler scheduler, Serializer serializer, HomeResolver homeResolver) {
         this.listener = listener;
         this.dao = dao;
         this.scheduler = scheduler;
@@ -34,7 +33,7 @@ public class LogMonitorToolWindowFactory implements ToolWindowFactory {
     @Override
     public void createToolWindowContent(Project project, ToolWindow toolWindow) {
         LogMonitorPanel panel = new LogMonitorPanel(
-                new LogMonitorPanelModel(dao, serializer, listener),
+                new LogMonitorPanelModel(project, dao, serializer, listener, homeResolver),
                 project,
                 new LogMonitorSettingsConfigurable(project, dao, serializer, scheduler, homeResolver));
         listener.setLogMonitorPanel(panel);

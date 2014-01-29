@@ -10,7 +10,9 @@ import java.util.List;
  */
 public interface ConfigurationDao {
 
-    void save(List<Configuration> configs);
+    void startTransaction();
+
+    void commit();
 
     List<Configuration> getConfigs();
 
@@ -20,15 +22,14 @@ public interface ConfigurationDao {
 
     LogEntry getLastEntry(Environment settings);
 
-    void addEntries(List<LogEntry> entries);
-
-    void addMatchConfig(Environment environment, MatchConfig config);
-
     void removeMatchConfig(Environment environment, MatchConfig config);
 
     void remove(BaseObject group);
 
     void removeAllEntries(Environment environment);
 
-    void clearAll(boolean createTmpTest);
+    void clearAll();
+
+    void persist(BaseObject baseObject);
+
 }

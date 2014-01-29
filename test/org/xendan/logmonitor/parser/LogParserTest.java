@@ -4,6 +4,7 @@ import org.apache.log4j.Level;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.junit.Test;
+import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.LogEntry;
 
 import java.util.List;
@@ -13,11 +14,7 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 public class LogParserTest {
 
-//    public static final String PATTERN = "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%C] %m%n";
-
     private static final String MESSAGE = "some message not multiline";
-
-//    private static final long WARN_READ = DateTimeFormat.forPattern(DateParser.DEFAULT_FORMAT).parseDateTime("2012-09-21 01:12:17,191").getMillis();
 
     public static final String LOG_WARN = "2012-09-21 01:12:17,191 WARN  [org.caramba.CarambaContext] " + MESSAGE;
     public static final String LOG_INFO = "2012-09-22 01:12:17,191 INFO  [org.caramba.CarambaContext] " + MESSAGE;
@@ -35,10 +32,18 @@ public class LogParserTest {
     }
 
     @Test
+    public void test_getDateAsString() throws Exception {
+        LogParser parser = new LogParser(null, "%d %-5p [%c] %m%n", new Environment());
+        assertEquals("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9] DEBUG|ERROR|FATAL|INFO |TRACE|WARN  \\[.+\\] .+",
+                parser.getRegExpStr());
+    }
+
+    @Test
     public void test_use_case1() throws Exception {
         singleEntry("%d %-5p [%c] %m%n", "2013-09-10 00:00:00,016 INFO  [com.bics.btts.job.ActionRepairTimeJob] ActionRepairTimeJob started : 10/09/2013 00:00");
-
     }
+
+
 
     private LogEntry singleEntry(String pattern, String log) {
         EntryMatcher generousMatcher = createGenerousMatcher();
