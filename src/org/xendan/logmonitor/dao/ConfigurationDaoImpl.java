@@ -1,18 +1,10 @@
 package org.xendan.logmonitor.dao;
 
-import org.apache.commons.lang.StringUtils;
-import org.hibernate.ejb.HibernatePersistence;
-import org.hibernate.internal.util.ClassLoaderHelper;
-import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.spi.PersistenceProvider;
-import javax.persistence.spi.PersistenceProviderResolver;
-import javax.persistence.spi.PersistenceProviderResolverHolder;
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * User: id967161
@@ -21,64 +13,25 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public class ConfigurationDaoImpl implements ConfigurationDao {
 
-    public static final String DEF_PATH = "db";
-    private static EntityManagerFactory factory;
-
-    private final String dbPath;
     protected EntityManager entityManager;
-    private final HomeResolver homeResolver;
 
-    protected ConfigurationDaoImpl(HomeResolver homeResolver) {
-        this(homeResolver, DEF_PATH);
+    public ConfigurationDaoImpl(EntityManager entityManager) {
+       this.entityManager = entityManager;
     }
 
-    protected ConfigurationDaoImpl(HomeResolver homeResolver, String dbPath) {
-        this(createEntityManager(homeResolver, dbPath), homeResolver, dbPath);
-    }
-
-    private static synchronized EntityManager createEntityManager(HomeResolver homeResolver, String dbPath) {
-        if (factory == null) {
-            PersistenceProviderResolverHolder.setPersistenceProviderResolver(new IdeaPersistenceProviderResolver());
-            ClassLoaderHelper.overridenClassLoader = ConfigurationDaoImpl.class.getClassLoader();
-            factory = Persistence.createEntityManagerFactory("defaultPersistentUnit", createProperties(homeResolver, dbPath));
-        }
-        return factory.createEntityManager();
-    }
-
-    private static Map<String, String> createProperties(HomeResolver homeResolver, String dbPath) {
-        Map<String, String> props = new HashMap<String, String>();
-        props.put("hibernate.connection.url", createConnectionStr(homeResolver, dbPath));
-        return props;
-    }
-
-    private static String createConnectionStr(HomeResolver homeResolver, String dbPath) {
-        String connection = "jdbc:h2:/" + homeResolver.joinMkDirs(DEF_PATH, dbPath) + ";MVCC=true";
-        System.out.println(Thread.currentThread());
-        System.out.println(connection);
-        return connection;
-    }
-
-    private ConfigurationDaoImpl(EntityManager entityManager, HomeResolver homeResolver, String dbPath) {
-        this.entityManager = entityManager;
-        this.homeResolver = homeResolver;
-        this.dbPath = dbPath;
-    }
 
     @Override
     public void persist(BaseObject baseObject) {
         if (baseObject instanceof LogEntry) {
             LogEntry entry = (LogEntry) baseObject;
             assert entry.getDate() != null;
-            assert !StringUtils.isEmpty(entry.getMessage());
+            assert entry.getMessage() != null;
         }
-        entityManager.merge(baseObject);
+        entityManager.persist(baseObject);
     }
 
     public void clearAll() {
         entityManager.createNativeQuery("DROP ALL OBJECTS ").executeUpdate();
-        entityManager.getTransaction().commit();
-        entityManager = createEntityManager(homeResolver, dbPath);
-
     }
 
     @Override
@@ -178,7 +131,6 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     @Override
     public List<LogEntry> getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment) {
-
         return entityManager.createNativeQuery(
                 "SELECT e.* FROM LOG_ENTRY e " +
                         " WHERE e.MATCH_CONFIG = (:matcher) AND e.ENVIRONMENT = (:environment) " +
@@ -209,21 +161,5 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 .setParameter("matcher", matchConfig.getId())
                 .setParameter("environment", environment.getId())
                 .getResultList();
-    }
-
-    private static class IdeaPersistenceProviderResolver implements PersistenceProviderResolver {
-
-        @Override
-        public List<PersistenceProvider> getPersistenceProviders() {
-            List<PersistenceProvider> list = new ArrayList<PersistenceProvider>();
-            list.add(new HibernatePersistence());
-            return list;
-        }
-
-        @Override
-        public void clearCachedProviders() {
-        }
-
-
     }
 }

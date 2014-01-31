@@ -206,7 +206,7 @@ public class LogMonitorSettingsConfigurableTest {
         configurable.projectComboBox.setSelectedItem(config);
 
         configurable.addLogSettingsButton.doClick();
-        assertEquals("Expect all available matchcs + new default copied to new enviromnent",
+        assertEquals("Expect all available matches + new default copied to new enviromnent",
                 4, ((Environment) configurable.environmentsList.getSelectedValue()).getMatchConfigs().size());
     }
 
@@ -231,7 +231,7 @@ public class LogMonitorSettingsConfigurableTest {
 
     private class MockService extends LogService {
         public MockService() {
-            super(null);
+            super(new HomeResolver(), "");
         }
 
         @Override

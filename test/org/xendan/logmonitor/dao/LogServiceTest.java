@@ -41,28 +41,41 @@ public class LogServiceTest {
     public void setUp() {
         failure = null;
         homeResolver = new HomeResolver();
+        File directory = new File(homeResolver.getPath(TEST_FILES));
+        if (directory.exists()) {
+            try {
+                FileUtils.deleteDirectory(directory);
+            } catch (IOException e) {
+                throw new IllegalStateException("Can't delete directory", e);
+            }
+        }
         service = new WaitingService(homeResolver);
-        service.clearAll(false, new TestCallback<Void>() {
+        service.clearAll(false, new DefaultCallBack<Void>() {
             @Override
             public void onAnswer(Void answer) {
-                File directory = new File(homeResolver.getPath(TEST_FILES));
-                if (directory.exists()) {
-                    try {
-                        FileUtils.deleteDirectory(directory);
-                    } catch (IOException e) {
-                        throw new IllegalStateException("Can't delete directory", e);
-                    }
-                }
+                service.save(createConfigs(), new NoExceptionCallback());
             }
         });
-        environment = new Environment();
+
+    }
+
+    private MatchConfig createMatchConfig() {
         matchConfig = new MatchConfig();
         matchConfig.setGeneral(true);
         matchConfig.setLevel(Level.ERROR.toString());
+        return matchConfig;
+    }
+
+    private List<Configuration> createConfigs() {
         Configuration config = new Configuration();
-        config.getEnvironments().add(environment);
-        environment.getMatchConfigs().add(matchConfig);
-        service.save(Arrays.asList(config), new NoExceptionCallback());
+        config.getEnvironments().add(createEnvironment());
+        return Arrays.asList(config);
+    }
+
+    private Environment createEnvironment() {
+        environment = new Environment();
+        environment.getMatchConfigs().add(createMatchConfig());
+        return environment;
     }
 
     @Test
@@ -92,7 +105,7 @@ public class LogServiceTest {
     }
 
     @Test
-    public void testAddConfig() throws Throwable {
+    public void testAddMatchConfig() throws Throwable {
         List<LogEntry> entries = new ArrayList<LogEntry>();
         String error1 = "this. is .a long [error]";
         for (int i = 0; i < 3; i++) {
@@ -297,7 +310,7 @@ public class LogServiceTest {
 
     private class WaitingService extends LogService {
         public WaitingService(HomeResolver resolver) {
-            super(resolver);
+            super(resolver, TEST_PATH);
         }
 
         @Override
@@ -309,11 +322,6 @@ public class LogServiceTest {
             } catch (Exception e) {
                 throw new IllegalStateException("Error waiting command termination");
             }
-        }
-
-        @Override
-        protected ConfigurationDaoImpl createDao() {
-            return new ConfigurationDaoImpl(homeResolver, TEST_PATH);
         }
     }
 }

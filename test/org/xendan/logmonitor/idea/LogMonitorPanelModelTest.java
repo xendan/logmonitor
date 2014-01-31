@@ -4,6 +4,7 @@ import org.apache.log4j.Level;
 import org.joda.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
+import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.dao.*;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.model.*;
@@ -107,7 +108,7 @@ public class LogMonitorPanelModelTest {
     public void setUp() {
         dao = mock(ConfigurationDao.class);
         //nulll
-        model = new LogMonitorPanelModel(null, new LogService(null), mock(Serializer.class), mock(EntryAddedListener.class), null);
+        model = new LogMonitorPanelModel(null, new LogService(new HomeResolver(), ""), mock(Serializer.class), mock(EntryAddedListener.class), null);
 
         Configuration config = new Configuration();
         environment = new Environment();

@@ -49,6 +49,21 @@
         <option name="CONDITION" value="&#13;&#13;JAVA" />
         <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
       </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java" line="59" class="org.xendan.logmonitor.model.LogEntry" package="org.xendan.logmonitor.model">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="StringUtils.isEmpty(message)&#13;org.apache.commons.lang.StringUtils&#13;JAVA" />
+        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+      </breakpoint>
     </line_breakpoints>
     <exception_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint class_name="org.h2.jdbc.JdbcSQLException" package_name="org.h2.jdbc">
@@ -411,7 +426,7 @@
       <breakpoint class_name="javax.persistence.PersistenceException" package_name="javax.persistence">
         <option name="NOTIFY_CAUGHT" value="true" />
         <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="true" />
+        <option name="ENABLED" value="false" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
         <option name="REMOVE_AFTER_HIT" value="false" />
@@ -441,6 +456,23 @@
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
         <option name="CONDITION" value="&#13;&#13;JAVA" />
         <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+      </breakpoint>
+      <breakpoint class_name="java.lang.AssertionError" package_name="java.lang">
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </exception_breakpoints>
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
@@ -489,62 +521,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="todo.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/todo.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="13" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="PersistenceProviderResolverHolder.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProviderResolverHolder.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="141" column="119" selection-start="5116" selection-end="5116" vertical-scroll-proportion="0.0" vertical-offset="1584" max-vertical-offset="3417">
-              <folding>
-                <element signature="e#6591#6612#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="persistence.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/META-INF/persistence.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="71" selection-start="1127" selection-end="1127" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConfigurationDaoImpl.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ConfigurationDaoImpl.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="97" selection-start="1707" selection-end="1707" vertical-scroll-proportion="0.45652175" vertical-offset="275" max-vertical-offset="3791">
+            <state line="30" column="34" selection-start="777" selection-end="777" vertical-scroll-proportion="0.0" vertical-offset="151" max-vertical-offset="2839">
               <folding>
-                <element signature="e#625#655#0" expanded="true" />
-                <element signature="e#1908#1924#0" expanded="true" />
-                <element signature="e#8478#8499#0" expanded="true" />
-                <marker date="1390999534284" expanded="true" signature="4455:4658" placeholder="DELETE FROM ..." />
-                <marker date="1390999534284" expanded="true" signature="4559:4631" placeholder="SELECT ID FR..LOG_ENTRY..." />
-                <marker date="1390999534284" expanded="true" signature="4781:5044" placeholder="DELETE FROM ..." />
-                <marker date="1390999534284" expanded="true" signature="5164:5220" placeholder="DELETE FROM ..." />
-                <marker date="1390999534284" expanded="true" signature="5814:6083" placeholder="DELETE FROM ..." />
-                <marker date="1390999534284" expanded="true" signature="6814:7219" placeholder="SELECT e.* F..LOG_ENTRY..." />
-                <marker date="1390999534284" expanded="true" signature="7016:7139" placeholder="SELECT ENTRI..LOG_ENTRY_GROUP_ENTRIES..." />
-                <marker date="1390999534284" expanded="true" signature="7609:8025" placeholder="SELECT g.* F..LOG_ENTRY_GROUP..." />
-                <marker date="1390999534284" expanded="true" signature="7719:8023" placeholder="SELECT 1 FRO..LOG_ENTRY_GROUP_ENTRIES..." />
+                <marker date="1391181704986" expanded="true" signature="2201:2404" placeholder="DELETE FROM ..." />
+                <marker date="1391181704986" expanded="true" signature="2305:2377" placeholder="SELECT ID FR..LOG_ENTRY..." />
+                <marker date="1391181704986" expanded="true" signature="2527:2790" placeholder="DELETE FROM ..." />
+                <marker date="1391181704986" expanded="true" signature="2910:2966" placeholder="DELETE FROM ..." />
+                <marker date="1391181704986" expanded="true" signature="3560:3829" placeholder="DELETE FROM ..." />
+                <marker date="1391181704986" expanded="true" signature="4559:4964" placeholder="SELECT e.* F..LOG_ENTRY..." />
+                <marker date="1391181704986" expanded="true" signature="4761:4884" placeholder="SELECT ENTRI..LOG_ENTRY_GROUP_ENTRIES..." />
+                <marker date="1391181704986" expanded="true" signature="5354:5770" placeholder="SELECT g.* F..LOG_ENTRY_GROUP..." />
+                <marker date="1391181704986" expanded="true" signature="5464:5768" placeholder="SELECT 1 FRO..LOG_ENTRY_GROUP_ENTRIES..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Persistence.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/Persistence.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="45" selection-start="2779" selection-end="2779" vertical-scroll-proportion="0.0" vertical-offset="696" max-vertical-offset="1666">
-              <folding />
             </state>
           </provider>
         </entry>
@@ -552,7 +543,36 @@
       <file leaf-file-name="LogService.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="437" column="34" selection-start="16812" selection-end="16812" vertical-scroll-proportion="0.0" vertical-offset="6305" max-vertical-offset="6868">
+            <state line="300" column="34" selection-start="11884" selection-end="11899" vertical-scroll-proportion="0.0" vertical-offset="3760" max-vertical-offset="7463">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogEntry.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="59" column="0" selection-start="1332" selection-end="1332" vertical-scroll-proportion="0.0" vertical-offset="457" max-vertical-offset="1326">
+              <folding>
+                <element signature="e#1368#1369#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LogServiceTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/LogServiceTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="304" column="52" selection-start="11409" selection-end="11409" vertical-scroll-proportion="0.63957596" vertical-offset="3650" max-vertical-offset="4505">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="unexpected-error.log" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/unexpected-error.log">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1240" column="59" selection-start="188522" selection-end="188551" vertical-scroll-proportion="-2.0" vertical-offset="20980" max-vertical-offset="27863">
               <folding />
             </state>
           </provider>
@@ -665,8 +685,6 @@
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LevelParserTest.java" />
         <option value="$PROJECT_DIR$/resources/round_log.sh" />
         <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/dao/empty_messages.log" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/dao/LogServiceTest.java" />
         <option value="$PROJECT_DIR$/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/command/CommandFileLoader.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java" />
@@ -675,9 +693,16 @@
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/OnOkAction.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/EntryMatcher.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/EntryMatcher.java" />
-        <option value="$PROJECT_DIR$/resources/META-INF/persistence.xml" />
         <option value="$PROJECT_DIR$/todo.txt" />
+        <option value="db-console:/cee21cd2/ea86d4ac-f52a-4cff-bc7e-9555519a54fa/" />
+        <option value="$PROJECT_DIR$/resources/META-INF/persistence.xml" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDao.java" />
+        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurableTest.java" />
+        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/idea/LogMonitorPanelModelTest.java" />
+        <option value="db-console:/cee21cd2/054940bb-dcf6-48e0-adf7-eaab24b9b639/" />
+        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java" />
         <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java" />
+        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/dao/LogServiceTest.java" />
       </list>
     </option>
   </component>
@@ -713,8 +738,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -722,10 +745,6 @@
               <option name="myItemId" value="logmonitor" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -734,60 +753,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dao" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -823,12 +788,28 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="logmonitor" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="META-INF" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Facets" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
     <property name="OverrideImplement.combined" value="true" />
     <property name="project.structure.proportion" value="0.15" />
@@ -856,21 +837,25 @@
     <property name="dynamic.classpath" value="false" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="SearchEverywhereHistory" value="" />
+    <property name="LayoutCode.rearrangeEntriesH2" value="false" />
+    <property name="extract.method.default.visibility" value="private" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="org.xendan.logmonitor.parser" />
       <recent name="org.xendan.logmonitor.dao.impl" />
       <recent name="org.xendan.logmonitor.idea" />
       <recent name="org.xendan.logmonitor.read" />
     </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.xendan.logmonitor.read" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\work\projects\logmonitor\META-INF" />
       <recent name="C:\work\projects\logmonitor\src\org\xendan\logmonitor\idea\img" />
       <recent name="C:\work\projects\logmonitor\test\org\xendan\logmonitor\dao\impl" />
       <recent name="C:\work\projects\logmonitor\src\META-INF" />
@@ -890,20 +875,20 @@
       <recent name="org.xendan.logmonitor.parser" />
       <recent name="org.xendan.logmonitor.service" />
     </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="org.xendan.logmonitor.parser" />
-      <recent name="org.xendan.logmonitor.idea" />
-      <recent name="org.xendan.logmonitor.dao" />
-      <recent name="org.xendan.logmonitor.dao.impl" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\work\projects\logmonitor\resources\META-INF" />
       <recent name="C:\work\projects\logmonitor\test\org\xendan\logmonitor\dao" />
       <recent name="C:\work\projects\logmonitor\src\org\xendan\logmonitor\idea\img" />
       <recent name="C:\work\projects\logmonitor\test\org\xendan\logmonitor\read" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="org.xendan.logmonitor.parser" />
+      <recent name="org.xendan.logmonitor.idea" />
+      <recent name="org.xendan.logmonitor.dao" />
+      <recent name="org.xendan.logmonitor.dao.impl" />
+    </key>
   </component>
-  <component name="RunManager" selected="Plugin.run">
+  <component name="RunManager" selected="JUnit.LogServiceTest.test_misc_error">
     <configuration default="false" name="LogMonitorPanelModelTest.test_isNodeUpdated" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1020,7 +1005,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="" />
       <option name="PACKAGE_NAME" value="org.xendan.logmonitor.dao" />
       <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.dao.LogServiceTest" />
-      <option name="METHOD_NAME" value="testAddConfig" />
+      <option name="METHOD_NAME" value="testAddMatchConfig" />
       <option name="TEST_OBJECT" value="method" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" value="" />
@@ -1068,7 +1053,13 @@
       <envs />
       <dir value="$PROJECT_DIR$/test" />
       <patterns />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
@@ -1434,10 +1425,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.LogServiceTest.test_empty_messages" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.LogServiceTest" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.LogServiceTest.testAddConfig" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.LogServiceTest.test_misc_error" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.LogServiceTest.test_misc_error" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.LogServiceTest.test_empty_messages" />
+        <item index="2" class="java.lang.String" itemvalue="JUnit.LogServiceTest" />
+        <item index="3" class="java.lang.String" itemvalue="JUnit.LogServiceTest.testAddConfig" />
         <item index="4" class="java.lang.String" itemvalue="JUnit.LogServiceTest" />
       </list>
     </recent_temporary>
@@ -1476,12 +1467,16 @@
       <created>1378367231033</created>
       <updated>1378367231033</updated>
       <workItem from="1390989492870" duration="105000" />
-      <workItem from="1390990367759" duration="8117000" />
+      <workItem from="1390990367759" duration="9852000" />
+      <workItem from="1391074980868" duration="13000" />
+      <workItem from="1391160844024" duration="360000" />
+      <workItem from="1391161414220" duration="6531000" />
+      <workItem from="1391172799763" duration="6326000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8222000" />
+    <option name="totallyTimeSpent" value="23187000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -1505,44 +1500,46 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.6009227" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22771673" sideWeight="0.6724337" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979239" sideWeight="0.2607099" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20634921" sideWeight="0.4264463" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.6009227" order="21" side_tool="true" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22832723" sideWeight="0.6724337" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979239" sideWeight="0.2607099" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20634921" sideWeight="0.6724337" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3267974" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20634921" sideWeight="0.57190084" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32552955" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3690078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="JPA Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2637699" sideWeight="0.6730083" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3273743" sideWeight="0.54161566" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="JRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33966482" sideWeight="0.73929006" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32664436" sideWeight="0.54161566" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="JRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="20" side_tool="false" content_ui="tabs" />
+      <window_info id="Hibernate Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33890748" sideWeight="0.73929006" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="JRebel" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.326257" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="JRebel" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32552955" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.6286044" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23378213" sideWeight="0.6730083" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.34832758" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.4094579" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.6585928" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3702422" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.4094579" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24908425" sideWeight="0.6585928" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26009792" sideWeight="0.67128026" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26009792" sideWeight="0.67128026" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ticket History" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.6782007" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -1595,234 +1592,117 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/todo.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="102" selection-start="56" selection-end="56" vertical-scroll-proportion="0.0" vertical-offset="68" max-vertical-offset="612">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/LogServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="293" column="52" selection-start="11265" selection-end="11265" vertical-scroll-proportion="0.0" vertical-offset="4981" max-vertical-offset="5168">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/command/RoundLogDownloader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="100" selection-start="590" selection-end="590" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LevelParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="59" selection-start="1199" selection-end="1199" vertical-scroll-proportion="0.6499069" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/parser/DateParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="69" selection-start="536" selection-end="536" vertical-scroll-proportion="0.33512545" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/UnitParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="97" selection-start="1088" selection-end="1088" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="34" selection-start="1916" selection-end="1916" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/round_log.sh">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="128" selection-start="930" selection-end="930" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="242" column="0" selection-start="8682" selection-end="8682" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDao.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="0" selection-start="679" selection-end="688" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/empty_messages.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="0" selection-start="4973" selection-end="4973" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/error_line_89.log">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="jar://C:/java/src.zip!/java/util/concurrent/Executor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="9" selection-start="3659" selection-end="3659" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="jar://C:/java/src.zip!/java/util/concurrent/FutureTask.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="11" selection-start="2381" selection-end="2381" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/LogServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="293" column="52" selection-start="11265" selection-end="11265" vertical-scroll-proportion="0.6436916" vertical-offset="3274" max-vertical-offset="4369">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tmp.config">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="856" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/PersistenceContext.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="21" selection-start="1265" selection-end="1283" vertical-scroll-proportion="0.44194108" vertical-offset="0" max-vertical-offset="884">
-          <folding>
-            <element signature="e#0#2353#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/util.jar!/com/intellij/openapi/diagnostic/Logger.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="64" selection-start="3739" selection-end="3756" vertical-scroll-proportion="0.75886524" vertical-offset="711" max-vertical-offset="1275">
-          <folding />
-        </state>
+        <state line="68" column="64" selection-start="3739" selection-end="3756" vertical-scroll-proportion="0.75886524" vertical-offset="711" max-vertical-offset="1275" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/idea/LoggerFactory.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="160" selection-end="160" vertical-scroll-proportion="0.15070923" vertical-offset="0" max-vertical-offset="564">
-          <folding />
-        </state>
+        <state line="6" column="13" selection-start="160" selection-end="160" vertical-scroll-proportion="0.15070923" vertical-offset="0" max-vertical-offset="564" />
       </provider>
     </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/log4j.jar!/org/apache/log4j/Logger.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="159" selection-end="159" vertical-scroll-proportion="0.15070923" vertical-offset="0" max-vertical-offset="564">
-          <folding />
-        </state>
+        <state line="6" column="13" selection-start="159" selection-end="159" vertical-scroll-proportion="0.15070923" vertical-offset="0" max-vertical-offset="564" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/command/CommandFileLoader.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="80" selection-start="473" selection-end="550" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1292">
-          <folding />
-        </state>
+        <state line="17" column="80" selection-start="473" selection-end="550" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1292" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="93" selection-start="1603" selection-end="1603" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3604">
-          <folding />
-        </state>
+        <state line="43" column="93" selection-start="1603" selection-end="1603" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3604" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/DownloadAndParse.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="4" selection-start="906" selection-end="906" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="1309">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/DefaultCallBack.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="4" selection-start="528" selection-end="528" vertical-scroll-proportion="0.51241136" vertical-offset="0" max-vertical-offset="564">
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
+        <state line="24" column="4" selection-start="906" selection-end="906" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="1309" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/jar/2f4e93876023b3c346c2db21a1d73cd4e9dbf243/hibernate-entitymanager-4.2.5.Final.jar!/META-INF/services/javax.persistence.spi.PersistenceProvider">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="38" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="38" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/internal/util/ClassLoaderHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="30" selection-start="1401" selection-end="1401" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425">
-          <folding />
-        </state>
+        <state line="33" column="30" selection-start="1401" selection-end="1401" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProviderResolver.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="30" selection-start="1465" selection-end="1465" vertical-scroll-proportion="0.59375" vertical-offset="136" max-vertical-offset="680">
-          <folding />
-        </state>
+        <state line="42" column="30" selection-start="1465" selection-end="1465" vertical-scroll-proportion="0.59375" vertical-offset="136" max-vertical-offset="680" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/OnOkAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="22" selection-start="282" selection-end="282" vertical-scroll-proportion="0.35416666" vertical-offset="0" max-vertical-offset="576">
-          <folding />
-        </state>
+        <state line="17" column="22" selection-start="282" selection-end="282" vertical-scroll-proportion="0.35416666" vertical-offset="0" max-vertical-offset="576" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="46" selection-start="2034" selection-end="2034" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2108">
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1066#1081#0" expanded="false" />
-            <element signature="e#1142#1152#0" expanded="false" />
-            <element signature="e#2352#2361#0" expanded="false" />
-            <element signature="e#2680#2704#0" expanded="false" />
-            <element signature="e#4159#4160#0" expanded="false" />
-            <element signature="e#4189#4190#0" expanded="false" />
-          </folding>
-        </state>
+        <state line="51" column="46" selection-start="2034" selection-end="2034" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2108" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/EntryMatcher.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="256" selection-end="256" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697">
-          <folding />
-        </state>
+        <state line="12" column="0" selection-start="256" selection-end="256" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/engine/jdbc/internal/JdbcServicesImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="241" column="0" selection-start="10211" selection-end="10211" vertical-scroll-proportion="0.0" vertical-offset="2917" max-vertical-offset="6477">
-          <folding />
-        </state>
+        <state line="241" column="0" selection-start="10211" selection-end="10211" vertical-scroll-proportion="0.0" vertical-offset="2917" max-vertical-offset="6477" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/service/jdbc/connections/internal/UserSuppliedConnectionProviderImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="0" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.28125" vertical-offset="442" max-vertical-offset="986">
-          <folding />
-        </state>
+        <state line="61" column="0" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.28125" vertical-offset="442" max-vertical-offset="986" />
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/EntityManagerFactoryImpl.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/EntityManagerFactory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="190" column="25" selection-start="7350" selection-end="7350" vertical-scroll-proportion="0.33333334" vertical-offset="2077" max-vertical-offset="4743">
-          <folding />
-        </state>
+        <state line="59" column="25" selection-start="2297" selection-end="2297" vertical-scroll-proportion="0.0" vertical-offset="431" max-vertical-offset="2125" />
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/QueryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="276" column="0" selection-start="8990" selection-end="8990" vertical-scroll-proportion="0.0" vertical-offset="3342" max-vertical-offset="9860" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/todo.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629" />
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProviderResolverHolder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="141" column="119" selection-start="5116" selection-end="5116" vertical-scroll-proportion="0.0" vertical-offset="1584" max-vertical-offset="3417" />
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/cee21cd2/ea86d4ac-f52a-4cff-bc7e-9555519a54fa/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="115" selection-start="246" selection-end="246" vertical-scroll-proportion="0.22972973" vertical-offset="0" max-vertical-offset="444" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/empty_messages.log">
+      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="0" selection-start="8217" selection-end="8217" vertical-scroll-proportion="0.0" vertical-offset="991" max-vertical-offset="47209" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProvider.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="32" selection-start="1838" selection-end="1838" vertical-scroll-proportion="0.0" vertical-offset="339" max-vertical-offset="1122">
+        <state line="47" column="32" selection-start="1838" selection-end="1838" vertical-scroll-proportion="0.0" vertical-offset="245" max-vertical-offset="1122">
           <folding>
             <element signature="e#0#2823#0" expanded="false" />
             <element signature="imports" expanded="false" />
@@ -1832,86 +1712,245 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/HibernatePersistence.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="0" selection-start="2219" selection-end="2219" vertical-scroll-proportion="0.0" vertical-offset="271" max-vertical-offset="1428">
+        <state line="57" column="50" selection-start="2263" selection-end="2263" vertical-scroll-proportion="0.0" vertical-offset="143" max-vertical-offset="1428">
+          <folding>
+            <element signature="e#0#4014#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3984#3985#0" expanded="false" />
+            <element signature="e#4010#4011#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/AvailableSettings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="147" column="31" selection-start="5277" selection-end="5277" vertical-scroll-proportion="-5.22" vertical-offset="1864" max-vertical-offset="5712" />
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/cfg/Environment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="134" column="35" selection-start="5326" selection-end="5348" vertical-scroll-proportion="-0.2369727" vertical-offset="1840" max-vertical-offset="5508" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="59" selection-start="1575" selection-end="1575" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/EntityManagerFactory.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/cfg/AvailableSettings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="25" selection-start="2297" selection-end="2297" vertical-scroll-proportion="0.0" vertical-offset="431" max-vertical-offset="2125">
-          <folding />
+        <state line="373" column="31" selection-start="14241" selection-end="14241" vertical-scroll-proportion="0.0" vertical-offset="5682" max-vertical-offset="11118">
+          <folding>
+            <element signature="e#0#26764#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/Ejb3Configuration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="322" column="124" selection-start="13806" selection-end="13806" vertical-scroll-proportion="0.0" vertical-offset="3325" max-vertical-offset="26707">
+        <state line="315" column="0" selection-start="13361" selection-end="13361" vertical-scroll-proportion="0.0" vertical-offset="3318" max-vertical-offset="26707">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/QueryImpl.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/cfg/Settings.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="0" selection-start="8990" selection-end="8990" vertical-scroll-proportion="0.0" vertical-offset="3342" max-vertical-offset="9860">
+        <state line="174" column="30" selection-start="5298" selection-end="5298" vertical-scroll-proportion="0.0" vertical-offset="1649" max-vertical-offset="5117">
+          <folding>
+            <element signature="e#5308#5309#0" expanded="false" />
+            <element signature="e#5338#5339#0" expanded="false" />
+            <element signature="e#8893#8894#0" expanded="false" />
+            <element signature="e#8920#8921#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/cfg/SettingsFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="339" column="0" selection-start="14731" selection-end="14731" vertical-scroll-proportion="0.0" vertical-offset="4661" max-vertical-offset="8551">
+          <folding>
+            <element signature="e#0#23141#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/tool/hbm2ddl/Target.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="0" selection-start="1446" selection-end="1446" vertical-scroll-proportion="0.69911504" vertical-offset="30" max-vertical-offset="595" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurableTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="208" column="84" selection-start="8789" selection-end="8789" vertical-scroll-proportion="0.0" vertical-offset="2967" max-vertical-offset="3859">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/META-INF/persistence.xml">
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/sql/Update.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="71" selection-start="1127" selection-end="1127" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+        <state line="37" column="13" selection-start="1335" selection-end="1335" vertical-scroll-proportion="-4.876543" vertical-offset="2918" max-vertical-offset="3485">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/todo.txt">
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/DefaultCallBack.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="437" column="34" selection-start="16812" selection-end="16812" vertical-scroll-proportion="0.0" vertical-offset="6305" max-vertical-offset="6868">
+        <state line="6" column="31" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/Persistence.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="45" selection-start="2779" selection-end="2779" vertical-scroll-proportion="0.0" vertical-offset="696" max-vertical-offset="1666">
+        <state line="58" column="39" selection-start="2239" selection-end="2239" vertical-scroll-proportion="0.0" vertical-offset="440" max-vertical-offset="1666">
+          <folding>
+            <element signature="e#0#4207#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1280#1301#0" expanded="false" />
+            <element signature="e#3036#3037#0" expanded="false" />
+            <element signature="e#3054#3055#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/internal/SessionFactoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="571" column="0" selection-start="25349" selection-end="25349" vertical-scroll-proportion="0.0" vertical-offset="6990" max-vertical-offset="27778">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProviderResolverHolder.java">
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/cfg/Configuration.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="119" selection-start="5116" selection-end="5116" vertical-scroll-proportion="0.0" vertical-offset="1584" max-vertical-offset="3417">
+        <state line="1789" column="0" selection-start="63801" selection-end="63801" vertical-scroll-proportion="0.0" vertical-offset="27424" max-vertical-offset="57698">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/EntityManagerFactoryImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="128" column="0" selection-start="5558" selection-end="5558" vertical-scroll-proportion="0.0" vertical-offset="1030" max-vertical-offset="4743">
           <folding>
-            <element signature="e#6591#6612#0" expanded="true" />
+            <element signature="e#0#12380#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3652#3684#0" expanded="false" />
+            <element signature="e#7647#7648#0" expanded="false" />
+            <element signature="e#7676#7677#0" expanded="false" />
+            <element signature="e#7712#7713#0" expanded="false" />
+            <element signature="e#7735#7736#0" expanded="false" />
+            <element signature="e#7935#7936#0" expanded="false" />
+            <element signature="e#7959#7960#0" expanded="false" />
+            <element signature="e#8455#8456#0" expanded="false" />
+            <element signature="e#8483#8484#0" expanded="false" />
+            <element signature="e#8531#8532#0" expanded="false" />
+            <element signature="e#8569#8570#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/AbstractEntityManagerImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1301" column="0" selection-start="42220" selection-end="42220" vertical-scroll-proportion="0.0" vertical-offset="19764" max-vertical-offset="23732">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/TransactionImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="94" column="0" selection-start="2780" selection-end="2780" vertical-scroll-proportion="0.0" vertical-offset="940" max-vertical-offset="2074">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="40" selection-start="388" selection-end="388" vertical-scroll-proportion="0.31135532" vertical-offset="0" max-vertical-offset="546">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/tool/hbm2ddl/SchemaUpdate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="241" column="0" selection-start="8022" selection-end="8022" vertical-scroll-proportion="0.0" vertical-offset="3063" max-vertical-offset="4165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/idea/LogMonitorPanelModelTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="110" column="80" selection-start="5501" selection-end="5501" vertical-scroll-proportion="0.0" vertical-offset="1206" max-vertical-offset="1972">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/META-INF/persistence.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="554">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="dbDummy://db-console:/cee21cd2/054940bb-dcf6-48e0-adf7-eaab24b9b639/">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="102">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="9" selection-start="710" selection-end="710" vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="663">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/unexpected-error.log">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1240" column="59" selection-start="188522" selection-end="188551" vertical-scroll-proportion="-2.0" vertical-offset="20980" max-vertical-offset="27863">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="300" column="34" selection-start="11884" selection-end="11899" vertical-scroll-proportion="0.0" vertical-offset="3760" max-vertical-offset="7463">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="59" column="0" selection-start="1332" selection-end="1332" vertical-scroll-proportion="0.0" vertical-offset="457" max-vertical-offset="1326">
+          <folding>
+            <element signature="e#1368#1369#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="97" selection-start="1707" selection-end="1707" vertical-scroll-proportion="0.45652175" vertical-offset="275" max-vertical-offset="3791">
+        <state line="30" column="34" selection-start="777" selection-end="777" vertical-scroll-proportion="0.0" vertical-offset="151" max-vertical-offset="2839">
           <folding>
-            <element signature="e#625#655#0" expanded="true" />
-            <element signature="e#1908#1924#0" expanded="true" />
-            <element signature="e#8478#8499#0" expanded="true" />
-            <marker date="1390999534284" expanded="true" signature="4455:4658" placeholder="DELETE FROM ..." />
-            <marker date="1390999534284" expanded="true" signature="4559:4631" placeholder="SELECT ID FR..LOG_ENTRY..." />
-            <marker date="1390999534284" expanded="true" signature="4781:5044" placeholder="DELETE FROM ..." />
-            <marker date="1390999534284" expanded="true" signature="5164:5220" placeholder="DELETE FROM ..." />
-            <marker date="1390999534284" expanded="true" signature="5814:6083" placeholder="DELETE FROM ..." />
-            <marker date="1390999534284" expanded="true" signature="6814:7219" placeholder="SELECT e.* F..LOG_ENTRY..." />
-            <marker date="1390999534284" expanded="true" signature="7016:7139" placeholder="SELECT ENTRI..LOG_ENTRY_GROUP_ENTRIES..." />
-            <marker date="1390999534284" expanded="true" signature="7609:8025" placeholder="SELECT g.* F..LOG_ENTRY_GROUP..." />
-            <marker date="1390999534284" expanded="true" signature="7719:8023" placeholder="SELECT 1 FRO..LOG_ENTRY_GROUP_ENTRIES..." />
+            <marker date="1391181704986" expanded="true" signature="2201:2404" placeholder="DELETE FROM ..." />
+            <marker date="1391181704986" expanded="true" signature="2305:2377" placeholder="SELECT ID FR..LOG_ENTRY..." />
+            <marker date="1391181704986" expanded="true" signature="2527:2790" placeholder="DELETE FROM ..." />
+            <marker date="1391181704986" expanded="true" signature="2910:2966" placeholder="DELETE FROM ..." />
+            <marker date="1391181704986" expanded="true" signature="3560:3829" placeholder="DELETE FROM ..." />
+            <marker date="1391181704986" expanded="true" signature="4559:4964" placeholder="SELECT e.* F..LOG_ENTRY..." />
+            <marker date="1391181704986" expanded="true" signature="4761:4884" placeholder="SELECT ENTRI..LOG_ENTRY_GROUP_ENTRIES..." />
+            <marker date="1391181704986" expanded="true" signature="5354:5770" placeholder="SELECT g.* F..LOG_ENTRY_GROUP..." />
+            <marker date="1391181704986" expanded="true" signature="5464:5768" placeholder="SELECT 1 FRO..LOG_ENTRY_GROUP_ENTRIES..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/LogServiceTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="304" column="52" selection-start="11409" selection-end="11409" vertical-scroll-proportion="0.63957596" vertical-offset="3650" max-vertical-offset="4505">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1944,7 +1983,7 @@
       </state>
       <state key="GlobalLibrariesConfigurable.UI">
         <settings>
-          <last-edited>default</last-edited>
+          <last-edited>log4j-from-bts-jboss</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

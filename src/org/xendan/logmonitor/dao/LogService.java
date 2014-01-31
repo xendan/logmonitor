@@ -1,11 +1,18 @@
 package org.xendan.logmonitor.dao;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.ejb.HibernatePersistence;
+import org.hibernate.internal.util.ClassLoaderHelper;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.*;
 import org.xendan.logmonitor.parser.PatternUtils;
 import org.xendan.logmonitor.read.Serializer;
 
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.spi.PersistenceProvider;
+import javax.persistence.spi.PersistenceProviderResolver;
+import javax.persistence.spi.PersistenceProviderResolverHolder;
 import java.io.*;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -22,16 +29,27 @@ import java.util.regex.Pattern;
  * Date: 22/11/13
  */
 public class LogService {
-
+    public static final String DEF_PATH = "db";
     public static final int MATCHING_INDEX = 5;
 
     protected final ConfigurationDao dao;
     private final HomeResolver resolver;
+    private EntityManagerFactory entityManagerFactory;
+    private String dbPath;
+    private final Map<String, ConfigurationDao> targets = new HashMap<String, ConfigurationDao>();
     protected final ExecutorService executor = Executors.newFixedThreadPool(5);
 
-    public LogService(HomeResolver resolver) {
+    public LogService(HomeResolver resolver, String dbPath) {
         this.resolver = resolver;
-        this.dao = (ConfigurationDao) Proxy.newProxyInstance(getClass().getClassLoader(), new Class[]{ConfigurationDao.class}, new DaoHandler());
+        this.dbPath = dbPath;
+        this.dao = (ConfigurationDao) Proxy.newProxyInstance(getClass().getClassLoader(), new Class[]{ConfigurationDao.class}, new DaoProxyHandler());
+        entityManagerFactory = createEntityManagerFactory();
+    }
+
+    private EntityManagerFactory createEntityManagerFactory() {
+        PersistenceProviderResolverHolder.setPersistenceProviderResolver(new IdeaPersistenceProviderResolver());
+        ClassLoaderHelper.overridenClassLoader = ConfigurationDaoImpl.class.getClassLoader();
+        return Persistence.createEntityManagerFactory("defaultPersistentUnit", createProperties(resolver, dbPath));
     }
 
     public void getConfigs(Callback<List<Configuration>> callback) {
@@ -152,7 +170,7 @@ public class LogService {
         schedule(new Callable<Void>() {
             @Override
             public Void call() throws Exception {
-                tmpSaveConfig(configs);
+                //tmpSaveConfig(configs);
                 for (Configuration config : configs) {
                     dao.persist(config);
                 }
@@ -161,6 +179,7 @@ public class LogService {
         }, callback);
     }
 
+    /*
     private void tmpSaveConfig(List<Configuration> configs) {
         HomeResolver resolver = new HomeResolver();
         String filePath = resolver.joinMkDirs("tmp.config", "tmpconfig");
@@ -174,13 +193,16 @@ public class LogService {
         } catch (Exception e) {
             throw new IllegalStateException("Error writing entries", e);
         }
-    }
+    }*/
 
     public void clearAll(final boolean createTestTmp, Callback<Void> callback) {
+        //TODO: think shutdown before clear all
         schedule(new Callable<Void>() {
             @Override
             public Void call() throws Exception {
                 dao.clearAll();
+                targets.clear();
+                entityManagerFactory = createEntityManagerFactory();
                 if (createTestTmp) {
                     for (Configuration config : createTmpConfig()) {
                         dao.persist(config);
@@ -191,6 +213,7 @@ public class LogService {
         }, callback);
     }
 
+    @SuppressWarnings("unchecked")
     private List<Configuration> createTmpConfig() {
         ObjectInputStream in = null;
         InputStream rin = null;
@@ -406,13 +429,19 @@ public class LogService {
         }
     }
 
-    protected ConfigurationDaoImpl createDao() {
-        return new ConfigurationDaoImpl(resolver);
+    private static Map<String, String> createProperties(HomeResolver homeResolver, String dbPath) {
+        Map<String, String> props = new HashMap<String, String>();
+        props.put("hibernate.connection.url", createConnectionStr(homeResolver, dbPath));
+        return props;
     }
 
-    private class DaoHandler implements InvocationHandler {
-        private final Map<String, ConfigurationDao> targets = new HashMap<String, ConfigurationDao>();
+    private static String createConnectionStr(HomeResolver homeResolver, String dbPath) {
+        String connection = "jdbc:h2:/" + homeResolver.joinMkDirs(DEF_PATH, dbPath) + ";MVCC=true";
+        System.out.println(connection);
+        return connection;
+    }
 
+    private class DaoProxyHandler implements InvocationHandler {
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
             boolean transactional = !method.getName().startsWith("get");
@@ -429,13 +458,12 @@ public class LogService {
                     target.commit();
                 }
             }
-
         }
 
         private ConfigurationDao getOrCreateDao(String name) {
             if (!targets.containsKey(name)) {
-                //TODO use hibernate
-                targets.put(name, createDao());
+                //TODO use hibernate :check if single dao
+                targets.put(name, new ConfigurationDaoImpl(entityManagerFactory.createEntityManager()));
             }
             return targets.get(name);
         }
@@ -445,6 +473,20 @@ public class LogService {
         @Override
         public int compare(LogEntryGroup o1, LogEntryGroup o2) {
             return o2.getEntries().size() - o1.getEntries().size();
+        }
+    }
+
+    private static class IdeaPersistenceProviderResolver implements PersistenceProviderResolver {
+
+        @Override
+        public List<PersistenceProvider> getPersistenceProviders() {
+            List<PersistenceProvider> list = new ArrayList<PersistenceProvider>();
+            list.add(new HibernatePersistence());
+            return list;
+        }
+
+        @Override
+        public void clearCachedProviders() {
         }
     }
 }
