@@ -1,7 +1,198 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" name="Default" comment="" />
+    <list default="true" id="66bd8709-4881-4a6c-9053-cd924d030e5f" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/idea/idea.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ideaplugin/ideaplugin.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/idea/META-INF/plugin.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/logmonitor.iml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\logmonitor\src\org\xendan\logmonitor\parser\EntryAddedListener.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\logmonitor\src\org\xendan\logmonitor\parser\LineNumberParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.gradle\1.7\taskArtifacts\cache.properties" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.gradle\1.7\taskArtifacts\cache.properties.lock" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.gradle\1.7\taskArtifacts\fileHashes.bin" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.gradle\1.7\taskArtifacts\fileSnapshots.bin" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.gradle\1.7\taskArtifacts\outputFileStates.bin" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.gradle\1.7\taskArtifacts\taskArtifacts.bin" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\dataSources.ids" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\dataSources.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\ant_1_7_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\ant_1_9_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\ant_jsch_1_7_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\ant_jsch_1_9_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\ant_launcher_1_7_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\ant_launcher_1_9_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\antlr_2_7_7.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\binding_2_0_6.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\commons_io_1_3_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\dom4j_1_6_1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\h2_1_0_20061217.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\h2_1_3_174.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\hamcrest_core_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\hibernate_commons_annotations_4_0_2_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\hibernate_core_4_2_5_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\hibernate_entitymanager_4_2_5_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\hibernate_jpa_2_0_api_1_0_1_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\javassist_3_15_0_GA.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\jboss_logging_3_1_0_GA.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\jboss_transaction_api_1_1_spec_1_0_1_Final.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\joda_money_0_6.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\joda_time_2_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\joda_time_hibernate_1_3.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\jsch_0_1_29.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\jsch_0_1_50.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\junit_4_11.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\mockito_all_1_8_4.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\unresolved_dependency____log4j_1_2.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\usertype_core_3_0_0_CR1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\.idea\libraries\usertype_spi_3_0_0_CR1.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\META-INF\persistence.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\META-INF\plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\build.gradle" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\build\libs\logmonitor.jar" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\build\tmp\jar\MANIFEST.MF" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\gradle.properties" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\resources\META-INF\persistence.xml" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\resources\filter_last.sh" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\resources\round_log.sh" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\HomeResolver.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\dao\Callback.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\dao\ConfigurationDao.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\dao\ConfigurationDaoImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\dao\DefaultCallBack.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\dao\LogService.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\AdvancedSettings.form" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\AdvancedSettings.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\BaseDialog.form" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\BaseDialog.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\LogMonitorPanel.form" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\LogMonitorPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\LogMonitorSettingsConfigurable.form" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\LogMonitorSettingsConfigurable.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\LogMonitorToolWindowFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\MatchConfigForm.form" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\MatchConfigForm.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\OnOkAction.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\ServerLogChooser.form" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\ServerLogChooser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\img\down.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\img\environment.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\img\error.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\img\icon.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\img\list-error.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\img\list-unknown.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\img\project.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\img\up.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\img\warning.png" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\BeanChangeListener.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\CreateMatchAction.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\EntriesComparator.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\ListModelUpdater.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\LogChooseListener.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\LogMonitorPanelModel.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\MatchConfigListModel.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\SetItemFromListModel.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\VerboseBeanAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\node\ConsoleDisplayable.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\node\EntityObject.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\node\EntryObject.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\node\EnvironmentObject.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\node\GroupObject.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\node\GroupedEntryObject.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\node\MatchConfigObject.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\task\LoadRoundLogTask.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\idea\model\task\ShowLogAroundAction.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\model\BaseObject.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\model\Configuration.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\model\Environment.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\model\LogEntry.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\model\LogEntryGroup.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\model\MatchConfig.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\model\Server.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\CallerParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\DateParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\DownloadAndParse.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\EntryAddedListener.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\EntryMatcher.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\LevelParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\LineNumberParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\LogFileReader.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\LogParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\PatternUtils.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\SimpleParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\parser\UnitParser.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\read\ReaderScheduler.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\read\Serializer.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\read\command\BaseCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\read\command\CommandFileLoader.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\read\command\LogDownloader.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\read\command\LsCommand.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\src\org\xendan\logmonitor\read\command\RoundLogDownloader.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\dao\LogServiceTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\dao\different_internal_errores.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\dao\dvf-settings.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\dao\empty_messages.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\dao\error_line_89.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\dao\exclude_by_string.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\dao\same_errores.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\dao\similar_end.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\dao\similar_start.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\dao\unexpected-error.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\idea\LogMonitorPanelModelTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\idea\LogMonitorSettingsConfigurableTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\idea\MatchConfigFormTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\idea\SetItemFromListModelTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\parser\DateParserTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\parser\EntryMatcherTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\parser\LevelParserTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\parser\LogParserTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\parser\PatternUtilsTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\read\LogFileParserTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\read\LsCommandTest.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\read\bigexample.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\org\xendan\logmonitor\read\no_match_spring.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\test\reader_test.log" afterPath="" />
+      <change type="DELETED" beforePath="C:\work\projects\tmp\logmonitor\todo.txt" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/dao/ConfigurationDao.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/dao/ConfigurationDao.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/model/CreateMatchAction.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/model/CreateMatchAction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/parser/DownloadAndParse.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/parser/DownloadAndParse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/model/Environment.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/model/Environment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/model/node/EnvironmentObject.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/model/node/EnvironmentObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/model/node/GroupedEntryObject.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/model/node/GroupedEntryObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/read/command/LogDownloader.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/read/command/LogDownloader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/model/LogEntry.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/model/LogEntry.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/test/org/xendan/logmonitor/read/LogFileParserTest.java" afterPath="$PROJECT_DIR$/../../logmonitor/test/org/xendan/logmonitor/read/LogFileParserTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/parser/LogFileReader.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/parser/LogFileReader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/LogMonitorPanel.form" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/LogMonitorPanel.form" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/LogMonitorPanel.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/LogMonitorPanel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/model/LogMonitorPanelModel.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/model/LogMonitorPanelModel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/test/org/xendan/logmonitor/idea/LogMonitorPanelModelTest.java" afterPath="$PROJECT_DIR$/../../logmonitor/test/org/xendan/logmonitor/idea/LogMonitorPanelModelTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurable.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/LogMonitorToolWindowFactory.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/idea/LogMonitorToolWindowFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/parser/LogParser.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/parser/LogParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/test/org/xendan/logmonitor/parser/LogParserTest.java" afterPath="$PROJECT_DIR$/../../logmonitor/test/org/xendan/logmonitor/parser/LogParserTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/dao/LogService.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/dao/LogService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/test/org/xendan/logmonitor/dao/LogServiceTest.java" afterPath="$PROJECT_DIR$/../../logmonitor/test/org/xendan/logmonitor/dao/LogServiceTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/read/ReaderScheduler.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/read/ReaderScheduler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/read/command/RoundLogDownloader.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/read/command/RoundLogDownloader.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/parser/SimpleParser.java" afterPath="$PROJECT_DIR$/../../logmonitor/src/org/xendan/logmonitor/parser/SimpleParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/build.gradle" afterPath="$PROJECT_DIR$/../../logmonitor/build.gradle" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/resources/filter_last.sh" afterPath="$PROJECT_DIR$/../../logmonitor/resources/filter_last.sh" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/logmonitor.iml" afterPath="$PROJECT_DIR$/../../logmonitor/logmonitor.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/META-INF/plugin.xml" afterPath="$PROJECT_DIR$/../../logmonitor/META-INF/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/rebel_project.xml" afterPath="$PROJECT_DIR$/.idea/rebel_project.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/todo.txt" afterPath="$PROJECT_DIR$/../../logmonitor/todo.txt" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../logmonitor/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../logmonitor/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <ignored path="logmonitor.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -11,21 +202,6 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
-  <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/logmonitor$ALL.coverage" NAME="ALL Coverage Results" MODIFIED="1384259669280" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/logmonitor$AllSuite.coverage" NAME="AllSuite Coverage Results" MODIFIED="1379672931088" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.xendan.logmonitor.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/logmonitor$FastPortableSuite.coverage" NAME="FastPortableSuite Coverage Results" MODIFIED="1378743177045" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.xendan.logmonitor.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/logmonitor$ConfigurationDaoImplTest_testAddConfig.coverage" NAME="ConfigurationDaoImplTest.testAddConfig Coverage Results" MODIFIED="1384349318803" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>org.xendan.logmonitor.dao.impl.*</FILTER>
-    </SUITE>
-  </component>
-  <component name="CoverageViewManager">
-    <option name="myFlattenPackages" value="true" />
-  </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
   </component>
@@ -33,448 +209,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="jar://C:/java/src.zip!/javax/swing/tree/DefaultMutableTreeNode.java" line="167" class="javax.swing.tree.DefaultMutableTreeNode" package="javax.swing.tree">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java" line="59" class="org.xendan.logmonitor.model.LogEntry" package="org.xendan.logmonitor.model">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="StringUtils.isEmpty(message)&#13;org.apache.commons.lang.StringUtils&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-    </line_breakpoints>
-    <exception_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint class_name="org.h2.jdbc.JdbcSQLException" package_name="org.h2.jdbc">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.ArrayIndexOutOfBoundsException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.InstantiationException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.IllegalAccessException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.NullPointerException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.StringIndexOutOfBoundsException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.StringIndexOutOfBoundsException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.ArrayIndexOutOfBoundsException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.util.ConcurrentModificationException" package_name="java.util">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.IllegalStateException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.ClassCastException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="org.hibernate.LazyInitializationException" package_name="org.hibernate">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.util.ConcurrentModificationException" package_name="java.util">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="org.hibernate.PersistentObjectException" package_name="org.hibernate">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="javax.persistence.PersistenceException" package_name="javax.persistence">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;java.util.concurrent.RejectedExecutionException&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.IllegalArgumentException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="org.hibernate.TransientPropertyValueException" package_name="org.hibernate">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint class_name="java.util.concurrent.RejectedExecutionException" package_name="java.util.concurrent">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.ArrayIndexOutOfBoundsException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="org.hibernate.HibernateException" package_name="org.hibernate">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="org.hibernate.TransientPropertyValueException" package_name="org.hibernate">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="javax.persistence.PersistenceException" package_name="javax.persistence">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.UnsupportedOperationException" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
-      </breakpoint>
-      <breakpoint class_name="java.lang.AssertionError" package_name="java.lang">
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </exception_breakpoints>
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -490,8 +224,8 @@
         <option name="CONDITION_ENABLED" value="true" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
       </breakpoint>
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -507,8 +241,8 @@
         <option name="CONDITION_ENABLED" value="true" />
         <option name="CLASS_FILTERS_ENABLED" value="false" />
         <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="&#13;&#13;JAVA" />
-        <option name="LOG_MESSAGE" value="&#13;&#13;JAVA" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
@@ -521,58 +255,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ConfigurationDaoImpl.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java">
+      <file leaf-file-name="build.gradle" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../../logmonitor/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="34" selection-start="777" selection-end="777" vertical-scroll-proportion="0.0" vertical-offset="151" max-vertical-offset="2839">
-              <folding>
-                <marker date="1391181704986" expanded="true" signature="2201:2404" placeholder="DELETE FROM ..." />
-                <marker date="1391181704986" expanded="true" signature="2305:2377" placeholder="SELECT ID FR..LOG_ENTRY..." />
-                <marker date="1391181704986" expanded="true" signature="2527:2790" placeholder="DELETE FROM ..." />
-                <marker date="1391181704986" expanded="true" signature="2910:2966" placeholder="DELETE FROM ..." />
-                <marker date="1391181704986" expanded="true" signature="3560:3829" placeholder="DELETE FROM ..." />
-                <marker date="1391181704986" expanded="true" signature="4559:4964" placeholder="SELECT e.* F..LOG_ENTRY..." />
-                <marker date="1391181704986" expanded="true" signature="4761:4884" placeholder="SELECT ENTRI..LOG_ENTRY_GROUP_ENTRIES..." />
-                <marker date="1391181704986" expanded="true" signature="5354:5770" placeholder="SELECT g.* F..LOG_ENTRY_GROUP..." />
-                <marker date="1391181704986" expanded="true" signature="5464:5768" placeholder="SELECT 1 FRO..LOG_ENTRY_GROUP_ENTRIES..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LogService.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="300" column="34" selection-start="11884" selection-end="11899" vertical-scroll-proportion="0.0" vertical-offset="3760" max-vertical-offset="7463">
+            <state line="29" column="64" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LogEntry.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java">
+      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="0" selection-start="1332" selection-end="1332" vertical-scroll-proportion="0.0" vertical-offset="457" max-vertical-offset="1326">
-              <folding>
-                <element signature="e#1368#1369#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LogServiceTest.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/LogServiceTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="304" column="52" selection-start="11409" selection-end="11409" vertical-scroll-proportion="0.63957596" vertical-offset="3650" max-vertical-offset="4505">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="unexpected-error.log" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/unexpected-error.log">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="1240" column="59" selection-start="188522" selection-end="188551" vertical-scroll-proportion="-2.0" vertical-offset="20980" max-vertical-offset="27863">
+            <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="511">
               <folding />
             </state>
           </provider>
@@ -585,124 +280,386 @@
       <setting name="OPEN_NEW_TAB" value="false" />
     </FindUsagesManager>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GradleLocalSettings">
-    <option name="availableTasks">
-      <set>
-        <GradleTaskDescriptor>
-          <option name="description" value="Assembles the outputs of this project." />
-          <option name="name" value="assemble" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Assembles and tests this project." />
-          <option name="name" value="build" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Assembles and tests this project and all projects that depend on it." />
-          <option name="name" value="buildDependents" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Assembles and tests this project and all projects it depends on." />
-          <option name="name" value="buildNeeded" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Runs all checks." />
-          <option name="name" value="check" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Assembles classes 'main'." />
-          <option name="name" value="classes" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Deletes the build directory." />
-          <option name="name" value="clean" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Compiles source set 'main:java'." />
-          <option name="name" value="compileJava" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Compiles source set 'test:java'." />
-          <option name="name" value="compileTestJava" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Assembles a jar archive containing the main classes." />
-          <option name="name" value="jar" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Generates Javadoc API documentation for the main source code." />
-          <option name="name" value="javadoc" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Processes source set 'main:resources'." />
-          <option name="name" value="processResources" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Processes source set 'test:resources'." />
-          <option name="name" value="processTestResources" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Runs the unit tests." />
-          <option name="name" value="test" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="description" value="Assembles classes 'test'." />
-          <option name="name" value="testClasses" />
-        </GradleTaskDescriptor>
-      </set>
-    </option>
-    <option name="expandStates">
+    <option name="tasksExpandState">
       <map>
-        <entry key="dependencies/logmonitor/logmonitor" value="false" />
-        <entry key="logmonitor" value="true" />
-        <entry key="logmonitor/logmonitor" value="true" />
+        <entry key="" value="true" />
+        <entry key="idea/" value="false" />
+        <entry key="ideaplugin/" value="true" />
+        <entry key="logmonitor/" value="false" />
       </map>
     </option>
-    <option name="recentTasks">
-      <list>
-        <GradleTaskDescriptor>
-          <option name="executorId" value="Debug" />
-          <option name="name" value="build" />
-        </GradleTaskDescriptor>
-        <GradleTaskDescriptor>
-          <option name="executorId" value="Run" />
-          <option name="name" value="build" />
-        </GradleTaskDescriptor>
-      </list>
+    <option name="availableProjects">
+      <map>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="idea" />
+              <option name="path" value="$PROJECT_DIR$/idea" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="idea" />
+                <option name="path" value="$PROJECT_DIR$/idea" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="logmonitor" />
+              <option name="path" value="$PROJECT_DIR$/../../logmonitor" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="logmonitor" />
+                <option name="path" value="$PROJECT_DIR$/../../logmonitor" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="logmonitor" />
+              <option name="path" value="$PROJECT_DIR$" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="logmonitor" />
+                <option name="path" value="$PROJECT_DIR$" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="availableTasks">
+      <map>
+        <entry key="$PROJECT_DIR$/../../logmonitor">
+          <value>
+            <list>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects it depends on." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="buildNeeded" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles classes 'test'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="testClasses" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs the unit tests." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="test" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs all checks." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="check" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Compiles Java source 'test:java'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="compileTestJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles the outputs of this project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="assemble" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Deletes the build directory." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="clean" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Compiles Java source 'main:java'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="compileJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Generates Javadoc API documentation for the main source code." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="javadoc" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="build" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects that depend on it." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="buildDependents" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles a jar archive containing the main classes." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="jar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles classes 'main'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="classes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Processes resources 'test:resources'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="processTestResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Processes resources 'main:resources'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/../../logmonitor" />
+                <option name="name" value="processResources" />
+              </ExternalTaskPojo>
+            </list>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/idea">
+          <value>
+            <list>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects it depends on." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="buildNeeded" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles classes 'test'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="testClasses" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs the unit tests." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="test" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Runs all checks." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="check" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Compiles Java source 'test:java'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="compileTestJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles the outputs of this project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="assemble" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Deletes the build directory." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="clean" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Compiles Java source 'main:java'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="compileJava" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Generates Javadoc API documentation for the main source code." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="javadoc" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="build" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles and tests this project and all projects that depend on it." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="buildDependents" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles a jar archive containing the main classes." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="jar" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Assembles classes 'main'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="classes" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Processes resources 'test:resources'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="processTestResources" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Processes resources 'main:resources'." />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/idea" />
+                <option name="name" value="processResources" />
+              </ExternalTaskPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="modificationStamps">
+      <map>
+        <entry key="$PROJECT_DIR$/../../logmonitor" value="1395341712726" />
+        <entry key="$PROJECT_DIR$/idea" value="1395341712726" />
+        <entry key="C:\work\projects\tmp\logmonitor" value="1395340744722" />
+      </map>
+    </option>
+    <option name="projectBuildClasspath">
+      <map>
+        <entry key="$PROJECT_DIR$/../../logmonitor">
+          <value>
+            <ExternalProjectBuildClasspathPojo>
+              <option name="modulesBuildClasspath">
+                <map>
+                  <entry key="$PROJECT_DIR$/../../logmonitor">
+                    <value>
+                      <ExternalModuleBuildClasspathPojo>
+                        <option name="path" value="$PROJECT_DIR$/../../logmonitor" />
+                      </ExternalModuleBuildClasspathPojo>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="name" value="logmonitor" />
+              <option name="projectBuildClasspath">
+                <list>
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-sonar-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-base-services-groovy-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-base-services-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-osgi-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-wrapper-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-ivy-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/ant-launcher-1.9.2.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-language-base-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-announce-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-tooling-api-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-cpp-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-native-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/ivy-2.2.0.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-ear-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-launcher-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-jetty-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-scala-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-resources-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-antlr-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/groovy-all-1.8.6.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-cli-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-reporting-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-plugins-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-docs-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/ant-1.9.2.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-messaging-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-core-impl-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-signing-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-build-comparison-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-code-quality-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-publish-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-ui-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-javascript-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-open-api-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/ant-antlr-1.9.2.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-maven-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-ide-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-diagnostics-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-build-init-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-jacoco-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-core-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-language-jvm-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../logmonitor/buildSrc/src/main/java" />
+                  <option value="$PROJECT_DIR$/../../logmonitor/buildSrc/src/main/groovy" />
+                </list>
+              </option>
+            </ExternalProjectBuildClasspathPojo>
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/idea">
+          <value>
+            <ExternalProjectBuildClasspathPojo>
+              <option name="modulesBuildClasspath">
+                <map>
+                  <entry key="$PROJECT_DIR$/idea">
+                    <value>
+                      <ExternalModuleBuildClasspathPojo>
+                        <option name="path" value="$PROJECT_DIR$/idea" />
+                      </ExternalModuleBuildClasspathPojo>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+              <option name="name" value="idea" />
+              <option name="projectBuildClasspath">
+                <list>
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-sonar-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-base-services-groovy-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-base-services-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-osgi-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-wrapper-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-ivy-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/ant-launcher-1.9.2.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-language-base-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-announce-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-tooling-api-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-cpp-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-native-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/ivy-2.2.0.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-ear-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-launcher-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-jetty-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-scala-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-resources-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-antlr-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/groovy-all-1.8.6.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-cli-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-reporting-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-plugins-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-docs-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/ant-1.9.2.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-messaging-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-core-impl-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-signing-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-build-comparison-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-code-quality-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-publish-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-ui-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-javascript-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-open-api-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/ant-antlr-1.9.2.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-maven-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-ide-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-diagnostics-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-build-init-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-jacoco-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/gradle-core-1.9.jar" />
+                  <option value="$PROJECT_DIR$/../../../deploy/gradle-1.9-bin/gradle-1.9/lib/plugins/gradle-language-jvm-1.9.jar" />
+                  <option value="$PROJECT_DIR$/idea/buildSrc/src/main/java" />
+                  <option value="$PROJECT_DIR$/idea/buildSrc/src/main/groovy" />
+                </list>
+              </option>
+            </ExternalProjectBuildClasspathPojo>
+          </value>
+        </entry>
+      </map>
     </option>
   </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/model/task/LoadRoundLogTask.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/model/LogMonitorPanelModel.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/DateParser.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/command/LogDownloader.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/command/RoundLogDownloader.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LogParserTest.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/UnitParser.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/DateParserTest.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/parser/LevelParserTest.java" />
-        <option value="$PROJECT_DIR$/resources/round_log.sh" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/dao/empty_messages.log" />
-        <option value="$PROJECT_DIR$/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/read/command/CommandFileLoader.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/DownloadAndParse.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/DefaultCallBack.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/OnOkAction.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/model/EntryMatcher.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/parser/EntryMatcher.java" />
-        <option value="$PROJECT_DIR$/todo.txt" />
-        <option value="db-console:/cee21cd2/ea86d4ac-f52a-4cff-bc7e-9555519a54fa/" />
-        <option value="$PROJECT_DIR$/resources/META-INF/persistence.xml" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDao.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurableTest.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/idea/LogMonitorPanelModelTest.java" />
-        <option value="db-console:/cee21cd2/054940bb-dcf6-48e0-adf7-eaab24b9b639/" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java" />
-        <option value="$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java" />
-        <option value="$PROJECT_DIR$/test/org/xendan/logmonitor/dao/LogServiceTest.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/ideaplugin/build.gradle" />
+        <option value="$PROJECT_DIR$/.gitignore" />
       </list>
     </option>
   </component>
@@ -712,7 +669,7 @@
     <option name="width" value="1696" />
     <option name="height" value="1026" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="false">
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
     <OptionsSetting value="true" id="Checkout" />
@@ -738,6 +695,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -752,7 +710,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
+              <option name="myItemId" value="web" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -762,305 +720,46 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="resources" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="META-INF" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="logmonitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="META-INF" />
+              <option name="myItemId" value="idea" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Facets" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
-    <property name="OverrideImplement.combined" value="true" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="MemberChooser.sorted" value="false" />
-    <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="GoToClass.includeJavaFiles" value="false" />
-    <property name="Database.TableEditor.Splitter" value="0.9" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="MemberChooser.showClasses" value="true" />
-    <property name="FullScreen" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/src/org/xendan/logmonitor/idea/model/task" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="options.lastSelected" value="project.propCompiler" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/idea/build.gradle" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="false" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="gradle.tool.window.active" value="Tasks" />
-    <property name="options.searchVisible" value="true" />
     <property name="dynamic.classpath" value="false" />
-    <property name="LayoutCode.rearrangeEntriesJava" value="false" />
-    <property name="SearchEverywhereHistory" value="" />
-    <property name="LayoutCode.rearrangeEntriesH2" value="false" />
-    <property name="extract.method.default.visibility" value="private" />
-    <property name="OverrideImplement.overriding.sorted" value="false" />
   </component>
-  <component name="RecentsManager">
-    <key name="CreateTestDialog.RecentsKey">
-      <recent name="org.xendan.logmonitor.parser" />
-      <recent name="org.xendan.logmonitor.dao.impl" />
-      <recent name="org.xendan.logmonitor.idea" />
-      <recent name="org.xendan.logmonitor.read" />
-    </key>
-    <key name="CreateTestDialog.Recents.Supers">
-      <recent name="" />
-    </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="org.xendan.logmonitor.read" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\work\projects\logmonitor\META-INF" />
-      <recent name="C:\work\projects\logmonitor\src\org\xendan\logmonitor\idea\img" />
-      <recent name="C:\work\projects\logmonitor\test\org\xendan\logmonitor\dao\impl" />
-      <recent name="C:\work\projects\logmonitor\src\META-INF" />
-      <recent name="C:\work\projects\logmonitor\src" />
-    </key>
-    <key name="IntroduceConstantDialog.RECENTS_KEY">
-      <recent name="org.xendan.logmonitor.dao.ConfigurationDaoImpl.IdeaPersistenceProviderResolver.IdeaPersistenceProvider" />
-      <recent name="org.xendan.logmonitor.read.command.LogDownloader" />
-      <recent name="org.xendan.logmonitor.idea.model.LogMonitorPanelModel.EntryObject" />
-      <recent name="org.xendan.logmonitor.idea.model.LogMonitorPanelModel" />
-      <recent name="org.xendan.logmonitor.parser.LogParser" />
-    </key>
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="org.xendan.logmonitor.idea.model.task" />
-      <recent name="org.xendan.logmonitor.dao" />
-      <recent name="org.xendan.logmonitor.model" />
-      <recent name="org.xendan.logmonitor.parser" />
-      <recent name="org.xendan.logmonitor.service" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\work\projects\logmonitor\resources\META-INF" />
-      <recent name="C:\work\projects\logmonitor\test\org\xendan\logmonitor\dao" />
-      <recent name="C:\work\projects\logmonitor\src\org\xendan\logmonitor\idea\img" />
-      <recent name="C:\work\projects\logmonitor\test\org\xendan\logmonitor\read" />
-    </key>
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="org.xendan.logmonitor.parser" />
-      <recent name="org.xendan.logmonitor.idea" />
-      <recent name="org.xendan.logmonitor.dao" />
-      <recent name="org.xendan.logmonitor.dao.impl" />
-    </key>
-  </component>
-  <component name="RunManager" selected="JUnit.LogServiceTest.test_misc_error">
-    <configuration default="false" name="LogMonitorPanelModelTest.test_isNodeUpdated" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.xendan.logmonitor.idea.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.idea" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.idea.LogMonitorPanelModelTest" />
-      <option name="METHOD_NAME" value="test_isNodeUpdated" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
+  <component name="RunManager" selected="Plugin.RUN">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="file://$PROJECT_DIR$" />
+      <setting name="debug" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="LogServiceTest" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.xendan.logmonitor.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.dao" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.dao.LogServiceTest" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <dir value="$PROJECT_DIR$/test" />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="LogServiceTest.test_misc_error" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.xendan.logmonitor.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.dao" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.dao.LogServiceTest" />
-      <option name="METHOD_NAME" value="test_misc_error" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <dir value="$PROJECT_DIR$/test" />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="LogServiceTest.testAddConfig" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.xendan.logmonitor.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.dao" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.dao.LogServiceTest" />
-      <option name="METHOD_NAME" value="testAddMatchConfig" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <dir value="$PROJECT_DIR$/test" />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="LogServiceTest.test_empty_messages" type="JUnit" factoryName="JUnit" temporary="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.xendan.logmonitor.dao.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.dao" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.dao.LogServiceTest" />
-      <option name="METHOD_NAME" value="test_empty_messages" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <dir value="$PROJECT_DIR$/test" />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
+      <module name="ideaplugin" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
       <method />
     </configuration>
     <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails" singleton="true">
@@ -1073,21 +772,6 @@
       <setting name="launchBrowser" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
-      <module name="logmonitor" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
-      <option name="PROGRAM_PARAMETERS" />
-      <method />
-    </configuration>
-    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
-      <module name="" />
-      <setting name="path" value="" />
-      <setting name="vmparams" value="" />
-      <setting name="params" value="" />
-      <setting name="workDir" value="file://$PROJECT_DIR$" />
-      <setting name="debug" value="false" />
-      <method />
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -1097,6 +781,19 @@
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug" singleton="true">
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -1125,19 +822,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -1283,89 +967,9 @@
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <method />
     </configuration>
-    <configuration default="true" type="com.intellij.persistence.run.ConsoleRunConfigurationType" factoryName="Query Language Console">
-      <option name="VM_PARAMETERS" value="" />
-      <option name="USER_CFG_CLASS" />
-      <option name="CONTEXT_PROVIDER" />
-      <method />
-    </configuration>
-    <configuration default="false" name="LogFileParserTest.test_read" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.xendan.logmonitor.read.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.read" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.read.LogFileParserTest" />
-      <option name="METHOD_NAME" value="test_read" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="ALL" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" value="" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="directory" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="" />
-      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <dir value="$PROJECT_DIR$/test" />
-      <patterns />
-      <RunnerSettings RunnerId="Cover" />
-      <RunnerSettings RunnerId="Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="JProfiler">
-        <option name="WINDOW" value="false" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="JRebel Debug">
-        <option name="DEBUG_PORT" value="" />
-        <option name="TRANSPORT" value="0" />
-        <option name="LOCAL" value="true" />
-      </RunnerSettings>
-      <RunnerSettings RunnerId="Run" />
-      <ConfigurationWrapper RunnerId="Cover" />
-      <ConfigurationWrapper RunnerId="Debug" />
-      <ConfigurationWrapper RunnerId="Run" />
-      <method />
-    </configuration>
-    <configuration default="false" name="run" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="logmonitor" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+    <configuration default="false" name="RUN" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin" singleton="true">
+      <module name="idea" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <log_file path="$USER_HOME$/.IntelliJIdea11/system/plugins-sandbox/system/log/idea.log" checked="false" skipped="true" show_all="false" alias="IDEA LOG" />
       <RunnerSettings RunnerId="Debug">
@@ -1381,122 +985,37 @@
         <option name="TRANSPORT" value="0" />
         <option name="LOCAL" value="true" />
       </RunnerSettings>
-      <ConfigurationWrapper RunnerId="Debug" />
-      <method />
-    </configuration>
-    <configuration default="false" name="LogParserTest.test_getDateAsString" type="JUnit" factoryName="JUnit">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="org.xendan.logmonitor.parser.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="logmonitor" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="org.xendan.logmonitor.parser" />
-      <option name="MAIN_CLASS_NAME" value="org.xendan.logmonitor.parser.LogParserTest" />
-      <option name="METHOD_NAME" value="test_getDateAsString" />
-      <option name="TEST_OBJECT" value="method" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <envs />
-      <patterns />
       <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <list size="9">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.LogFileParserTest.test_read" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.ALL" />
-      <item index="2" class="java.lang.String" itemvalue="Plugin.run" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.LogParserTest.test_getDateAsString" />
-      <item index="4" class="java.lang.String" itemvalue="JUnit.LogMonitorPanelModelTest.test_isNodeUpdated" />
-      <item index="5" class="java.lang.String" itemvalue="JUnit.LogServiceTest" />
-      <item index="6" class="java.lang.String" itemvalue="JUnit.LogServiceTest.test_misc_error" />
-      <item index="7" class="java.lang.String" itemvalue="JUnit.LogServiceTest.testAddConfig" />
-      <item index="8" class="java.lang.String" itemvalue="JUnit.LogServiceTest.test_empty_messages" />
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Plugin.RUN" />
     </list>
-    <recent_temporary>
-      <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="JUnit.LogServiceTest.test_misc_error" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.LogServiceTest.test_empty_messages" />
-        <item index="2" class="java.lang.String" itemvalue="JUnit.LogServiceTest" />
-        <item index="3" class="java.lang.String" itemvalue="JUnit.LogServiceTest.testAddConfig" />
-        <item index="4" class="java.lang.String" itemvalue="JUnit.LogServiceTest" />
-      </list>
-    </recent_temporary>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
     </configuration>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
-  <component name="SliceManager">
-    <option name="analysisUIOptions">
-      <AnalysisUIOptions />
-    </option>
-  </component>
-  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="all">
-    <option name="USER" value="" />
-    <option name="PASSWORD" value="" />
-    <option name="mySSHConnectionTimeout" value="30000" />
-    <option name="mySSHReadTimeout" value="30000" />
-    <option name="LAST_MERGED_REVISION" />
-    <option name="MERGE_DRY_RUN" value="false" />
-    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
-    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
-    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
-    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
-    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
-    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
-    <option name="FORCE_UPDATE" value="false" />
-    <option name="IGNORE_EXTERNALS" value="false" />
-    <configuration useDefault="false">C:\Users\id967161\AppData\Roaming\Subversion</configuration>
-    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
-  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="60fd8e86-acf2-4e51-bcc4-e77be8dfb7d0" name="Default" comment="" />
-      <created>1378367231033</created>
-      <updated>1378367231033</updated>
-      <workItem from="1390989492870" duration="105000" />
-      <workItem from="1390990367759" duration="9852000" />
-      <workItem from="1391074980868" duration="13000" />
-      <workItem from="1391160844024" duration="360000" />
-      <workItem from="1391161414220" duration="6531000" />
-      <workItem from="1391172799763" duration="6326000" />
+      <changelist id="66bd8709-4881-4a6c-9053-cd924d030e5f" name="Default" comment="" />
+      <created>1395340753650</created>
+      <updated>1395340753650</updated>
+      <workItem from="1395340759032" duration="430000" />
+      <workItem from="1395341285900" duration="509000" />
+      <workItem from="1395341826665" duration="53000" />
+      <workItem from="1395341916482" duration="1484000" />
+      <workItem from="1395344990527" duration="384000" />
+      <workItem from="1395345448491" duration="119000" />
+      <workItem from="1395345612687" duration="930000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="23187000" />
-  </component>
-  <component name="TodoView" selected-index="2">
-    <todo-panel id="selected-file">
-      <are-packages-shown value="false" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="default-changelist">
-      <are-packages-shown value="false" />
-      <are-modules-shown value="false" />
-      <flatten-packages value="false" />
-      <is-autoscroll-to-source value="false" />
-    </todo-panel>
+    <option name="totallyTimeSpent" value="3909000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
@@ -1504,49 +1023,41 @@
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Persistence" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20634921" sideWeight="0.4264463" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.6009227" order="21" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22832723" sideWeight="0.6724337" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="17" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3979239" sideWeight="0.2607099" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20634921" sideWeight="0.57190084" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32552955" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3690078" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="JPA Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="JRebel Executor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="IvyIDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32967034" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24969475" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2637699" sideWeight="0.6730083" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32664436" sideWeight="0.54161566" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="JRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="20" side_tool="false" content_ui="tabs" />
-      <window_info id="Hibernate Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32998884" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33890748" sideWeight="0.73929006" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JRebel Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="JRebel" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32552955" sideWeight="0.5" order="18" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.6286044" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="19" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23378213" sideWeight="0.6730083" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.34832758" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.249694" sideWeight="0.4094579" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24908425" sideWeight="0.6585928" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="JRebel" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Ticket History" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33072627" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Atlassian " active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298731" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26009792" sideWeight="0.67128026" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ticket History" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32986537" sideWeight="0.6782007" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
-    <option name="RECENTLY_FILTERED_USERS">
+    <option name="RECENTLY_FILTERED_USER_GROUPS">
       <collection />
     </option>
   </component>
@@ -1557,399 +1068,200 @@
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
-    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="false" />
-    <MESSAGE value="checkTDD" />
-    <option name="LAST_COMMIT_MESSAGE" value="checkTDD" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-    </breakpoint-manager>
+    <breakpoint-manager />
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
-  <component name="atlassian-ide-plugin-workspace">
-    <option name="bambooConfiguration">
-      <BambooWorkspaceConfiguration>
-        <option name="view">
-          <BambooViewConfigurationBean />
-        </option>
-      </BambooWorkspaceConfiguration>
-    </option>
-    <option name="defaultCredentials">
-      <UserCfgBean />
-    </option>
-  </component>
-  <component name="atlassian-ide-plugin-workspace-issues">
-    <option name="view">
-      <JiraViewConfigurationBean>
-        <option name="viewFilterId" value="" />
-      </JiraViewConfigurationBean>
-    </option>
-  </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/util.jar!/com/intellij/openapi/diagnostic/Logger.class">
+    <entry file="file://$PROJECT_DIR$/../../logmonitor/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="68" column="64" selection-start="3739" selection-end="3756" vertical-scroll-proportion="0.75886524" vertical-offset="711" max-vertical-offset="1275" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/idea.jar!/com/intellij/idea/LoggerFactory.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="160" selection-end="160" vertical-scroll-proportion="0.15070923" vertical-offset="0" max-vertical-offset="564" />
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/log4j.jar!/org/apache/log4j/Logger.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="159" selection-end="159" vertical-scroll-proportion="0.15070923" vertical-offset="0" max-vertical-offset="564" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/read/command/CommandFileLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="80" selection-start="473" selection-end="550" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1292" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/LogMonitorPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="93" selection-start="1603" selection-end="1603" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3604" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/DownloadAndParse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="4" selection-start="906" selection-end="906" vertical-scroll-proportion="0.0" vertical-offset="67" max-vertical-offset="1309" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/jar/2f4e93876023b3c346c2db21a1d73cd4e9dbf243/hibernate-entitymanager-4.2.5.Final.jar!/META-INF/services/javax.persistence.spi.PersistenceProvider">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="38" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="119" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/internal/util/ClassLoaderHelper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="30" selection-start="1401" selection-end="1401" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="425" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProviderResolver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="30" selection-start="1465" selection-end="1465" vertical-scroll-proportion="0.59375" vertical-offset="136" max-vertical-offset="680" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/idea/OnOkAction.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="22" selection-start="282" selection-end="282" vertical-scroll-proportion="0.35416666" vertical-offset="0" max-vertical-offset="576" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/plugin.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="986" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/LogParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="51" column="46" selection-start="2034" selection-end="2034" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2108" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/parser/EntryMatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="256" selection-end="256" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="697" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/engine/jdbc/internal/JdbcServicesImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="241" column="0" selection-start="10211" selection-end="10211" vertical-scroll-proportion="0.0" vertical-offset="2917" max-vertical-offset="6477" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/service/jdbc/connections/internal/UserSuppliedConnectionProviderImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="0" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.28125" vertical-offset="442" max-vertical-offset="986" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/EntityManagerFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="25" selection-start="2297" selection-end="2297" vertical-scroll-proportion="0.0" vertical-offset="431" max-vertical-offset="2125" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/QueryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="276" column="0" selection-start="8990" selection-end="8990" vertical-scroll-proportion="0.0" vertical-offset="3342" max-vertical-offset="9860" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/todo.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="96" selection-end="96" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProviderResolverHolder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="141" column="119" selection-start="5116" selection-end="5116" vertical-scroll-proportion="0.0" vertical-offset="1584" max-vertical-offset="3417" />
-      </provider>
-    </entry>
-    <entry file="dbDummy://db-console:/cee21cd2/ea86d4ac-f52a-4cff-bc7e-9555519a54fa/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="115" selection-start="246" selection-end="246" vertical-scroll-proportion="0.22972973" vertical-offset="0" max-vertical-offset="444" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/empty_messages.log">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="0" selection-start="8217" selection-end="8217" vertical-scroll-proportion="0.0" vertical-offset="991" max-vertical-offset="47209" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/spi/PersistenceProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="32" selection-start="1838" selection-end="1838" vertical-scroll-proportion="0.0" vertical-offset="245" max-vertical-offset="1122">
-          <folding>
-            <element signature="e#0#2823#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/HibernatePersistence.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="50" selection-start="2263" selection-end="2263" vertical-scroll-proportion="0.0" vertical-offset="143" max-vertical-offset="1428">
-          <folding>
-            <element signature="e#0#4014#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3984#3985#0" expanded="false" />
-            <element signature="e#4010#4011#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/AvailableSettings.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="147" column="31" selection-start="5277" selection-end="5277" vertical-scroll-proportion="-5.22" vertical-offset="1864" max-vertical-offset="5712" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/cfg/Environment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="35" selection-start="5326" selection-end="5348" vertical-scroll-proportion="-0.2369727" vertical-offset="1840" max-vertical-offset="5508" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/META-INF/persistence.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="59" selection-start="1575" selection-end="1575" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="544">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/cfg/AvailableSettings.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="373" column="31" selection-start="14241" selection-end="14241" vertical-scroll-proportion="0.0" vertical-offset="5682" max-vertical-offset="11118">
-          <folding>
-            <element signature="e#0#26764#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/Ejb3Configuration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="315" column="0" selection-start="13361" selection-end="13361" vertical-scroll-proportion="0.0" vertical-offset="3318" max-vertical-offset="26707">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/cfg/Settings.java">
+    <entry file="file://$PROJECT_DIR$/common/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="174" column="30" selection-start="5298" selection-end="5298" vertical-scroll-proportion="0.0" vertical-offset="1649" max-vertical-offset="5117">
-          <folding>
-            <element signature="e#5308#5309#0" expanded="false" />
-            <element signature="e#5338#5339#0" expanded="false" />
-            <element signature="e#8893#8894#0" expanded="false" />
-            <element signature="e#8920#8921#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/cfg/SettingsFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="339" column="0" selection-start="14731" selection-end="14731" vertical-scroll-proportion="0.0" vertical-offset="4661" max-vertical-offset="8551">
-          <folding>
-            <element signature="e#0#23141#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/tool/hbm2ddl/Target.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="0" selection-start="1446" selection-end="1446" vertical-scroll-proportion="0.69911504" vertical-offset="30" max-vertical-offset="595" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/idea/LogMonitorSettingsConfigurableTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="208" column="84" selection-start="8789" selection-end="8789" vertical-scroll-proportion="0.0" vertical-offset="2967" max-vertical-offset="3859">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/sql/Update.java">
+    <entry file="file://$PROJECT_DIR$/web/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="13" selection-start="1335" selection-end="1335" vertical-scroll-proportion="-4.876543" vertical-offset="2918" max-vertical-offset="3485">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/DefaultCallBack.java">
+    <entry file="file://$PROJECT_DIR$/../../logmonitor/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="31" selection-start="141" selection-end="141" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate.javax.persistence/hibernate-jpa-2.0-api/1.0.1.Final/source/574f65373b46a038332eb1a14acc3142bd9e9810/hibernate-jpa-2.0-api-1.0.1.Final-sources.jar!/javax/persistence/Persistence.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="58" column="39" selection-start="2239" selection-end="2239" vertical-scroll-proportion="0.0" vertical-offset="440" max-vertical-offset="1666">
-          <folding>
-            <element signature="e#0#4207#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#1280#1301#0" expanded="false" />
-            <element signature="e#3036#3037#0" expanded="false" />
-            <element signature="e#3054#3055#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/internal/SessionFactoryImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="571" column="0" selection-start="25349" selection-end="25349" vertical-scroll-proportion="0.0" vertical-offset="6990" max-vertical-offset="27778">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/cfg/Configuration.java">
+    <entry file="file://$PROJECT_DIR$/common/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1789" column="0" selection-start="63801" selection-end="63801" vertical-scroll-proportion="0.0" vertical-offset="27424" max-vertical-offset="57698">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/EntityManagerFactoryImpl.java">
+    <entry file="file://$PROJECT_DIR$/web/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="128" column="0" selection-start="5558" selection-end="5558" vertical-scroll-proportion="0.0" vertical-offset="1030" max-vertical-offset="4743">
-          <folding>
-            <element signature="e#0#12380#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#3652#3684#0" expanded="false" />
-            <element signature="e#7647#7648#0" expanded="false" />
-            <element signature="e#7676#7677#0" expanded="false" />
-            <element signature="e#7712#7713#0" expanded="false" />
-            <element signature="e#7735#7736#0" expanded="false" />
-            <element signature="e#7935#7936#0" expanded="false" />
-            <element signature="e#7959#7960#0" expanded="false" />
-            <element signature="e#8455#8456#0" expanded="false" />
-            <element signature="e#8483#8484#0" expanded="false" />
-            <element signature="e#8531#8532#0" expanded="false" />
-            <element signature="e#8569#8570#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/AbstractEntityManagerImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1301" column="0" selection-start="42220" selection-end="42220" vertical-scroll-proportion="0.0" vertical-offset="19764" max-vertical-offset="23732">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-entitymanager/4.2.5.Final/source/c445db26e5cc5bbb41f489e7dea752ec6df1113c/hibernate-entitymanager-4.2.5.Final-sources.jar!/org/hibernate/ejb/TransactionImpl.java">
+    <entry file="file://$PROJECT_DIR$/../../logmonitor/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="0" selection-start="2780" selection-end="2780" vertical-scroll-proportion="0.0" vertical-offset="940" max-vertical-offset="2074">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/junit-4.10.jar!/org/junit/internal/runners/model/ReflectiveCallable.class">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="40" selection-start="388" selection-end="388" vertical-scroll-proportion="0.31135532" vertical-offset="0" max-vertical-offset="546">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.hibernate/hibernate-core/4.2.5.Final/source/e7e189207af1af0fa5004431aef79618444c97c9/hibernate-core-4.2.5.Final-sources.jar!/org/hibernate/tool/hbm2ddl/SchemaUpdate.java">
+    <entry file="file://$PROJECT_DIR$/common/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="241" column="0" selection-start="8022" selection-end="8022" vertical-scroll-proportion="0.0" vertical-offset="3063" max-vertical-offset="4165">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/idea/LogMonitorPanelModelTest.java">
+    <entry file="file://$PROJECT_DIR$/web/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="80" selection-start="5501" selection-end="5501" vertical-scroll-proportion="0.0" vertical-offset="1206" max-vertical-offset="1972">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/META-INF/persistence.xml">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="554">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="dbDummy://db-console:/cee21cd2/054940bb-dcf6-48e0-adf7-eaab24b9b639/">
+    <entry file="file://$PROJECT_DIR$/common/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="102">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDao.java">
+    <entry file="file://$PROJECT_DIR$/web/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="9" selection-start="710" selection-end="710" vertical-scroll-proportion="0.0" vertical-offset="96" max-vertical-offset="663">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/unexpected-error.log">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1240" column="59" selection-start="188522" selection-end="188551" vertical-scroll-proportion="-2.0" vertical-offset="20980" max-vertical-offset="27863">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/LogService.java">
+    <entry file="file://$PROJECT_DIR$/common/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="300" column="34" selection-start="11884" selection-end="11899" vertical-scroll-proportion="0.0" vertical-offset="3760" max-vertical-offset="7463">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/model/LogEntry.java">
+    <entry file="file://$PROJECT_DIR$/web/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="0" selection-start="1332" selection-end="1332" vertical-scroll-proportion="0.0" vertical-offset="457" max-vertical-offset="1326">
-          <folding>
-            <element signature="e#1368#1369#0" expanded="true" />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/xendan/logmonitor/dao/ConfigurationDaoImpl.java">
+    <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="34" selection-start="777" selection-end="777" vertical-scroll-proportion="0.0" vertical-offset="151" max-vertical-offset="2839">
-          <folding>
-            <marker date="1391181704986" expanded="true" signature="2201:2404" placeholder="DELETE FROM ..." />
-            <marker date="1391181704986" expanded="true" signature="2305:2377" placeholder="SELECT ID FR..LOG_ENTRY..." />
-            <marker date="1391181704986" expanded="true" signature="2527:2790" placeholder="DELETE FROM ..." />
-            <marker date="1391181704986" expanded="true" signature="2910:2966" placeholder="DELETE FROM ..." />
-            <marker date="1391181704986" expanded="true" signature="3560:3829" placeholder="DELETE FROM ..." />
-            <marker date="1391181704986" expanded="true" signature="4559:4964" placeholder="SELECT e.* F..LOG_ENTRY..." />
-            <marker date="1391181704986" expanded="true" signature="4761:4884" placeholder="SELECT ENTRI..LOG_ENTRY_GROUP_ENTRIES..." />
-            <marker date="1391181704986" expanded="true" signature="5354:5770" placeholder="SELECT g.* F..LOG_ENTRY_GROUP..." />
-            <marker date="1391181704986" expanded="true" signature="5464:5768" placeholder="SELECT 1 FRO..LOG_ENTRY_GROUP_ENTRIES..." />
-          </folding>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="374">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/test/org/xendan/logmonitor/dao/LogServiceTest.java">
+    <entry file="file://$PROJECT_DIR$/common/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="304" column="52" selection-start="11409" selection-end="11409" vertical-scroll-proportion="0.63957596" vertical-offset="3650" max-vertical-offset="4505">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="340">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="869">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="289">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/common/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="869">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/idea/src/org/xendan/logmonitor/HomeResolver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1037">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../logmonitor/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="64" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="511">
           <folding />
         </state>
       </provider>
@@ -1995,7 +1307,7 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>1.6</last-edited>
+          <last-edited>IDEA IU-117.1037</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -2007,7 +1319,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>logmonitor</last-edited>
+          <last-edited>idea</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
@@ -2031,7 +1343,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>ant-1.7.1</last-edited>
+          <last-edited>Gradle: ant-1.9.2</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>

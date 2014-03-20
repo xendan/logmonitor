@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/logmonitor.iml" filepath="$PROJECT_DIR$/logmonitor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/idea/idea.iml" filepath="$PROJECT_DIR$/idea/idea.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ideaplugin/ideaplugin.iml" filepath="$PROJECT_DIR$/ideaplugin/ideaplugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/web/web.iml" filepath="$PROJECT_DIR$/web/web.iml" />
     </modules>
   </component>
 </project>
