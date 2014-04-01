@@ -1,8 +1,11 @@
-*.iml
-.idea
-*.swp
+**/*.iml
+**/.idea
+**/*.swp
 atlassian-ide-plugin.xml
-out
+**/out
 logmonitor.zip
-gradle.properties
+**/gradle.properties
 tmp.config
+**/.project
+**/.settings
+**/.classpath
