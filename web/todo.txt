@@ -1,0 +1,5 @@
++ service return mock
+- service return real configs
+- show projects by rest service
+- add new project by GET
+- save new projects
