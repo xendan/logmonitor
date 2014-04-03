@@ -1,4 +1,4 @@
-package org.xendan.logmonitor.dao;
+package org.xendan.logmonitor.web.dao;
 
 import org.xendan.logmonitor.model.*;
 
@@ -9,10 +9,6 @@ import java.util.List;
  * Date: 04/09/13
  */
 public interface ConfigurationDao {
-
-    void startTransaction();
-
-    void commit();
 
     List<Configuration> getConfigs();
 

@@ -1,32 +1,55 @@
-package org.xendan.logmonitor.dao;
+package org.xendan.logmonitor.web.dao;
 
-import org.xendan.logmonitor.model.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
-import java.util.Collections;
-import java.util.List;
+import javax.persistence.Persistence;
+
+import org.xendan.logmonitor.HomeResolver;
+import org.xendan.logmonitor.model.BaseObject;
+import org.xendan.logmonitor.model.Configuration;
+import org.xendan.logmonitor.model.Environment;
+import org.xendan.logmonitor.model.LogEntry;
+import org.xendan.logmonitor.model.LogEntryGroup;
+import org.xendan.logmonitor.model.MatchConfig;
+
+import com.google.inject.Inject;
 
 /**
- * User: id967161
- * Date: 04/09/13
+ * @author xendan
+ * @since 04/09/13
  */
 @SuppressWarnings("unchecked")
 public class ConfigurationDaoImpl implements ConfigurationDao {
+	
+	private static final String DEF_PATH = "db";
 
     protected EntityManager entityManager;
 
-    public ConfigurationDaoImpl(EntityManager entityManager) {
-       this.entityManager = entityManager;
+    @Inject
+    public ConfigurationDaoImpl(HomeResolver homeResolver) {
+       this.entityManager = Persistence.createEntityManagerFactory("defaultPersistentUnit", 
+	    		createProperties(homeResolver, DEF_PATH)).createEntityManager();
+    }
+    
+    private static Map<String, String> createProperties(HomeResolver homeResolver, String dbPath) {
+        Map<String, String> props = new HashMap<String, String>();
+        props.put("hibernate.connection.url", createConnectionStr(homeResolver, dbPath));
+        return props;
+    }
+
+    private static String createConnectionStr(HomeResolver homeResolver, String dbPath) {
+        String connection = "jdbc:h2:/" + homeResolver.joinMkDirs(DEF_PATH, dbPath) + ";MVCC=true";
+        System.out.println(connection);
+        return connection;
     }
 
 
     @Override
     public void persist(BaseObject baseObject) {
-        if (baseObject instanceof LogEntry) {
-            LogEntry entry = (LogEntry) baseObject;
-            assert entry.getDate() != null;
-            assert entry.getMessage() != null;
-        }
         entityManager.persist(baseObject);
     }
 
@@ -37,20 +60,6 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     public void clearAll() {
         entityManager.createNativeQuery("DROP ALL OBJECTS ").executeUpdate();
-    }
-
-    @Override
-    public void startTransaction() {
-        if (!entityManager.getTransaction().isActive()) {
-            entityManager.getTransaction().begin();
-        }
-    }
-
-    @Override
-    public void commit() {
-        if (entityManager.getTransaction().isActive()) {
-            entityManager.getTransaction().commit();
-        }
     }
 
     @Override
