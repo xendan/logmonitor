@@ -9,6 +9,7 @@ atlassian-ide-plugin.xml
 logmonitor.zip
 **/gradle.properties
 tmp.config
-**/.project
-**/.settings
-**/.classpath
+.project
+.settings
+.classpath
+.idea
