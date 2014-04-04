@@ -1,6 +1,9 @@
 **/*.iml
 **/.idea
 **/*.swp
+**/.project
+**/.settings
+**/.classpath
 atlassian-ide-plugin.xml
 **/out
 logmonitor.zip

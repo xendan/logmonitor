@@ -1,13 +1,13 @@
 package org.xendan.logmonitor.web.service;
 
+import com.google.inject.Inject;
+import org.xendan.logmonitor.web.dao.ConfigurationDao;
+import org.xendan.logmonitor.web.model.Configurations;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import org.xendan.logmonitor.web.dao.ConfigurationDao;
-
-import com.google.inject.Inject;
 
 @Path("/rest/configs")
 public class ConfigResource {
@@ -23,9 +23,10 @@ public class ConfigResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getAllConfigs() {
-		System.err.println("DAO| IS " + dao);
-		return "[{project:'aaa'}, {project:'bbb'}]";
+	public Configurations getAllConfigs() {
+        Configurations configs = new Configurations();
+		configs.setConfigurations(dao.getConfigs());
+        return configs;
 	}
 
 }
