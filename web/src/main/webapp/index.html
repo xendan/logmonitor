@@ -1,22 +1,12 @@
 <!DOCTYPE html>
 <html ng-app="app">
 <body>
-<h2>Hello World!</h2>
-I will do here my AngularJS
-<div ng-hide="configs.length">No config found and some link to
-    create new.
-</div>
 <div ng-view>
-    <ul>
-        <li ng-repeat="config in configs">{{config}}</li>
-    </ul>
-    <p>You are looser {{errorStatus}}</p>
-
-    <p>Real, big looser {{errorData}}</p>
 </div>
 
-<script src="lib/angular/angular.min.js"></script>
-<script src="lib/angular/angular-route.min.js"></script>
+<script src="lib/angular/angular.js"></script>
+<script src="lib/angular/angular-route.js"></script>
+<script src="lib/angular/angular-resource.js"></script>
 <!--
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular-route.js"></script>

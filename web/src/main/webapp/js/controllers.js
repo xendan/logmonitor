@@ -1,18 +1,9 @@
-function ConfigController($scope, $routeParams, $http) {
-		$http.get('rest/configs').success(function(configs) {
-		    if (configs) {
-			    $scope.configs = configs.configurations;
-			}
-			else {
-			    $scope.configs = [];
-			}
-			console.log($routeParams);
-			for(var zu in $routeParams) {
-			    console.log(zu + '--' + $routeParams[zu]);
-			}
+function ConfigController($scope, Configs, $routeParams) {
+        $scope.configs = Configs.query();
+        $scope.currentProject = $routeParams.current;
+}
 
-		}).error(function(data, status, headers, config) {
-			$scope.errorStatus = status;
-			$scope.errorData = data;
-		});
-	}
+function NewController($scope, Config, $routeParams) {
+        $scope.config = Config.getNew();
+        $scope.config.projectName = $routeParams.newName;
+}

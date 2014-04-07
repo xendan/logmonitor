@@ -1,2 +1,10 @@
-hello world
-bla bla bla
+<div ng-hide="configs.length">No config found and some</div>
+<ul>
+    <li ng-repeat="config in configs">{{config}}</li>
+</ul>
+<a href="#/configs/new/{{currentProject}}">
+    Create new config for project {{currentProject}}
+</a>
+
+<p ng-visible="errorStatus.length">You are looser {{errorStatus}}</p>
+<p ng-visible="errorData.length">Real, big looser {{errorData}}</p>
