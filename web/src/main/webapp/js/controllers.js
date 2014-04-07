@@ -4,6 +4,5 @@ function ConfigController($scope, Configs, $routeParams) {
 }
 
 function NewController($scope, Config, $routeParams) {
-        $scope.config = Config.getNew();
-        $scope.config.projectName = $routeParams.newName;
+        $scope.config = Config.getNew({projectName:$routeParams.newName});
 }

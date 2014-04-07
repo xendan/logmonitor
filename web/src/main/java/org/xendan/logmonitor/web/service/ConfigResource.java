@@ -8,10 +8,7 @@ import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.web.dao.ConfigurationDao;
 import org.xendan.logmonitor.web.model.Configurations;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,10 +37,11 @@ public class ConfigResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{configId}")
-    public Configuration getConfig(@PathParam("configId") Integer configId) {
+    public Configuration getConfig(@PathParam("configId") Integer configId, @DefaultValue("") @QueryParam("projectName") String projectName) {
         if (configId == -1) {
             Configuration configuration = new Configuration();
             configuration.setEnvironments(Arrays.asList(createDevEnv()));
+            configuration.setProjectName(projectName);
             return configuration;
         }
         return null;

@@ -1,18 +1,18 @@
 package org.xendan.logmonitor.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * User: id967161
  * Date: 03/09/13
  */
 @Entity
+@XmlRootElement
 public class Configuration extends BaseObject {
     public static final String ENVIRONMENTS = "environments";
     private String projectName;
