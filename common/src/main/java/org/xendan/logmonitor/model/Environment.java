@@ -19,6 +19,9 @@ public class Environment extends BaseObject {
     private Server server;
     private String path;
     private String name;
+    /**
+     * Update interval in minutes
+     */
     private int updateInterval;
     private List<MatchConfig> matchConfigs = new ArrayList<MatchConfig>();
     private LocalDateTime lastUpdate;

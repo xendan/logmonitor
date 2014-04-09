@@ -33,7 +33,6 @@ public class ConfigResource {
         configs.setConfigurations(dao.getConfigs());
         return configs;
     }
-
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{configId}")
@@ -47,10 +46,17 @@ public class ConfigResource {
         return null;
     }
 
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void saveConfig(Configuration configuration) {
+        dao.merge(configuration);
+    }
+
     private Environment createDevEnv() {
         Environment dev = new Environment();
         dev.setName("DEV");
         dev.setMatchConfigs(createAnyErrorMatchConfig());
+        dev.setUpdateInterval(5);
         return dev;
     }
 
@@ -62,7 +68,10 @@ public class ConfigResource {
 
     private MatchConfig createError() {
         MatchConfig match = new MatchConfig();
+        match.setName("General error");
         match.setLevel(Level.ERROR.toString());
+        match.setShowNotification(true);
+        match.setGeneral(true);
         return match;
     }
 

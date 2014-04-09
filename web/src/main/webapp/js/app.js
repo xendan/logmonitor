@@ -1,6 +1,6 @@
 var app = angular.module('app', ['ngRoute', 'ngResource']);
 app.controller('ConfigController', ['$scope', 'Configs', '$routeParams', ConfigController]);
-app.controller('NewController', ['$scope', 'Config', '$routeParams', NewController]);
+app.controller('NewController', ['$scope', 'Configs', '$routeParams', NewController]);
 app.config(['$routeProvider', function ($routeProvider) {
   $routeProvider
     .when('/configs',

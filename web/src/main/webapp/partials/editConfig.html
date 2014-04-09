@@ -1,1 +1,33 @@
-Name: {{config.projectName}}
+<div>
+    Project Name: {{config.projectName}}
+</div>
+<div>
+    Log pattern: {{config.logPattern}} see <a
+        href="http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html">pattern description</a>
+</div>
+<div>
+    Environments:
+    <ul>
+        <li ng-repeat="env in config.environments">
+            {{env.name}}, update each {{env.updateInterval}} minutes. Last update {{env.lastUpdate}}
+        </li>
+    </ul>
+</div>
+<div ng-show="matchers.length">
+    Available match patterns: <br/>
+    <ul>
+        <li ng-repeat="matcher in matchers | orderBy: weight">
+            <input type="checkbox" checked="true">
+            <a ng-click='$parent.selectedMatcher = matcher'>{{matcher.name}}</a>
+        </li>
+    </ul>
+</div>
+<div ng-show="selectedMatcher">
+    Name: {{selectedMatcher.name}} <br/>
+    Error level: {{selectedMatcher.level}} <br/>
+    Error message: {{selectedMatcher.message}} <br/>
+    Show notification: {{selectedMatcher.showNotification}} <br/>
+    Is general: {{selectedMatcher.general}}
+</div>
+<button ng-click="saveConfig()">Save</button>
+
