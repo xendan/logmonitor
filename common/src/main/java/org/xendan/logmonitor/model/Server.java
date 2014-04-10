@@ -19,10 +19,11 @@ public class Server extends BaseObject {
 
     }
 
+    /*
     public Server(String host, int id) {
         this.host = host;
         setId((long) id);
-    }
+    }*/
 
     public String getHost() {
         return host;

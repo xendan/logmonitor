@@ -1,52 +1,27 @@
 package org.xendan.logmonitor.web.dao;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import com.google.inject.Inject;
+import com.google.inject.persist.Transactional;
+import org.xendan.logmonitor.model.*;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
-
-import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.model.BaseObject;
-import org.xendan.logmonitor.model.Configuration;
-import org.xendan.logmonitor.model.Environment;
-import org.xendan.logmonitor.model.LogEntry;
-import org.xendan.logmonitor.model.LogEntryGroup;
-import org.xendan.logmonitor.model.MatchConfig;
-
-import com.google.inject.Inject;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author xendan
  * @since 04/09/13
  */
 @SuppressWarnings("unchecked")
+@Transactional
 public class ConfigurationDaoImpl implements ConfigurationDao {
 	
-	private static final String DEF_PATH = "db";
-
     protected EntityManager entityManager;
 
     @Inject
-    public ConfigurationDaoImpl(HomeResolver homeResolver) {
-       this.entityManager = Persistence.createEntityManagerFactory("defaultPersistentUnit", 
-	    		createProperties(homeResolver, DEF_PATH)).createEntityManager();
+    public ConfigurationDaoImpl(EntityManager entityManager) {
+       this.entityManager = entityManager;
     }
-    
-    private static Map<String, String> createProperties(HomeResolver homeResolver, String dbPath) {
-        Map<String, String> props = new HashMap<String, String>();
-        props.put("hibernate.connection.url", createConnectionStr(homeResolver, dbPath));
-        return props;
-    }
-
-    private static String createConnectionStr(HomeResolver homeResolver, String dbPath) {
-        String connection = "jdbc:h2:/" + homeResolver.joinMkDirs(DEF_PATH, dbPath) + ";MVCC=true";
-        System.out.println(connection);
-        return connection;
-    }
-
 
     @Override
     public void persist(BaseObject baseObject) {

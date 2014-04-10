@@ -5,6 +5,7 @@ import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -110,6 +111,7 @@ public class Environment extends BaseObject {
         return result;
     }
 
+    @XmlTransient
     @Transient
     public String getNextUpdate() {
         if (getLastUpdate() == null) {
