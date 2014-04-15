@@ -49,6 +49,11 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         return configs;
     }
 
+    @Override
+    public Configuration getConfig(Long configId) {
+        return entityManager.find(Configuration.class, configId);
+    }
+
     private <T> List<T> getAll(Class<T> entityClass) {
         return entityManager.createQuery("SELECT l FROM " + entityClass.getName() + " l", entityClass)
                 .getResultList();
@@ -135,5 +140,10 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 .setParameter("matcher", matchConfig.getId())
                 .setParameter("environment", environment.getId())
                 .getResultList();
+    }
+
+    @Override
+    public List<Server> getAllServers() {
+        return entityManager.createQuery("select s from Server s", Server.class).getResultList();
     }
 }

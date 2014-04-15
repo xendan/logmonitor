@@ -27,4 +27,8 @@ public interface ConfigurationDao {
     void persist(BaseObject baseObject);
 
     void merge(BaseObject config);
+
+    Configuration getConfig(Long configId);
+
+    List<Server> getAllServers();
 }

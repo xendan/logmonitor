@@ -1,15 +1,22 @@
-var app = angular.module('app', ['ngRoute', 'ngResource']);
-app.controller('ConfigController', ['$scope', 'Configs', '$routeParams', ConfigController]);
-app.controller('NewController', ['$scope', 'Configs', '$routeParams', NewController]);
-app.config(['$routeProvider', function ($routeProvider) {
-  $routeProvider
-    .when('/configs',
-      {templateUrl: 'partials/all.html', controller: 'ConfigController'}
-    ).when('/configs/current/:current',
-      {templateUrl: 'partials/all.html', controller: 'ConfigController'}
-    ).when('/configs/new/:newName',
-        {templateUrl: 'partials/editConfig.html', controller: 'NewController'})
-    .otherwise({
-        redirectTo: '/configs'
-    });
-}]);
+var app = angular.module('app', [ 'ngRoute', 'ngResource' ]);
+
+// Controllers
+app.controller('AllConfigsController', [ '$scope', 'Configs', '$routeParams',
+		AllConfigsController ]);
+app.controller('ConfigController', [ '$scope', 'Configs', 'Servers', '$http', '$routeParams',
+		ConfigController ]);
+
+app.config([ '$routeProvider', function($routeProvider) {
+	$routeProvider.when('/configs', {
+		templateUrl : 'partials/all.html',
+		controller : 'AllConfigsController'
+	}).when('/configs/current/:current', {
+		templateUrl : 'partials/all.html',
+		controller : 'AllConfigsController'
+	}).when('/configs/:configId', {
+		templateUrl : 'partials/editConfig.html',
+		controller : 'ConfigController'
+	}).otherwise({
+		redirectTo : '/configs'
+	});
+} ]);

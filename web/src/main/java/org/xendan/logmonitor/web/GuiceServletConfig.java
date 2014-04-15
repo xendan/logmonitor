@@ -13,6 +13,8 @@ import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.web.dao.ConfigurationDao;
 import org.xendan.logmonitor.web.dao.ConfigurationDaoImpl;
 import org.xendan.logmonitor.web.service.ConfigResource;
+import org.xendan.logmonitor.web.service.LogLevelResource;
+import org.xendan.logmonitor.web.service.ServersResource;
 
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
@@ -33,6 +35,8 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 JpaPersistModule module = jpaModule.properties(createJpaProperties());
                 install(module);
                 bind(ConfigResource.class);
+                bind(LogLevelResource.class);
+                bind(ServersResource.class);
                 bind(HomeResolver.class);
                 bind(ConfigurationDao.class).to(ConfigurationDaoImpl.class);
                 bind(MessageBodyReader.class).to(JacksonJsonProvider.class);

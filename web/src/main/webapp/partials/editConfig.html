@@ -1,33 +1,65 @@
-<div>
-    Project Name: {{config.projectName}}
-</div>
-<div>
-    Log pattern: {{config.logPattern}} see <a
-        href="http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html">pattern description</a>
-</div>
-<div>
-    Environments:
-    <ul>
-        <li ng-repeat="env in config.environments">
-            {{env.name}}, update each {{env.updateInterval}} minutes. Last update {{env.lastUpdate}}
-        </li>
-    </ul>
-</div>
-<div ng-show="matchers.length">
-    Available match patterns: <br/>
-    <ul>
-        <li ng-repeat="matcher in matchers | orderBy: weight">
-            <input type="checkbox" checked="true">
-            <a ng-click='$parent.selectedMatcher = matcher'>{{matcher.name}}</a>
-        </li>
-    </ul>
-</div>
-<div ng-show="selectedMatcher">
-    Name: {{selectedMatcher.name}} <br/>
-    Error level: {{selectedMatcher.level}} <br/>
-    Error message: {{selectedMatcher.message}} <br/>
-    Show notification: {{selectedMatcher.showNotification}} <br/>
-    Is general: {{selectedMatcher.general}}
-</div>
-<button ng-click="saveConfig()">Save</button>
+<form name="configForm" ng-submit="saveConfig()" novalidate>
+	<div>
+		<!--
+        ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }
+        -->
+		Project Name: <input type="text" name="projectName"
+			ng-model="config.projectName" required>
+	</div>
+	<div>
+		Log pattern: <input type="text" name="logPattern"
+			ng-model="config.logPattern" required> see <a
+			href="http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html">pattern
+			description</a>
+	</div>
+	<div>
+		Environments:
+		<ul>
+			<li class="selectedEnvironment"
+				ng-repeat="env in environments"><a
+				ng-click='$parent.selectedEnvironment = env'
+				ng-show='$parent.selectedEnvironment != env'>{{env.name}}</a>
+				<div ng-show="$parent.selectedEnvironment == env">
+					<input type="text" name="envName" ng-model="env.name" >,
+					update each <input type="text" name="envUpdateInterval"
+						ng-model="env.updateInterval"> minutes. Last
+					update {{env.lastUpdate}}
+					<br />
+					Log file path: <input type="text" name="path"
+						ng-model="path" > Server  <select
+						ng-model="env.server"
+						ng-options="server.name for server in servers">
+					</select>
+				</div></li>
+		</ul>
+	</div>
 
+	<div>
+		Matchin patterns: <br />
+		<ul>
+			<li class="selectedMatcher"
+				ng-repeat="matcher in matchers | orderBy: weight"><input
+				ng-show="$parent.selectedEnvironment" type="checkbox"
+				ng-model="matcher.selected"
+				ng-click="$parent.toggleSelected(matcher)"> <a
+				ng-click='$parent.selectedMatcher = matcher'> <span
+					ng-show="selectedMatcher != matcher">{{matcher.name}}</span></a>
+				<div ng-show="selectedMatcher == matcher">
+					Name: <input type="text" name="matcherName"
+						ng-model="selectedMatcher.name"><br /> Error level: <select
+						ng-model="selectedMatcher.level"
+						ng-options="level for level in levels">
+					</select><br /> Error message:
+					<textarea rows="4" cols="50" type="text" name="matcherMessage"
+						ng-model="selectedMatcher.message">
+        </textarea>
+					<br /> Show notification: <input type="checkbox"
+						name="matcherShowNotification"
+						ng-model="selectedMatcher.showNotification"><br /> Is
+					general: <input type="checkbox" name="matcherGeneral"
+						ng-model="selectedMatcher.general"><br />
+				</div></li>
+		</ul>
+	</div>
+	<button type="submit" ng-disabled="configForm.$invalid || cantSave()">Save</button>
+</form>

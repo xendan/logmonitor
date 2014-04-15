@@ -6,7 +6,6 @@ import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.web.dao.ConfigurationDao;
-import org.xendan.logmonitor.web.model.Configurations;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -25,25 +24,23 @@ public class ConfigResource {
         this.dao = dao;
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Configuration> getAllConfigs() {
+        return dao.getConfigs();
+    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public org.xendan.logmonitor.web.model.Configurations getAllConfigs() {
-        Configurations configs = new Configurations();
-        configs.setConfigurations(dao.getConfigs());
-        return configs;
-    }
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
     @Path("{configId}")
-    public Configuration getConfig(@PathParam("configId") Integer configId, @DefaultValue("") @QueryParam("projectName") String projectName) {
+    public Configuration getConfig(@PathParam("configId") Long configId, @DefaultValue("") @QueryParam("projectName") String projectName) {
         if (configId == -1) {
             Configuration configuration = new Configuration();
             configuration.setEnvironments(Arrays.asList(createDevEnv()));
             configuration.setProjectName(projectName);
             return configuration;
         }
-        return null;
+        return dao.getConfig(configId);
     }
 
     @POST

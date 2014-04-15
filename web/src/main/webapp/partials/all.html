@@ -1,10 +1,13 @@
 <div ng-hide="configs.length">No config found and some</div>
 <ul>
-    <li ng-repeat="config in configs">{{config}}</li>
+    <li ng-repeat="config in configs">
+        <a href="#/configs/{{config.id}}">{{config.projectName}}</a>
+    </li>
 </ul>
-<a href="#/configs/new/{{currentProject}}">
-    Create new config for project {{currentProject}}
+<a href="#/configs/-1?projectName={{currentProject}}">
+    Create new config <span ng-show="currentProject">for project {{currentProject}}</span> ...
 </a>
 
-<p ng-visible="errorStatus.length">You are looser {{errorStatus}}</p>
-<p ng-visible="errorData.length">Real, big looser {{errorData}}</p>
+<!--
+TOOD handle error
+-->

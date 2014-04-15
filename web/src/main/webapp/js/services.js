@@ -1,14 +1,14 @@
 app.factory('Configs', ['$resource',
   function($resource){
     return $resource('rest/configs', {}, {
-      query: {
+      getAll: {
             method:'GET',
             isArray:true},
 
-      getNew: {
+      getOne: {
             method:'GET',
             isArray:false,
-            params:{configId:-1},
+            params:{configId:'@id'},
             url:'rest/configs/:configId'},
 
       update: {
@@ -16,3 +16,12 @@ app.factory('Configs', ['$resource',
       }
     });
   }]);
+app.factory('Servers', ['$resource',
+                        function($resource){
+	return $resource('rest/servers', {}, {
+		getAll: {
+			method:'GET',
+			isArray:true}
+	});
+}]);
+
