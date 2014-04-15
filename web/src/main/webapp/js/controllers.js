@@ -39,8 +39,7 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 	$scope.matchers = [];
 	$scope.config = Configs
 			.getOne(serviceParams,
-					function() {
-						$scope.environments = [createNewEnvironment()];
+					function() {						
 						for (var i = 0; i < $scope.config.environments.length; i++) {
 							for (var j = 0; j < $scope.config.environments[i].matchConfigs.length; j++) {
 								var matcher = $scope.config.environments[i].matchConfigs[j];

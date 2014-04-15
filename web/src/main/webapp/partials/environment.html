@@ -1,0 +1,13 @@
+<div>
+	<a ng-click='$parent.selectedEnvironment = env'
+		ng-show='$parent.selectedEnvironment != env'>{{name}}</a>
+	<div ng-show="$parent.selectedEnvironment == env">
+		<input type="text" name="envName" ng-model="env.name">, update
+		each <input type="text" name="envUpdateInterval"
+			ng-model="env.updateInterval"> minutes. Last update
+		{{env.lastUpdate}} <br /> Log file path: <input type="text"
+			name="path" ng-model="path"> Server <select
+			ng-model="env.server" ng-options="server.name for server in servers">
+		</select>
+	</div>
+</div>
