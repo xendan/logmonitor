@@ -1,13 +1,18 @@
-<div>
-	<a ng-click='$parent.selectedEnvironment = env'
-		ng-show='$parent.selectedEnvironment != env'>{{name}}</a>
-	<div ng-show="$parent.selectedEnvironment == env">
+<div> 
+	<a ng-click='selection.env = env'
+		ng-show='selection.env != env'>{{name}}</a>
+	
+	<div ng-show="selection.env == env">
 		<input type="text" name="envName" ng-model="env.name">, update
 		each <input type="text" name="envUpdateInterval"
 			ng-model="env.updateInterval"> minutes. Last update
 		{{env.lastUpdate}} <br /> Log file path: <input type="text"
 			name="path" ng-model="path"> Server <select
-			ng-model="env.server" ng-options="server.name for server in servers">
+			ng-model="env.server" ng-options="server.name for server in $parent.servers">
 		</select>
+		<br />
+		<button ng-click="saveEnvironment(env)">Ok</button>
+		<button ng-click="selection.env = undefined">Cancel</button>
 	</div>
+
 </div>

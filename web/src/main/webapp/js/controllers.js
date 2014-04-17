@@ -8,20 +8,24 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 	this.Configs = Configs;
 	$scope.saveConfig = function() {
 		// TODO add polyfill
-		$scope.config.environments.forEach(function(env) {
-			env.matchConfigs.forEach(function(matcher) {
-				delete matcher.selected;
-			});
-		});
+		/*
+		 * $scope.config.environments.forEach(function(env) {
+		 * env.matchConfigs.forEach(function(matcher) { delete matcher.selected;
+		 * }); })
+		 */;
 		Configs.update($scope.config);
 		/*
 		 * if ($scope.userForm.$valid) { alert('our form is amazing'); }
 		 */
 	};
-	var localhost = {name:"localhost"};
+	var localhost = {
+		name : "localhost"
+	};
 	$scope.servers = Servers.getAll({}, function(servers) {
 		servers.unshift(localhost);
-		servers.unshift({name:"new..."});		
+		servers.unshift({
+			name : "new..."
+		});
 
 	});
 	$http({
@@ -37,58 +41,69 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 		projectName : $routeParams.projectName
 	};
 	$scope.matchers = [];
-	$scope.config = Configs
-			.getOne(serviceParams,
-					function() {						
-						for (var i = 0; i < $scope.config.environments.length; i++) {
-							for (var j = 0; j < $scope.config.environments[i].matchConfigs.length; j++) {
-								var matcher = $scope.config.environments[i].matchConfigs[j];
-								if ($scope.matchers.indexOf(matcher) == -1) {
-									$scope.matchers.push(matcher);
-								}
-							}
-						}
-					});
-	var findById = function(id, items) {
-		for (var i = 0; i < items.length; i++) {
-			if (items[i].id == id) {
-				return items[i];
+	$scope.createNewEnvironment = function(env) {
+		return {
+			updateInterval : 5,
+			sever : localhost,
+			matchConfigs : $scope.matchers
+		};
+	};
+	var forEachEnvMatcher = function(action, visitEnv) {
+		for (var i = 0; i < $scope.config.environments.length; i++) {
+			var env = $scope.config.environments[i];
+			if (visitEnv) {
+				action(env);
 			}
-			return undefined;
+			for (var j = 0; j < env.matchConfigs.length; j++) {
+				action($scope.config.environments[i], env.matchConfigs[j]);
+			}
 		}
 	};
-	$scope.$watch("selectedEnvironment", function(newValue, oldValue) {
-		if (newValue) {
-			for (var i = 0; i < $scope.matchers.length; i++) {
-				$scope.matchers[i].selected = findById($scope.matchers[i].id,
-						newValue.matchConfigs) != undefined;
-
+	$scope.config = Configs.getOne(serviceParams, function() {
+		$scope.environmentMatcher = {};
+		forEachEnvMatcher(function(env, matcher) {
+			if (!$scope.environmentMatcher[env.id]) {
+				$scope.environmentMatcher[env.id] = {};
+				$scope.environmentMatcher[env.id][-1] = true;
 			}
-		}
+			if (matcher) {
+				$scope.environmentMatcher[env.id][matcher.id] = true;
+				if ($scope.matchers.indexOf(matcher) == -1) {
+					$scope.matchers.push(matcher);
+				}
+			}
+		}, true);
 	});
 
-	$scope.toggleSelected = function(matcher) {
-		if (!matcher.selected) {
-			$scope.selectedEnvironment.matchConfigs.push(matcher);
-		} else {
-			$scope.selectedEnvironment.matchConfigs.pop(findById(matcher.id,
-					$scope.selectedEnvironment.matchConfigs));
+	$scope.selection = {};
+
+	$scope.$watch('environmentMatcher', function(newValue) {
+		if (newValue) {
+			forEachEnvMatcher(function(env, matcher) {
+				var index = env.matchConfigs.indexOf(matcher);
+				if (newValue[env.id][matcher.id]) {
+					if (index == -1) {
+						env.matchConfigs.push(matcher);
+					}
+				} else {
+					if (index != -1) {
+						env.matchConfigs.splice(index, 1);
+					}
+				}
+			});
 		}
-	};
+	}, true);
+
 	$scope.cantSave = function() {
 		// TODO validate environment and match config
 		return false;
 	};
+	$scope.saveEnvironment = function(env) {
 
-	document.onclick = function(evt) {
-		var inEnvironment = $('.selectedEnvironment').find(evt.target).length;
-		var inMatcher = $('.selectedMatcher').find(evt.target).length;
-		if (!inEnvironment && !inMatcher) {
-			$scope.selectedEnvironment = undefined;
-		}
-		if (!inMatcher) {
-			$scope.selectedMatcher = undefined;
-		}
-		$scope.$apply();
+	};
+	$scope.newMatcher = {
+		id : -1,
+		level : "ERROR",
+		general : true
 	};
 }

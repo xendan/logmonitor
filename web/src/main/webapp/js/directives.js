@@ -2,19 +2,40 @@ app.directive('environment', function() {
 	return {
 		// required to make it work as an element
 		restrict : 'A',
-
-		// replace <photo> with this html
 		templateUrl : 'partials/environment.html',
 		replace : true,
 		scope : {
-			name : '='
+			name : '=',
+			selection : '=',
+			env0 : '='
 		},
-		// observe and manipulate the DOM
 		link : function($scope, element, attrs) {
-			console.log("attrs" + attrs );
-			console.log("element" + element);
-			
+			//TODO: angular, why???
+			if (!attrs.env0) {
+				$scope.env = $scope.$parent.createNewEnvironment();
+			} else {
+				$scope.env = $scope.env0;
+			}
 		}
-
-	}
+	};
+});
+app.directive('matcher', function() {
+	return {
+		// required to make it work as an element
+		restrict : 'A',
+		templateUrl : 'partials/matcher.html',
+		replace : true,
+		scope : {
+			name : '=',
+			selection : '=',
+			env : '=',
+			levels : '=',
+			matcherObj : '=',
+			environments : '=',
+			environmentMatcher :  '='
+				
+		},
+		link : function($scope, element, attrs) {
+		}
+	};
 });

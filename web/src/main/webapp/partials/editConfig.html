@@ -13,44 +13,43 @@
 			description</a>
 	</div>
 	<div>
-		Environments:
+
 		<ul>
-		<li class="selectedEnvironment" ng-repeat="env in environments">
-			<div environment name="env.name"></div>
-		</li>
-		<li >
-			<li environment name="'Add new'" ></li>	
-		</li>
-						
-					
+			<li ng-repeat="env in config.environments">
+				<div environment name="env.name" env0="env" selection="$parent.selection"></div>
+			</li>
+		
+			<li >
+			<div  environment name="'Add new...'" selection="selection"></div>
+			<!-- 
+			TODO: angular, why??
+				<div environment name="'Add new...'" env="createNewEnvironment()"></div>
+				
+				 -->
+			</li>
+		
+
 		</ul>
 	</div>
 
 	<div>
-		Matching patterns: <br />
+		Matching patterns:<br />
 		<ul>
-			<li class="selectedMatcher"
-				ng-repeat="matcher in matchers | orderBy: weight"><input
-				ng-show="$parent.selectedEnvironment" type="checkbox"
-				ng-model="matcher.selected"
-				ng-click="$parent.toggleSelected(matcher)"> <a
-				ng-click='$parent.selectedMatcher = matcher'> <span
-					ng-show="selectedMatcher != matcher">{{matcher.name}}</span></a>
-				<div ng-show="selectedMatcher == matcher">
-					Name: <input type="text" name="matcherName"
-						ng-model="selectedMatcher.name"><br /> Error level: <select
-						ng-model="selectedMatcher.level"
-						ng-options="level for level in levels">
-					</select><br /> Error message:
-					<textarea rows="4" cols="50" type="text" name="matcherMessage"
-						ng-model="selectedMatcher.message">
-        </textarea>
-					<br /> Show notification: <input type="checkbox"
-						name="matcherShowNotification"
-						ng-model="selectedMatcher.showNotification"><br /> Is
-					general: <input type="checkbox" name="matcherGeneral"
-						ng-model="selectedMatcher.general"><br />
-				</div></li>
+			<li 
+				ng-repeat="matcher in matchers | orderBy: weight">
+				<div matcher name="matcher.name" matcher-obj="matcher"
+				 selection="$parent.selection" 
+				 levels="$parent.levels" environments="$parent.config.environments"
+				 environment-matcher = "$parent.environmentMatcher"
+				 ></div>
+				</li>
+			<li>
+				<div matcher matcher-obj="newMatcher" name="'Add new...'" selection="selection"			
+				environments="config.environments"
+				levels="levels"
+				environment-matcher = "environmentMatcher"
+				></div>		
+			</li>
 		</ul>
 	</div>
 	<button type="submit" ng-disabled="configForm.$invalid || cantSave()">Save</button>
