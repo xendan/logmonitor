@@ -21,6 +21,7 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
+      <!--
       <applicationService serviceInterface="org.xendan.logmonitor.dao.LogService"
                           serviceImplementation="org.xendan.logmonitor.dao.LogService"/>
 
@@ -44,10 +45,11 @@
       <applicationService serviceInterface="org.xendan.logmonitor.parser.EntryStatusListener"
                       serviceImplementation="org.xendan.logmonitor.parser.EntryStatusListener"/>
 
-       <projectConfigurable instance="org.xendan.logmonitor.idea.LogMonitorSettingsConfigurable" id="logmonitor.settings" />
+    -->
+      <applicationConfigurable instance="org.xendan.logmonitor.idea.components.LogMonitorSettingsConfigurable" id="logmonitor.settings" />
 
       <toolWindow id="Log Monitor" anchor="right" icon="/org/xendan/logmonitor/idea/img/icon.png"
-                  factoryClass="org.xendan.logmonitor.idea.LogMonitorToolWindowFactory"/>
+                  factoryClass="org.xendan.logmonitor.idea.components.LogMonitorToolWindowFactory"/>
   </extensions>
 
 </idea-plugin>

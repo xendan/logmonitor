@@ -5,7 +5,6 @@ import org.joda.time.LocalDateTime;
 import org.junit.Before;
 import org.junit.Test;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.dao.*;
 import org.xendan.logmonitor.idea.model.LogMonitorPanelModel;
 import org.xendan.logmonitor.model.*;
 import org.xendan.logmonitor.parser.EntryStatusListener;
