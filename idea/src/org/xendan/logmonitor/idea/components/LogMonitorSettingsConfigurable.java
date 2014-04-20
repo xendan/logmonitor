@@ -8,19 +8,24 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author xendan
  * @since 4/20/14.
  */
 public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll{
-    private JCheckBox useBuiltInServerCheckBox;
     private JTextField textField1;
-    private JLabel url;
     private JLabel webArjPath;
-    private JButton copyPathButton;
-    private JTextField textField2;
     private JPanel contentPanel;
+    private JPanel buildInPanel;
+    private JPanel externalServerSettins;
+    private JButton copyPathButton;
+    private JLabel configLink;
+    private JTextField textField2;
+    private JRadioButton useBuiltInServerRadioButton;
+    private JRadioButton useExternalServerRadioButton;
+    private Settings settings;
 
     @NotNull
     @Override
@@ -50,8 +55,10 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     @Nullable
     @Override
     public JComponent createComponent() {
+        settings = readSettings();
         return contentPanel;
     }
+
 
     @Override
     public boolean isModified() {
@@ -71,5 +78,18 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     @Override
     public void disposeUIResources() {
 
+    }
+
+    private void setPanelEnabled(JPanel panel, boolean enabled) {
+        for (Component component : panel.getComponents()) {
+            component.setEnabled(enabled);
+            if (component instanceof JPanel) {
+                setPanelEnabled((JPanel) component, enabled);
+            }
+        }
+    }
+    
+    private static class Settings {
+        
     }
 }
