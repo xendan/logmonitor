@@ -1,41 +1,84 @@
 app.directive('environment', function() {
 	return {
-		// required to make it work as an element
 		restrict : 'A',
 		templateUrl : 'partials/environment.html',
 		replace : true,
 		scope : {
 			name : '=',
-			selection : '=',
-			env0 : '='
+			env0 : '=',
+			createNewEnvironment : '=',
+			saveEnvironment : '=',
+			servers : '=',
+			index : '=',
+			matchers : '=',
 		},
 		link : function($scope, element, attrs) {
-			//TODO: angular, why???
-			if (!attrs.env0) {
-				$scope.env = $scope.$parent.createNewEnvironment();
-			} else {
-				$scope.env = $scope.env0;
-			}
+			$scope.onLinkClick = function() {
+				var createCopy = function(env) {
+					var copy = angular.copy(env);
+					copy.server = env.server;
+					return copy;
+				};
+				$scope.env = ($scope.env0) ? createCopy($scope.env0) : $scope.createNewEnvironment();
+				$scope.enabledMatchers = {};
+				if (!$scope.env0) {
+					$scope.env.matchConfigs = $scope.matchers;
+				}
+				$scope.env.matchConfigs.forEach(function(matcher) {
+					$scope.enabledMatchers[matcher.id] = true;
+				});
+				$('#env' + $scope.index).dialog(
+						{
+							modal : true,
+							width : 550,
+							buttons : {
+								OK : function() {
+									$scope.saveEnvironment($scope.env,
+											$scope.enabledMatchers);
+									$(this).dialog("close");
+								}
+							}
+						});
+
+			};
+
 		}
 	};
 });
 app.directive('matcher', function() {
 	return {
-		// required to make it work as an element
 		restrict : 'A',
 		templateUrl : 'partials/matcher.html',
 		replace : true,
 		scope : {
-			name : '=',
-			selection : '=',
-			env : '=',
+			name : '=',			
 			levels : '=',
-			matcherObj : '=',
-			environments : '=',
-			environmentMatcher :  '='
-				
+			matcher0 : '=',
+			allEnvironments : '=',
+			createNewMatcher : '=',
+			saveMatcher : '=',
+			index : '=',
+
 		},
 		link : function($scope, element, attrs) {
+			$scope.onLinkClick = function() {
+				$scope.matcher = ($scope.matcher0) ? angular
+						.copy($scope.matcher0) : $scope.createNewMatcher();
+				$scope.enabledEnvironments = {};
+				$('#matcher' + $scope.index).dialog(
+						{
+							modal : true,
+							width : 550,
+							buttons : {
+								OK : function() {
+									$scope.saveMatcher($scope.matcher,
+											$scope.enabledEnvironments);
+									$(this).dialog("close");
+								}
+							}
+						});
+
+			};
 		}
 	};
 });

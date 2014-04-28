@@ -1,5 +1,15 @@
-+ service return mock
-+ service return real configs
-+ show projects by rest service
-- add new project by GET
-- save new projects
++ add popup for env
++ add popup for matcher
+
+- matcher in  env
+- env in matcher
+- save environment
+- save matcher
+- nicme matcher message
+- popup validation
+- disable ok on invalid form
+- add new server
+- handle localhost
+- save idea login
+- parse log file and add to db
+- main page with messag trees.

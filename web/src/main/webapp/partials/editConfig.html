@@ -3,29 +3,35 @@
 		<!--
         ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }
         -->
-		Project Name: <input type="text" name="projectName"
+		<span class="mandatory_label">Project Name: </span><input type="text" name="projectName"
 			ng-model="config.projectName" required>
 	</div>
 	<div>
-		Log pattern: <input type="text" name="logPattern"
+		<span class="mandatory_label">Log pattern</span>: <input type="text" name="logPattern"
 			ng-model="config.logPattern" required> see <a
 			href="http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/PatternLayout.html">pattern
 			description</a>
 	</div>
 	<div>
-
+Environments
 		<ul>
 			<li ng-repeat="env in config.environments">
-				<div environment name="env.name" env0="env" selection="$parent.selection"></div>
+				<div environment name="env.name" env0="env"				 
+				servers="servers"				
+				index = "config.environments.indexOf(env)"
+				save-environment="saveEnvironment"
+				matchers = "matchers"
+				></div>
 			</li>
 		
 			<li >
-			<div  environment name="'Add new...'" selection="selection"></div>
-			<!-- 
-			TODO: angular, why??
-				<div environment name="'Add new...'" env="createNewEnvironment()"></div>
-				
-				 -->
+			<div  environment name="'Add new...'" 
+			servers="servers"			
+			create-new-environment="createNewEnvironment"
+			index = "-1"
+			save-environment="saveEnvironment"
+			matchers = "matchers" 
+			></div>
 			</li>
 		
 
@@ -35,22 +41,25 @@
 	<div>
 		Matching patterns:<br />
 		<ul>
-			<li 
+			<li
 				ng-repeat="matcher in matchers | orderBy: weight">
-				<div matcher name="matcher.name" matcher-obj="matcher"
-				 selection="$parent.selection" 
-				 levels="$parent.levels" environments="$parent.config.environments"
-				 environment-matcher = "$parent.environmentMatcher"
+				<div matcher name="matcher.name" matcher0="matcher"
+				 levels="$parent.levels" all-environments="$parent.config.environments"				 
+				 index = "matchers.indexOf(matcher)"
+				 save-matcher = "$parent.saveMatcher" 					 
 				 ></div>
 				</li>
 			<li>
-				<div matcher matcher-obj="newMatcher" name="'Add new...'" selection="selection"			
-				environments="config.environments"
-				levels="levels"
-				environment-matcher = "environmentMatcher"
+				{{config.createNewMatcher}}
+				<div matcher  name="'Add new...'"
+				create-new-matcher = "createNewMatcher"
+				save-matcher = "saveMatcher" 		
+				all-environments="config.environments"
+				levels="levels"								
+				index = "-1"
 				></div>		
 			</li>
 		</ul>
 	</div>
-	<button type="submit" ng-disabled="configForm.$invalid || cantSave()">Save</button>
+	<button type="submit" ng-disabled="cantSave()">Save</button>
 </form>
