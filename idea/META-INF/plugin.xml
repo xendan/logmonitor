@@ -21,6 +21,13 @@
 
   <extensions defaultExtensionNs="com.intellij">
     <!-- Add your extensions here -->
+      <applicationService serviceInterface="org.xendan.logmonitor.idea.read.Settings"
+                          serviceImplementation="org.xendan.logmonitor.idea.read.Settings"/>
+
+      <applicationService serviceInterface="org.xendan.logmonitor.idea.read.Serializer"
+                          serviceImplementation="org.xendan.logmonitor.idea.read.Serializer"/>
+
+
       <!--
       <applicationService serviceInterface="org.xendan.logmonitor.dao.LogService"
                           serviceImplementation="org.xendan.logmonitor.dao.LogService"/>
