@@ -8,23 +8,15 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 	this.Configs = Configs;
 	$scope.saveConfig = function() {
 		// TODO add polyfill
-		/*
-		 * $scope.config.environments.forEach(function(env) {
-		 * env.matchConfigs.forEach(function(matcher) { delete matcher.selected;
-		 * }); })
-		 */;
 		Configs.update($scope.config);
-		/*
-		 * if ($scope.userForm.$valid) { alert('our form is amazing'); }
-		 */
 	};
 	var localhost = {
-		name : "localhost"
+		host : "localhost"
 	};
 	$scope.servers = Servers.getAll({}, function(servers) {
 		servers.unshift(localhost);
 		servers.unshift({
-			name : "new..."
+			host : "new..."
 		});
 
 	});
@@ -42,10 +34,31 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 	};
 	$scope.matchers = [];
 	$scope.createNewEnvironment = function(env) {
+		var minId = 0;
+		forEachEnvMatcher(function(env, matcher) {
+			if (env.id < minId) {
+				minId = env.id;
+			}
+		}, true);
 		return {
 			updateInterval : 5,
-			sever : localhost,
-			matchConfigs : $scope.matchers
+			server : localhost,
+			matchConfigs : $scope.matchers,
+			id : minId - 1
+		};
+	};
+	$scope.createNewMatcher  = function() {
+		var minId = 0;
+		forEachEnvMatcher(function(env, matcher) {
+			if (matcher && matcher.id < minId) {
+				minId = matcher.id;
+			}
+		});
+		return {
+			general : true,
+			showNotification : true,
+			level : 'ERROR',
+			id : minId - 1
 		};
 	};
 	var forEachEnvMatcher = function(action, visitEnv) {
@@ -58,16 +71,13 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 				action($scope.config.environments[i], env.matchConfigs[j]);
 			}
 		}
-	};
+	};	
 	$scope.config = Configs.getOne(serviceParams, function() {
-		$scope.environmentMatcher = {};
 		forEachEnvMatcher(function(env, matcher) {
-			if (!$scope.environmentMatcher[env.id]) {
-				$scope.environmentMatcher[env.id] = {};
-				$scope.environmentMatcher[env.id][-1] = true;
+			if (!env.server) {
+				env.server = localhost;
 			}
 			if (matcher) {
-				$scope.environmentMatcher[env.id][matcher.id] = true;
 				if ($scope.matchers.indexOf(matcher) == -1) {
 					$scope.matchers.push(matcher);
 				}
@@ -75,35 +85,35 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 		}, true);
 	});
 
-	$scope.selection = {};
-
-	$scope.$watch('environmentMatcher', function(newValue) {
-		if (newValue) {
-			forEachEnvMatcher(function(env, matcher) {
-				var index = env.matchConfigs.indexOf(matcher);
-				if (newValue[env.id][matcher.id]) {
-					if (index == -1) {
-						env.matchConfigs.push(matcher);
-					}
-				} else {
-					if (index != -1) {
-						env.matchConfigs.splice(index, 1);
-					}
-				}
-			});
-		}
-	}, true);
-
 	$scope.cantSave = function() {
 		// TODO validate environment and match config
 		return false;
 	};
-	$scope.saveEnvironment = function(env) {
-
+	var findById = function(id, items) {
+		for (var i = 0; i < items.length; i++) {
+			if (items[i].id == id) {
+				return items[i];
+			}			
+		}
 	};
-	$scope.newMatcher = {
-		id : -1,
-		level : "ERROR",
-		general : true
+	$scope.saveEnvironment = function(env, enabledMatchers) {
+		var envUpdate = findById(env.id, $scope.config.environments);
+		if (!envUpdate) {
+			$scope.config.environments.push(env);
+			envUpdate = env;
+		}
+		angular.extend(envUpdate, env);
+		envUpdate.matchConfigs = [];
+		for (var i = 0; i < $scope.matchers.length; i++) {
+			var matcher = $scope.matchers[i];
+			if (enabledMatchers[matcher.id]) {
+				envUpdate.matchConfigs.push(matcher);
+			}			
+		}
+		$scope.$digest();
 	};
+	
+	$scope.saveMatcher = function(matcher, enabledEnvironments) {
+	};
+	
 }

@@ -1,18 +1,23 @@
-<div> 
-	<a ng-click='selection.env = env'
-		ng-show='selection.env != env'>{{name}}</a>
-	
-	<div ng-show="selection.env == env">
-		<input type="text" name="envName" ng-model="env.name">, update
-		each <input type="text" name="envUpdateInterval"
-			ng-model="env.updateInterval"> minutes. Last update
-		{{env.lastUpdate}} <br /> Log file path: <input type="text"
-			name="path" ng-model="path"> Server <select
-			ng-model="env.server" ng-options="server.name for server in $parent.servers">
-		</select>
-		<br />
-		<button ng-click="saveEnvironment(env)">Ok</button>
-		<button ng-click="selection.env = undefined">Cancel</button>
-	</div>
+<div>
+	<a ng-click="onLinkClick()">{{name}} <span
+		ng-show="env0.name == name"> ({{env0.server.host}})</span></a>
+	<div style="display: none">
+		<div id="env{{index}}">
+			<span class="mandatory_label">Name:</span> <input type="text"
+				name="envName" ng-model="env.name" required> <br /> <span
+				class="mandatory_label">update each</span> <input type="text"
+				name="envUpdateInterval" ng-model="env.updateInterval">
+			minutes.<span ng-show="env.lastUpdate"> Last update
+				{{env.lastUpdate}}</span> <br /> <br /> Server <select
+				ng-model="env.server" ng-options="server.host for server in servers">
+			</select> <br /> Log file path: <input type="text" name="path"
+				ng-model="path"> <br /> Enabled matchers
+			<ul>
+				<li ng-repeat="matcher in matchers | orderBy: weight">		
+				<input type="checkbox" ng-model="enabledMatchers[matcher.id]" /> {{matcher.name}}
+				</li>
+			</ul>
 
+		</div>
+	</div>
 </div>

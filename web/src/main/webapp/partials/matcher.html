@@ -1,28 +1,24 @@
 <div>
-	<input ng-show="selection.env && matcherObj.name == name" type="checkbox"
-		ng-model="environmentMatcher[selection.env.id][matcherObj.id]"">
-	<a ng-click='selection.matcher = matcherObj'> <span
-		ng-show="selection.matcher != matcherObj">{{name}}</span></a>
-	<div ng-show="selection.matcher == matcherObj">
-		Name: <input type="text" name="matcherName" ng-model="matcherObj.name"><br />
-		Error level: <select ng-model="matcherObj.level"
-			ng-options="level for level in levels">
-		</select><br /> Error message:
-		<textarea rows="4" cols="50" type="text" name="matcherMessage"
-			ng-model="matcherObj.message">
+	<a ng-click='onLinkClick()()'> <span>{{name}}</span></a>
+	<div style="display: none">
+		<div id="matcher{{index}}">
+			<span class="mandatory_label">Name:</span> <input type="text"
+				name="matcherName" ng-model="matcher.name"><br /> Error
+			level: <select ng-model="matcher.level"
+				ng-options="level for level in levels">
+			</select><br /> Error message:
+			<textarea rows="4" cols="50" type="text" name="matcherMessage"
+				ng-model="matcher.message">
         </textarea>
-		<br /> Show notification: <input type="checkbox"
-			name="matcherShowNotification" ng-model="matcherObj.showNotification"><br />
-		Is general: <input type="checkbox" name="matcherGeneral"
-			ng-model="matcherObj.general"><br />
-		 <ul>
-		 Found in environments:
-		  <li ng-repeat="env in environments">
-		 	<input type="checkbox" ng-model="environmentMatcher[env.id][matcherObj.id]" >{{env.name}}
-		 	</li>
-		 </ul>
-		<button>Ok</button>
-		<button ng-click="selection.matcher = undefined">Cancel</button>
-		
+			<br /> Show notification: <input type="checkbox"
+				name="matcherShowNotification" ng-model="matcher.showNotification"><br />
+			Is general: <input type="checkbox" name="matcherGeneral"
+				ng-model="matcher.general"><br />
+				Found in environments:
+			<ul>
+				<li ng-repeat="env in allEnvironments"><input type="checkbox"
+					ng-model="enabledEnvironments[env.id]">{{env.name}}</li>
+			</ul>			
+		</div>
 	</div>
 </div>

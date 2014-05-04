@@ -36,6 +36,7 @@ public class ConfigResource {
     public Configuration getConfig(@PathParam("configId") Long configId, @DefaultValue("") @QueryParam("projectName") String projectName) {
         if (configId == -1) {
             Configuration configuration = new Configuration();
+            configuration.setId(-1L);
             configuration.setEnvironments(Arrays.asList(createDevEnv()));
             configuration.setProjectName(projectName);
             return configuration;
@@ -51,6 +52,7 @@ public class ConfigResource {
 
     private Environment createDevEnv() {
         Environment dev = new Environment();
+        dev.setId(-1L);
         dev.setName("DEV");
         dev.setMatchConfigs(createAnyErrorMatchConfig());
         dev.setUpdateInterval(5);
@@ -65,11 +67,11 @@ public class ConfigResource {
 
     private MatchConfig createError() {
         MatchConfig match = new MatchConfig();
+        match.setId(-1L);
         match.setName("General error");
         match.setLevel(Level.ERROR.toString());
         match.setShowNotification(true);
         match.setGeneral(true);
         return match;
     }
-
 }
