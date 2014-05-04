@@ -25,14 +25,32 @@
                 <stopPort>9999</stopPort>
             </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.7</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <tasks>
+                                <copy file="${project.build.directory}/${webFile}.war" todir="${project.basedir}/../idea/resources/"/>
+                            </tasks>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
-		<finalName>web</finalName>
+		<finalName>${webFile}</finalName>
 	</build>
 	<properties>
 		<jetty.version>7.4.1.v20110513</jetty.version>
 		<jersey.version>1.10</jersey.version>
 		<guice.version>3.0</guice.version>
 		<jackson.version>1.9.13</jackson.version>
+        <webFile>logmonitor</webFile>
 	</properties>
 	<dependencies>
 		<dependency>

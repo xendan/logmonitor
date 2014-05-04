@@ -5,14 +5,11 @@ repositories {
         url "http://jsch.sf.net/maven2/"
     } */
     mavenCentral()
-
 }
 
-task getHomeDir << {
-    println gradle.gradleHomeDir
-}
 
 dependencies {
+
     compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: '4.2.5.Final'
     compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.0-api', version: '1.0.1.Final'
 
