@@ -27,6 +27,9 @@
       <applicationService serviceInterface="org.xendan.logmonitor.idea.read.Serializer"
                           serviceImplementation="org.xendan.logmonitor.idea.read.Serializer"/>
 
+      <applicationService serviceInterface="org.xendan.logmonitor.HomeResolver"
+                          serviceImplementation="org.xendan.logmonitor.HomeResolver"/>
+
 
       <!--
       <applicationService serviceInterface="org.xendan.logmonitor.dao.LogService"

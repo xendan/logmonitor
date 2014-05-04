@@ -7,38 +7,44 @@ import com.intellij.ui.DocumentAdapter;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.idea.read.Serializer;
 import org.xendan.logmonitor.idea.read.Settings;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.text.NumberFormat;
 
 /**
  * @author xendan
  * @since 4/20/14.
  */
-public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll{
+public class LogMonitorSettingsConfigurable implements SearchableConfigurable, Configurable.NoScroll {
     private JLabel webArjPath;
     private JPanel contentPanel;
     private JPanel buildInPanel;
     private JPanel externalServerSettings;
     private JButton copyPathButton;
     private JLabel configLink;
-    private JTextField textField2;
+    private JTextField urlTextField;
     private JRadioButton useBuiltInServerRadioButton;
     private JRadioButton useExternalServerRadioButton;
     private JFormattedTextField portTextField;
+    private JLabel ocupiedMessage;
     private Settings settings;
     private Serializer serializer;
+    private HomeResolver homeResolver;
     private Settings.State initialState;
 
-    public LogMonitorSettingsConfigurable(Settings settings, Serializer serializer) {
+    public LogMonitorSettingsConfigurable(Settings settings, Serializer serializer, HomeResolver homeResolver) {
         this.settings = settings;
         this.serializer = serializer;
+        this.homeResolver = homeResolver;
         init();
     }
 
@@ -61,7 +67,12 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         useBuiltInServerRadioButton.addActionListener(internalExternalListener);
         useExternalServerRadioButton.addActionListener(internalExternalListener);
         portTextField.setValue(state.getPort());
-        portTextField.getDocument().addDocumentListener(new PortSynchroniser());
+        portTextField.getDocument().addDocumentListener(new PortSynchronizer());
+        if (isExternal) {
+            urlTextField.setText(state.getUrl());
+        }
+        webArjPath.setText(new File(homeResolver.joinMkDirs("aa.war", "warfile")).getAbsolutePath());
+        urlTextField.getDocument().addDocumentListener(new UrlSynchronizer());
     }
 
     private void initState() {
@@ -113,6 +124,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     @Override
     public void reset() {
         settings.reset(initialState);
+        setState(initialState);
     }
 
     @Override
@@ -121,6 +133,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     }
 
     private void setPanelEnabled(JPanel panel, boolean enabled) {
+        panel.setEnabled(enabled);
         for (Component component : panel.getComponents()) {
             component.setEnabled(enabled);
             if (component instanceof JPanel) {
@@ -133,13 +146,20 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
         NumberFormat format = NumberFormat.getNumberInstance();
         format.setGroupingUsed(false);
         portTextField = new JFormattedTextField(format);
+        Dimension size = new Dimension(54, -1);
+        portTextField.setPreferredSize(size);
+        portTextField.setMaximumSize(size);
     }
 
-    private class PortSynchroniser extends DocumentAdapter {
+    private class PortSynchronizer extends DocumentAdapter {
 
         @Override
         protected void textChanged(DocumentEvent documentEvent) {
-            settings.getState().setPort((Integer) portTextField.getValue());
+            try {
+                Integer port = Integer.valueOf(portTextField.getText());
+                settings.getState().setPort(port);
+            } catch (NumberFormatException e) {
+            }
         }
     }
 
@@ -151,6 +171,13 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
             settings.getState().setUseBuiltInServer(builtInServer);
             setPanelEnabled(buildInPanel, builtInServer);
             setPanelEnabled(externalServerSettings, !builtInServer);
+        }
+    }
+
+    private class UrlSynchronizer extends DocumentAdapter {
+        @Override
+        protected void textChanged(DocumentEvent documentEvent) {
+            settings.getState().setUrl(urlTextField.getText());
         }
     }
 }
