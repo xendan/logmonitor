@@ -1,6 +1,5 @@
 <div>
-	<a ng-click="onLinkClick()">{{name}} <span
-		ng-show="env0.name == name"> ({{env0.server.host}})</span></a>
+	<a ng-click="onLinkClick()">{{envToString(env0, name, true)}}</a>
 	<div style="display: none">
 		<div id="env{{index}}">
 			<span class="mandatory_label">Name:</span> <input type="text"
@@ -11,10 +10,10 @@
 				{{env.lastUpdate}}</span> <br /> <br /> Server <select
 				ng-model="env.server" ng-options="server.host for server in servers">
 			</select> <br /> Log file path: <input type="text" name="path"
-				ng-model="path"> <br /> Enabled matchers
+				ng-model="env.path"> <br /> Enabled matchers
 			<ul>
 				<li ng-repeat="matcher in matchers | orderBy: weight">		
-				<input type="checkbox" ng-model="enabledMatchers[matcher.id]" /> {{matcher.name}}
+				<input type="checkbox" ng-model="enabledMatchers[matcher.id]" /> {{matcherToString(matcher)}}
 				</li>
 			</ul>
 

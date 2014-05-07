@@ -86,9 +86,9 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 	});
 
 	$scope.cantSave = function() {
-		// TODO validate environment and match config
-		return false;
+		return !($scope.config.projectName) || !($scope.config.logPattern);
 	};
+	
 	var findById = function(id, items) {
 		for (var i = 0; i < items.length; i++) {
 			if (items[i].id == id) {
@@ -114,6 +114,46 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 	};
 	
 	$scope.saveMatcher = function(matcher, enabledEnvironments) {
+		forEachEnvMatcher(function(env, matcher1) {
+			var matcherUpdate = findById(matcher.id, env.matchConfigs);
+			if (!matcherUpdate && !findById(matcher.id, $scope.matchers)) {
+				$scope.matchers.push(matcher);
+			}
+			if (enabledEnvironments[env.id]) {
+				if (!matcherUpdate) {
+					env.matchConfigs.push(matcher);
+				} else {
+					angular.extend(matcherUpdate, matcher); 
+				}
+			} else if (matcherUpdate) {
+				env.matchConfigs.pop(matcherUpdate);
+			}
+		});
+		$scope.$digest();
+	};
+	
+	$scope.envToString = function(env, name, showPath) {
+		if (env) {
+			var path = showPath ? ", " + (env.path ? env.path : "Not defined") : "";
+			return env.name + " (" + env.server.host +  path + ")";
+		}
+		return name;
+	};
+	$scope.matcherToString = function(matcher, name) {
+		var substring = function(message, max) {
+			if (message.length < max) {
+				return message;
+			}
+			return message + "...";
+		};
+		if (matcher != undefined) {
+			name = matcher.name + " (" + matcher.level ;
+			if (matcher.message && matcher.message.length !== 0) {
+				name += ", " + substring(matcher.message, 10);
+			}
+			name += ")";
+		}
+		return name;
 	};
 	
 }

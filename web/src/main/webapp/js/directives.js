@@ -11,6 +11,8 @@ app.directive('environment', function() {
 			servers : '=',
 			index : '=',
 			matchers : '=',
+			envToString : '=',
+			matcherToString : '='
 		},
 		link : function($scope, element, attrs) {
 			$scope.onLinkClick = function() {
@@ -36,6 +38,7 @@ app.directive('environment', function() {
 									$scope.saveEnvironment($scope.env,
 											$scope.enabledMatchers);
 									$(this).dialog("close");
+									$scope.$digest();
 								}
 							}
 						});
@@ -58,6 +61,8 @@ app.directive('matcher', function() {
 			createNewMatcher : '=',
 			saveMatcher : '=',
 			index : '=',
+			envToString : '=',
+			matcherToString : '='
 
 		},
 		link : function($scope, element, attrs) {
@@ -65,6 +70,11 @@ app.directive('matcher', function() {
 				$scope.matcher = ($scope.matcher0) ? angular
 						.copy($scope.matcher0) : $scope.createNewMatcher();
 				$scope.enabledEnvironments = {};
+				$scope.allEnvironments.forEach(function(env) {
+					if (!$scope.matcher0 || env.matchConfigs.indexOf($scope.matcher0) != -1) {
+						$scope.enabledEnvironments[env.id] = true;
+					}
+				});
 				$('#matcher' + $scope.index).dialog(
 						{
 							modal : true,
@@ -74,6 +84,7 @@ app.directive('matcher', function() {
 									$scope.saveMatcher($scope.matcher,
 											$scope.enabledEnvironments);
 									$(this).dialog("close");
+									$scope.$digest();
 								}
 							}
 						});

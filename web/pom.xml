@@ -49,8 +49,8 @@
 		<jetty.version>7.4.1.v20110513</jetty.version>
 		<jersey.version>1.10</jersey.version>
 		<guice.version>3.0</guice.version>
-		<jackson.version>1.9.13</jackson.version>
         <webFile>logmonitor</webFile>
+        <jackson.version>1.9.13</jackson.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -98,18 +98,18 @@
 			<artifactId>jersey-json</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
-        <!--
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		-->
+<!--
+    <dependency>
+        <groupId>org.codehaus.jackson</groupId>
+        <artifactId>jackson-core-asl</artifactId>
+        <version>${jackson.version}</version>
+    </dependency>
+          <dependency>
+              <groupId>org.codehaus.jackson</groupId>
+              <artifactId>jackson-mapper-asl</artifactId>
+              <version>${jackson.version}</version>
+          </dependency>
+          -->
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-guice</artifactId>
