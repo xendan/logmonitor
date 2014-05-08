@@ -23,6 +23,8 @@ public class Environment extends BaseObject {
     private int updateInterval;
     private List<MatchConfig> matchConfigs = new ArrayList<MatchConfig>();
     private LocalDateTime lastUpdate;
+    private EnvironmentStatus status = EnvironmentStatus.WAITING;
+
 
     public String getPath() {
         return path;
@@ -73,6 +75,15 @@ public class Environment extends BaseObject {
 
     public void setLastUpdate(LocalDateTime lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    @Enumerated(EnumType.STRING)
+    public EnvironmentStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(EnvironmentStatus status) {
+        this.status = status;
     }
 
     @Override

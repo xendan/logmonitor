@@ -5,6 +5,7 @@ import org.apache.log4j.Level;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
+import org.xendan.logmonitor.web.read.schedule.ReaderScheduler;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,10 +17,12 @@ import java.util.List;
 public class ConfigResource {
 
     private final LogService service;
+    private ReaderScheduler scheduler;
 
     @Inject
-    public ConfigResource(LogService service) {
+    public ConfigResource(LogService service, ReaderScheduler scheduler) {
         this.service = service;
+        this.scheduler = scheduler;
     }
 
     @GET
@@ -46,6 +49,7 @@ public class ConfigResource {
     @Consumes(MediaType.APPLICATION_JSON)
     public void saveConfig(Configuration configuration) {
         service.merge(configuration);
+        scheduler.reload();
     }
 
     private Environment createDevEnv() {

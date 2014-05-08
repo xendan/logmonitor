@@ -2,7 +2,7 @@ package org.xendan.logmonitor.web.guice;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.persist.PersistFilter;
+import com.google.inject.persist.PersistService;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.sun.jersey.api.json.JSONConfiguration;
@@ -12,11 +12,13 @@ import org.codehaus.jackson.jaxrs.JacksonJsonProvider;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.web.dao.ConfigurationDao;
 import org.xendan.logmonitor.web.dao.ConfigurationDaoImpl;
+import org.xendan.logmonitor.web.read.schedule.ReaderScheduler;
 import org.xendan.logmonitor.web.service.ConfigResource;
 import org.xendan.logmonitor.web.service.LogLevelResource;
 import org.xendan.logmonitor.web.service.LogService;
 import org.xendan.logmonitor.web.service.ServersResource;
 
+import javax.servlet.ServletContextEvent;
 import javax.ws.rs.ext.MessageBodyReader;
 import javax.ws.rs.ext.MessageBodyWriter;
 import java.util.HashMap;
@@ -26,10 +28,19 @@ import java.util.Properties;
 public class GuiceServletConfig extends GuiceServletContextListener {
 
     private static final String DEF_PATH = "db";
+    private Injector injector;
 
-	@Override
+    @Override
+    public void contextInitialized(ServletContextEvent servletContextEvent) {
+        super.contextInitialized(servletContextEvent);
+        injector.getInstance(PersistService.class).start();
+        ReaderScheduler scheduler = injector.getInstance(ReaderScheduler.class);
+        scheduler.reload();
+    }
+
+    @Override
 	protected Injector getInjector() {
-        return Guice.createInjector(new JerseyServletModule() {
+        injector = Guice.createInjector(new JerseyServletModule() {
             @Override
             protected void configureServlets() {
                 JpaPersistModule jpaModule = new JpaPersistModule("defaultPersistentUnit");
@@ -40,13 +51,15 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 bind(ServersResource.class);
                 bind(HomeResolver.class);
                 bind(ConfigurationDao.class).to(ConfigurationDaoImpl.class);
+                bind(ReaderScheduler.class);
                 bind(MessageBodyReader.class).to(JacksonJsonProvider.class);
                 bind(MessageBodyWriter.class).to(JacksonJsonProvider.class);
                 bind(LogService.class).toProvider(LogServiceProvider.class);
-                filter("/*").through(PersistFilter.class);
+                filter("/*").through(SpecialPersistFilter.class);
                 serve("/*").with(GuiceContainer.class, createJsonParams());
             }
         });
+        return injector;
 	}
 
     private Properties createJpaProperties() {

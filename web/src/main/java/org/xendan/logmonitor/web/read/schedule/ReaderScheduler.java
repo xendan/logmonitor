@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.web.read.schedule;
 
+import com.google.inject.Inject;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
@@ -20,6 +21,7 @@ public class ReaderScheduler {
     private LogService service;
     private ScheduledThreadPoolExecutor executor;
 
+    @Inject
     public ReaderScheduler(HomeResolver homeResolver, LogService service) {
         this.homeResolver = homeResolver;
         this.service = service;
