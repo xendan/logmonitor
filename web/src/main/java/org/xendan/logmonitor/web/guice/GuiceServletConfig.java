@@ -1,4 +1,4 @@
-package org.xendan.logmonitor.web;
+package org.xendan.logmonitor.web.guice;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -14,6 +14,7 @@ import org.xendan.logmonitor.web.dao.ConfigurationDao;
 import org.xendan.logmonitor.web.dao.ConfigurationDaoImpl;
 import org.xendan.logmonitor.web.service.ConfigResource;
 import org.xendan.logmonitor.web.service.LogLevelResource;
+import org.xendan.logmonitor.web.service.LogService;
 import org.xendan.logmonitor.web.service.ServersResource;
 
 import javax.ws.rs.ext.MessageBodyReader;
@@ -41,6 +42,7 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 bind(ConfigurationDao.class).to(ConfigurationDaoImpl.class);
                 bind(MessageBodyReader.class).to(JacksonJsonProvider.class);
                 bind(MessageBodyWriter.class).to(JacksonJsonProvider.class);
+                bind(LogService.class).toProvider(LogServiceProvider.class);
                 filter("/*").through(PersistFilter.class);
                 serve("/*").with(GuiceContainer.class, createJsonParams());
             }

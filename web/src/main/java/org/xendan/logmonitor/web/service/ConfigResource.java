@@ -5,7 +5,6 @@ import org.apache.log4j.Level;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
-import org.xendan.logmonitor.web.dao.ConfigurationDao;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -16,18 +15,17 @@ import java.util.List;
 @Path("/rest/configs")
 public class ConfigResource {
 
-    private final ConfigurationDao dao;
-
+    private final LogService service;
 
     @Inject
-    public ConfigResource(ConfigurationDao dao) {
-        this.dao = dao;
+    public ConfigResource(LogService service) {
+        this.service = service;
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Configuration> getAllConfigs() {
-        return dao.getConfigs();
+        return service.getConfigs();
     }
 
     @GET
@@ -41,13 +39,13 @@ public class ConfigResource {
             configuration.setProjectName(projectName);
             return configuration;
         }
-        return dao.getConfig(configId);
+        return service.getConfig(configId);
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public void saveConfig(Configuration configuration) {
-        dao.merge(configuration);
+        service.merge(configuration);
     }
 
     private Environment createDevEnv() {
