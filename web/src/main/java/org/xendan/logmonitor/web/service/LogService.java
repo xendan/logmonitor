@@ -11,6 +11,6 @@ import java.util.List;
  * @author mullomuk
  * @since 5/8/2014.
  */
-public interface LogService extends ConfigurationDao, LogServicePartial {
+public interface LogService extends ConfigurationDao, LogServicePartial, EnvironmentMonitor {
 
 }

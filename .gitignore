@@ -1,3 +1,5 @@
+tmp.txt
+idea/resources/*.war
 **/*.swp
 **/.project
 **/.settings

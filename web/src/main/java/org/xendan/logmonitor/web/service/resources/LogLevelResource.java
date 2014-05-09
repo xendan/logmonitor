@@ -1,4 +1,4 @@
-package org.xendan.logmonitor.web.service;
+package org.xendan.logmonitor.web.service.resources;
 
 import org.apache.log4j.Level;
 

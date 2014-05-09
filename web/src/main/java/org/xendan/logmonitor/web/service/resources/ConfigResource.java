@@ -1,4 +1,4 @@
-package org.xendan.logmonitor.web.service;
+package org.xendan.logmonitor.web.service.resources;
 
 import com.google.inject.Inject;
 import org.apache.log4j.Level;
@@ -6,6 +6,7 @@ import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 import org.xendan.logmonitor.web.read.schedule.ReaderScheduler;
+import org.xendan.logmonitor.web.service.LogService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

@@ -3,13 +3,14 @@ package org.xendan.logmonitor.web.read.schedule;
 import org.apache.log4j.Logger;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.Environment;
-import org.xendan.logmonitor.model.EnvironmentStatus;
 import org.xendan.logmonitor.model.LogEntry;
+import org.xendan.logmonitor.web.service.EnvironmentMessage;
 import org.xendan.logmonitor.web.read.command.LogDownloader;
 import org.xendan.logmonitor.web.read.parse.DateParser;
 import org.xendan.logmonitor.web.read.parse.LogFileReader;
 import org.xendan.logmonitor.web.service.LogService;
 
+import java.io.File;
 import java.util.List;
 
 /**
@@ -36,31 +37,23 @@ public class DownloadAndParse implements Runnable {
     @Override
     public void run() {
         String lastRead = environment.getLastUpdate() == null ? null : new DateParser().getDateAsString(logPattern, environment.getLastUpdate());
-        service.setEnvironmentStatus(environment, EnvironmentStatus.DOWNLOADING);
         String logFile = getLogFile(lastRead);
-        service.setEnvironmentStatus(environment, EnvironmentStatus.PARSING);
+        if (logFile == null) {
+            return;
+        }
+        File file = new File(logFile);
+        if (!file.exists()) {
+            service.setEnvironmentStatus(environment, EnvironmentMessage.FILE_NOT_FOUND);
+            return;
+        }
+        service.setEnvironmentStatus(environment, EnvironmentMessage.PARSING);
         List<LogEntry> entries = new LogFileReader(logFile, logPattern, environment).getEntries();
         if (entries == null) {
-            service.setEnvironmentStatus(environment, EnvironmentStatus.NO_ENTIRIES_FOUND);
+            service.setEnvironmentStatus(environment, EnvironmentMessage.NO_ENTRIES_FOUND);
             return;
         }
         service.addEntries(entries);
-        service.setEnvironmentStatus(environment, EnvironmentStatus.WAITING);
-        /*
-        monitor.onParseEntriesStarted();
-        service.addEntries(entries, new Callback<Void>(){
-            @Override
-            public void onAnswer(Void answer) {
-                monitor.onEntriesAdded();
-            }
-
-            @Override
-            public void onFail(Throwable error) {
-                monitor.onAddEntriesError(error);
-                logger.error(error);
-            }
-        });
-        */
+        service.setEnvironmentStatus(environment, EnvironmentMessage.WAITING);
     }
 
     private String getLogFile(String lastRead) {

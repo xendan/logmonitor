@@ -1,6 +1,5 @@
 package org.xendan.logmonitor.web.service;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.*;
@@ -20,21 +19,12 @@ import java.util.regex.Pattern;
 public class LogServiceImpl implements LogServicePartial {
     private static final Logger logger = Logger.getLogger(LogServiceImpl.class);
 
-    private static final String DEF_PATH = "db";
     private static final int MATCHING_INDEX = 5;
 
     protected final ConfigurationDao dao;
-    private final HomeResolver resolver;
 
-    public LogServiceImpl(HomeResolver resolver, ConfigurationDao dao) {
-        this.resolver = resolver;
+    public LogServiceImpl(ConfigurationDao dao) {
         this.dao = dao;
-    }
-
-    @Override
-    public void setEnvironmentStatus(Environment environment, EnvironmentStatus status) {
-        environment.setStatus(status);
-        dao.persist(environment);
     }
 
     public List<LogEntryGroup> getMatchedEntryGroups(final MatchConfig matchConfig, final Environment environment) {
@@ -76,7 +66,7 @@ public class LogServiceImpl implements LogServicePartial {
                 }
             }
             for (LogEntry entry : dao.getNotGroupedMatchedEntries(matchConfig, environment)) {
-                if (!StringUtils.isEmpty(matchConfig.getMessage())) {
+                if (matchConfig.getMessage()!=null && !matchConfig.equals("")) {
                     restoreMessage(entry, matchConfig.getMessage());
                 }
                 if (PatternUtils.isMatch(entry, newConfig)) {

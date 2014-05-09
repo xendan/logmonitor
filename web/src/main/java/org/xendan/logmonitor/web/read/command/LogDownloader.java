@@ -7,7 +7,8 @@ import org.apache.tools.ant.taskdefs.optional.ssh.SSHExec;
 import org.apache.tools.ant.taskdefs.optional.ssh.Scp;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.Environment;
-import org.xendan.logmonitor.model.EnvironmentStatus;
+import org.xendan.logmonitor.web.service.EnvironmentMessage;
+import org.xendan.logmonitor.web.service.EnvironmentMonitor;
 import org.xendan.logmonitor.web.service.LogService;
 
 /**
@@ -23,19 +24,19 @@ public class LogDownloader extends BaseCommand {
     protected final Environment environment;
     private final HomeResolver homeResolver;
     private final CommandFileLoader fileLoader;
-    private String project;
-    private final LogService service;
+    private final String project;
+    private final EnvironmentMonitor monitor;
 
     public LogDownloader(Environment settings, HomeResolver homeResolver, String project, LogService service) {
         this(settings, homeResolver, CommandFileLoader.createFilter(homeResolver) ,project, service);
     }
 
-    public LogDownloader(Environment environment, HomeResolver homeResolver, CommandFileLoader fileLoader, String project, LogService service) {
+    public LogDownloader(Environment environment, HomeResolver homeResolver, CommandFileLoader fileLoader, String project, EnvironmentMonitor monitor) {
         super(environment.getServer());
         this.homeResolver = homeResolver;
         this.fileLoader = fileLoader;
         this.project = project;
-        this.service = service;
+        this.monitor = monitor;
         this.environment = environment;
     }
 
@@ -45,11 +46,12 @@ public class LogDownloader extends BaseCommand {
             scp.execute();
         } catch (BuildException e) {
             if (e.getMessage().contains("No such file or directory")) {
+                monitor.setEnvironmentStatus(environment, EnvironmentMessage.FILE_NOT_FOUND);
                 return null;
             }
-            service.setEnvironmentStatus(environment, EnvironmentStatus.ERROR_DOWLOADING);
-            //TODO handle error somehow monitor.onSshError("downloading from server", e);
-            throw new IllegalStateException(e);
+            monitor.setErrorDownloading(environment, e);
+            logger.error("Error file download", e);
+            return null;
         }
         return localPath;
     }
@@ -67,7 +69,7 @@ public class LogDownloader extends BaseCommand {
             return environment.getPath();
         }
         String localPath = homeResolver.joinMkDirs(LAST_LOG, project, environment.getName());
-        //TODO monitor.setDownloadPrepareStart(localPath);
+        monitor.setDownloadStartedTo(environment, localPath);
         SSHExec exec = initTask(new SSHExec());
         String command = buildCommand(datePattern);
         exec.setCommand(command);
@@ -79,11 +81,10 @@ public class LogDownloader extends BaseCommand {
             if (size != null) {
                 size = size.replaceAll("\\s+", "");
             }
-            //TODO monitor.setFileSizeCalculated(size);
+            monitor.setFileSizeCalculated(environment, size);
         } catch (BuildException e) {
-            //TODO handle it
-           //monitor.onSshError("preparing log on server", e);
-           return null;
+           monitor.setErrorSizeCalculation(environment, e);
+           logger.error("Error calculating file size", e);
         }
 
         Scp scp = initTask(new Scp());

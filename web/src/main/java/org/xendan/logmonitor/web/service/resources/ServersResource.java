@@ -1,4 +1,4 @@
-package org.xendan.logmonitor.web.service;
+package org.xendan.logmonitor.web.service.resources;
 
 import com.google.inject.Inject;
 import org.xendan.logmonitor.model.Server;
