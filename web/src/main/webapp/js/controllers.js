@@ -1,11 +1,20 @@
-function AllConfigsController($scope, Configs, $routeParams) {
-	$scope.configs = Configs.getAll();
+function AllConfigsController($scope, Configs, LogEntries, $routeParams) {
+	$scope.statuses = {}
+	$scope.configs = Configs.getAll({}, function(configs) {
+    	for (var i = 0; i < configs.length; i++) {
+    	    for (var j = 0; j < configs[i].environments.length; j++) {
+    	    var id = configs[i].environments[j].id;
+    	        LogEntries.getStatus({envId:id}, function(status) {
+    	            $scope.statuses[id] = status;
+    	        });
+    	    }
+    	}
+	});
 	$scope.currentProject = $routeParams.projectName;
+
 }
 
 function ConfigController($scope, Configs, Servers, $http, $routeParams) {
-	this.scope = $scope;
-	this.Configs = Configs;
 	$scope.saveConfig = function() {
 		// TODO add polyfill
 		Configs.update($scope.config);
@@ -71,7 +80,7 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 				action($scope.config.environments[i], env.matchConfigs[j]);
 			}
 		}
-	};	
+	};
 	$scope.config = Configs.getOne(serviceParams, function() {
 		forEachEnvMatcher(function(env, matcher) {
 			if (!env.server) {

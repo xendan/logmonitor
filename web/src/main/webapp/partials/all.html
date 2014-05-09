@@ -2,6 +2,9 @@
 <ul>
     <li ng-repeat="config in configs">
         <a href="#/configs/{{config.id}}">{{config.projectName}}</a>
+        <ul>
+            <li ng-repeat="env in config.environments">{{env.name}}{{statuses[env.id]}}</li>
+        </ul>
     </li>
 </ul>
 <a href="#/configs/-1?projectName={{currentProject}}">

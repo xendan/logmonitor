@@ -1,7 +1,7 @@
 var app = angular.module('app', [ 'ngRoute', 'ngResource' ]);
 
 // Controllers
-app.controller('AllConfigsController', [ '$scope', 'Configs', '$routeParams',
+app.controller('AllConfigsController', [ '$scope', 'Configs', 'LogEntries', '$routeParams',
 		AllConfigsController ]);
 app.controller('ConfigController', [ '$scope', 'Configs', 'Servers', '$http', '$routeParams',
 		ConfigController ]);

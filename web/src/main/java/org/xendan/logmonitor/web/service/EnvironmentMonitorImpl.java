@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.web.service;
 
+import com.google.inject.Singleton;
 import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.apache.tools.ant.BuildException;
@@ -10,6 +11,7 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+@Singleton
 public class EnvironmentMonitorImpl implements EnvironmentMonitor {
     private static final Logger logger = Logger.getLogger(EnvironmentMonitorImpl.class);
 
