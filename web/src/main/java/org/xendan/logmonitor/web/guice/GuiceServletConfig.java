@@ -29,6 +29,7 @@ import java.util.Properties;
 public class GuiceServletConfig extends GuiceServletContextListener {
 
     private static final String DEF_PATH = "db";
+    public static final String PERSISTENT_UNIT = "defaultPersistentUnit";
     private Injector injector;
 
     @Override
@@ -41,11 +42,17 @@ public class GuiceServletConfig extends GuiceServletContextListener {
 
     @Override
 	protected Injector getInjector() {
-        injector = Guice.createInjector(new JerseyServletModule() {
+        String dbFile = DEF_PATH;
+        injector = createInjector(dbFile);
+        return injector;
+	}
+
+    public static Injector createInjector(final String dbFile) {
+        return Guice.createInjector(new JerseyServletModule() {
             @Override
             protected void configureServlets() {
-                JpaPersistModule jpaModule = new JpaPersistModule("defaultPersistentUnit");
-                JpaPersistModule module = jpaModule.properties(createJpaProperties());
+                JpaPersistModule jpaModule = new JpaPersistModule(PERSISTENT_UNIT);
+                JpaPersistModule module = jpaModule.properties(createJpaProperties(dbFile));
                 install(module);
                 bind(ConfigResource.class);
                 bind(LogEntryResource.class);
@@ -62,22 +69,21 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 serve("/*").with(GuiceContainer.class, createJsonParams());
             }
         });
-        return injector;
-	}
+    }
 
-    private Properties createJpaProperties() {
+    public static Properties createJpaProperties(String dbFile) {
         Properties props = new Properties();
-        props.put("hibernate.connection.url", createConnectionStr(new HomeResolver()));
+        props.put("hibernate.connection.url", createConnectionStr(new HomeResolver(), dbFile));
         return props;
     }
 
-    private String createConnectionStr(HomeResolver homeResolver) {
-        String connection = "jdbc:h2:/" + homeResolver.joinMkDirs(DEF_PATH, DEF_PATH) + ";MVCC=true";
+    private static String createConnectionStr(HomeResolver homeResolver, String dbFile) {
+        String connection = "jdbc:h2:/" + homeResolver.joinMkDirs(dbFile, DEF_PATH) + ";MVCC=true";
         System.out.println(connection);
         return connection;
     }
 
-    private Map<String, String> createJsonParams() {
+    private static Map<String, String> createJsonParams() {
         Map<String, String> params = new HashMap<String, String>();
         params.put(JSONConfiguration.FEATURE_POJO_MAPPING, "true");
         return params;

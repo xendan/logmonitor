@@ -21,7 +21,7 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
     public void setEnvironmentStatus(Environment environment, EnvironmentMessage message) {
         EnvironmentInfo info = getOrCreateInfo(environment);
         info.setMessage(message);
-        info.setError(false);
+        info.setError(message == EnvironmentMessage.NO_ENTRIES_FOUND);
     }
 
     private EnvironmentInfo getOrCreateInfo(Environment environment) {
@@ -52,13 +52,13 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
 
     private String downloaded(String localPath, long fileSize) {
         if (fileSize <= 0) {
-            return  "unknown";
+            return "unknown";
         }
         File file = new File(localPath);
         if (!file.exists()) {
             return "0% of " + fileSize;
         }
-        return String.valueOf(Math.round(((double) file.length()) / fileSize * 100)) + "% of " + fileSize ;
+        return String.valueOf(Math.round(((double) file.length()) / fileSize * 100)) + "% of " + fileSize;
     }
 
     @Override
@@ -106,7 +106,7 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
     }
 
     private EnvironmentStatus createErrorStatus(EnvironmentMessage message, Exception exception) {
-        return new EnvironmentStatus(message.getText(), ExceptionUtils.getStackTrace(exception));
+        return new EnvironmentStatus(message.getText(), exception == null ? "" : ExceptionUtils.getStackTrace(exception));
     }
 
     private EnvironmentStatus createOkStatus(EnvironmentMessage message) {
@@ -114,7 +114,7 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
     }
 
     private EnvironmentInfo getById(Long envId) {
-        for (Map.Entry<Environment,EnvironmentInfo> entry : infos.entrySet()) {
+        for (Map.Entry<Environment, EnvironmentInfo> entry : infos.entrySet()) {
             if (entry.getKey().getId().equals(envId)) {
                 return entry.getValue();
             }

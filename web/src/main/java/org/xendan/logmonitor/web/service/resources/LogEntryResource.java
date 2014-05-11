@@ -5,10 +5,7 @@ import org.xendan.logmonitor.model.EnvironmentStatus;
 import org.xendan.logmonitor.web.service.EnvironmentMonitor;
 import org.xendan.logmonitor.web.service.LogService;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 
 @Path("/rest/logentries")
@@ -27,6 +24,12 @@ public class LogEntryResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/envstatus/{envId}")
     public EnvironmentStatus getStatus(@PathParam("envId") Long envId) {
+        return monitor.getStatus(envId);
+    }
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public EnvironmentStatus getEntries(@QueryParam("envId") Long envId, @QueryParam("matcherId") Long matcherId, @QueryParam("isGeneral") boolean isGeneral) {
         return monitor.getStatus(envId);
     }
 }

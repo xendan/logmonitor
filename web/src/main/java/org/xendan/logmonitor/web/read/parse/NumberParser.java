@@ -14,7 +14,7 @@ class NumberParser extends UnitParser<Integer> {
     }
 
     @Override
-    protected String toRegExp(Matcher matcher) {
+    protected String buildRegexpNoSpaces(Matcher matcher) {
         return "\\d+";
     }
 }

@@ -17,7 +17,14 @@ function AllConfigsController($scope, Configs, LogEntries, $routeParams) {
 function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 	$scope.saveConfig = function() {
 		// TODO add polyfill
-		Configs.update($scope.config);
+		var copy = angular.copy($scope.config);
+		for (var i = 0; i < copy.environments.length; i++ ) {
+		    var env = copy.environments[i];
+		    if (env.server.host == localhost.host) {
+		        delete env.server;
+		    }
+		}
+		Configs.update(copy);
 	};
 	var localhost = {
 		host : "localhost"

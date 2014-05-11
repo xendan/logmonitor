@@ -8,19 +8,16 @@ import java.util.regex.Pattern;
 public abstract class UnitParser<V> {
 
     protected Pattern samplePattern;
-    
     public UnitParser(String samplePatternStr) {
-        this(samplePatternStr, false);
+        samplePattern = Pattern.compile("%[\\.\\d-]*" + decorateSamplePatternString(samplePatternStr));
     }
 
-    public UnitParser(String samplePatternStr, boolean addCurlBraces) {
-        if (addCurlBraces) {
-            samplePatternStr += "(\\\\\\{.+\\\\\\})?";
-        }
-        samplePattern = Pattern.compile("%" + samplePatternStr);
+    protected String decorateSamplePatternString(String samplePatternStr) {
+        return samplePatternStr;
     }
 
-    public int getStart(String pattern) {
+
+    public int getStartPosition(String pattern) {
         Matcher matcher = samplePattern.matcher(pattern);
         if (matcher.find()) {
             return matcher.start();
@@ -38,16 +35,24 @@ public abstract class UnitParser<V> {
         return pattern;
     }
 
-
-
+    protected String surroundSpaces(String meaningValue) {
+        return "\\s*" + meaningValue + "\\s*";
+    }
 
     protected String getRegexpForEntryMatcher(MatchConfig entryMatcher, Matcher matcher) {
         return toRegExp(matcher);
     }
 
-    public abstract V toValue(String string);
+    protected String toRegExp(Matcher matcher) {
+        return surroundSpaces(buildRegexpNoSpaces(matcher));
+    }
 
-    protected abstract String toRegExp(Matcher matcher);
+    protected abstract V toValue(String string);
+
+    protected abstract String buildRegexpNoSpaces(Matcher matcher);
 
 
+    public V getValue(String group) {
+        return toValue(group.trim());
+    }
 }

@@ -13,11 +13,18 @@ import java.util.regex.Pattern;
  */
 public class PatternUtils {
     public static final String ALL_GROUP = "(.*)";
-    private static final String[] REGEX_SPECIAL = {"\\", "[", "]", "|", ".", "?", "+", "*", "(", ")", "{", "}", "$"};
+    public static final String DOT = ".";
+    private static final String[] REGEX_SPECIAL = {"\\", "[", "]", "|", DOT, "?", "+", "*", "(", ")", "{", "}", "$"};
 
     public static String simpleToRegexp(String pattern) {
+        return simpleToRegexp(pattern, false);
+    }
+
+    public static String simpleToRegexp(String pattern, boolean ignoreDot) {
         for (String element : REGEX_SPECIAL) {
-            pattern = pattern.replace(element, "\\" + element);
+            if (!ignoreDot || !DOT.equals(element)) {
+                pattern = pattern.replace(element, "\\" + element);
+            }
         }
         return pattern;
     }

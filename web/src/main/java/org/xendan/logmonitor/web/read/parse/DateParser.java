@@ -24,7 +24,7 @@ public class DateParser extends UnitParser<LocalDateTime> {
     }
 
     @Override
-    protected String toRegExp(Matcher matcher) {
+    protected String buildRegexpNoSpaces(Matcher matcher) {
         String formatAsString = matcher.group(2);
         if (formatAsString == null || ISO8601.equals(formatAsString)) {
             formatAsString = DEFAULT_FORMAT;
@@ -43,11 +43,21 @@ public class DateParser extends UnitParser<LocalDateTime> {
 
 
     public String getDateAsString(String logPattern, LocalDateTime date) {
-        Matcher matcher = samplePattern.matcher(logPattern);
+        Matcher matcher = samplePattern.matcher(PatternUtils.simpleToRegexp(logPattern, true));
         if (matcher.find()) {
-            toRegExp(matcher);
+            buildRegexpNoSpaces(matcher);
             return dateFormatter.print(date);
         }
-        return null;
+        throw new IllegalArgumentException("No date found in pattern" + logPattern);
     }
+
+
+    @Override
+    public String replaceInPattern(String pattern, boolean useParentheses) {
+        return super.replaceInPattern(pattern, useParentheses);
+    }
+
+    //%[\.\d-]*d(\\\{(.+?)\\\})?
+    //%[\.\d-]*d(\\\{(.+?)\\\})?
+    //%d %-5p [%c] %m%n
 }

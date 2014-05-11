@@ -21,31 +21,31 @@ public class LogParser {
     private static Map<String, UnitParser<?>> createParsersMap() {
         Map<String, UnitParser<?>> map = new HashMap<String, UnitParser<?>>();
         //C
-        map.put("caller", new CallerParser());
+        map.put("caller", new WithPrecisionSpecifier('C'));
         //d
         map.put("date", new DateParser());
         //p
         map.put("level", new LevelParser());
         //m
-        map.put("message", new SimpleParser("m"));
+        map.put("message", new SimpleParser('m'));
         //t
-        map.put("thread", new SimpleParser("t"));
+        map.put("thread", new SimpleParser('t'));
         //c
-        map.put("category", SimpleParser.createWithCurlyBraces("c"));
+        map.put("category", new WithPrecisionSpecifier('c'));
         //L
         map.put("lineNumber", new NumberParser("L"));
         //F
         map.put("fileName", new NumberParser("F"));
         //l
-        map.put("locationInformation", new SimpleParser("l"));
+        map.put("locationInformation", new SimpleParser('l'));
         //M
-        map.put("methodName", new SimpleParser("M"));
+        map.put("methodName", new SimpleParser('M'));
         //r
-        map.put("elapsedTime", new SimpleParser("r"));
+        map.put("elapsedTime", new SimpleParser('r'));
         //x
-        map.put("ndc", SimpleParser.createCanBeEmpty("x"));
+        map.put("ndc", SimpleParser.createCanBeEmpty('x'));
         //X
-        map.put("mdc", new SimpleParser("X"));
+        map.put("mdc", new WithPrecisionSpecifier('X'));
         return map;
     }
 
@@ -67,7 +67,9 @@ public class LogParser {
     public LogParser(LocalDateTime since, String pattern, EntryMatcher entryMatcher) {
         this.since = since;
         this.entryMatcher = entryMatcher;
-        this.pattern = PatternUtils.simpleToRegexp(pattern.replace("%n", ""));
+        this.pattern = PatternUtils.simpleToRegexp(pattern.replace("%n", "")
+                        .replace("\\r", "")
+                        .replace("\\n", ""), true);
         regexPattern = getRegexPattern();
     }
 
@@ -96,9 +98,9 @@ public class LogParser {
     private Map<Integer, UnitParser<?>> getParserMap(String pattern) {
         Map<Integer, UnitParser<?>> parserMap = new HashMap<Integer, UnitParser<?>>();
         for (UnitParser<?> parser : ALL_PARSERS.values()) {
-            int start = parser.getStart(pattern);
-            if (start != -1) {
-                parserMap.put(start, parser);
+            Integer interval = parser.getStartPosition(pattern);
+            if (interval!= -1) {
+                parserMap.put(interval, parser);
             }
         }
         return parserMap;
@@ -153,7 +155,7 @@ public class LogParser {
 
     private <V> V getValue(Matcher matcher, UnitParser<V> parser) {
         if (activeParsers.contains(parser)) {
-            return parser.toValue(matcher.group(activeParsers.indexOf(parser) + 1));
+            return parser.getValue(matcher.group(activeParsers.indexOf(parser) + 1));
         }
         return null;
     }

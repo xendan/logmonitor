@@ -17,4 +17,4 @@ common/common.iml
 idea/.gradle/
 logmonitor.iml
 web/web.iml
-
+idea/build/
