@@ -59,13 +59,15 @@ public class GuiceServletConfig extends GuiceServletContextListener {
                 bind(LogLevelResource.class);
                 bind(ServersResource.class);
                 bind(HomeResolver.class);
+                bind(LogServiceHandler.class);
+                bind(LogServiceImpl.class);
                 bind(ConfigurationDao.class).to(ConfigurationDaoImpl.class);
                 bind(ReaderScheduler.class);
                 bind(EnvironmentMonitor.class).to(EnvironmentMonitorImpl.class);
                 bind(MessageBodyReader.class).to(JacksonJsonProvider.class);
                 bind(MessageBodyWriter.class).to(JacksonJsonProvider.class);
                 bind(LogService.class).toProvider(LogServiceProvider.class);
-                filter("/*").through(SpecialPersistFilter.class);
+//                filter("/*").through(SpecialPersistFilter.class);
                 serve("/*").with(GuiceContainer.class, createJsonParams());
             }
         });

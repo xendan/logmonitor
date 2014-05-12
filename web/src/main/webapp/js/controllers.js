@@ -1,12 +1,22 @@
 function AllConfigsController($scope, Configs, LogEntries, $routeParams) {
-	$scope.statuses = {}
+	$scope.statuses = {};
+	$scope.entries = {};
 	$scope.configs = Configs.getAll({}, function(configs) {
     	for (var i = 0; i < configs.length; i++) {
+    	    var confId = configs[i].id;
+    	    $scope.entries[confId] = {};
     	    for (var j = 0; j < configs[i].environments.length; j++) {
-    	    var id = configs[i].environments[j].id;
-    	        LogEntries.getStatus({envId:id}, function(status) {
-    	            $scope.statuses[id] = status;
+    	        var env = configs[i].environments[j];
+    	        $scope.entries[confId][env.id] = {};
+    	        LogEntries.getStatus({envId:env.id}, function(status) {
+    	            $scope.statuses[env.id] = status;
     	        });
+    	        //getEntries
+    	        for (var k = 0; k < env.matchConfigs.length; k++ ) {
+    	            var matcherId = env.matchConfigs[k].id;
+    	            $scope.entries[confId][env.id][matcherId] = LogEntries.getEntries(
+    	            {envId:env.id, matcherId:matcherId, isGeneral:env.matchConfigs[k].general });
+    	        }
     	    }
     	}
 	});
@@ -24,7 +34,9 @@ function ConfigController($scope, Configs, Servers, $http, $routeParams) {
 		        delete env.server;
 		    }
 		}
-		Configs.update(copy);
+		Configs.update(copy, function() {
+		    window.location = '';
+		});
 	};
 	var localhost = {
 		host : "localhost"

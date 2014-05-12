@@ -1,6 +1,7 @@
 tmp.txt
 idea/resources/*.war
 **/*.swp
+**/*.swo
 **/.project
 **/.settings
 **/.classpath

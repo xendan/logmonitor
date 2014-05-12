@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.web.service;
 
+import com.google.inject.Inject;
 import org.apache.log4j.Logger;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.*;
@@ -23,12 +24,13 @@ public class LogServiceImpl implements LogServicePartial {
 
     protected final ConfigurationDao dao;
 
+    @Inject
     public LogServiceImpl(ConfigurationDao dao) {
         this.dao = dao;
     }
 
-    public List<LogEntryGroup> getMatchedEntryGroups(final MatchConfig matchConfig, final Environment environment) {
-        List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfig, environment);
+    public List<LogEntryGroup> getMatchedEntryGroups(Long matchConfigId, Long environmentId) {
+        List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfigId, environmentId);
         Collections.sort(groups, new GroupComparator());
         return groups;
     }
@@ -45,7 +47,7 @@ public class LogServiceImpl implements LogServicePartial {
 
     private void checkMatchConfigContainsExampleForNew(Environment environment, MatchConfig newConfig, MatchConfig matchConfig) {
         if (matchConfig.isGeneral()) {
-            for (LogEntryGroup group : dao.getMatchedEntryGroups(matchConfig, environment)) {
+            for (LogEntryGroup group : dao.getMatchedEntryGroups(matchConfig.getId(), environment.getId())) {
                 boolean groupChanged = false;
                 for (LogEntry entry : new ArrayList<LogEntry>(group.getEntries())) {
                     restoreMessage(entry, group.getMessagePattern());
@@ -65,7 +67,7 @@ public class LogServiceImpl implements LogServicePartial {
                     }
                 }
             }
-            for (LogEntry entry : dao.getNotGroupedMatchedEntries(matchConfig, environment)) {
+            for (LogEntry entry : dao.getNotGroupedMatchedEntries(matchConfig.getId(), environment.getId())) {
                 if (matchConfig.getMessage()!=null && !matchConfig.equals("")) {
                     restoreMessage(entry, matchConfig.getMessage());
                 }
@@ -154,7 +156,7 @@ public class LogServiceImpl implements LogServicePartial {
             if (!entry.getMatchConfig().isGeneral()) {
                 dao.persist(getLogEntryForNotGeneral(entries, entry));
             } else {
-                List<LogEntryGroup> groups = dao.getMatchedEntryGroups(entry.getMatchConfig(), entry.getEnvironment());
+                List<LogEntryGroup> groups = dao.getMatchedEntryGroups(entry.getMatchConfig().getId(), entry.getEnvironment().getId());
                 persistGroupCandidate(entry, getMatchedGroup(groups, entry));
             }
         }
@@ -176,7 +178,7 @@ public class LogServiceImpl implements LogServicePartial {
             dao.persist(entry);
             dao.persist(matchedGroup);
         } else {
-            List<LogEntry> oldEntries = dao.getNotGroupedMatchedEntries(entry.getMatchConfig(), entry.getEnvironment());
+            List<LogEntry> oldEntries = dao.getNotGroupedMatchedEntries(entry.getMatchConfig().getId(), entry.getEnvironment().getId());
             boolean matchFound = false;
             for (Iterator<LogEntry> iterator = oldEntries.iterator(); iterator.hasNext() && !matchFound; ) {
                 matchFound = checkIfShouldBeSameGroup(entry, iterator.next());
@@ -279,7 +281,7 @@ public class LogServiceImpl implements LogServicePartial {
     }
 
     private LogEntry getLogEntryForNotGeneral(List<LogEntry> entries, LogEntry entry) {
-        List<LogEntry> oldEntries = dao.getNotGroupedMatchedEntries(entry.getMatchConfig(), entry.getEnvironment());
+        List<LogEntry> oldEntries = dao.getNotGroupedMatchedEntries(entry.getMatchConfig().getId(), entry.getEnvironment().getId());
         if (!oldEntries.isEmpty()) {
             LogEntry first = oldEntries.get(0);
             first.setDate(entry.getDate());

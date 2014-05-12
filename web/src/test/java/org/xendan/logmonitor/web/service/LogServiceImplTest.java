@@ -87,7 +87,7 @@ public class LogServiceImplTest {
         assertAllHaveMessages(entries);
         service.addEntries(entries);
         for (MatchConfig config : environment.getMatchConfigs())  {
-            assertAllHaveMessages(dao.getNotGroupedMatchedEntries(config, environment));
+            assertAllHaveMessages(dao.getNotGroupedMatchedEntries(config.getId(), environment.getId()));
         }
     }
 
@@ -118,24 +118,24 @@ public class LogServiceImplTest {
         environment.getMatchConfigs().add(textError);
         checkGroupNum(0);
         checkNotGrouped(0);
-        entries = dao.getNotGroupedMatchedEntries(textError, environment);
+        entries = dao.getNotGroupedMatchedEntries(textError.getId(), environment.getId());
         assertEquals("All errors are now for new config",
                 4, entries.size());
 
     }
 
     private void checkNotGrouped(final int entriesNum) {
-        List<LogEntry> answer = dao.getNotGroupedMatchedEntries(matchConfig, environment);
+        List<LogEntry> answer = dao.getNotGroupedMatchedEntries(matchConfig.getId(), environment.getId());
         assertEquals(entriesNum, answer.size());
     }
 
     private void checkEntriesInGroup(final int groupIndex, final int entriesNum) {
-        List<LogEntryGroup> answer = dao.getMatchedEntryGroups(matchConfig, environment);
+        List<LogEntryGroup> answer = dao.getMatchedEntryGroups(matchConfig.getId(), environment.getId());
         assertEquals(entriesNum, answer.get(groupIndex).getEntries().size());
     }
 
     private void checkGroupNum(final int number) {
-        List<LogEntryGroup> answer = dao.getMatchedEntryGroups(matchConfig, environment);
+        List<LogEntryGroup> answer = dao.getMatchedEntryGroups(matchConfig.getId(), environment.getId());
         assertEquals(number, answer.size());
     }
 
@@ -166,7 +166,7 @@ public class LogServiceImplTest {
     private List<LogEntryGroup> addEntriesAndVerifyGroups(String fileName) throws IOException {
         final List<LogEntry> entries = getJobErrorsEntries(fileName);
         service.addEntries(entries);
-        return dao.getMatchedEntryGroups(matchConfig, environment);
+        return dao.getMatchedEntryGroups(matchConfig.getId(), environment.getId());
     }
 
     @Test

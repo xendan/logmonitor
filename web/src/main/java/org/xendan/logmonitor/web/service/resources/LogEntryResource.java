@@ -1,12 +1,17 @@
 package org.xendan.logmonitor.web.service.resources;
 
 import com.google.inject.Inject;
+import org.xendan.logmonitor.model.EntriesList;
 import org.xendan.logmonitor.model.EnvironmentStatus;
+import org.xendan.logmonitor.model.LogEntry;
+import org.xendan.logmonitor.model.LogEntryGroup;
 import org.xendan.logmonitor.web.service.EnvironmentMonitor;
 import org.xendan.logmonitor.web.service.LogService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import java.util.Collections;
+import java.util.List;
 
 @Path("/rest/logentries")
 public class LogEntryResource {
@@ -29,7 +34,9 @@ public class LogEntryResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public EnvironmentStatus getEntries(@QueryParam("envId") Long envId, @QueryParam("matcherId") Long matcherId, @QueryParam("isGeneral") boolean isGeneral) {
-        return monitor.getStatus(envId);
+    public EntriesList getEntries(@QueryParam("envId") Long envId, @QueryParam("matcherId") Long matcherId, @QueryParam("isGeneral") boolean isGeneral) {
+        List<LogEntryGroup> groups = isGeneral ? service.getMatchedEntryGroups(matcherId, envId) : Collections.<LogEntryGroup>emptyList();
+        List<LogEntry> notGrouped = service.getNotGroupedMatchedEntries(matcherId, envId);
+        return new EntriesList(groups, notGrouped);
     }
 }
