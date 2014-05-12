@@ -1,6 +1,7 @@
 package org.xendan.logmonitor.web.service;
 
 import com.google.inject.Inject;
+import com.google.inject.persist.Transactional;
 import org.apache.log4j.Logger;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.*;
@@ -17,6 +18,7 @@ import java.util.regex.Pattern;
  * User: id967161
  * Date: 22/11/13
  */
+@Transactional
 public class LogServiceImpl implements LogServicePartial {
     private static final Logger logger = Logger.getLogger(LogServiceImpl.class);
 

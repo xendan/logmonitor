@@ -22,7 +22,7 @@ public class LogEntryGroup extends BaseObject {
         this.messagePattern = messagePattern;
     }
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @OrderBy(value="date asc")
     public List<LogEntry> getEntries() {
         return entries;

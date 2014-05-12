@@ -44,10 +44,14 @@ public class LogParserTest {
 
     @Test
     public void test_idea_log() {
-        //TODO: research why idea has no date in log4j pattern???
         LogEntry entry = singleEntry("%d [%7r] %6p - %30.30c - %m \\n", "2014-04-04 19:53:52,100 [     17]   INFO -        #com.intellij.idea.Main - IDE: IntelliJ IDEA (build #IC-135.480, 21 Mar 2014 00:00) ");
         assertEquals(Level.INFO.toString(), entry.getLevel());
     }
+//    @Test
+//    public void test_idea_log2() {
+//        LogEntry entry = singleEntry("%d \\[%7r\\] %6p - %30.30c - %m ", "2014-05-12 12:40:24,450 [ 569347]   WARN - ution.process.OSProcessHandler - Cannot kill process tree. Trying to destroy process using Java API. Cmdline:");
+//        assertEquals(Level.INFO.toString(), entry.getLevel());
+//    }
 
     @Test
     public void test_getDateAsString() throws Exception {

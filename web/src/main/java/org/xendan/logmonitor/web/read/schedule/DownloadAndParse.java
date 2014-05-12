@@ -52,7 +52,7 @@ public class DownloadAndParse implements Runnable {
             service.setEnvironmentStatus(environment, EnvironmentMessage.NO_ENTRIES_FOUND);
             return;
         }
-        service.persist(environment);
+        service.merge(environment);
         service.addEntries(entries);
         service.setEnvironmentStatus(environment, EnvironmentMessage.WAITING);
     }

@@ -38,15 +38,6 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     @Override
     public void merge(BaseObject object) {
-        /*
-        if (object instanceof Configuration) {
-            Configuration config = (Configuration) object;
-            for (Environment environment : config.getEnvironments()) {
-                for (MatchConfig matchConfig : environment.getMatchConfigs()) {
-                    merge(matchConfig);
-                }
-            }
-        }*/
         getEntityManager().merge(object);
     }
 
@@ -65,10 +56,16 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     private Configuration sortEnvironments(Configuration configuration) {
         //TODO why not done by hibernate..
+        //TODO also problems with eager environment load
         for (Environment environment : configuration.getEnvironments()) {
             Collections.sort(environment.getMatchConfigs());
+            initEnvironmentMatch(environment);
         }
         return configuration;
+    }
+
+    private void initEnvironmentMatch(Environment environment) {
+        environment.getMatchConfigs().size();
     }
 
     @Override
@@ -133,7 +130,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     @Override
     public List<LogEntry> getNotGroupedMatchedEntries(Long matchConfigId, Long environmentId) {
 //        System.out.println(entityManager.createQuery("from LogEntry").getResultList());
-        return getEntityManager().createNativeQuery(
+        return initializeEnvironments(getEntityManager().createNativeQuery(
                 "SELECT e.* FROM LOG_ENTRY e " +
                         " WHERE e.MATCH_CONFIG = (:matcher) AND e.ENVIRONMENT = (:environment) " +
                         " AND NOT EXISTS (" +
@@ -146,14 +143,22 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
         )
                 .setParameter("matcher", matchConfigId)
                 .setParameter("environment", environmentId)
-                .getResultList();
+                .getResultList());
+    }
+
+    private List<LogEntry> initializeEnvironments(List<LogEntry> entries) {
+        //TODO why hibernate not eager load
+        for (LogEntry entry : entries) {
+            initEnvironmentMatch(entry.getEnvironment());
+        }
+        return entries;
     }
 
 
     @Override
     public List<LogEntryGroup> getMatchedEntryGroups(Long matchConfigId, Long environmentId) {
 //        System.out.println(entityManager.createQuery("from LogEntryGroup").getResultList());
-        return getEntityManager().createNativeQuery(
+        List<LogEntryGroup> groups = getEntityManager().createNativeQuery(
                 "SELECT g.* FROM LOG_ENTRY_GROUP g" +
                         " WHERE EXISTS (" +
                         "    SELECT 1 FROM  LOG_ENTRY_GROUP_ENTRIES le, LOG_ENTRY e" +
@@ -166,6 +171,10 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 .setParameter("matcher", matchConfigId)
                 .setParameter("environment", environmentId)
                 .getResultList();
+        for (LogEntryGroup group : groups) {
+            initializeEnvironments(group.getEntries());
+        }
+        return groups;
     }
 
     @Override

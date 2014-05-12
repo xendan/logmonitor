@@ -53,7 +53,7 @@ public class LogParser {
     private final List<UnitParser<?>> activeParsers = new ArrayList<UnitParser<?>>();
 
     private final List<LogEntry> entries = new ArrayList<LogEntry>();
-    private final String pattern;
+    private final String log4jPreparedPattern;
     private final EntryMatcher entryMatcher;
     private final LocalDateTime since;
     private LogEntry lastEntry;
@@ -67,19 +67,19 @@ public class LogParser {
     public LogParser(LocalDateTime since, String pattern, EntryMatcher entryMatcher) {
         this.since = since;
         this.entryMatcher = entryMatcher;
-        this.pattern = PatternUtils.simpleToRegexp(pattern.replace("%n", "")
+        this.log4jPreparedPattern = PatternUtils.simpleToRegexp(pattern.replace("%n", "")
                         .replace("\\r", "")
                         .replace("\\n", ""), true);
         regexPattern = getRegexPattern();
     }
 
     private Pattern getRegexPattern() {
-        initActiveParsers(pattern);
+        initActiveParsers(log4jPreparedPattern);
         return Pattern.compile(buildRegexPattern(true));
     }
 
     private String buildRegexPattern(boolean useParentheses) {
-        String resultPattern = pattern;
+        String resultPattern = log4jPreparedPattern;
         for (UnitParser<?> parser : activeParsers) {
             resultPattern = parser.replaceInPattern(resultPattern, useParentheses);
         }
@@ -144,7 +144,7 @@ public class LogParser {
     }
 
     /**
-     * @return found entries, if pattern didn't match provided string, return null
+     * @return found entries, if log4jPreparedPattern didn't match provided string, return null
      */
     public List<LogEntry> getEntries() {
         if (somethingWasFound) {

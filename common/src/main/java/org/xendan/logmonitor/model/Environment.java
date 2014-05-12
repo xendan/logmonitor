@@ -33,7 +33,8 @@ public class Environment extends BaseObject {
         this.path = path;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //TODO WHY Column "MATCHCONFI1_.WEIGHT" not found; SQL statement
+    @ManyToMany(cascade = CascadeType.ALL)
     @OrderBy(value="weight desc")
     public List<MatchConfig> getMatchConfigs() {
         return matchConfigs;
