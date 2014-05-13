@@ -31,4 +31,6 @@ public interface ConfigurationDao {
     Configuration getConfig(Long configId);
 
     List<Server> getAllServers();
+
+    Environment getEnvironment(long environmentId);
 }

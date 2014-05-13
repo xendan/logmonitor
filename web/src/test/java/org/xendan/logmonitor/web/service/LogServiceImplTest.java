@@ -53,13 +53,13 @@ public class LogServiceImplTest {
         for (Configuration config : createConfigs()) {
             dao.persist(config);
         }
-        service = new LogServiceImpl(dao);
     }
 
     private void createDao() {
         Injector injector = GuiceServletConfig.createInjector(TEST_PATH);
         injector.getInstance(PersistService.class).start();
         dao = injector.getInstance(ConfigurationDao.class);
+        service = injector.getInstance(LogService.class);
     }
 
     private MatchConfig createMatchConfig() {
@@ -114,7 +114,7 @@ public class LogServiceImplTest {
         textError.setLevel(Level.ERROR.toString());
         textError.setMessage("\\[Error\\]");
 
-        service.addMatchConfig(environment, textError);
+        service.addMatchConfig(environment.getId(), textError);
         environment.getMatchConfigs().add(textError);
         checkGroupNum(0);
         checkNotGrouped(0);

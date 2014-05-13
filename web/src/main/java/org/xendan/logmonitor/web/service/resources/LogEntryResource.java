@@ -37,6 +37,18 @@ public class LogEntryResource {
     public EntriesList getEntries(@QueryParam("envId") Long envId, @QueryParam("matcherId") Long matcherId, @QueryParam("isGeneral") boolean isGeneral) {
         List<LogEntryGroup> groups = isGeneral ? service.getMatchedEntryGroups(matcherId, envId) : Collections.<LogEntryGroup>emptyList();
         List<LogEntry> notGrouped = service.getNotGroupedMatchedEntries(matcherId, envId);
+        deleteEnvironments(notGrouped);
+        for (LogEntryGroup group : groups) {
+            deleteEnvironments(group.getEntries());
+        }
         return new EntriesList(groups, notGrouped);
+    }
+
+    private void deleteEnvironments(List<LogEntry> entries) {
+        for (LogEntry entry : entries) {
+            entry.setMatchConfig(null);
+            entry.setEnvironment(null);
+        }
+
     }
 }

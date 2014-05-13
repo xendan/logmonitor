@@ -1,8 +1,6 @@
 package org.xendan.logmonitor.web.service;
 
-import org.apache.tools.ant.BuildException;
 import org.xendan.logmonitor.model.Environment;
-import org.xendan.logmonitor.model.EnvironmentStatus;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.model.MatchConfig;
 
@@ -18,6 +16,6 @@ public interface LogServicePartial {
 
     void removeMatchConfig(final MatchConfig match, final Environment environment);
 
-    void addMatchConfig(final Environment environment, final MatchConfig newConfig);
+    void addMatchConfig(long environmentId, final MatchConfig newConfig);
 
 }

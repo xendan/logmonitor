@@ -20,8 +20,17 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
     @Override
     public void setEnvironmentStatus(Environment environment, EnvironmentMessage message) {
         EnvironmentInfo info = getOrCreateInfo(environment);
-        info.setMessage(message);
         info.setError(message == EnvironmentMessage.NO_ENTRIES_FOUND);
+        info.setMessage(message);
+        if (needRecordStart(environment, message)) {
+            info.setProcessStart(System.currentTimeMillis());
+        } else if (message == EnvironmentMessage.WAITING || message == EnvironmentMessage.NO_ENTRIES_FOUND) {
+            setProcessDuration(info);
+        }
+    }
+
+    private void setProcessDuration(EnvironmentInfo info) {
+        info.setProcessDuration(System.currentTimeMillis() - info.getProcessStart());
     }
 
     private EnvironmentInfo getOrCreateInfo(Environment environment) {
@@ -38,8 +47,14 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
 
     private void setErrorStatus(Environment environment, EnvironmentMessage message, Exception exception) {
         EnvironmentInfo info = getOrCreateInfo(environment);
-        info.setMessage(message);
         info.setException(exception);
+        info.setMessage(message);
+        setProcessDuration(info);
+    }
+
+    private boolean needRecordStart(Environment environment, EnvironmentMessage message) {
+        return (environment.getServer() == null && message == EnvironmentMessage.PARSING) ||
+                message == EnvironmentMessage.DOWNLOADING;
     }
 
     @Override
@@ -88,7 +103,19 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
 
     @Override
     public EnvironmentStatus getStatus(Long envId) {
-        EnvironmentInfo info = getById(envId);
+        Map.Entry<Environment, EnvironmentInfo> entry = getById(envId);
+        EnvironmentStatus status = createStatus(entry == null ? null : entry.getValue());
+        if (entry != null) {
+            status.setRecommendUpdate(getRecommendedUpdateInSeconds(entry.getValue(), entry.getKey()));
+        }
+        return status;
+    }
+
+    private long getRecommendedUpdateInSeconds(EnvironmentInfo info, Environment env) {
+        return info.getProcessStart() / 1000 + info.getProcessDuration() / 1000 + env.getUpdateInterval() * 60;
+    }
+
+    private EnvironmentStatus createStatus(EnvironmentInfo info) {
         if (info == null) {
             return createOkStatus(EnvironmentMessage.WAITING);
         }
@@ -113,10 +140,10 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
         return new EnvironmentStatus(message.getText(), false);
     }
 
-    private EnvironmentInfo getById(Long envId) {
+    private Map.Entry<Environment, EnvironmentInfo>  getById(Long envId) {
         for (Map.Entry<Environment, EnvironmentInfo> entry : infos.entrySet()) {
             if (entry.getKey().getId().equals(envId)) {
-                return entry.getValue();
+                return entry;
             }
         }
         return null;
@@ -128,6 +155,8 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
         private EnvironmentMessage message;
         private String filePath;
         private long fileSize;
+        private long processStart;
+        private long processDuration;
 
         public boolean isError() {
             return error;
@@ -171,6 +200,22 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
 
         public void setFileSize(long fileSize) {
             this.fileSize = fileSize;
+        }
+
+        public long getProcessStart() {
+            return processStart;
+        }
+
+        public void setProcessStart(long processStart) {
+            this.processStart = processStart;
+        }
+
+        public long getProcessDuration() {
+            return processDuration;
+        }
+
+        public void setProcessDuration(long processDuration) {
+            this.processDuration = processDuration;
         }
     }
 }

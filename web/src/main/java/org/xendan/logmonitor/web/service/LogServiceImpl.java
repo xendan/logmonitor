@@ -37,7 +37,8 @@ public class LogServiceImpl implements LogServicePartial {
         return groups;
     }
 
-    public void addMatchConfig(final Environment environment, final MatchConfig newConfig) {
+    public void addMatchConfig(long environmentId, final MatchConfig newConfig) {
+        Environment environment = dao.getEnvironment(environmentId);
         environment.getMatchConfigs().add(newConfig);
         dao.persist(environment);
         for (MatchConfig matchConfig : environment.getMatchConfigs()) {
