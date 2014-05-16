@@ -49,7 +49,7 @@ public class EnvironmentMonitorImplTest {
     }
 
     private void assertUpdateSoon(EnvironmentStatus status) {
-        long delta = System.currentTimeMillis()/1000 + environment.getUpdateInterval() * 60 - status.getRecommendUpdate();
+        long delta = environment.getUpdateInterval() * 60 * 1000 - status.getUpdateInterval();
         assertTrue("Next update after parsing delta -" + delta, delta < 100);
     }
 

@@ -106,13 +106,13 @@ public class EnvironmentMonitorImpl implements EnvironmentMonitor {
         Map.Entry<Environment, EnvironmentInfo> entry = getById(envId);
         EnvironmentStatus status = createStatus(entry == null ? null : entry.getValue());
         if (entry != null) {
-            status.setRecommendUpdate(getRecommendedUpdateInSeconds(entry.getValue(), entry.getKey()));
+            status.setUpdateInterval(getRecommendedUpdateInSeconds(entry.getValue(), entry.getKey()));
         }
         return status;
     }
 
     private long getRecommendedUpdateInSeconds(EnvironmentInfo info, Environment env) {
-        return info.getProcessStart() / 1000 + info.getProcessDuration() / 1000 + env.getUpdateInterval() * 60;
+        return info.getProcessDuration() + env.getUpdateInterval() * 60 * 1000;
     }
 
     private EnvironmentStatus createStatus(EnvironmentInfo info) {

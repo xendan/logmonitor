@@ -49,7 +49,8 @@ public class PatternUtils {
 
     public static String restoreMessage(LogEntry entry, String messagePattern) {
         if (messagePattern.contains(PatternUtils.ALL_GROUP)) {
-            return PatternUtils.regexToSimple(messagePattern).replace(PatternUtils.ALL_GROUP, entry.getMessage());
+            return PatternUtils.regexToSimple(messagePattern).replace(PatternUtils.ALL_GROUP,
+                    "<span class='messageGroup'>" + entry.getMessage() + "</span>");
         } else {
             return PatternUtils.regexToSimple(messagePattern);
         }

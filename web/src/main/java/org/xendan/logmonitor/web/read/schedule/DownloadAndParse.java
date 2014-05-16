@@ -36,25 +36,29 @@ public class DownloadAndParse implements Runnable {
 
     @Override
     public void run() {
-        String lastRead = environment.getLastUpdate() == null ? null : new DateParser().getDateAsString(logPattern, environment.getLastUpdate());
-        String logFile = getLogFile(lastRead);
-        if (logFile == null) {
-            return;
+        try {
+            String lastRead = environment.getLastUpdate() == null ? null : new DateParser().getDateAsString(logPattern, environment.getLastUpdate());
+            String logFile = getLogFile(lastRead);
+            if (logFile == null) {
+                return;
+            }
+            File file = new File(logFile);
+            if (!file.exists()) {
+                service.setEnvironmentStatus(environment, EnvironmentMessage.FILE_NOT_FOUND);
+                return;
+            }
+            service.setEnvironmentStatus(environment, EnvironmentMessage.PARSING);
+            List<LogEntry> entries = new LogFileReader(logFile, logPattern, environment).getEntries();
+            if (entries == null) {
+                service.setEnvironmentStatus(environment, EnvironmentMessage.NO_ENTRIES_FOUND);
+                return;
+            }
+            service.merge(environment);
+            service.addEntries(entries);
+            service.setEnvironmentStatus(environment, EnvironmentMessage.WAITING);
+        } catch (Exception e) {
+            logger.error(e);
         }
-        File file = new File(logFile);
-        if (!file.exists()) {
-            service.setEnvironmentStatus(environment, EnvironmentMessage.FILE_NOT_FOUND);
-            return;
-        }
-        service.setEnvironmentStatus(environment, EnvironmentMessage.PARSING);
-        List<LogEntry> entries = new LogFileReader(logFile, logPattern, environment).getEntries();
-        if (entries == null) {
-            service.setEnvironmentStatus(environment, EnvironmentMessage.NO_ENTRIES_FOUND);
-            return;
-        }
-        service.merge(environment);
-        service.addEntries(entries);
-        service.setEnvironmentStatus(environment, EnvironmentMessage.WAITING);
     }
 
     private String getLogFile(String lastRead) {

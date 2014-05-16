@@ -5,6 +5,7 @@ import org.xendan.logmonitor.model.EntriesList;
 import org.xendan.logmonitor.model.EnvironmentStatus;
 import org.xendan.logmonitor.model.LogEntry;
 import org.xendan.logmonitor.model.LogEntryGroup;
+import org.xendan.logmonitor.web.read.parse.PatternUtils;
 import org.xendan.logmonitor.web.service.EnvironmentMonitor;
 import org.xendan.logmonitor.web.service.LogService;
 
@@ -40,6 +41,9 @@ public class LogEntryResource {
         deleteEnvironments(notGrouped);
         for (LogEntryGroup group : groups) {
             deleteEnvironments(group.getEntries());
+            for (LogEntry entry : group.getEntries()) {
+                entry.setExpandedMessage(PatternUtils.restoreMessage(entry, group.getMessagePattern()));
+            }
         }
         return new EntriesList(groups, notGrouped);
     }

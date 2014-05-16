@@ -1,15 +1,11 @@
-+ add popup for env
-+ add popup for matcher
-
-- matcher in  env
-- env in matcher
-- save environment
-- save matcher
-- nicme matcher message
+- colapse/expand config tree
+- just added messages
+-- on expand:
+---  edit config
+---  add matcher by group, message
+---  delete messages for environment
+- refresh immediatly
 - popup validation
-- disable ok on invalid form
 - add new server
-- handle localhost
-- save idea login
-- parse log file and add to db
-- main page with messag trees.
+- show recent message
+- delete if a lot

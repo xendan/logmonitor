@@ -1,8 +1,7 @@
-var app = angular.module('app', [ 'ngRoute', 'ngResource' ]);
+var app = angular.module('app', [ 'ngRoute', 'ngResource', 'ngSanitize' ]);
 
 // Controllers
-app.controller('AllConfigsController', [ '$scope', 'Configs', 'LogEntries', '$routeParams',
-		AllConfigsController ]);
+app.controller('AllConfigsController', [ '$scope', 'Configs', 'LogEntries', '$routeParams',	AllConfigsController ]);
 app.controller('ConfigController', [ '$scope', 'Configs', 'Servers', '$http', '$routeParams',
 		ConfigController ]);
 

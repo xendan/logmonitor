@@ -1,27 +1,92 @@
 function AllConfigsController($scope, Configs, LogEntries, $routeParams) {
 	$scope.statuses = {};
 	$scope.entries = {};
+	$scope.newEntries = {};
+	$scope.notifications = {};
+	$scope.entriesNum = {};
+	$scope.expanded = {configs:{}, matchers:{}, groups:{}, messages:{}};
+	var eachEntry = function(list, lambda) {
+	    var eachInList = function(entries) {
+	        if (entries) {
+	            for (var i = 0; i < entries.length; i++) {
+	                lambda(entries[i]);
+	            }
+	        }
+	    };
+	    if (list.groups) {
+	        for (var i=0; i < list.groups.length; i++) {
+	            eachInList(list.groups[i].entries);
+	        }
+	    }
+	    eachInList(list.notGrouped);
+	};
+	var addNotification = function(matcher, entry) {
+	    if (!$scope.notifications[matcher.name]) {
+	        $scope.notifications[matcher.name] = [];
+	    }
+	    $scope.notifications[matcher.name].push(entry);
+	};
+	var getLoadEntriesHandler = function(matcher, envId) {
+	    return function(entries) {
+            	    eachEntry(entries, function(newEntry) {
+            	        var existed = false;
+            	        eachEntry($scope.entries, function(oldEntry) {
+            	            if (newEntry.id == oldEntry.id) {
+            	                existed = true;
+            	            }
+            	        });
+            	        $scope.newEntries[newEntry.id] = !existed;
+            	        if (!existed && matcher.showNotification) {
+            	            addNotification(matcher, newEntry);
+            	        }
+            	    });
+                    $scope.entries[envId][matcher.id] = entries;
+                    var counter= 0;
+                    eachEntry(entries, function() {
+                        counter++;
+                    })
+                    $scope.entriesNum[envId][matcher.id] = counter;
+    //                $scope.$digest();
+            	}
+	};
+	var refreshEnvironment = function(env) {
+        LogEntries.getStatus({envId:env.id}, function(status) {
+            $scope.statuses[env.id] = status;
+            setTimeout(refreshEnvironment, status.updateInterval, env);
+        });
+        for (var k = 0; k < env.matchConfigs.length; k++ ) {
+            if (!$scope.entries[env.id]) {
+                $scope.entries[env.id] = {};
+            }
+            var matcherId = env.matchConfigs[k].id;
+         	LogEntries.getEntries(
+        	            {envId:env.id, matcherId:matcherId, isGeneral:env.matchConfigs[k].general },
+                    getLoadEntriesHandler(env.matchConfigs[k], env.id));
+        }
+	}
+	var visibleFields = {};
 	$scope.configs = Configs.getAll({}, function(configs) {
     	for (var i = 0; i < configs.length; i++) {
-    	    var confId = configs[i].id;
-    	    $scope.entries[confId] = {};
+    	    visibleFields[configs[i].id] = configs[i].visibleFields;
+    	    $scope.entries = {};
     	    for (var j = 0; j < configs[i].environments.length; j++) {
     	        var env = configs[i].environments[j];
-    	        $scope.entries[confId][env.id] = {};
-    	        LogEntries.getStatus({envId:env.id}, function(status) {
-    	            $scope.statuses[env.id] = status;
-    	        });
-    	        //getEntries
-    	        for (var k = 0; k < env.matchConfigs.length; k++ ) {
-    	            var matcherId = env.matchConfigs[k].id;
-    	            $scope.entries[confId][env.id][matcherId] = LogEntries.getEntries(
-    	            {envId:env.id, matcherId:matcherId, isGeneral:env.matchConfigs[k].general });
-    	        }
+    	        refreshEnvironment(env);
+    	        $scope.entriesNum[env.id] = {};
+    	        $scope.expanded.matchers[env.id] = {};
     	    }
     	}
 	});
 	$scope.currentProject = $routeParams.projectName;
-
+    $scope.entryToHtml = function(entry, configId) {
+        var result = "";
+        for (var i = 0;  i < visibleFields[configId].length; i++) {
+            var field = visibleFields[configId][i];
+            var value = (field == 'message' && entry.expandedMessage) ? entry.expandedMessage : entry[field];
+            result +=  field + ":" + value + '<br />';
+        }
+        return result;
+    }
 }
 
 function ConfigController($scope, Configs, Servers, $http, $routeParams) {

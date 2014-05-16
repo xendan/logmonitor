@@ -168,4 +168,15 @@ public class LogParser {
     public LocalDateTime getLastTime() {
         return lastTime;
     }
+
+    public List<String> getVisibleFields() {
+        List<String> fields = new ArrayList<String>();
+        for (Map.Entry<String, UnitParser<?>> entry : ALL_PARSERS.entrySet()) {
+            if (activeParsers.contains(entry.getValue())) {
+                fields.add(entry.getKey());
+            }
+        }
+        return fields;
+
+    }
 }

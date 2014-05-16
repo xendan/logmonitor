@@ -5,6 +5,7 @@ import org.apache.log4j.Level;
 import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
+import org.xendan.logmonitor.web.read.parse.LogParser;
 import org.xendan.logmonitor.web.read.schedule.ReaderScheduler;
 import org.xendan.logmonitor.web.service.LogService;
 
@@ -29,7 +30,11 @@ public class ConfigResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public List<Configuration> getAllConfigs() {
-        return service.getConfigs();
+        List<Configuration> configs = service.getConfigs();
+        for (Configuration config : configs) {
+            config.setVisibleFields(new LogParser(config.getLogPattern(), new Environment()).getVisibleFields());
+        }
+        return configs;
     }
 
     @GET

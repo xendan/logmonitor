@@ -8,7 +8,7 @@ public class EnvironmentStatus {
     private final String message;
     private final boolean isError;
     private final String stackTrace;
-    private long recommendUpdate;
+    private long updateInterval;
 
     public EnvironmentStatus(String message, boolean isError) {
         this.message = message;
@@ -34,11 +34,11 @@ public class EnvironmentStatus {
         return stackTrace;
     }
 
-    public long getRecommendUpdate() {
-        return recommendUpdate;
+    public long getUpdateInterval() {
+        return updateInterval;
     }
 
-    public void setRecommendUpdate(long recommendUpdate) {
-        this.recommendUpdate = recommendUpdate;
+    public void setUpdateInterval(long updateInterval) {
+        this.updateInterval = updateInterval;
     }
 }
