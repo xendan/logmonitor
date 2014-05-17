@@ -1,11 +1,8 @@
 package org.xendan.logmonitor.model;
 
 import org.joda.time.LocalDateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlTransient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,8 +12,8 @@ import java.util.List;
  */
 @Entity
 public class Environment extends BaseObject {
-    public static final String SOON = "soon";
-    private final DateTimeFormatter HOURS_MINUTES = DateTimeFormat.forPattern("HH:mm");
+//    public static final String SOON = "soon";
+//    private final DateTimeFormatter HOURS_MINUTES = DateTimeFormat.forPattern("HH:mm");
     private Server server;
     private String path;
     private String name;
@@ -27,6 +24,7 @@ public class Environment extends BaseObject {
     private List<MatchConfig> matchConfigs = new ArrayList<MatchConfig>();
     private LocalDateTime lastUpdate;
 
+
     public String getPath() {
         return path;
     }
@@ -35,7 +33,8 @@ public class Environment extends BaseObject {
         this.path = path;
     }
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    //TODO WHY Column "MATCHCONFI1_.WEIGHT" not found; SQL statement
+    @ManyToMany(cascade = CascadeType.ALL)
     @OrderBy(value="weight desc")
     public List<MatchConfig> getMatchConfigs() {
         return matchConfigs;
@@ -83,6 +82,7 @@ public class Environment extends BaseObject {
         return name;
     }
 
+    /*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -93,6 +93,7 @@ public class Environment extends BaseObject {
 
         if (updateInterval != that.updateInterval) return false;
         //new array because persistentbag is compared by identity
+        //i don't need this anymore...TODO check
         if (matchConfigs != null ? !new ArrayList<MatchConfig>(matchConfigs).equals(new ArrayList<MatchConfig>(that.matchConfigs)) : that.matchConfigs != null) return false;
         if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (path != null ? !path.equals(that.path) : that.path != null) return false;
@@ -109,8 +110,9 @@ public class Environment extends BaseObject {
         result = 31 * result + updateInterval;
         result = 31 * result + (matchConfigs != null ? matchConfigs.hashCode() : 0);
         return result;
-    }
+    }*/
 
+    /*
     @XmlTransient
     @Transient
     public String getNextUpdate() {
@@ -118,5 +120,5 @@ public class Environment extends BaseObject {
             return SOON;
         }
         return HOURS_MINUTES.print(getLastUpdate().plusMinutes(getUpdateInterval()));
-    }
+    }*/
 }

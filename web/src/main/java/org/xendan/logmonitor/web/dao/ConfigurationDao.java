@@ -12,9 +12,9 @@ public interface ConfigurationDao {
 
     List<Configuration> getConfigs();
 
-    List<LogEntry> getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment);
+    List<LogEntry> getNotGroupedMatchedEntries(Long matchConfigId, Long environmentId);
 
-    List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment);
+    List<LogEntryGroup> getMatchedEntryGroups(Long matchConfigId, Long environmentId);
 
     void removeMatchConfig(Environment environment, MatchConfig config);
 
@@ -31,4 +31,6 @@ public interface ConfigurationDao {
     Configuration getConfig(Long configId);
 
     List<Server> getAllServers();
+
+    Environment getEnvironment(long environmentId);
 }

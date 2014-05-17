@@ -23,6 +23,7 @@ public class LogEntry extends BaseObject {
     private Integer elapsedTime;
     private String ndc;
     private String mdc;
+    private String expandedMessage;
 
     @Column(length = 1000)
     public String getCategory() {
@@ -155,5 +156,14 @@ public class LogEntry extends BaseObject {
 
     public void setMdc(String mdc) {
         this.mdc = mdc;
+    }
+
+    @Transient
+    public String getExpandedMessage() {
+        return expandedMessage;
+    }
+
+    public void setExpandedMessage(String expandedMessage) {
+        this.expandedMessage = expandedMessage;
     }
 }

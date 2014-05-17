@@ -1,0 +1,125 @@
+2013-10-15 00:00:00,015 INFO  [com.bics.btts.job.ActionRepairTimeJob] ActionRepairTimeJob started : 15/10/2013 00:00
+2013-10-15 00:00:00,015 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob started: 15/10/2013 00:00
+2013-10-15 00:00:08,423 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:00:08,504 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:00:13,433 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: none rules not executed: AUTO_INCREASE_ESCALATION,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:00:13,491 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:00:22,583 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 236633 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:00:22,643 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 236633 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:00:22,802 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob ended: 15/10/2013 00:00 it took: 0-22s 
+2013-10-15 00:00:27,388 ERROR [org.quartz.core.JobRunShell] Job DEFAULT.org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean#44ca96de threw an unhandled Exception:
+org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:273)
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:86)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:195)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+Caused by: java.lang.NullPointerException#123456
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.getIncreaseConfiguration(AutoIncreaseInternalEscalationRule.java:102)
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.mustBeExecuted(AutoIncreaseInternalEscalationRule.java:76)
+	at com.bics.btts.job.ActionRepairTimeJob.execute(ActionRepairTimeJob.java:62)
+	at com.bics.btts.job.BttsJob.startJob(BttsJob.java:19)
+	at sun.reflect.GeneratedMethodAccessor943.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:273)
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:264)
+	... 3 more
+2013-10-15 00:10:00,047 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob started: 15/10/2013 00:10
+2013-10-15 00:10:00,048 INFO  [com.bics.btts.job.ActionRepairTimeJob] ActionRepairTimeJob started : 15/10/2013 00:10
+2013-10-15 00:10:08,264 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:10:08,677 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:10:09,843 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: none rules not executed: AUTO_INCREASE_ESCALATION,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:10:09,915 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:10:13,212 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 236633 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:10:13,326 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 236633 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:10:13,628 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob ended: 15/10/2013 00:10 it took: 0-13s 
+2013-10-15 00:10:14,628 ERROR [org.quartz.core.JobRunShell] Job DEFAULT.org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean#44ca96de threw an unhandled Exception:
+org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:273)
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:86)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:195)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+Caused by: java.lang.NullPointerException#124356
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.getIncreaseConfiguration(AutoIncreaseInternalEscalationRule.java:102)
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.mustBeExecuted(AutoIncreaseInternalEscalationRule.java:76)
+	at com.bics.btts.job.ActionRepairTimeJob.execute(ActionRepairTimeJob.java:62)
+	at com.bics.btts.job.BttsJob.startJob(BttsJob.java:19)
+	at sun.reflect.GeneratedMethodAccessor943.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:273)
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:264)
+	... 3 more
+2013-10-15 00:10:00,047 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob started: 15/10/2013 00:10
+2013-10-15 00:10:01,047 ERROR [org.quartz.core.JobRunShell] Job DEFAULT.org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean#44ca96de threw an unhandled Exception:
+org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:273)
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:86)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:195)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+Caused by: java.lang.NullPointerException#7776WWW
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.getIncreaseConfiguration(AutoIncreaseInternalEscalationRule.java:102)
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.mustBeExecuted(AutoIncreaseInternalEscalationRule.java:76)
+	at com.bics.btts.job.ActionRepairTimeJob.execute(ActionRepairTimeJob.java:62)
+	at com.bics.btts.job.BttsJob.startJob(BttsJob.java:19)
+	at sun.reflect.GeneratedMethodAccessor943.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:273)
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:264)
+	... 3 more
+2013-10-15 00:10:00,047 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob started: 15/10/2013 00:10
+2013-10-15 00:20:00,042 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob started: 15/10/2013 00:20
+2013-10-15 00:20:00,079 INFO  [com.bics.btts.job.ActionRepairTimeJob] ActionRepairTimeJob started : 15/10/2013 00:20
+2013-10-15 00:20:07,529 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:20:07,869 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:20:12,796 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: none rules not executed: AUTO_INCREASE_ESCALATION,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:20:12,845 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:20:15,903 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 236633 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:20:16,026 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 236633 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:20:16,370 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob ended: 15/10/2013 00:20 it took: 0-16s 
+2013-10-15 00:20:17,370 ERROR [org.quartz.core.JobRunShell] Job DEFAULT.org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean#44ca96de threw an unhandled Exception:
+org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:273)
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:86)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:195)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+Caused by: java.lang.NullPointerException#3333
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.getIncreaseConfiguration(AutoIncreaseInternalEscalationRule.java:102)
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.mustBeExecuted(AutoIncreaseInternalEscalationRule.java:76)
+	at com.bics.btts.job.ActionRepairTimeJob.execute(ActionRepairTimeJob.java:62)
+	at com.bics.btts.job.BttsJob.startJob(BttsJob.java:19)
+	at sun.reflect.GeneratedMethodAccessor943.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:273)
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:264)
+	... 3 more
+2013-10-15 00:10:00,047 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob started: 15/10/2013 00:10
+2013-10-15 00:10:00,048 ERROR [org.quartz.core.JobRunShell] Job DEFAULT.org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean#44ca96de threw an unhandled Exception:
+org.springframework.scheduling.quartz.JobMethodInvocationFailedException: Invocation of method 'startJob' on target class [class com.bics.btts.job.ActionRepairTimeJob] failed; nested exception is java.lang.NullPointerException
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:273)
+	at org.springframework.scheduling.quartz.QuartzJobBean.execute(QuartzJobBean.java:86)
+	at org.quartz.core.JobRunShell.run(JobRunShell.java:195)
+	at org.quartz.simpl.SimpleThreadPool$WorkerThread.run(SimpleThreadPool.java:520)
+Caused by: java.lang.NullPointerException#666
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.getIncreaseConfiguration(AutoIncreaseInternalEscalationRule.java:102)
+	at com.bics.btts.rule.impl.AutoIncreaseInternalEscalationRule.mustBeExecuted(AutoIncreaseInternalEscalationRule.java:76)
+	at com.bics.btts.job.ActionRepairTimeJob.execute(ActionRepairTimeJob.java:62)
+	at com.bics.btts.job.BttsJob.startJob(BttsJob.java:19)
+	at sun.reflect.GeneratedMethodAccessor943.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)
+	at java.lang.reflect.Method.invoke(Method.java:597)
+	at org.springframework.util.MethodInvoker.invoke(MethodInvoker.java:273)
+	at org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean$MethodInvokingJob.executeInternal(MethodInvokingJobDetailFactoryBean.java:264)
+	... 3 more
+2013-10-15 00:10:00,047 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob started: 15/10/2013 00:10
+2013-10-15 00:30:00,034 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob started: 15/10/2013 00:30
+2013-10-15 00:30:00,046 INFO  [com.bics.btts.job.ActionRepairTimeJob] ActionRepairTimeJob started : 15/10/2013 00:30
+2013-10-15 00:30:01,872 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:30:01,930 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:30:02,818 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: none rules not executed: AUTO_INCREASE_ESCALATION,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:30:02,877 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 254144 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:30:05,823 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 236633 rules executed: none rules not executed: AUTO_INCREASE_PRIORITY,AUTO_MAIL_TICKET_ESCALATION
+2013-10-15 00:30:05,924 INFO  [com.bics.btts.service.impl.SlaServiceImpl] On ticket: 236633 rules executed: INHERITANCE_PRIORITY,INHERITANCE_ESCALATION rules not executed: none
+2013-10-15 00:30:06,136 INFO  [com.bics.btts.job.ActionExecutionJob] ActionExecutionJob ended: 15/10/2013 00:30 it took: 0-6s

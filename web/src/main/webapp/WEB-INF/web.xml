@@ -13,7 +13,7 @@
 	</servlet>
 	<display-name>Archetype Created Web Application</display-name>
 	<listener>
-		<listener-class>org.xendan.logmonitor.web.GuiceServletConfig</listener-class>
+		<listener-class>org.xendan.logmonitor.web.guice.GuiceServletConfig</listener-class>
 	</listener>
 	<filter>
 		<filter-name>Guice Filter</filter-name>

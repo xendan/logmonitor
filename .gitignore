@@ -1,4 +1,8 @@
+tmp.txt
+idea/resources/*.war
 **/*.swp
+**/*.swo
+**/*.swn
 **/.project
 **/.settings
 **/.classpath
@@ -15,4 +19,4 @@ common/common.iml
 idea/.gradle/
 logmonitor.iml
 web/web.iml
-
+idea/build/

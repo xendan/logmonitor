@@ -1,5 +1,7 @@
 <div>
-	<a ng-click='onLinkClick()()'> <span>{{name}}</span></a>
+
+	<a ng-click='onLinkClick()'> <span>{{matcherToString(matcher0, name)}}</span></a>
+	
 	<div style="display: none">
 		<div id="matcher{{index}}">
 			<span class="mandatory_label">Name:</span> <input type="text"
@@ -7,8 +9,10 @@
 			level: <select ng-model="matcher.level"
 				ng-options="level for level in levels">
 			</select><br /> Error message:
+			
 			<textarea rows="4" cols="50" type="text" name="matcherMessage"
 				ng-model="matcher.message">
+
         </textarea>
 			<br /> Show notification: <input type="checkbox"
 				name="matcherShowNotification" ng-model="matcher.showNotification"><br />
@@ -16,9 +20,12 @@
 				ng-model="matcher.general"><br />
 				Found in environments:
 			<ul>
-				<li ng-repeat="env in allEnvironments"><input type="checkbox"
-					ng-model="enabledEnvironments[env.id]">{{env.name}}</li>
+				
+				<li ng-repeat="env in allEnvironments | orderBy: 'name'"><input type="checkbox"
+					ng-model="enabledEnvironments[env.id]">{{envToString(env)}}</li>
+		 
 			</ul>			
 		</div>
 	</div>
+	
 </div>

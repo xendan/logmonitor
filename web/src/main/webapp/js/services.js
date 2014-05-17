@@ -24,4 +24,18 @@ app.factory('Servers', ['$resource',
 			isArray:true}
 	});
 }]);
+app.factory('LogEntries', ['$resource', function($resource) {
+	return $resource('rest/logentries/', {}, {
+		getStatus: {
+			method:'GET',
+			isArray:false,
+			params:{envId: '@id'},
+			url: 'rest/logentries/envstatus/:envId'
+			},
+        getEntries: {
+			method:'GET',
+			isArray:false,
+			}
+	});
+}]);
 

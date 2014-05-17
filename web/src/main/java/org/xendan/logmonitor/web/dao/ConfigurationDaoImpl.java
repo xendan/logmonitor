@@ -1,6 +1,8 @@
 package org.xendan.logmonitor.web.dao;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
 import org.xendan.logmonitor.model.*;
 
@@ -13,49 +15,67 @@ import java.util.List;
  * @since 04/09/13
  */
 @SuppressWarnings("unchecked")
+@Singleton
 @Transactional
 public class ConfigurationDaoImpl implements ConfigurationDao {
 	
-    protected EntityManager entityManager;
+//    protected EntityManager entityManager;
+    private final Provider<EntityManager> emProvider;
 
     @Inject
-    public ConfigurationDaoImpl(EntityManager entityManager) {
-       this.entityManager = entityManager;
+    public ConfigurationDaoImpl(Provider<EntityManager> emProvider) {
+        this.emProvider = emProvider;
     }
 
     @Override
     public void persist(BaseObject baseObject) {
-        entityManager.persist(baseObject);
+        getEntityManager().persist(baseObject);
+    }
+
+    private EntityManager getEntityManager() {
+        return emProvider.get();
     }
 
     @Override
     public void merge(BaseObject object) {
-         entityManager.merge(object);
+        getEntityManager().merge(object);
     }
 
     public void clearAll() {
-        entityManager.createNativeQuery("DROP ALL OBJECTS ").executeUpdate();
+        getEntityManager().createNativeQuery("DROP ALL OBJECTS ").executeUpdate();
     }
 
     @Override
     public synchronized List<Configuration> getConfigs() {
         List<Configuration> configs = getAll(Configuration.class);
         for (Configuration configuration : configs) {
-            //TODO why not done by hibernate..
-            for (Environment environment : configuration.getEnvironments()) {
-                Collections.sort(environment.getMatchConfigs());
-            }
+            sortEnvironments(configuration);
         }
         return configs;
     }
 
+    private Configuration sortEnvironments(Configuration configuration) {
+        //TODO why not done by hibernate..
+        //TODO also problems with eager environment load
+        for (Environment environment : configuration.getEnvironments()) {
+            Collections.sort(environment.getMatchConfigs());
+            environment.getMatchConfigs().size();
+        }
+        return configuration;
+    }
+
     @Override
     public Configuration getConfig(Long configId) {
-        return entityManager.find(Configuration.class, configId);
+        return sortEnvironments(getEntityManager().find(Configuration.class, configId));
+    }
+
+    @Override
+    public Environment getEnvironment(long environmentId) {
+        return getEntityManager().find(Environment.class, environmentId);
     }
 
     private <T> List<T> getAll(Class<T> entityClass) {
-        return entityManager.createQuery("SELECT l FROM " + entityClass.getName() + " l", entityClass)
+        return getEntityManager().createQuery("SELECT l FROM " + entityClass.getName() + " l", entityClass)
                 .getResultList();
 
     }
@@ -63,7 +83,7 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     @Override
     public void remove(BaseObject object) {
-        entityManager.remove(object);
+        getEntityManager().remove(object);
 
     }
 
@@ -71,20 +91,20 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     public void removeAllEntries(Environment environment) {
         synchronized (ConfigurationDaoImpl.class) {
             //TODO maybe it is possible by JPA
-            entityManager.createNativeQuery("DELETE FROM LOG_ENTRY_GROUP_ENTRIES " +
+            getEntityManager().createNativeQuery("DELETE FROM LOG_ENTRY_GROUP_ENTRIES " +
                     "WHERE ENTRIES IN (" +
                     "SELECT ID FROM LOG_ENTRY " +
                     " WHERE ENVIRONMENT = ?" +
 
                     ")").setParameter(1, environment.getId())
                     .executeUpdate();
-            entityManager.createNativeQuery("DELETE FROM LOG_ENTRY_GROUP g " +
+            getEntityManager().createNativeQuery("DELETE FROM LOG_ENTRY_GROUP g " +
                     " WHERE NOT EXISTS (" +
                     "SELECT LOG_ENTRY_GROUP " +
                     " FROM LOG_ENTRY_GROUP_ENTRIES lg " +
                     " WHERE lg.LOG_ENTRY_GROUP = g.ID" +
                     ")").executeUpdate();
-            entityManager.createNativeQuery("DELETE FROM LOG_ENTRY  WHERE ENVIRONMENT = :environment")
+            getEntityManager().createNativeQuery("DELETE FROM LOG_ENTRY  WHERE ENVIRONMENT = :environment")
                     .setParameter("environment", environment.getId())
 
                     .executeUpdate();
@@ -93,12 +113,12 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     @Override
     public void removeMatchConfig(Environment environment, MatchConfig config) {
-        entityManager
+        getEntityManager()
                 .createQuery("DELETE FROM LogEntry WHERE matchConfig = :config AND environment = :environment")
                 .setParameter("config", config)
                 .setParameter("environment", environment)
                 .executeUpdate();
-        entityManager
+        getEntityManager()
                 .createNativeQuery("DELETE FROM MATCH_CONFIG c " +
                         "WHERE NOT EXISTS (" +
                         "SELECT MATCH_CONFIGS " +
@@ -109,8 +129,9 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     @Override
-    public List<LogEntry> getNotGroupedMatchedEntries(MatchConfig matchConfig, Environment environment) {
-        return entityManager.createNativeQuery(
+    public List<LogEntry> getNotGroupedMatchedEntries(Long matchConfigId, Long environmentId) {
+//        System.out.println(entityManager.createQuery("from LogEntry").getResultList());
+        return getEntityManager().createNativeQuery(
                 "SELECT e.* FROM LOG_ENTRY e " +
                         " WHERE e.MATCH_CONFIG = (:matcher) AND e.ENVIRONMENT = (:environment) " +
                         " AND NOT EXISTS (" +
@@ -119,16 +140,18 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                         "WHERE ENTRIES = e.ID" +
                         ")" +
                         " ORDER BY e.date DESC ",
-                LogEntry.class)
-                .setParameter("matcher", matchConfig.getId())
-                .setParameter("environment", environment.getId())
+                LogEntry.class
+        )
+                .setParameter("matcher", matchConfigId)
+                .setParameter("environment", environmentId)
                 .getResultList();
     }
 
 
     @Override
-    public List<LogEntryGroup> getMatchedEntryGroups(MatchConfig matchConfig, Environment environment) {
-        return entityManager.createNativeQuery(
+    public List<LogEntryGroup> getMatchedEntryGroups(Long matchConfigId, Long environmentId) {
+//        System.out.println(entityManager.createQuery("from LogEntryGroup").getResultList());
+        return getEntityManager().createNativeQuery(
                 "SELECT g.* FROM LOG_ENTRY_GROUP g" +
                         " WHERE EXISTS (" +
                         "    SELECT 1 FROM  LOG_ENTRY_GROUP_ENTRIES le, LOG_ENTRY e" +
@@ -136,14 +159,15 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                         "    AND le.ENTRIES = e.ID" +
                         "    AND e.MATCH_CONFIG = (:matcher) " +
                         "   AND e.ENVIRONMENT = (:environment) )",
-                LogEntryGroup.class)
-                .setParameter("matcher", matchConfig.getId())
-                .setParameter("environment", environment.getId())
+                LogEntryGroup.class
+        )
+                .setParameter("matcher", matchConfigId)
+                .setParameter("environment", environmentId)
                 .getResultList();
     }
 
     @Override
     public List<Server> getAllServers() {
-        return entityManager.createQuery("select s from Server s", Server.class).getResultList();
+        return getEntityManager().createQuery("select s from Server s", Server.class).getResultList();
     }
 }

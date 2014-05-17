@@ -1,10 +1,11 @@
-+ order of patterns
-+ remove ignore pattern.
-+ fix JPA
+
+- delete config, enivronment, matcher
+- redirect
 
 - date in log file name
 
 - find why empty messages
+
 
 - find logger
 - show log round message.
