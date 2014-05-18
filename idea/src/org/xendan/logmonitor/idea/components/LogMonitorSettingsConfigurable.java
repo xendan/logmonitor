@@ -35,7 +35,7 @@ public class LogMonitorSettingsConfigurable implements SearchableConfigurable, C
     private JRadioButton useBuiltInServerRadioButton;
     private JRadioButton useExternalServerRadioButton;
     private JFormattedTextField portTextField;
-    private JLabel ocupiedMessage;
+    private JLabel portOcupiedMessage;
     private Settings settings;
     private Serializer serializer;
     private HomeResolver homeResolver;
