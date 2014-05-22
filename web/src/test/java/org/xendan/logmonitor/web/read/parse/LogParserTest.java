@@ -130,11 +130,13 @@ public class LogParserTest {
     @Test
     public void test_no_read_before() throws Exception {
         LocalDateTime dateTime = defaultFrmtDate("2012-09-21 01:12:17,191");
-        LogParser parser = new LogParser(dateTime, FULL_PATTERN, INFO_MATCHER);
+        LogParser parser = new LogParser(dateTime, FULL_PATTERN + " %m", INFO_MATCHER);
         parser.addString(LOG_WARN);
         parser.addString(LOG_ERROR);
         parser.addString(LOG_INFO);
         parser.addString(LOG_DEBUG);
+
+        assertNotNull("Expect entries was read", parser.getEntries());
 
         assertEquals("Expect only error and info read after defined date", 2, parser.getEntries().size());
     }

@@ -87,7 +87,7 @@ public class LogServiceImplTest {
         assertAllHaveMessages(entries);
         service.addEntries(entries);
         for (MatchConfig config : environment.getMatchConfigs())  {
-            assertAllHaveMessages(dao.getNotGroupedMatchedEntries(config.getId(), environment.getId()));
+            assertAllHaveMessages(dao.getNotGroupedEntries(config.getId(), environment.getId(), LogServiceImpl.A_WHILE_AGO));
         }
     }
 
@@ -118,24 +118,24 @@ public class LogServiceImplTest {
         environment.getMatchConfigs().add(textError);
         checkGroupNum(0);
         checkNotGrouped(0);
-        entries = dao.getNotGroupedMatchedEntries(textError.getId(), environment.getId());
+        entries = dao.getNotGroupedEntries(textError.getId(), environment.getId(), LogServiceImpl.A_WHILE_AGO);
         assertEquals("All errors are now for new config",
                 4, entries.size());
 
     }
 
     private void checkNotGrouped(final int entriesNum) {
-        List<LogEntry> answer = dao.getNotGroupedMatchedEntries(matchConfig.getId(), environment.getId());
+        List<LogEntry> answer = dao.getNotGroupedEntries(matchConfig.getId(), environment.getId(), LogServiceImpl.A_WHILE_AGO);
         assertEquals(entriesNum, answer.size());
     }
 
     private void checkEntriesInGroup(final int groupIndex, final int entriesNum) {
-        List<LogEntryGroup> answer = dao.getMatchedEntryGroups(matchConfig.getId(), environment.getId());
+        List<LogEntryGroup> answer = dao.getEntryGroups(matchConfig.getId(), environment.getId(), LogServiceImpl.A_WHILE_AGO);
         assertEquals(entriesNum, answer.get(groupIndex).getEntries().size());
     }
 
     private void checkGroupNum(final int number) {
-        List<LogEntryGroup> answer = dao.getMatchedEntryGroups(matchConfig.getId(), environment.getId());
+        List<LogEntryGroup> answer = dao.getEntryGroups(matchConfig.getId(), environment.getId(), LogServiceImpl.A_WHILE_AGO);
         assertEquals(number, answer.size());
     }
 
@@ -150,13 +150,13 @@ public class LogServiceImplTest {
     }
 
     @Test
-    public void test_misc_error() throws Exception {
+    public void testMiscError() throws Exception {
         service.addEntries(getJobErrorsEntries("unexpected-error.log"));
         service.addEntries(getJobErrorsEntries("error_line_89.log"));
     }
 
     @Test
-    public void test_similar_start() throws Exception {
+    public void testSimilarStart() throws Exception {
         List<LogEntryGroup> groups = addEntriesAndVerifyGroups("similar_start.log");
         assertEquals("Expect single group", 1, groups.size());
         assertTrue(groups.get(0).getMessagePattern().endsWith("(.*)"));
@@ -166,27 +166,69 @@ public class LogServiceImplTest {
     private List<LogEntryGroup> addEntriesAndVerifyGroups(String fileName) throws IOException {
         final List<LogEntry> entries = getJobErrorsEntries(fileName);
         service.addEntries(entries);
-        return dao.getMatchedEntryGroups(matchConfig.getId(), environment.getId());
+        return dao.getEntryGroups(matchConfig.getId(), environment.getId(), LogServiceImpl.A_WHILE_AGO);
     }
 
     @Test
-    public void test_dvf_settings() throws Exception {
+    public void testDvfSettings() throws Exception {
         List<LogEntryGroup> groups = addEntriesAndVerifyGroups("dvf-settings.log");
         assertEquals("Expect single group", 1, groups.size());
         assertEquals(2, groups.get(0).getEntries().size());
     }
 
     @Test
-    public void test_similar_end() throws Exception {
+    public void testSimilarEnd() throws Exception {
         List<LogEntryGroup> groups = addEntriesAndVerifyGroups("similar_end.log");
         assertEquals("Expect single group", 1, groups.size());
         assertTrue(groups.get(0).getMessagePattern().substring(0, 10), groups.get(0).getMessagePattern().startsWith("(.*)Caused by"));
     }
 
     @Test
-    public void test_general_error_grouped__full_text() throws Exception {
+    public void testGroupTransformed() throws Exception {
+        List<LogEntry> entries = new ArrayList<LogEntry>();
+        entries.add(createEntry(createSomeMessage(1)));
+        entries.add(createEntry(createSomeMessage(1)));
+        entries.add(createEntry(createSomeMessage(1)));
+
+        service.addEntries(entries);
+
+        List<LogEntryGroup> groups = dao.getEntryGroups(matchConfig.getId(), environment.getId(), LogServiceImpl.A_WHILE_AGO);
+        assertEquals("Expect 1 group created", 1, groups.size());
+        assertFalse("Expect no regexp group", groups.get(0).getMessagePattern().contains(PatternUtils.ALL_GROUP));
+
+        service.addEntries(Arrays.asList(createEntry(createSomeMessage(8))));
+
+        groups = dao.getEntryGroups(matchConfig.getId(), environment.getId(), LogServiceImpl.A_WHILE_AGO);
+        String message = "Expect group transformed to have regexp group in pattern";
+        assertEquals(message, 1, groups.size());
+        assertEquals(message, 4, groups.get(0).getEntries().size());
+        for (LogEntry logEntry : groups.get(0).getEntries()) {
+            assertTrue("Expect entry message updated",
+                    logEntry.getMessage().equals("1") ||
+                    logEntry.getMessage().equals("8")
+            );
+        }
+        assertTrue("Expect regexp group, to match 1 and 5", groups.get(0).getMessagePattern().contains(PatternUtils.ALL_GROUP));
+
+    }
+
+    private LogEntry createEntry(String message) {
+        LogEntry entry = new LogEntry();
+        entry.setMatchConfig(matchConfig);
+        entry.setEnvironment(environment);
+        entry.setMessage(message);
+        entry.setDate(new LocalDateTime());
+        return entry;
+    }
+
+    private String createSomeMessage(int number) {
+        return "There is " + number +" kind of people.";
+    }
+
+    @Test
+    public void testGeneralErrorGroupedFullText() throws Exception {
         String fileName = "same_errores.log";
-        final List<LogEntry> entries = getJobErrorsEntries(fileName);
+        List<LogEntry> entries = getJobErrorsEntries(fileName);
         for (int i = 1; i < entries.size(); i++) {
             assertEquals(entries.get(0).getMessage(), entries.get(i).getMessage());
         }
@@ -195,7 +237,7 @@ public class LogServiceImplTest {
     }
 
     @Test
-    public void test_general_error_grouped__middle_match() throws Exception {
+    public void testGeneralErrorGroupedMiddleMatch() throws Exception {
         String fileName = "different_internal_errores.log";
         final List<LogEntry> entries = getJobErrorsEntries(fileName);
         List<LogEntryGroup> groups = addEntriesAndVerifyGroups(fileName);
@@ -229,13 +271,16 @@ public class LogServiceImplTest {
 
     private boolean entriesContains(LogEntryGroup group, LogEntry entry) {
         for (LogEntry otherEntry : group.getEntries()) {
+            String message = PatternUtils.restoreMessage(otherEntry, group.getMessagePattern())
+                    .replace("<span class='messageGroup'>", "")
+                    .replace("</span>", "");
             if (nullOrEquals(otherEntry.getCaller(), entry.getCaller()) &&
                     nullOrEquals(otherEntry.getEnvironment(), entry.getEnvironment()) &&
                     nullOrEquals(otherEntry.getCategory(), entry.getCategory()) &&
                     nullOrEquals(otherEntry.getFoundNumber(), entry.getFoundNumber()) &&
                     nullOrEquals(otherEntry.getLevel(), entry.getLevel()) &&
                     nullOrEquals(otherEntry.getMatchConfig(), entry.getMatchConfig()) &&
-                    nullOrEquals(PatternUtils.restoreMessage(otherEntry, group.getMessagePattern()), entry.getMessage()) &&
+                    nullOrEquals(message, entry.getMessage()) &&
                     nullOrEquals(otherEntry.getDate(), entry.getDate())) {
                 return true;
             }

@@ -1,11 +1,25 @@
-- colapse/expand config tree
-- just added messages
++ colapse/expand config tree
++ css
++ load only difs
++ refresh immediatly
++ show just added messages
++ shorten messages
+- orphan message debug
+- show notification
+- reload on config update
+
 -- on expand:
----  edit config
++++  edit config
 ---  add matcher by group, message
----  delete messages for environment
++++  delete messages for environment
 - refresh immediatly
 - popup validation
 - add new server
 - show recent message
 - delete if a lot
+- show log around
+- show all log
+- filter warnings, errors
+- lazy load/load not all
+- maybe expand/collapse groups
+- pattern validation - date must be present

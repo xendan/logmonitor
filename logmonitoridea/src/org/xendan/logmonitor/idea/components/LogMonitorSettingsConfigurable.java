@@ -8,12 +8,11 @@ import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.xendan.logmonitor.HomeResolver;
-import org.xendan.logmonitor.idea.read.Serializer;
 import org.xendan.logmonitor.idea.read.Settings;
+import org.xendan.logmonitor.util.Serializer;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,3 +1,6 @@
+.newItem{
+	font-weight:bold;
+}
 input.ng-invalid.ng-dirty {
 	background-color: #FA787E;
 }

@@ -2,7 +2,9 @@
 <a href="#/configs/-1?projectName={{currentProject}}">
     Create new config <span ng-show="currentProject">for project {{currentProject}}</span> ...
 </a>
+<div>
 Here will be some notifications
+</div>
 <ul>
     <li ng-repeat="(matcher, entries) in notifications">
         {{matcher}} ({{entries.length}})
@@ -10,36 +12,35 @@ Here will be some notifications
 </ul>
 <ul>
     <li ng-repeat="config in configs">
-        <!--
-        <a href="#/configs/{{config.id}}">{{config.projectName}}</a>
-        -->
         <a ng-show="!expanded.configs[config.id]" ng-click="expanded.configs[config.id]=true">{{config.projectName}}</a>
 
         <div ng-show="expanded.configs[config.id]">
-            <a ng-click="expanded.configs[config.id]=false">{{config.projectName}}</a>
+            <a ng-click="expanded.configs[config.id]=false">{{config.projectName}}</a>   <a href="#/configs/{{config.id}}">Edit..</a><a href="#/configs/{{config.id}}">Delete..</a>
             <ul>
-                <li ng-repeat="env in config.environments">{{env.name}}{{statuses[env.id]}}
+                <li ng-repeat="env in config.environments">{{env.name}}{{statuses[env.id]}} <br />
+                 	<a ng-click="deleteEntriesInEnv(env)">Delete entries...</a>
+                 	<a ng-click="refresh(env)">Refresh</a>
                     <ul>
                         <li ng-repeat="matcher in env.matchConfigs">
                             <a ng-show="!expanded.matchers[env.id][config.id]" ng-click="expanded.matchers[env.id][config.id]=true">
-                                {{matcher.name}} ({{entriesNum[env.id][matcher.id]}})</a>
-
+                                {{matcher.name}} ({{entriesNum[env.id][matcher.id]}})
+                            </a>
                             <div ng-show="expanded.matchers[env.id][config.id]">
                                 <a ng-click="expanded.matchers[env.id][config.id]=false"> {{matcher.name}}  ({{entriesNum[env.id][matcher.id]}})</a>
                                 <ul>
                                     <li ng-repeat="group in entries[env.id][matcher.id]['groups']">
-                                        <a ng-show="!expanded.groups[group.id]"
+                                        <a ng-class="getItemClass(group)" ng-show="!expanded.groups[group.id]"
                                            ng-click="expanded.groups[group.id]=true">
-                                            ({{group.entries.length}}) - '{{group.messagePattern}}'
+                                           {{groupName(group, true)}}                                            
                                         </a>
                                         <div ng-show="expanded.groups[group.id]">
-                                            <a  ng-click="expanded.groups[group.id]=false">
-                                                ({{group.entries.length}}) - '{{group.messagePattern}}'
+                                            <a ng-class="getItemClass(group)"  ng-click="expanded.groups[group.id]=false">                                                
+                                                {{groupName(group)}}
                                             </a>
                                             <a ng-click="createMatchConfig(group)"> create match config...</a>
                                             <ul>
                                                 <li ng-repeat="entry in group.entries">
-                                                    <div ng-bind-html="entryToHtml(entry, config.id)"></div>
+                                                    <div ng-class="getItemClass(entry)"  ng-bind-html="entryToHtml(entry, config.id)"></div>
                                                 </li>
                                             </ul>
                                         </div>
@@ -47,7 +48,7 @@ Here will be some notifications
                                 </ul>
                                 <ul>
                                     <li ng-repeat="entry in entries[env.id][matcher.id]['notGrouped']">
-                                        <div ng-bind-html="entryToHtml(entry, config.id)"></div>
+                                        <div ng-class="getItemClass(entry)" ng-bind-html="entryToHtml(entry, config.id)"></div>
                                     </li>
                                 </ul>
                             </div>

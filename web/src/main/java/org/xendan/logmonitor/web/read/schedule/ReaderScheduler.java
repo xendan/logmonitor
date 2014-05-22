@@ -43,20 +43,20 @@ public class ReaderScheduler {
                     executor.scheduleAtFixedRate(createCommand(configuration, environment), 0, environment.getUpdateInterval() * 60, TimeUnit.SECONDS);
                 }
             }
-//            executor.scheduleAtFixedRate(new EnvironmentStateMonitor(loadingStates, listener), 1, 3, TimeUnit.SECONDS);
         }
-//        inited = true;
+    }
+
+    public void refreshSynchronously(Long envId) {
+        Configuration configuration = service.getConfigByEnvironment(envId);
+        for (Environment environment : configuration.getEnvironments()) {
+            if (environment.getId().equals(envId)) {
+                createCommand(configuration, environment).run();
+                return;
+            }
+        }
     }
 
     private Runnable createCommand(Configuration configuration, Environment environment) {
         return new DownloadAndParse(configuration.getLogPattern(), environment, service, homeResolver, configuration.getProjectName());
     }
-
-    /*
-    public void refresh() {
-        if (!inited) {
-            reload();
-        }
-    }*/
-
 }

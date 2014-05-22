@@ -55,4 +55,8 @@ public class PatternUtils {
             return PatternUtils.regexToSimple(messagePattern);
         }
     }
+
+    public static boolean hasAllGroup(String messagePattern) {
+        return messagePattern.contains(ALL_GROUP);
+    }
 }

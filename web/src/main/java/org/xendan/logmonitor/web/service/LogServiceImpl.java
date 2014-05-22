@@ -3,6 +3,7 @@ package org.xendan.logmonitor.web.service;
 import com.google.inject.Inject;
 import com.google.inject.persist.Transactional;
 import org.apache.log4j.Logger;
+import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.*;
 import org.xendan.logmonitor.util.Serializer;
@@ -26,14 +27,25 @@ public class LogServiceImpl implements LogServicePartial {
 
     protected final ConfigurationDao dao;
 
+    static LocalDateTime A_WHILE_AGO = LocalDateTime.fromDateFields(new Date(0));
+
     @Inject
     public LogServiceImpl(ConfigurationDao dao) {
         this.dao = dao;
     }
 
-    public List<LogEntryGroup> getMatchedEntryGroups(Long matchConfigId, Long environmentId) {
-        List<LogEntryGroup> groups = dao.getMatchedEntryGroups(matchConfigId, environmentId);
+    public List<LogEntryGroup> getEntryGroups(Long matchConfigId, Long environmentId, LocalDateTime last) {
+        List<LogEntryGroup> groups = dao.getEntryGroups(matchConfigId, environmentId, last);
         Collections.sort(groups, new GroupComparator());
+        for (LogEntryGroup group : groups) {
+            Iterator<LogEntry> iterator = group.getEntries().iterator();
+            while (iterator.hasNext()) {
+                LogEntry entry = iterator.next();
+                if (!entry.getDate().isAfter(last)) {
+                    iterator.remove();
+                }
+            }
+        }
         return groups;
     }
 
@@ -50,7 +62,7 @@ public class LogServiceImpl implements LogServicePartial {
 
     private void checkMatchConfigContainsExampleForNew(Environment environment, MatchConfig newConfig, MatchConfig matchConfig) {
         if (matchConfig.isGeneral()) {
-            for (LogEntryGroup group : dao.getMatchedEntryGroups(matchConfig.getId(), environment.getId())) {
+            for (LogEntryGroup group : dao.getEntryGroups(matchConfig.getId(), environment.getId(), A_WHILE_AGO)) {
                 boolean groupChanged = false;
                 for (LogEntry entry : new ArrayList<LogEntry>(group.getEntries())) {
                     restoreMessage(entry, group.getMessagePattern());
@@ -70,7 +82,7 @@ public class LogServiceImpl implements LogServicePartial {
                     }
                 }
             }
-            for (LogEntry entry : dao.getNotGroupedMatchedEntries(matchConfig.getId(), environment.getId())) {
+            for (LogEntry entry : dao.getNotGroupedEntries(matchConfig.getId(), environment.getId(), A_WHILE_AGO)) {
                 if (matchConfig.getMessage()!=null && !matchConfig.equals("")) {
                     restoreMessage(entry, matchConfig.getMessage());
                 }
@@ -159,7 +171,7 @@ public class LogServiceImpl implements LogServicePartial {
             if (!entry.getMatchConfig().isGeneral()) {
                 dao.persist(getLogEntryForNotGeneral(entries, entry));
             } else {
-                List<LogEntryGroup> groups = dao.getMatchedEntryGroups(entry.getMatchConfig().getId(), entry.getEnvironment().getId());
+                List<LogEntryGroup> groups = dao.getEntryGroups(entry.getMatchConfig().getId(), entry.getEnvironment().getId(), A_WHILE_AGO);
                 persistGroupCandidate(entry, getMatchedGroup(groups, entry));
             }
         }
@@ -169,6 +181,17 @@ public class LogServiceImpl implements LogServicePartial {
         for (LogEntryGroup group : groups) {
             if (Pattern.matches(group.getMessagePattern(), entry.getMessage())) {
                 return group;
+            } else if (!PatternUtils.hasAllGroup(group.getMessagePattern())) {
+                String simpleGroupMessage = PatternUtils.regexToSimple(group.getMessagePattern());
+                String commonPattern = getCommonPattern(entry.getMessage(), simpleGroupMessage);
+                if (commonPattern != null) {
+                    String newMessage = getGroupedEntryMessage(commonPattern, simpleGroupMessage);
+                    group.setMessagePattern(commonPattern);
+                    for (LogEntry logEntry : group.getEntries()) {
+                        logEntry.setMessage(newMessage);
+                    }
+                    return group;
+                }
             }
         }
         return null;
@@ -176,12 +199,13 @@ public class LogServiceImpl implements LogServicePartial {
 
     private void persistGroupCandidate(LogEntry entry, LogEntryGroup matchedGroup) {
         if (matchedGroup != null) {
-            entry.setMessage(getGroupContent(matchedGroup.getMessagePattern(), entry.getMessage()));
+            entry.setMessage(getGroupedEntryMessage(matchedGroup.getMessagePattern(), entry.getMessage()));
             matchedGroup.getEntries().add(entry);
+            //TODO: check if needed, cascade on group
             dao.persist(entry);
             dao.persist(matchedGroup);
         } else {
-            List<LogEntry> oldEntries = dao.getNotGroupedMatchedEntries(entry.getMatchConfig().getId(), entry.getEnvironment().getId());
+            List<LogEntry> oldEntries = dao.getNotGroupedEntries(entry.getMatchConfig().getId(), entry.getEnvironment().getId(), A_WHILE_AGO);
             boolean matchFound = false;
             for (Iterator<LogEntry> iterator = oldEntries.iterator(); iterator.hasNext() && !matchFound; ) {
                 matchFound = checkIfShouldBeSameGroup(entry, iterator.next());
@@ -192,7 +216,7 @@ public class LogServiceImpl implements LogServicePartial {
         }
     }
 
-    private String getGroupContent(String commonPattern, String message) {
+    private String getGroupedEntryMessage(String commonPattern, String message) {
         if (PatternUtils.simpleToRegexp(message).equals(commonPattern)) {
             return "";
         }
@@ -209,8 +233,8 @@ public class LogServiceImpl implements LogServicePartial {
         if (commonPattern != null) {
             LogEntryGroup group = new LogEntryGroup();
             group.setMessagePattern(commonPattern);
-            oldEntry.setMessage(getGroupContent(commonPattern, oldEntry.getMessage()));
-            entry.setMessage(getGroupContent(commonPattern, entry.getMessage()));
+            oldEntry.setMessage(getGroupedEntryMessage(commonPattern, oldEntry.getMessage()));
+            entry.setMessage(getGroupedEntryMessage(commonPattern, entry.getMessage()));
             group.getEntries().add(oldEntry);
             group.getEntries().add(entry);
             dao.persist(group);
@@ -284,7 +308,7 @@ public class LogServiceImpl implements LogServicePartial {
     }
 
     private LogEntry getLogEntryForNotGeneral(List<LogEntry> entries, LogEntry entry) {
-        List<LogEntry> oldEntries = dao.getNotGroupedMatchedEntries(entry.getMatchConfig().getId(), entry.getEnvironment().getId());
+        List<LogEntry> oldEntries = dao.getNotGroupedEntries(entry.getMatchConfig().getId(), entry.getEnvironment().getId(), A_WHILE_AGO);
         if (!oldEntries.isEmpty()) {
             LogEntry first = oldEntries.get(0);
             first.setDate(entry.getDate());

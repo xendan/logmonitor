@@ -112,7 +112,7 @@ public class LogParser {
 
     public void addString(String log) {
         Matcher matcher = regexPattern.matcher(log);
-        if (!matcher.find()) {
+        if (!matcher.matches()) {
             if (lastEntry == null) {
                 return;
             }

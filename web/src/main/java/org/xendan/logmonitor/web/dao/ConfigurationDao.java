@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.web.dao;
 
+import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.model.*;
 
 import java.util.List;
@@ -12,15 +13,15 @@ public interface ConfigurationDao {
 
     List<Configuration> getConfigs();
 
-    List<LogEntry> getNotGroupedMatchedEntries(Long matchConfigId, Long environmentId);
+    List<LogEntry> getNotGroupedEntries(Long matchConfigId, Long environmentId, LocalDateTime last);
 
-    List<LogEntryGroup> getMatchedEntryGroups(Long matchConfigId, Long environmentId);
+    List<LogEntryGroup> getEntryGroups(Long matchConfigId, Long environmentId, LocalDateTime last);
 
     void removeMatchConfig(Environment environment, MatchConfig config);
 
     void remove(BaseObject group);
 
-    void removeAllEntries(Environment environment);
+    void removeAllEntries(Long environmentId, List<Long> matcherId);
 
     void clearAll();
 
@@ -33,4 +34,6 @@ public interface ConfigurationDao {
     List<Server> getAllServers();
 
     Environment getEnvironment(long environmentId);
+
+    Configuration getConfigByEnvironment(Long envId);
 }

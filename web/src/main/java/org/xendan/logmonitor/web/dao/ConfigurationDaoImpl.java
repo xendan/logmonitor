@@ -4,6 +4,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
+import org.apache.commons.lang.StringUtils;
+import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.model.*;
 
 import javax.persistence.EntityManager;
@@ -18,8 +20,7 @@ import java.util.List;
 @Singleton
 @Transactional
 public class ConfigurationDaoImpl implements ConfigurationDao {
-	
-//    protected EntityManager entityManager;
+
     private final Provider<EntityManager> emProvider;
 
     @Inject
@@ -29,6 +30,20 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     @Override
     public void persist(BaseObject baseObject) {
+        if (baseObject instanceof LogEntry) {
+          LogEntry entry = (LogEntry) baseObject;
+          if (StringUtils.isEmpty(entry.getMessage())) {
+              List groups = getEntityManager()
+                      .createQuery("SELECT g FROM LogEntryGroup g " +
+                              " JOIN g.entries e" +
+                              " WHERE e = :entry ")
+                      .setParameter("entry", entry)
+                      .getResultList();
+              if (groups.size() == 0) {
+                  System.out.println("OMG!!!");
+              }
+          }
+        }
         getEntityManager().persist(baseObject);
     }
 
@@ -70,45 +85,50 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     @Override
+    public Configuration getConfigByEnvironment(Long envId) {
+        return sortEnvironments((Configuration)
+                getEntityManager().createQuery("SELECT c " +
+                        " FROM Configuration c " +
+                        " JOIN c.environments e " +
+                        " WHERE e.id = :environment")
+                .setParameter("environment", envId)
+                .getSingleResult());
+    }
+
+    @Override
     public Environment getEnvironment(long environmentId) {
         return getEntityManager().find(Environment.class, environmentId);
     }
 
     private <T> List<T> getAll(Class<T> entityClass) {
-        return getEntityManager().createQuery("SELECT l FROM " + entityClass.getName() + " l", entityClass)
+        return getEntityManager()
+                .createQuery("SELECT l FROM " + entityClass.getName() + " l", entityClass)
                 .getResultList();
-
     }
-
 
     @Override
     public void remove(BaseObject object) {
         getEntityManager().remove(object);
-
     }
 
     @Override
-    public void removeAllEntries(Environment environment) {
-        synchronized (ConfigurationDaoImpl.class) {
-            //TODO maybe it is possible by JPA
-            getEntityManager().createNativeQuery("DELETE FROM LOG_ENTRY_GROUP_ENTRIES " +
-                    "WHERE ENTRIES IN (" +
-                    "SELECT ID FROM LOG_ENTRY " +
-                    " WHERE ENVIRONMENT = ?" +
+    public void removeAllEntries(Long envId, List<Long> matchersId) {
+        getEntityManager().createQuery("DELETE FROM LogEntryGroup g " +
+                " WHERE g IN (" +
+                "SELECT g0 FROM LogEntryGroup g0 " +
+                " JOIN g0.entries e WHERE (" +
+                "  e.matchConfig.id IN :matchersId" +
+                " AND e.environment.id = :environment ))")
+                .setParameter("environment", envId)
+                .setParameter("matchersId", matchersId)
+                .executeUpdate();
 
-                    ")").setParameter(1, environment.getId())
-                    .executeUpdate();
-            getEntityManager().createNativeQuery("DELETE FROM LOG_ENTRY_GROUP g " +
-                    " WHERE NOT EXISTS (" +
-                    "SELECT LOG_ENTRY_GROUP " +
-                    " FROM LOG_ENTRY_GROUP_ENTRIES lg " +
-                    " WHERE lg.LOG_ENTRY_GROUP = g.ID" +
-                    ")").executeUpdate();
-            getEntityManager().createNativeQuery("DELETE FROM LOG_ENTRY  WHERE ENVIRONMENT = :environment")
-                    .setParameter("environment", environment.getId())
-
-                    .executeUpdate();
-        }
+        getEntityManager().createQuery("DELETE FROM LogEntry e  " +
+                " WHERE e.environment.id = :environment" +
+                " AND e.matchConfig.id IN :matchersId")
+                .setParameter("environment", envId)
+                .setParameter("matchersId", matchersId)
+                .executeUpdate();
     }
 
     @Override
@@ -129,40 +149,37 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
     }
 
     @Override
-    public List<LogEntry> getNotGroupedMatchedEntries(Long matchConfigId, Long environmentId) {
-//        System.out.println(entityManager.createQuery("from LogEntry").getResultList());
-        return getEntityManager().createNativeQuery(
-                "SELECT e.* FROM LOG_ENTRY e " +
-                        " WHERE e.MATCH_CONFIG = (:matcher) AND e.ENVIRONMENT = (:environment) " +
+    public List<LogEntry> getNotGroupedEntries(Long matchConfigId, Long environmentId, LocalDateTime last) {
+        return getEntityManager().createQuery(
+                "SELECT e FROM LogEntry e " +
+                        " WHERE e.matchConfig.id = (:matcher) " +
+                        " AND e.environment.id= (:environment) " +
+                        " AND e.date > (:last) " +
                         " AND NOT EXISTS (" +
-                        "SELECT ENTRIES " +
-                        "FROM  LOG_ENTRY_GROUP_ENTRIES " +
-                        "WHERE ENTRIES = e.ID" +
+                        " SELECT g FROM LogEntryGroup g " +
+                        " JOIN g.entries e0 " +
+                        " WHERE e0 = e" +
                         ")" +
-                        " ORDER BY e.date DESC ",
-                LogEntry.class
+                        " ORDER BY e.date DESC "
         )
                 .setParameter("matcher", matchConfigId)
                 .setParameter("environment", environmentId)
+                .setParameter("last", last)
                 .getResultList();
     }
 
 
     @Override
-    public List<LogEntryGroup> getMatchedEntryGroups(Long matchConfigId, Long environmentId) {
-//        System.out.println(entityManager.createQuery("from LogEntryGroup").getResultList());
-        return getEntityManager().createNativeQuery(
-                "SELECT g.* FROM LOG_ENTRY_GROUP g" +
-                        " WHERE EXISTS (" +
-                        "    SELECT 1 FROM  LOG_ENTRY_GROUP_ENTRIES le, LOG_ENTRY e" +
-                        "    WHERE le.LOG_ENTRY_GROUP = g.ID " +
-                        "    AND le.ENTRIES = e.ID" +
-                        "    AND e.MATCH_CONFIG = (:matcher) " +
-                        "   AND e.ENVIRONMENT = (:environment) )",
-                LogEntryGroup.class
-        )
+    public List<LogEntryGroup> getEntryGroups(Long matchConfigId, Long environmentId, LocalDateTime last) {
+        return getEntityManager().createQuery(
+                "SELECT DISTINCT g FROM LogEntryGroup g" +
+                        " JOIN g.entries e " +
+                        " WHERE e.matchConfig.id = (:matcher) " +
+                        " AND e.environment.id= (:environment) " +
+                        " AND e.date > (:last) ")
                 .setParameter("matcher", matchConfigId)
                 .setParameter("environment", environmentId)
+                .setParameter("last", last)
                 .getResultList();
     }
 

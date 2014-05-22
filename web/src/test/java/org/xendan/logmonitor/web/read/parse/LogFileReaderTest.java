@@ -28,8 +28,8 @@ public class LogFileReaderTest {
     public void testReadFromGoodFile() throws Exception {
         String logPath = copyToTestPath("no_match_spring.log");
         Environment environment = new Environment();
-        LogFileReader reader = new LogFileReader(logPath, LogParserTest.FULL_PATTERN, environment);
-        assertNotNull(reader.getEntries());
+        LogFileReader reader = new LogFileReader(logPath, DEF_PATTERN, environment);
+        assertNotNull("Expect file match pattern", reader.getEntries());
         assertEquals("Expect last update date",
                 LogParserTest.defaultFrmtDate("2013-11-12 13:30:52,352"), environment.getLastUpdate());
     }
