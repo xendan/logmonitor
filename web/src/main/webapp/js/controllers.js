@@ -79,9 +79,6 @@ function AllConfigsController($scope, Configs, LogEntries, $routeParams) {
 					}
 				}
 				oldItems.groups.push(group);
-				oldItems.groups.sort(function(a, b) {
-					return b.entries.length - a.entries.length;
-				});
 				return group;
 			};
 			for (var i = 0; i < items.groups.length; i++) {
@@ -92,7 +89,11 @@ function AllConfigsController($scope, Configs, LogEntries, $routeParams) {
 				}
 			}
 			addNewEntries(items.notGrouped, oldItems.notGrouped);
-			var counter = 0;
+            oldItems.groups.sort(function(a, b) {
+                return b.entries.length - a.entries.length;
+            });
+
+            var counter = 0;
 			eachEntry($scope.entries[envId][matcher.id], function() {
 				counter++;
 			});

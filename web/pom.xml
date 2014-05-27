@@ -98,18 +98,6 @@
 			<artifactId>jersey-json</artifactId>
 			<version>${jersey.version}</version>
 		</dependency>
-<!--
-    <dependency>
-        <groupId>org.codehaus.jackson</groupId>
-        <artifactId>jackson-core-asl</artifactId>
-        <version>${jackson.version}</version>
-    </dependency>
-          <dependency>
-              <groupId>org.codehaus.jackson</groupId>
-              <artifactId>jackson-mapper-asl</artifactId>
-              <version>${jackson.version}</version>
-          </dependency>
-          -->
 		<dependency>
 			<groupId>com.sun.jersey.contribs</groupId>
 			<artifactId>jersey-guice</artifactId>
@@ -140,12 +128,5 @@
             <artifactId>commons-beanutils</artifactId>
             <version>1.9.1</version>
         </dependency>
-        <!--
-        <dependency>
-            <groupId>commons-collections</groupId>
-            <artifactId>commons-collections</artifactId>
-            <version>20040616</version>
-        </dependency>
-        -->
     </dependencies>
 </project>

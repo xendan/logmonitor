@@ -15,7 +15,7 @@ public class LogServiceHandler implements InvocationHandler {
     private EnvironmentMonitor monitor;
 
     @Inject
-    public LogServiceHandler(LogServiceImpl logService, ConfigurationDao dao, EnvironmentMonitor monitor, UnitOfWork unitOfWork) {
+    public LogServiceHandler(LogServiceImpl logService, ConfigurationDao dao, EnvironmentMonitor monitor) {
         this.logService = logService;
         this.dao = dao;
         this.monitor = monitor;
@@ -23,6 +23,7 @@ public class LogServiceHandler implements InvocationHandler {
 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        dao.sanitizeCheck();
         Method similar = findSimilar(method, EnvironmentMonitor.class);
         if (similar != null) {
             return similar.invoke(monitor, args);
@@ -31,8 +32,9 @@ public class LogServiceHandler implements InvocationHandler {
         if (similar != null) {
             return similar.invoke(logService, args);
         }
-        return method.invoke(dao, args);
-
+        Object result = method.invoke(dao, args);
+        dao.sanitizeCheck();
+        return result;
     }
 
     private Method findSimilar(Method method, Class<?> someClass) {

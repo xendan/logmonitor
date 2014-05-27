@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
-import org.apache.commons.lang.StringUtils;
 import org.joda.time.LocalDateTime;
 import org.xendan.logmonitor.model.*;
 
@@ -30,21 +29,32 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
 
     @Override
     public void persist(BaseObject baseObject) {
-        if (baseObject instanceof LogEntry) {
-          LogEntry entry = (LogEntry) baseObject;
-          if (StringUtils.isEmpty(entry.getMessage())) {
-              List groups = getEntityManager()
-                      .createQuery("SELECT g FROM LogEntryGroup g " +
-                              " JOIN g.entries e" +
-                              " WHERE e = :entry ")
-                      .setParameter("entry", entry)
-                      .getResultList();
-              if (groups.size() == 0) {
-                  System.out.println("OMG!!!");
-              }
-          }
-        }
         getEntityManager().persist(baseObject);
+    }
+
+    public void sanitizeCheck() {
+        List<LogEntry> orphans = getEntityManager()
+                .createQuery("SELECT e FROM LogEntry e WHERE (e.message = '' OR e.message is NULL) AND " +
+                        " NOT EXISTS (" +
+                        " SELECT g FROM LogEntryGroup g " +
+                        " JOIN g.entries e0 " +
+                        " WHERE e0 = e" +
+                        ")")
+                .getResultList();
+        if (!orphans.isEmpty()) {
+            System.out.println("OMG Orphans!!!");
+        }
+
+
+        List groups = getEntityManager()
+                .createNativeQuery("SELECT LOG_ENTRY_GROUP " +
+                        "FROM LOG_ENTRY_GROUP_ENTRIES " +
+                        "GROUP BY LOG_ENTRY_GROUP " +
+                        "HAVING COUNT(*) <2").getResultList();
+
+        if (!groups.isEmpty()) {
+            System.out.println("OMG Groups!!! with single entry");
+        }
     }
 
     private EntityManager getEntityManager() {
@@ -138,13 +148,13 @@ public class ConfigurationDaoImpl implements ConfigurationDao {
                 .setParameter("config", config)
                 .setParameter("environment", environment)
                 .executeUpdate();
+
         getEntityManager()
-                .createNativeQuery("DELETE FROM MATCH_CONFIG c " +
+                .createQuery("DELETE FROM MatchConfig c " +
                         "WHERE NOT EXISTS (" +
-                        "SELECT MATCH_CONFIGS " +
-                        "FROM ENVIRONMENT_MATCH_CONFIGS " +
-                        "WHERE MATCH_CONFIGS = c.ID" +
-                        ")")
+                        " SELECT e FROM Environment e " +
+                        " JOIN e.matchConfigs c0 " +
+                        " WHERE c0 = c)")
                 .executeUpdate();
     }
 

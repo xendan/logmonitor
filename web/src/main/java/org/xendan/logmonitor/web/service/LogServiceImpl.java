@@ -26,16 +26,18 @@ public class LogServiceImpl implements LogServicePartial {
     private static final int MATCHING_INDEX = 5;
 
     protected final ConfigurationDao dao;
+    private Serializer serializer;
 
     static LocalDateTime A_WHILE_AGO = LocalDateTime.fromDateFields(new Date(0));
 
     @Inject
-    public LogServiceImpl(ConfigurationDao dao) {
+    public LogServiceImpl(ConfigurationDao dao, Serializer serializer) {
         this.dao = dao;
+        this.serializer = serializer;
     }
 
     public List<LogEntryGroup> getEntryGroups(Long matchConfigId, Long environmentId, LocalDateTime last) {
-        List<LogEntryGroup> groups = dao.getEntryGroups(matchConfigId, environmentId, last);
+        List<LogEntryGroup> groups = serializer.doCopy(dao.getEntryGroups(matchConfigId, environmentId, last));
         Collections.sort(groups, new GroupComparator());
         for (LogEntryGroup group : groups) {
             Iterator<LogEntry> iterator = group.getEntries().iterator();

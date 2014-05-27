@@ -1,5 +1,6 @@
 package org.xendan.logmonitor.web.read.schedule;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.Environment;
@@ -25,6 +26,7 @@ public class DownloadAndParse implements Runnable {
     private final String project;
 
     private static final Logger logger = Logger.getLogger(DownloadAndParse.class);
+    private int counter = 0;
 
     public DownloadAndParse(String logPattern, Environment environment, LogService service, HomeResolver homeResolver, String project) {
         this.logPattern = logPattern;
@@ -47,6 +49,8 @@ public class DownloadAndParse implements Runnable {
                 service.setEnvironmentStatus(environment, EnvironmentMessage.FILE_NOT_FOUND);
                 return;
             }
+            String tmpLog = homeResolver.joinMkDirs("idea" + counter++ + ".log", "idea_logs");
+            FileUtils.copyFile(file, new File(tmpLog));
             service.setEnvironmentStatus(environment, EnvironmentMessage.PARSING);
             List<LogEntry> entries = new LogFileReader(logFile, logPattern, environment).getEntries();
             if (entries == null) {

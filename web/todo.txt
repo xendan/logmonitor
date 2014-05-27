@@ -4,7 +4,7 @@
 + refresh immediatly
 + show just added messages
 + shorten messages
-- orphan message debug
++ orphan message debug
 - show notification
 - reload on config update
 
@@ -23,3 +23,4 @@
 - lazy load/load not all
 - maybe expand/collapse groups
 - pattern validation - date must be present
+- WARN [HibernatePersistence] - HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider

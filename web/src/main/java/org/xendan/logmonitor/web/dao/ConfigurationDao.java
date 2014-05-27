@@ -27,6 +27,8 @@ public interface ConfigurationDao {
 
     void persist(BaseObject baseObject);
 
+    void sanitizeCheck();
+
     void merge(BaseObject config);
 
     Configuration getConfig(Long configId);

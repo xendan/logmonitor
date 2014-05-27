@@ -82,13 +82,20 @@ public class LogServiceImplTest {
     }
 
     @Test
-    public void test_empty_messages() throws Exception {
+    public void testEmptyMessages() throws Exception {
         List<LogEntry> entries = getJobErrorsEntries("empty_messages.log");
         assertAllHaveMessages(entries);
         service.addEntries(entries);
         for (MatchConfig config : environment.getMatchConfigs())  {
             assertAllHaveMessages(dao.getNotGroupedEntries(config.getId(), environment.getId(), LogServiceImpl.A_WHILE_AGO));
         }
+    }
+
+    private List<LogEntry> readIdeaLog(String fileName) throws IOException {
+        String pattern = "%d [%7r] %6p - %30.30c - %m \\n";
+        List<LogEntry> entries = new LogFileReader(copyFile(fileName), pattern, environment).getEntries();
+        assertNotNull("file " + fileName + " do not match " + pattern, entries);
+        return entries;
     }
 
     private void assertAllHaveMessages(List<LogEntry> entries) {
@@ -297,6 +304,11 @@ public class LogServiceImplTest {
 
 
     public List<LogEntry> getJobErrorsEntries(String fileName) throws IOException {
+        environment.setLastUpdate(new LocalDateTime(1980, 1, 1, 1, 1));
+        return new LogFileReader(copyFile(fileName), LogFileReaderTest.DEF_PATTERN, environment).getEntries();
+    }
+
+    private String copyFile(String fileName) throws IOException {
         String path = homeResolver.joinMkDirs(fileName, TEST_FILES);
         FileOutputStream output = null;
         try {
@@ -309,8 +321,7 @@ public class LogServiceImplTest {
                 output.close();
             }
         }
-        environment.setLastUpdate(new LocalDateTime(1980, 1, 1, 1, 1));
-        return new LogFileReader(path, LogFileReaderTest.DEF_PATTERN, environment).getEntries();
+        return path;
     }
 
 
