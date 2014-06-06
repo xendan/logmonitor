@@ -1,3 +1,16 @@
+app.directive('dynamic', function ($compile) {
+    return {
+        restrict: 'A',
+        replace: true,
+        link: function (scope, elem, attrs) {
+            scope.$watch(attrs.dynamic, function(html) {
+                console.log("HALLO");
+                elem.html(html);
+                $compile(elem.contents())(scope);
+            });
+        }
+    };
+});
 app.directive('environment', function() {
 	return {
 		restrict : 'A',
@@ -48,7 +61,7 @@ app.directive('environment', function() {
 		}
 	};
 });
-app.directive('matcher', function() {
+app.directive('matcher', function($compile) {
 	return {
 		restrict : 'A',
 		templateUrl : 'partials/matcher.html',
@@ -62,7 +75,8 @@ app.directive('matcher', function() {
 			saveMatcher : '=',
 			index : '=',
 			envToString : '=',
-			matcherToString : '='
+			matcherToString : '=',
+            popupcontent : '='
 
 		},
 		link : function($scope, element, attrs) {
@@ -75,6 +89,44 @@ app.directive('matcher', function() {
 						$scope.enabledEnvironments[env.id] = true;
 					}
 				});
+
+                $.get("partials/matcherDialog.html", function(data) {
+//                    console.log($compile(data)($scope));
+//                    $scope.popupcontent = data;
+                    $scope.$parent.$parent.popupcontent = data;
+                    console.log($scope.$parent.$parent.popupcontent);
+                  //  console.log($scope.popupcontent);
+                    /*
+                    console.log($scope.levels);
+                    var compiled = $compile(data)($scope);
+                    $('<div></div>').appendTo('body').html(compiled).dialog({
+                        modal: true,
+                        title: "lala i'm testing",
+                        zIndex: 10000,
+                        autoOpen: true,
+                        width: 'auto',
+                        resizable: false,
+                        buttons: {
+                            Yes: function() {
+                                consoloe.log("is it really working???");
+                            },
+                            No: function () {
+                                $(this).dialog("close");
+                            }
+                        },
+                        close: function (event, ui) {
+                            $(this).remove();
+                        }
+
+                    });
+                    */
+//                    showDialog(data, "New match config", function() {
+//                        console.log("Do something, lazy animal!!");
+//                    })
+
+                })
+
+                /*
 				$('#matcher' + $scope.index).dialog(
 						{
 							modal : true,
@@ -87,7 +139,7 @@ app.directive('matcher', function() {
 									$scope.$digest();
 								}
 							}
-						});
+						});*/
 
 			};
 		}

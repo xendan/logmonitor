@@ -1,26 +1,17 @@
-+ colapse/expand config tree
-+ css
-+ load only difs
-+ refresh immediatly
-+ show just added messages
-+ shorten messages
-+ orphan message debug
-- show notification
-- reload on config update
-
--- on expand:
-+++  edit config
----  add matcher by group, message
-+++  delete messages for environment
-- refresh immediatly
++ show notification
++ refresh on start
+- add matcher by group, message
 - popup validation
 - add new server
+- create tmp config
 - show recent message
 - delete if a lot
 - show log around
 - show all log
+- check if settimeout not cleared
 - filter warnings, errors
 - lazy load/load not all
 - maybe expand/collapse groups
 - pattern validation - date must be present
 - WARN [HibernatePersistence] - HHH015016: Encountered a deprecated javax.persistence.spi.PersistenceProvider
+- new group with old message (group can have 1 item) - FIX: don't delete items at new group. Delete entries that was added.
