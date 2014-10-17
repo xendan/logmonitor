@@ -15,7 +15,6 @@ import org.xendan.logmonitor.model.Configuration;
 import org.xendan.logmonitor.model.Environment;
 import org.xendan.logmonitor.model.MatchConfig;
 
-import javax.swing.*;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
 import javax.swing.text.html.HTMLDocument;
@@ -23,7 +22,6 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreePath;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -176,7 +174,7 @@ public class LogMonitorPanel {
     }
 
     public static ImageIcon getImgIcon(String name) {
-        return new ImageIcon(LogMonitorPanel.class.getResource("/org/xendan/logmonitor/idea/img/" + name + ".png"));
+        return new ImageIcon(LogMonitorPanel.class.getResource("/resources/img/" + name + ".png"));
     }
 
 

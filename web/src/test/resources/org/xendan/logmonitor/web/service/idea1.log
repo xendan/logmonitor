@@ -1,0 +1,109 @@
+2014-05-27 12:16:02,272 [      0]   INFO -        #com.intellij.idea.Main - ------------------------------------------------------ IDE STARTED ------------------------------------------------------ 
+2014-05-27 12:16:02,346 [     74]   INFO -        #com.intellij.idea.Main - IDE: IntelliJ IDEA (build #IU-135.690, 17 Apr 2014 00:00) 
+2014-05-27 12:16:02,346 [     74]   INFO -        #com.intellij.idea.Main - OS: Windows 7 (6.1, x86) 
+2014-05-27 12:16:02,346 [     74]   INFO -        #com.intellij.idea.Main - JRE: 1.7.0_40-b43 (Oracle Corporation) 
+2014-05-27 12:16:02,346 [     74]   INFO -        #com.intellij.idea.Main - JVM: 24.0-b56 (Java HotSpot(TM) Server VM) 
+2014-05-27 12:16:02,351 [     79]   INFO -        #com.intellij.idea.Main - JVM Args: -Xms128m -Xmx512m -XX:MaxPermSize=250m -XX:ReservedCodeCacheSize=64m -ea -Dsun.io.useCanonCaches=false -Djava.net.preferIPv4Stack=true -Djsse.enableSNIExtension=false -XX:+UseCodeCacheFlushing -XX:+UseConcMarkSweepGC -XX:SoftRefLRUPolicyMSPerMB=50 -Xbootclasspath/a:C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\boot.jar -Didea.paths.selector=IntelliJIdea13 
+2014-05-27 12:16:02,575 [    303]   INFO -        #com.intellij.idea.Main - JNA library loaded (32-bit) in 224 ms 
+2014-05-27 12:16:02,760 [    488]   INFO -        #com.intellij.idea.Main - Snappy library loaded (1.0.5) in 184 ms 
+2014-05-27 12:16:02,764 [    492]   INFO - penapi.util.io.win32.IdeaWin32 - Native filesystem for Windows is operational 
+2014-05-27 12:16:02,766 [    494]   INFO -        #com.intellij.idea.Main - Using "FocusKiller" library to prevent focus stealing. 
+2014-05-27 12:16:05,783 [   3511]   INFO - llij.ide.plugins.PluginManager - Cannot find optional descriptor flex-ide-specific.xml 
+2014-05-27 12:16:07,388 [   5116]   INFO - llij.ide.plugins.PluginManager - Cannot find optional descriptor intellilang-tapestry-support.xml 
+2014-05-27 12:16:09,326 [   7054]   INFO - llij.ide.plugins.PluginManager - 126 plugins initialized in 5050 ms 
+2014-05-27 12:16:09,426 [   7154]   INFO - llij.ide.plugins.PluginManager - Loaded bundled plugins: ASP (0.1), Android Designer, Android Support (10.0), Ant Support (1.0), Application Servers View (0.2.0), AspectJ Support (1.1), Byte Code Viewer (0.1), CFML Support (3.53), CSS Support, ClearCase Integration (2.0), Cloud Foundry integration (1.0), CloudBees integration (1.0), CoffeeScript (2.0), Commander (1.0.0), Copyright (8.1), Coverage, Cucumber for Groovy (999.999), Cucumber for Java (999.999), DSM Analysis (1.0.0), Database Support (1.0), Eclipse Integration (3.0), Emma, Flash/Flex Support (1.0), FreeMarker support (1.0), GWT Support (1.0), Geronimo Integration (1.0), Gherkin (999.999), Git Integration (8.1), GitHub, GlassFish Integration (1.0), Google App Engine Integration (1.1.4), Gradle, Grails (9.0), Groovy (9.0), GuiceyIDEA (8.0), HAML, HTML Tools (2.0), Heroku integration (1.0), Hibernate Support (1.0), I18n for Java, IDEA CORE, IDEtalk (1.0), IntelliLang (8.0), J2ME (1.0), JBoss Drools Support (1.0), JBoss Integration (1.0), JBoss Seam Pageflow Support (1.0), JBoss Seam Pages Support (1.0), JBoss Seam Support (1.0), JBoss jBPM (2.0.0), JSR45 Integration (1.0), JUnit (1.0), Java EE: Batch Applications (1.0), Java EE: Bean Validation Support (1.1), Java EE: Contexts and Dependency Injection (1.1), Java EE: EJB, JPA, Servlets (1.0), Java EE: JMS, JSON Processing, Concurrency, Transaction  (1.0), Java EE: Java Server Faces (2.2.X.), Java EE: RESTful Web Services (JAX-RS) (1.0), Java EE: Web Services (JAX-WS) (1.9), Java EE: WebSockets (1.0), Java Server Pages Integration (1.0), JavaFX (1.0), JavaScript Debugger (1.0), JavaScript Intention Power Pack (0.9.4), JavaScript Support (1.0), Jetty Integration (1.0), LESS support, Maven Integration, Maven Integration Extension, OpenShift integration (1.0), Osmorc (1.4.4), Perforce Integration (2.0), Persistence Frameworks Support (1.0), Playframework Support (1.0), Plugin DevKit (1.0), Properties Support, QuirksMode, REST Client, Refactor-X (2.01), Remote Hosts Access (0.1), Resin Integration (8.1), SASS support, SQL support (1.0), SSH Remote Run (0.1), Spring AOP/@AspectJ (1.0), Spring Batch (1.0), Spring Data (1.0), Spring Integration Patterns (1.0), Spring MVC Support (1.0), Spring OSGi (1.0), Spring Roo Console (1.0), Spring Security (1.0), Spring Support (1.0), Spring Web Flow (1.0), Spring Web Services (1.0), Spy-js (999.999), Structural Search (9.0), Struts 1.x (2.0), Struts 2 (1.0), Stylus support (999.999), Subversion Integration (1.1), TFS Integration (999.999), Tapestry support (1.0), Task Management (1.0), Terminal (0.1), TestNG-J (8.0), Time Tracking (1.0), Tomcat and TomEE Integration (1.0), Type Migration, UI Designer, UML Support (1.0), Vaadin Support (1.0), Velocity support (1.0), Visual SourceSafe Integration (2.0), W3C Validators (2.0), WebLogic Integration (1.0), WebSphere Integration (1.0), XPathView + XSLT Support (4), XSLT-Debugger (1.4), YAML, ZKM-Unscramble (1.0), dmServer Support (0.9.5), hg4idea (10.0) 
+2014-05-27 12:16:09,426 [   7154]   INFO - llij.ide.plugins.PluginManager - Loaded custom plugins: AngularJS (135.831) 
+2014-05-27 12:16:09,426 [   7154]   INFO - llij.ide.plugins.PluginManager - Disabled plugins: CVS Integration (11) 
+2014-05-27 12:16:12,083 [   9811]   INFO - ellij.util.io.PagedFileStorage - lower=100; upper=200; buffer=10; max=509214720 
+2014-05-27 12:16:12,269 [   9997]   INFO - api.vfs.impl.local.FileWatcher - Starting file watcher: C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\bin\fsnotifier.exe 
+2014-05-27 12:16:12,321 [  10049]   INFO - api.vfs.impl.local.FileWatcher - Native file watcher is operational. 
+2014-05-27 12:16:17,094 [  14822]   INFO - ellij.concurrency.JobScheduler - 50 ms execution limit failed for: com.intellij.openapi.progress.impl.ProgressManagerImpl$1@17b56f0; elapsed time was 90ms 
+2014-05-27 12:16:17,182 [  14910]   INFO - lij.diagnostic.DebugLogManager - Set DEBUG for the following categories: [] 
+2014-05-27 12:16:20,525 [  18253]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/macros.xml file is null 
+2014-05-27 12:16:20,534 [  18262]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/quicklists.xml file is null 
+2014-05-27 12:16:22,857 [  20585]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/androidRemoteDatabases.xml file is null 
+2014-05-27 12:16:22,888 [  20616]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/terminal.xml file is null 
+2014-05-27 12:16:22,924 [  20652]   INFO - pl.stores.ApplicationStoreImpl - 105 application components initialized in 13450 ms 
+2014-05-27 12:16:24,995 [  22723]   INFO - .intellij.idea.IdeaApplication - App initialization took 28546 ms 
+2014-05-27 12:16:25,399 [  23127]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/customization.xml file is null 
+2014-05-27 12:16:25,482 [  23210]   INFO - om.intellij.util.ProfilingUtil - Profiling agent is not enabled. Add -agentlib:yjpagent to idea.vmoptions if necessary to profile IDEA. 
+2014-05-27 12:16:33,574 [  31302]   INFO -                  TestNG Runner - Create TestNG Template Configuration 
+2014-05-27 12:16:33,721 [  31449]   INFO -                  TestNG Runner - Create TestNG Template Configuration 
+2014-05-27 12:16:34,240 [  31968]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/dynamic.xml file is null 
+2014-05-27 12:16:34,641 [  32369]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/deployment.xml file is null 
+2014-05-27 12:16:35,354 [  33082]   INFO - ellij.project.impl.ProjectImpl - 184 project components initialized in 9078 ms 
+2014-05-27 12:16:36,043 [  33771]   INFO - le.impl.ModuleManagerComponent - 4 module(s) loaded in 689 ms 
+2014-05-27 12:16:38,079 [  35807]   INFO - CompilerWorkspaceConfiguration - Available processors: 1 
+2014-05-27 12:16:38,379 [  36107]   INFO - .roots.impl.DirectoryIndexImpl - Directory index initialized in 0 ms, indexed 0 directories 
+2014-05-27 12:16:38,411 [  36139]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/sqldialects.xml file is null 
+2014-05-27 12:16:38,580 [  36308]   INFO - rains.ide.BuiltInServerManager - built-in server started, port 63342 
+2014-05-27 12:16:38,583 [  36311]   INFO - unicator.p2p.UserMonitorThread - Force finding users 
+2014-05-27 12:16:38,584 [  36312]   INFO - unicator.p2p.UserMonitorThread - Start User Monitor Thread 
+2014-05-27 12:16:38,585 [  36313]   INFO - icator.p2p.MulticastPingThread - /14.67.208.134 IDEtalk Multicast Thread: Start thread. 
+2014-05-27 12:16:38,856 [  36584]   INFO - pl.PushedFilePropertiesUpdater - File properties pushed in 473 ms 
+2014-05-27 12:16:42,631 [  40359]   WARN - pl.ExternalResourceManagerImpl - Cannot find standard resource. filename:/META-INF/tapestry_5_0_0.xsd class=class com.intellij.javaee.ResourceRegistrarImpl, classLoader:null 
+2014-05-27 12:16:43,706 [  41434]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/applicationLibraries.xml file is null 
+2014-05-27 12:16:43,917 [  41645]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/codeStyleSettings.xml file is null 
+2014-05-27 12:16:43,919 [  41647]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/projectCodeStyle.xml file is null 
+2014-05-27 12:16:44,386 [  42114]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/fileColors.xml file is null 
+2014-05-27 12:16:48,648 [  46376]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/gradle.xml file is null 
+2014-05-27 12:16:49,061 [  46789]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/dataSources.xml file is null 
+2014-05-27 12:16:49,239 [  46967]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/sqlDataSources.xml file is null 
+2014-05-27 12:16:51,742 [  49470]   INFO - ution.rmi.RemoteProcessSupport - "C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\jre\jre\bin\java" -Djava.awt.headless=true -Didea.version==13.1.2 -Xmx512m -Dfile.encoding=windows-1252 -classpath "/C:/Users/mullomuk/soft/IntelliJ IDEA 13.1.2/lib/resources_en.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\jna-utils.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\jdom.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\jna.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\picocontainer.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\resources_en.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\log4j.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\oromatcher.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\trove4j.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\util.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\lib\annotations.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\lucene-core-2.4.1.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven-server-api.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3-server-impl.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\aether-api-1.13.1.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\aether-connector-wagon-1.13.1.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\aether-impl-1.13.1.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\aether-spi-1.13.1.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\aether-util-1.13.1.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\archetype-catalog-2.2.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\archetype-common-2.2.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\commons-cli-1.2.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-aether-provider-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-artifact-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-compat-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-core-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-dependency-tree-1.2.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-embedder-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-model-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-model-builder-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-plugin-api-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-repository-metadata-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-settings-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\maven-settings-builder-3.0.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\nekohtml-1.9.6.2.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\nexus-indexer-3.0.4.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\nexus-indexer-artifact-1.0.1.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\plexus-cipher-1.7.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\plexus-classworlds-2.4.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\plexus-component-annotations-1.5.5.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\plexus-interpolation-1.14.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\plexus-sec-dispatcher-1.3.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\plexus-utils-2.0.6.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\sisu-guava-0.9.9.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\sisu-guice-3.1.0-no_aop.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\sisu-inject-bean-2.3.0.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\sisu-inject-plexus-2.3.0.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\wagon-file-2.6.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\wagon-http-2.6-shaded.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\wagon-http-shared-2.6.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\wagon-provider-api-2.6.jar;C:\Users\mullomuk\soft\IntelliJ IDEA 13.1.2\plugins\maven\lib\maven3\xercesMinimal-1.9.6.2.jar" org.jetbrains.idea.maven.server.RemoteMavenServer 
+2014-05-27 12:16:53,240 [  50968]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/gant_config.xml file is null 
+2014-05-27 12:16:55,700 [  53428]   INFO - ution.rmi.RemoteProcessSupport - Port/ID: 64226/Maven3ServerImplb186fa2b 
+2014-05-27 12:17:00,099 [  57827]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/IntelliLang.xml file is null 
+2014-05-27 12:17:00,768 [  58496]   INFO - tor.impl.FileEditorManagerImpl - Project opening took 34543 ms 
+2014-05-27 12:17:05,795 [  63523]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/databaseColors.xml file is null 
+2014-05-27 12:17:06,215 [  63943]   INFO - indexing.UnindexedFilesUpdater - Indexable files iterated in 26506 ms 
+2014-05-27 12:17:10,896 [  68624]   INFO - indexing.UnindexedFilesUpdater - Unindexed files update started: 0 files to update 
+2014-05-27 12:17:10,897 [  68625]   INFO - indexing.UnindexedFilesUpdater - Unindexed files update done in 1 ms 
+2014-05-27 12:17:11,986 [  69714]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/osmorc.xml file is null 
+2014-05-27 12:17:12,091 [  69819]   INFO - unicator.p2p.UserMonitorThread - Force finding users 
+2014-05-27 12:17:15,210 [  72938]   INFO - r.jabber.impl.JabberFacadeImpl - (504) Could not connect to jabber.org:5222. 
+Could not connect to jabber.org:5222.: (504) Could not connect to jabber.org:5222.
+  -- caused by: java.net.UnknownHostException: jabber.org
+	at org.jivesoftware.smack.XMPPConnection.connectUsingConfiguration(XMPPConnection.java:281)
+	at org.jivesoftware.smack.XMPPConnection.<init>(XMPPConnection.java:221)
+	at jetbrains.communicator.jabber.impl.JabberFacadeImpl._createConnection(JabberFacadeImpl.java:156)
+	at jetbrains.communicator.jabber.impl.JabberFacadeImpl.connect(JabberFacadeImpl.java:121)
+	at jetbrains.communicator.jabber.impl.JabberFacadeImpl.connect(JabberFacadeImpl.java:117)
+	at jetbrains.communicator.jabber.impl.JabberTransport$1.run(JabberTransport.java:128)
+	at com.intellij.openapi.application.impl.ApplicationImpl$8.run(ApplicationImpl.java:419)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:724)
+	at com.intellij.openapi.application.impl.ApplicationImpl$1$1.run(ApplicationImpl.java:149)
+Nested Exception: 
+java.net.UnknownHostException: jabber.org
+	at java.net.AbstractPlainSocketImpl.connect(AbstractPlainSocketImpl.java:178)
+	at java.net.PlainSocketImpl.connect(PlainSocketImpl.java:172)
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:392)
+	at java.net.Socket.connect(Socket.java:579)
+	at java.net.Socket.connect(Socket.java:528)
+	at java.net.Socket.<init>(Socket.java:425)
+	at java.net.Socket.<init>(Socket.java:208)
+	at org.jivesoftware.smack.XMPPConnection.connectUsingConfiguration(XMPPConnection.java:273)
+	at org.jivesoftware.smack.XMPPConnection.<init>(XMPPConnection.java:221)
+	at jetbrains.communicator.jabber.impl.JabberFacadeImpl._createConnection(JabberFacadeImpl.java:156)
+	at jetbrains.communicator.jabber.impl.JabberFacadeImpl.connect(JabberFacadeImpl.java:121)
+	at jetbrains.communicator.jabber.impl.JabberFacadeImpl.connect(JabberFacadeImpl.java:117)
+	at jetbrains.communicator.jabber.impl.JabberTransport$1.run(JabberTransport.java:128)
+	at com.intellij.openapi.application.impl.ApplicationImpl$8.run(ApplicationImpl.java:419)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:471)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:262)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:724)
+	at com.intellij.openapi.application.impl.ApplicationImpl$1$1.run(ApplicationImpl.java:149)
+2014-05-27 12:17:16,000 [  73728]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/remote-servers.xml file is null 
+2014-05-27 12:17:19,181 [  76909]   INFO - a.repo.GitUntrackedFilesHolder - GitUntrackedFilesHolder: Index has changed, marking file://C:/Users/mullomuk/myprojects/logmonitor recursively dirty 
+2014-05-27 12:17:24,014 [  81742]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $PROJECT_CONFIG_DIR$/checker.xml file is null 
+2014-05-27 12:17:24,739 [  82467]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/cachedDictionary.xml file is null 
+2014-05-27 12:17:28,479 [  86207]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/consoleFolding.xml file is null 
+2014-05-27 12:17:55,555 [ 113283]   INFO - s.communicator.p2p.NetworkUtil - Call [http://14.67.208.134:2864/rpc2] AddOnlineUser.addOnlineUser([14.67.208.134, mullomuk, 2864, [logmonitor], [AVAILABLE, 0]]) Server returned HTTP response code: 503 for URL: http://14.67.208.134:2864/rpc2 
+2014-05-27 12:18:01,869 [ 119597]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/intentionSettings.xml file is null 
+2014-05-27 12:18:08,458 [ 126186]   INFO - s.impl.stores.FileBasedStorage - Document was not loaded for $APP_CONFIG$/github_settings.xml file is null 
+2014-05-27 12:19:11,107 [ 188835]   INFO - s.communicator.p2p.NetworkUtil - Call [http://14.67.208.134:2864/rpc2] AddOnlineUser.addOnlineUser([14.67.208.134, mullomuk, 2864, [logmonitor], [AVAILABLE, 0]]) Server returned HTTP response code: 503 for URL: http://14.67.208.134:2864/rpc2 

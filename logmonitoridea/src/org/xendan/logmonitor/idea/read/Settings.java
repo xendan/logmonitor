@@ -6,7 +6,10 @@ import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.components.StoragePathMacros;
 import com.intellij.util.containers.HashSet;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.Set;
 
 /**
@@ -14,93 +17,123 @@ import java.util.Set;
  * @since 4/20/14.
  */
 @State(
-        name = "Logmonitorsettings",
-        storages = {
-                @Storage(
-                        file = StoragePathMacros.APP_CONFIG + "/logmonitorsettings.xml")
-        }
+		name = "Logmonitorsettings",
+		storages = {
+				@Storage(
+						file = StoragePathMacros.APP_CONFIG + "/logmonitorsettings.xml")
+		}
 )
 public class Settings implements PersistentStateComponent<Settings.State> {
 
-    private State myState = new State();
+	private State myState = new State();
 
-    @Override
-    public State getState() {
-        return myState;
-    }
+	@Override
+	public State getState() {
+		return myState;
+	}
 
-    @Override
-    public void loadState(State state) {
-        myState = state;
-    }
+	@Override
+	public void loadState(State state) {
+		myState = state;
+	}
 
-    public void reset(State initialState) {
-        myState.setUseBuiltInServer(initialState.useBuiltInServer);
-        myState.setIgnoredEnvironments(initialState.getIgnoredEnvironments());
-        myState.setPort(initialState.getPort());
-        myState.setUrl(initialState.getUrl());
-    }
+	public void reset(State initialState) {
+		myState.setUseBuiltInServer(initialState.useBuiltInServer);
+		myState.setIgnoredEnvironments(initialState.getIgnoredEnvironments());
+		myState.setPort(initialState.getPort());
+		myState.setUrl(initialState.getUrl());
+	}
 
-    public static class State implements Serializable {
-        private Boolean useBuiltInServer;
-        private int port = 8085;
-        private String url;
-        private Set<Integer> ignoredEnvironments = new HashSet<Integer>();
+	public boolean isUpAndRunning() {
+		return !isUrlReachable(getUrl());
+	}
 
-        public Boolean getUseBuiltInServer() {
-            return useBuiltInServer;
-        }
+	private boolean isUrlReachable(String url) {
+		if (url == null) {
+			return false;
+		}
+		Socket socket = null;
+		try {
+			socket = new Socket(url, 80);
+			return true;
+		} catch (Exception e) {
+			return false;
+		} finally {
+			if (socket != null) try {
+				socket.close();
+			} catch (IOException e) {
+				//do nothing
+			}
+		}
+	}
 
-        public void setUseBuiltInServer(Boolean useBuiltInServer) {
-            this.useBuiltInServer = useBuiltInServer;
-        }
+	public String getUrl() {
+		if (getState() == null || getState().getUseBuiltInServer() == null) {
+			return null;
+		}
+		return (getState().getUseBuiltInServer()) ? "http://localhost:" + getState().getPort() : getState().getUrl();
+	}
 
-        public int getPort() {
-            return port;
-        }
+	public static class State implements Serializable {
+		private Boolean useBuiltInServer;
+		private int port = 8085;
+		private String url;
+		private Set<Integer> ignoredEnvironments = new HashSet<Integer>();
 
-        public void setPort(int port) {
-            this.port = port;
-        }
+		public Boolean getUseBuiltInServer() {
+			return useBuiltInServer;
+		}
 
-        public String getUrl() {
-            return url;
-        }
+		public void setUseBuiltInServer(Boolean useBuiltInServer) {
+			this.useBuiltInServer = useBuiltInServer;
+		}
 
-        public void setUrl(String url) {
-            this.url = url;
-        }
+		public int getPort() {
+			return port;
+		}
 
-        public Set<Integer> getIgnoredEnvironments() {
-            return ignoredEnvironments;
-        }
+		public void setPort(int port) {
+			this.port = port;
+		}
 
-        public void setIgnoredEnvironments(Set<Integer> ignoredEnvironments) {
-            this.ignoredEnvironments = ignoredEnvironments;
-        }
+		public String getUrl() {
+			return url;
+		}
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
+		public void setUrl(String url) {
+			this.url = url;
+		}
 
-            State state = (State) o;
+		public Set<Integer> getIgnoredEnvironments() {
+			return ignoredEnvironments;
+		}
 
-            if (port != state.port) return false;
-            if (ignoredEnvironments != null ? !ignoredEnvironments.equals(state.ignoredEnvironments) : state.ignoredEnvironments != null)
-                return false;
-            if (url != null ? !url.equals(state.url) : state.url != null) return false;
-            return !(useBuiltInServer != null ? !useBuiltInServer.equals(state.useBuiltInServer) : state.useBuiltInServer != null);
+		public void setIgnoredEnvironments(Set<Integer> ignoredEnvironments) {
+			this.ignoredEnvironments = ignoredEnvironments;
+		}
 
-        }
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) return true;
+			if (o == null || getClass() != o.getClass()) return false;
 
-        @Override
-        public int hashCode() {
-            int result = useBuiltInServer != null ? useBuiltInServer.hashCode() : 0;
-            result = 31 * result + port;
-            result = 31 * result + (url != null ? url.hashCode() : 0);
-            result = 31 * result + (ignoredEnvironments != null ? ignoredEnvironments.hashCode() : 0);
-            return result;
-        }
-    }
+			State state = (State) o;
+
+			if (port != state.port) return false;
+			if (ignoredEnvironments != null ? !ignoredEnvironments.equals(state.ignoredEnvironments) : state.ignoredEnvironments != null)
+				return false;
+			if (url != null ? !url.equals(state.url) : state.url != null) return false;
+			return !(useBuiltInServer != null ? !useBuiltInServer.equals(state.useBuiltInServer) : state.useBuiltInServer != null);
+
+		}
+
+		@Override
+		public int hashCode() {
+			int result = useBuiltInServer != null ? useBuiltInServer.hashCode() : 0;
+			result = 31 * result + port;
+			result = 31 * result + (url != null ? url.hashCode() : 0);
+			result = 31 * result + (ignoredEnvironments != null ? ignoredEnvironments.hashCode() : 0);
+			return result;
+		}
+	}
 }

@@ -33,7 +33,8 @@
                         <phase>package</phase>
                         <configuration>
                             <tasks>
-                                <copy file="${project.build.directory}/${webFile}.war" todir="${project.basedir}/../idea/resources/"/>
+                                <!-- TODO use proper module name -->
+                                <copy file="${project.build.directory}/${webFile}.war" todir="${project.basedir}/../logmonitoridea/resources/"/>
                             </tasks>
                         </configuration>
                         <goals>
