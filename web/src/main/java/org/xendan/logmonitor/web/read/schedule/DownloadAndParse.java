@@ -49,8 +49,6 @@ public class DownloadAndParse implements Runnable {
                 service.setEnvironmentStatus(environment, EnvironmentMessage.FILE_NOT_FOUND);
                 return;
             }
-            String tmpLog = homeResolver.joinMkDirs("idea" + counter++ + ".log", "idea_logs");
-            FileUtils.copyFile(file, new File(tmpLog));
             service.setEnvironmentStatus(environment, EnvironmentMessage.PARSING);
             List<LogEntry> entries = new LogFileReader(logFile, logPattern, environment).getEntries();
             if (entries == null) {

@@ -1,3 +1,18 @@
+TODO:
+- rewrite for regexp groups
+- throw error if not match pattern and not start with \t
+- support log4j and custom pattern names like in logback
+
+
+Usability notice
+1) Add pattern description directly with keys where to get for log4j and logback.
+2) Load example of log file so a) check that your pattern match
+3) When create new config - specify that localhost require path to local file (it is visible only from popup)
+
+
+
+Try to understand this history
+
 General Task.
 - * Read errors from some of server
 

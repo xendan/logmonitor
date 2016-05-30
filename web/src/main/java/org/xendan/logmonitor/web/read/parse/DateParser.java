@@ -3,6 +3,7 @@ package org.xendan.logmonitor.web.read.parse;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.xendan.logmonitor.model.LogEntry;
 
 import java.util.regex.Matcher;
 
@@ -15,12 +16,7 @@ public class DateParser extends UnitParser<LocalDateTime> {
     private DateTimeFormatter dateFormatter;
 
     public DateParser() {
-        super("d(\\\\\\{(.+?)\\\\\\})?");
-    }
-
-    @Override
-    public LocalDateTime toValue(String string) {
-        return dateFormatter.parseDateTime(string).toLocalDateTime();
+        super("date", "d(\\\\\\{(.+?)\\\\\\})?");
     }
 
     @Override
@@ -43,7 +39,7 @@ public class DateParser extends UnitParser<LocalDateTime> {
 
 
     public String getDateAsString(String logPattern, LocalDateTime date) {
-        Matcher matcher = samplePattern.matcher(PatternUtils.simpleToRegexp(logPattern, true));
+        Matcher matcher = unitPattern.matcher(PatternUtils.simpleToRegexp(logPattern, true));
         if (matcher.find()) {
             buildRegexpNoSpaces(matcher);
             return dateFormatter.print(date);
@@ -51,13 +47,7 @@ public class DateParser extends UnitParser<LocalDateTime> {
         throw new IllegalArgumentException("No date found in pattern" + logPattern);
     }
 
-
-    @Override
-    public String replaceInPattern(String pattern, boolean useParentheses) {
-        return super.replaceInPattern(pattern, useParentheses);
+    @Override public void setValueToEntry(String value, LogEntry logEntry) {
+        logEntry.setDate(dateFormatter.parseDateTime(value).toLocalDateTime());
     }
-
-    //%[\.\d-]*d(\\\{(.+?)\\\})?
-    //%[\.\d-]*d(\\\{(.+?)\\\})?
-    //%d %-5p [%c] %m%n
 }

@@ -24,6 +24,7 @@ public class LogParserTest {
     public static final String FULL_PATTERN = "%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p [%C]";
     private static final EntryMatcher INFO_MATCHER = EntryMatcherTest.createInfoMatchers();
     public static final LocalDateTime A_WHILE_AGO = defaultFrmtDate("1900-09-22 01:12:17,191");
+    public static final String CALLER = "caller";
 
     @Test
     public void testErrorReportedOnInvalidFileFormat() throws Exception {
@@ -48,12 +49,12 @@ public class LogParserTest {
         assertEquals(Level.INFO.toString(), entry.getLevel());
     }
 
-    @Test
-    public void test_getDateAsString() throws Exception {
-        LogParser parser = new LogParser("%d %-5p [%c] %m%n", new Environment());
-        assertEquals("\\s*[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9]\\s* \\s*DEBUG\\s*|\\s*ERROR\\s*|\\s*FATAL\\s*|\\s*INFO\\s*|\\s*TRACE\\s*|\\s*WARN\\s* \\[\\s*.+\\s*\\] \\s*.+\\s*",
-                parser.getRegExpStr());
-    }
+//    @Test
+//    public void test_getDateAsString() throws Exception {
+//        LogParser parser = new LogParser("%d %-5p [%c] %m%n", new Environment());
+//        assertEquals("\\s*[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9],[0-9][0-9][0-9]\\s* \\s*DEBUG\\s*|\\s*ERROR\\s*|\\s*FATAL\\s*|\\s*INFO\\s*|\\s*TRACE\\s*|\\s*WARN\\s* \\[\\s*.+\\s*\\] \\s*.+\\s*",
+//                parser.getRegExpStr());
+//    }
 
     @Test
     public void testGetVisibleFields() throws Exception {
@@ -85,7 +86,6 @@ public class LogParserTest {
         return parser.getEntries().get(0);
     }
 
-
     @Test
     public void test_parse_level() throws Exception {
         LogEntry entry = singleEntry("%-5p", "WARN ");
@@ -109,7 +109,7 @@ public class LogParserTest {
     public void test_parse_caller() throws Exception {
         LogEntry entry = singleEntry("%C", "org.caramba.CarambaContext");
 
-        assertEquals("org.caramba.CarambaContext", entry.getCaller());
+        assertEquals("org.caramba.CarambaContext", entry.getProperties().get("caller"));
     }
 
     @Test
@@ -151,7 +151,7 @@ public class LogParserTest {
                 "2012-09-28 01:12:17,191 WARN  [org.caramba.CarambaContext]");
 
         assertEquals(28, entry.getDate().getDayOfMonth());
-        assertEquals("org.caramba.CarambaContext", entry.getCaller());
+        assertEquals("org.caramba.CarambaContext", entry.getProperties().get(CALLER));
         assertEquals(Level.WARN.toString(), entry.getLevel());
     }
 
@@ -162,7 +162,7 @@ public class LogParserTest {
                 "2012-09-28 01:12:17,191 WARN  [org.caramba.CarambaContext] " + message);
 
         assertEquals(28, entry.getDate().getDayOfMonth());
-        assertEquals("org.caramba.CarambaContext", entry.getCaller());
+        assertEquals("org.caramba.CarambaContext", entry.getProperties().get(CALLER));
         assertEquals(message, entry.getMessage());
         assertEquals(Level.WARN.toString(), entry.getLevel());
     }
@@ -171,13 +171,13 @@ public class LogParserTest {
     public void test_category_and_line() throws Exception {
         LogEntry entry = singleEntry(" %c{1}:%L ", " AxisOperation:485 ");
 
-        assertEquals("AxisOperation", entry.getCategory());
-        assertEquals(485, entry.getLineNumber().intValue());
+        assertEquals("AxisOperation", entry.getProperties().get("category"));
+        assertEquals("485", entry.getProperties().get("lineNumber"));
     }
 
     @Test
     public void test_parse_several() {
-        EntryMatcher genreousMatcher = createGenerousMatcher();
+        EntryMatcher genrousMatcher = createGenerousMatcher();
         String textStart = "DEBUG_FRAME = org.apache.axis2.util.JavaUtils.callStackToString(JavaUtils.java:564)";
         String[] logs = {
                 "02:00:33,543  DEBUG AxisOperation:485 - Exit: AxisOperation::setSoapAction",
@@ -189,7 +189,7 @@ public class LogParserTest {
                 "02:00:33,585  DEBUG AxisOperation:499 - Entry: AxisOperation::getInputAction",
                 "02:00:33,586  DEBUG AxisOperation:504 - Debug: AxisOperation::getInputAction - using soapAction" };
 
-        LogParser parser = new LogParser(A_WHILE_AGO, "%d{ABSOLUTE}  %5p %c{1}:%L - %m%n", genreousMatcher);
+        LogParser parser = new LogParser(A_WHILE_AGO, "%d{ABSOLUTE}  %5p %c{1}:%L - %m%n", genrousMatcher);
         for (String log : logs) {
             parser.addString(log);
         }
@@ -203,7 +203,7 @@ public class LogParserTest {
 
     private EntryMatcher createGenerousMatcher() {
         EntryMatcher genreousMatcher = mock(EntryMatcher.class);
-        when(genreousMatcher.match((LogEntry) anyObject())).thenReturn(true);
+        when(genreousMatcher.match(anyObject())).thenReturn(true);
         return genreousMatcher;
     }
 

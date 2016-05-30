@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 lines=()
 
 rm $download_path

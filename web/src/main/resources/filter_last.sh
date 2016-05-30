@@ -1,3 +1,4 @@
+#!/usr/bin/env bash
 if [ -z "$date" ] || ! grep -q '$date' $log_path; then
     cp $log_path  $download_path
 else

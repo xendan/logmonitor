@@ -16,7 +16,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class ReaderScheduler {
 
-    //    private boolean inited;
     private HomeResolver homeResolver;
     private LogService service;
     private ScheduledThreadPoolExecutor executor;

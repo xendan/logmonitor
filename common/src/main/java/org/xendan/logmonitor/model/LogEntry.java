@@ -1,5 +1,8 @@
 package org.xendan.logmonitor.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -8,55 +11,33 @@ import javax.persistence.*;
 @Entity
 public class LogEntry extends BaseObject {
     private LocalDateTime date;
-    private String caller;
     private String message;
-    private String category;
-    private Integer lineNumber;
-    private String level;
     private MatchConfig matchConfig;
     private Environment environment;
-    private String thread;
-    private int foundNumber;
-    private String fileName;
-    private String locationInformation;
-    private String methodName;
-    private Integer elapsedTime;
-    private String ndc;
-    private String mdc;
     private String expandedMessage;
+    private int foundNumber;
+    private String level;
+    private Map<String, String> properties = new HashMap<>();
 
-    @Column(length = 1000)
-    public String getCategory() {
-        return category;
+    @ElementCollection
+    @MapKeyColumn(name="name")
+    @Column(name="value")
+    @CollectionTable(name="log_entry_properties", joinColumns=@JoinColumn(name="property_id"))
+
+    public Map<String, String> getProperties() {
+        return properties;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
+    public void setProperties(Map<String, String> properties) {
+        this.properties = properties;
     }
 
-    public Integer getLineNumber() {
-        return lineNumber;
-    }
-
-    public void setLineNumber(Integer lineNumber) {
-        this.lineNumber = lineNumber;
-    }
-
-    @Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
     public LocalDateTime getDate() {
         return date;
     }
 
     public void setDate(LocalDateTime date) {
         this.date = date;
-    }
-
-    public String getCaller() {
-        return caller;
-    }
-
-    public void setCaller(String caller) {
-        this.caller = caller;
     }
 
     @Column(columnDefinition="text")
@@ -66,14 +47,6 @@ public class LogEntry extends BaseObject {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getLevel() {
-        return level;
-    }
-
-    public void setLevel(String level) {
-        this.level = level;
     }
 
     @ManyToOne
@@ -94,70 +67,6 @@ public class LogEntry extends BaseObject {
         this.environment = environment;
     }
 
-    public int getFoundNumber() {
-        return foundNumber;
-    }
-
-    public void setFoundNumber(int foundNumber) {
-        this.foundNumber = foundNumber;
-    }
-
-    public String getThread() {
-        return thread;
-    }
-
-    public void setThread(String thread) {
-        this.thread = thread;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getLocationInformation() {
-        return locationInformation;
-    }
-
-    public void setLocationInformation(String locationInformation) {
-        this.locationInformation = locationInformation;
-    }
-
-    public String getMethodName() {
-        return methodName;
-    }
-
-    public void setMethodName(String methodName) {
-        this.methodName = methodName;
-    }
-
-    public Integer getElapsedTime() {
-        return elapsedTime;
-    }
-
-    public void setElapsedTime(Integer elapsedTime) {
-        this.elapsedTime = elapsedTime;
-    }
-
-    public String getNdc() {
-        return ndc;
-    }
-
-    public void setNdc(String ndc) {
-        this.ndc = ndc;
-    }
-
-    public String getMdc() {
-        return mdc;
-    }
-
-    public void setMdc(String mdc) {
-        this.mdc = mdc;
-    }
-
     @Transient
     public String getExpandedMessage() {
         return expandedMessage;
@@ -165,5 +74,22 @@ public class LogEntry extends BaseObject {
 
     public void setExpandedMessage(String expandedMessage) {
         this.expandedMessage = expandedMessage;
+    }
+
+
+    public String getLevel() {
+        return level;
+    }
+
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public int getFoundNumber() {
+        return foundNumber;
+    }
+
+    public void setFoundNumber(int foundNumber) {
+        this.foundNumber = foundNumber;
     }
 }

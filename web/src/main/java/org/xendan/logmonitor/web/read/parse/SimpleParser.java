@@ -6,12 +6,12 @@ class SimpleParser extends UnitParser<String> {
 
     private boolean canBeEmpty;
 
-    public SimpleParser(char letter) {
-        super(String.valueOf(letter));
+    public SimpleParser(String name, char letter) {
+        super(name, String.valueOf(letter));
     }
 
-    public static SimpleParser createCanBeEmpty(char letter) {
-        SimpleParser parser = new SimpleParser(letter);
+    public static SimpleParser createCanBeEmpty(String name, char letter) {
+        SimpleParser parser = new SimpleParser(name, letter);
         parser.canBeEmpty = true;
         return parser;
     }
@@ -21,8 +21,4 @@ class SimpleParser extends UnitParser<String> {
         return "." + (canBeEmpty ? "*" : "+");
     }
 
-    @Override
-    protected String toValue(String string) {
-        return string;
-    }
 }

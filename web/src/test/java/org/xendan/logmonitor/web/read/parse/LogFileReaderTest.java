@@ -4,6 +4,7 @@ package org.xendan.logmonitor.web.read.parse;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Level;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.xendan.logmonitor.HomeResolver;
 import org.xendan.logmonitor.model.Environment;
@@ -23,6 +24,14 @@ import static org.junit.Assert.assertNull;
 public class LogFileReaderTest {
 
     public static final String DEF_PATTERN = "%d %-5p [%c] %m%n";
+
+    @Test @Ignore("TODO: implement")
+    public void testLogbackWithCustomPattern() throws Exception {
+        String logPath = copyToTestPath("custom.log");
+        Environment environment = new Environment();
+        LogFileReader reader = new LogFileReader(logPath, "%-32([%d{yyyy-MM-dd HH:mm:ss:SSS}] [${storeNumber}]) %-30([%thread]) %-7([%level]) %-40([%logger{0}]): %msg%n", environment);
+        assertNotNull("Expect file match pattern", reader.getEntries());
+    }
 
     @Test
     public void testReadFromGoodFile() throws Exception {

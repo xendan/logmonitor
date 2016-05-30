@@ -1,0 +1,3 @@
+[2016-04-22 12:54:13:305] [966]  [RMI TCP Connection(2)-127.0.0.1] [INFO]  [ExceptionHandlerExceptionResolver]     : Detected @ExceptionHandler methods in globalControllerExceptionHandler
+[2016-04-22 12:54:13:305] [966]  [RMI TCP Connection(2)-127.0.0.1] [INFO]  [ExceptionHandlerExceptionResolver]     : Detected @ExceptionHandler methods in repositoryRestExceptionHandler
+[2016-04-22 12:54:13:468] [966]  [RMI TCP Connection(2)-127.0.0.1] [INFO]  [DispatcherServlet]                     : FrameworkServlet 'apo-dispatcher-servlet': initialization completed in 1720 ms

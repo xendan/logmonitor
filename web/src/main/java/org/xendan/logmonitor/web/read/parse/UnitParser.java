@@ -1,58 +1,76 @@
 package org.xendan.logmonitor.web.read.parse;
 
-import org.xendan.logmonitor.model.MatchConfig;
+import org.apache.commons.beanutils.BeanUtils;
+import org.xendan.logmonitor.model.LogEntry;
 
+import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public abstract class UnitParser<V> {
 
-    protected Pattern samplePattern;
-    public UnitParser(String samplePatternStr) {
-        samplePattern = Pattern.compile("%[\\.\\d-]*" + decorateSamplePatternString(samplePatternStr));
+    protected Pattern unitPattern;
+    protected String name;
+
+    private static final List<String> LOG_ENTRY_FIELDS = Arrays.asList("level", "message");
+
+
+    public UnitParser(String name, String samplePatternStr) {
+        unitPattern = Pattern.compile(getPatternPrefix() + samplePatternStr + getPatternSuffix());
+        this.name = name;
     }
 
-    protected String decorateSamplePatternString(String samplePatternStr) {
-        return samplePatternStr;
+    public String getName() {
+        return name;
     }
 
-
-    public int getStartPosition(String pattern) {
-        Matcher matcher = samplePattern.matcher(pattern);
-        if (matcher.find()) {
-            return matcher.start();
-        }
-        return -1;
+    protected String getPatternSuffix() {
+        return "";
     }
 
-    public String replaceInPattern(String pattern, boolean useParentheses) {
-        Matcher matcher = samplePattern.matcher(pattern);
+    private String getPatternPrefix() {
+        return "%[\\.\\d-]*";
+    }
+
+    public boolean isPresentInPattern(String allPattern) {
+        return unitPattern.matcher(allPattern).find();
+    }
+
+    public String replaceInPattern(String pattern) {
+        Matcher matcher = unitPattern.matcher(pattern);
         if (matcher.find()) {
             return pattern.substring(0, matcher.start())
-                    + (useParentheses ? "(" : "") + toRegExp(matcher) + (useParentheses ? ")" : "")
+                    + "\\s*(?<" + name + ">" + toRegExp(matcher) + ")\\s*"
                     + pattern.substring(matcher.end());
         }
         return pattern;
     }
 
-    protected String surroundSpaces(String meaningValue) {
+    protected String surroundSpaceRegexp(String meaningValue) {
         return "\\s*" + meaningValue + "\\s*";
     }
 
-    protected String getRegexpForEntryMatcher(MatchConfig entryMatcher, Matcher matcher) {
-        return toRegExp(matcher);
-    }
+//    protected String getRegexpForEntryMatcher(MatchConfig entryMatcher, Matcher matcher) {
+//        return toRegExp(matcher);
+//    }
 
     protected String toRegExp(Matcher matcher) {
-        return surroundSpaces(buildRegexpNoSpaces(matcher));
+        return surroundSpaceRegexp(buildRegexpNoSpaces(matcher));
     }
-
-    protected abstract V toValue(String string);
 
     protected abstract String buildRegexpNoSpaces(Matcher matcher);
 
-
-    public V getValue(String group) {
-        return toValue(group.trim());
+    public void setValueToEntry(String value, LogEntry logEntry) {
+        if (LOG_ENTRY_FIELDS.contains(name)) {
+            try {
+                BeanUtils.setProperty(logEntry, name, value);
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                throw new IllegalArgumentException("Can't set bean property", e);
+            }
+        } else {
+            logEntry.getProperties().put(name, value);
+        }
     }
 }

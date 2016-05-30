@@ -15,6 +15,7 @@ import org.xendan.logmonitor.web.dao.ConfigurationDao;
 import org.xendan.logmonitor.web.guice.GuiceServletConfig;
 import org.xendan.logmonitor.web.read.parse.LogFileReader;
 import org.xendan.logmonitor.web.read.parse.LogFileReaderTest;
+import org.xendan.logmonitor.web.read.parse.LogParserTest;
 import org.xendan.logmonitor.web.read.parse.PatternUtils;
 
 import java.io.File;
@@ -30,6 +31,7 @@ public class LogServiceImplTest {
 
     public static final String TEST_PATH = "test_db";
     public static final String TEST_FILES = "test_files";
+    public static final String CATEGORY = "category";
     private LogServicePartial service;
     private Environment environment;
     private MatchConfig matchConfig;
@@ -281,9 +283,9 @@ public class LogServiceImplTest {
             String message = PatternUtils.restoreMessage(otherEntry, group.getMessagePattern())
                     .replace("<span class='messageGroup'>", "")
                     .replace("</span>", "");
-            if (nullOrEquals(otherEntry.getCaller(), entry.getCaller()) &&
+            if (nullOrEquals(otherEntry.getProperties().get(LogParserTest.CALLER), entry.getProperties().get(LogParserTest.CALLER)) &&
                     nullOrEquals(otherEntry.getEnvironment(), entry.getEnvironment()) &&
-                    nullOrEquals(otherEntry.getCategory(), entry.getCategory()) &&
+                    nullOrEquals(otherEntry.getProperties().get(CATEGORY), entry.getProperties().get(CATEGORY)) &&
                     nullOrEquals(otherEntry.getFoundNumber(), entry.getFoundNumber()) &&
                     nullOrEquals(otherEntry.getLevel(), entry.getLevel()) &&
                     nullOrEquals(otherEntry.getMatchConfig(), entry.getMatchConfig()) &&
