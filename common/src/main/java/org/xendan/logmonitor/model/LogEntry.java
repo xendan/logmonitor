@@ -19,11 +19,10 @@ public class LogEntry extends BaseObject {
     private String level;
     private Map<String, String> properties = new HashMap<>();
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @MapKeyColumn(name="name")
     @Column(name="value")
     @CollectionTable(name="log_entry_properties", joinColumns=@JoinColumn(name="property_id"))
-
     public Map<String, String> getProperties() {
         return properties;
     }
